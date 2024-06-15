@@ -1,0 +1,9 @@
+@use '../abstracts/variables' as *;
+
+html{
+  font-size: $font-size-root;
+}
+
+a{
+  color: $clr-primary;
+}

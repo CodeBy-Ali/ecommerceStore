@@ -1,0 +1,41 @@
+@use '../base/fonts' as *;
+
+// * --------------- Fonts --------------- *
+$font-primaryBold : "eloquiaBold",sans-serif;
+$font-primaryLight: "eloquiaLight",sans-serif;
+
+
+// * --------------- Colors --------------- *
+$clr-primary: rgb(32, 61, 59);
+$clr-text-secondary: rgb(117, 117, 117);
+$clr-text-quaternary: rgb(98, 98, 98); 
+$clr-text-primary: rgb(128, 128, 128);
+$clr-btn-primary: rgb(226, 249, 73);
+
+
+// * --------------- Width --------------- *
+/// Container's maximum width
+/// @type Length
+$max-width: 1180px !default;
+$w-logo-lg: 12.2rem;
+$w-logo: 8rem;
+// * --------------- Padding --------------- *
+$pd-container : 2rem;
+$pd-header-nav-inline-lg: 8rem;
+$pd-header-nav-inline: 1.6rem;
+$pd-header-nav-block-lg: 2.4rem;
+$pd-header-nav-block: 2rem;
+
+// * --------------- fontSize --------------- *
+$font-size-root: 10px;
+$font-size-base: 1.6rem;
+$font-size-sm: 1.4rem;
+$font-size-xsm: 1rem;
+$font-size-md: 2rem;
+$font-size-lg: 2.4rem;
+$font-size-xlg: 2.8rem;
+
+// *----------------- fontWeight --------------- *
+$font-semibold: 600;
+
+

@@ -1,0 +1,44 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+//  header 
+.header_menu_nav{
+  padding-inline: $pd-header-nav-inline;
+  padding-block: $pd-header-nav-block;
+  @include respond-to('medium'){
+    padding-block: $pd-header-nav-block-lg;
+    padding-inline: $pd-header-nav-inline-lg ;
+  }
+}
+
+.header_logo img{
+  width: $w-logo;
+  @include respond-to('medium'){
+    width: $w-logo-lg;
+  }
+}
+
+
+.header_menu_links_shop, 
+.header_menu_links_login{
+  font-weight: $font-semibold;
+  letter-spacing: 1px;
+  font-size: $font-size-xsm;
+  @include respond-to('medium'){
+    font-size: $font-size-sm;
+  }
+}
+
+.header_menu_links_login{
+  @include flex-row-jc(center){
+    gap: 2rem;
+  };
+}
+
+.header_menu_links_shop{
+  display: none;
+  @include respond-to(medium){
+    @include flex-row-jc(center){
+      gap: 4rem;
+    };
+  }
+}
