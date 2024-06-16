@@ -5,37 +5,71 @@ $font-primaryBold : "eloquiaBold",sans-serif;
 $font-primaryLight: "eloquiaLight",sans-serif;
 
 
-// * --------------- Colors --------------- *
+// *---------------- EveryElement ----------*
+$outline-offset: 5px;
+$outline-width: 3px;
+$trans-dur-outline-offset: .3s;
+$trans-outline-func: linear;
+$clr-outline: rgb(127,127,127);
+
+
+
+// *---------------- Body ------------------*
 $clr-primary: rgb(32, 61, 59);
 $clr-text-secondary: rgb(117, 117, 117);
 $clr-text-quaternary: rgb(98, 98, 98); 
 $clr-text-primary: rgb(128, 128, 128);
-$clr-btn-primary: rgb(226, 249, 73);
 
-
-// * --------------- Width --------------- *
-/// Container's maximum width
-/// @type Length
-$max-width: 1180px !default;
-$w-logo-lg: 12.2rem;
-$w-logo: 8rem;
-// * --------------- Padding --------------- *
-$pd-container : 2rem;
-$pd-header-nav-inline-lg: 8rem;
-$pd-header-nav-inline: 1.6rem;
-$pd-header-nav-block-lg: 2.4rem;
-$pd-header-nav-block: 2rem;
-
-// * --------------- fontSize --------------- *
 $font-size-root: 10px;
 $font-size-base: 1.6rem;
 $font-size-sm: 1.4rem;
-$font-size-xsm: 1rem;
+$font-size-xsm: 1.2rem;
 $font-size-md: 2rem;
 $font-size-lg: 2.4rem;
 $font-size-xlg: 2.8rem;
 
-// *----------------- fontWeight --------------- *
 $font-semibold: 600;
+
+
+
+// * ---------------- Container ------------ *
+$max-width: 1180px !default;
+$pd-container : 2rem;
+
+
+
+
+// *------------------- Logo --------------- *
+$w-logo-lg: 12.2rem;
+$w-logo: 8rem;
+
+
+
+// * --------------- Header --------------- *
+$pd-header-nav-inline-lg: 8rem;
+$pd-header-nav-inline: 1.6rem;
+$pd-header-nav-block-lg: 2rem;
+$pd-header-nav-block: 1.6rem;
+
+
+
+
+
+// * --------------- Button --------------- *
+$clr-btn--bg-primary: rgb(226, 249, 73);
+$clr-btn-focus: rgb(127,127,127);
+
+$pd-btn-inline: 1.6rem;
+$pd-btn-inline-lg: 2rem;
+$pd-btn-block: 1rem;
+$pd-btn-block-lg: 1.2rem;
+
+$focus-offset-btn: 5px;
+$focus-width-btn: 3px;
+
+$br-btn: 2.5rem;
+
+$leading-btn: 2.2rem;
+
 
 

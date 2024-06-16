@@ -10,22 +10,34 @@
     <title>Phil's Refills</title>
   </head>
   <body>
+    <a class="button--skipToMain" href="">Skip to content</a>
     <header>
-      <nav class="header_menu_nav flex_row_btw">
-        <div class="header_menu_links_shop">
-          <a href="">SHOP</a>
-          <a href="">LEARN</a>
-        </div>
-        <div>
-          <h1 class="header_logo"><img src="./src/assets/logo/logo.webp" alt=""></h1>
-        </div>
-        <div class="header_menu_links_login">
-          <a href="">LOGIN</a>
-          <a href="">CART <span></span></a>
-        </div>
-        <div class="header_mobile_menu">
-          
-        </div>
+      <nav class="header_menu_nav ">
+        <ul class="flex_row_btw">
+          <li class="header_mobile_menu">
+            <a href="">Menu</a>
+          </li>
+          <li class="header_menu_links_shop" >
+            <div class="flex_row_btw relative" id="menu_shop">
+              <a href="">SHOP</a>
+              <button class="header_menu_dropDown-btn" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                  <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                </svg>
+              </button>
+            </div>
+            <a href="">LEARN</a>
+          </li>
+          <li>
+            <a href="" class="header_logo" aria-label="phils">
+              <h1 class=""><img src="./src/assets/logo/logo.webp" alt=""></h1>
+            </a>
+          </li>
+          <li class="header_menu_links_login">
+            <a href="">LOGIN</a>
+            <a href="">CART <span></span></a>
+          </li>
+        </ul>
       </nav>
     </header>
   </body>

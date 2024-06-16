@@ -6,4 +6,9 @@ html{
 
 a{
   color: $clr-primary;
+  transition:outline-offset $trans-dur-outline-offset  $trans-outline-func ;
+  &:focus{
+    outline: $outline-width solid $clr-outline;
+    outline-offset: $outline-offset;
+  }
 }
