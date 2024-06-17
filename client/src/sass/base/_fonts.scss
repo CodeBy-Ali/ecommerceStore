@@ -1,12 +1,14 @@
 @font-face {
-  font-family: eloquiaBold;
-  src: url("../../assets/fonts/EloquiaDisplay-ExtraBold.otf");
+  font-family: "eloquiaBold";
+  src: url("../../assets/fonts/eloquiadisplay-extrabold-webfont.woff2") format("woff2"),
+       url("../../assets/fonts/eloquiadisplay-extrabold-webfont.woff") format(("woff"));
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
-  font-family: eloquiaLight;
-  src: url("../../assets/fonts/EloquiaText-ExtraLight.otf");
+  font-family: "eloquiaLight";
+  src: url("../../assets/fonts/eloquiatext-extralight-webfont.woff2") format("woff2"),
+        url("../../assets/fonts/eloquiatext-extralight-webfont.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

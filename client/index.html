@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Muhammad Ali Hassan">
-    <script src="src/js/main.js" defer></script>
+    <script src="src/js/main.js" type="module" defer></script>
     <link rel="stylesheet" href="./src/sass/main.scss">
     <title>Phil's Refills</title>
   </head>
@@ -15,10 +15,12 @@
       <nav class="header_menu_nav ">
         <ul class="flex_row_btw">
           <li class="header_mobile_menu">
-            <a href="">Menu</a>
+            <div>
+              <a href="">Menu</a>
+            </div>
           </li>
           <li class="header_menu_links_shop" >
-            <div class="flex_row_btw relative" id="menu_shop">
+            <div class="flex_row_btw relative" id="menu_shop" data-shopLink>
               <a href="">SHOP</a>
               <button class="header_menu_dropDown-btn" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
@@ -26,7 +28,9 @@
                 </svg>
               </button>
             </div>
-            <a href="">LEARN</a>
+            <div>
+              <a href="">LEARN</a>
+            </div>
           </li>
           <li>
             <a href="" class="header_logo" aria-label="phils">
@@ -34,11 +38,20 @@
             </a>
           </li>
           <li class="header_menu_links_login">
-            <a href="">LOGIN</a>
-            <a href="">CART <span></span></a>
+            <div>
+              <a href="">LOGIN</a>
+            </div>
+            <div>
+              <a href="">CART <span></span></a>
+            </div>
           </li>
         </ul>
       </nav>
+      <section>
+        <nav class="header_dropDown_menu">
+
+        </nav>
+      </section>
     </header>
   </body>
 </html>
