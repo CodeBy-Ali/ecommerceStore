@@ -1,28 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Muhammad Ali Hassan">
+    <meta name="author" content="Muhammad Ali Hassan" />
     <script src="src/js/main.js" type="module" defer></script>
-    <link rel="stylesheet" href="./src/sass/main.scss">
+    <link rel="stylesheet" href="./src/sass/main.scss" />
     <title>Phil's Refills</title>
   </head>
   <body>
     <a class="button--skipToMain" href="">Skip to content</a>
     <header>
-      <nav class="header_menu_nav ">
+      <nav class="header_menu_nav">
         <ul class="flex_row_btw">
           <li class="header_mobile_menu">
             <div>
               <a href="">Menu</a>
             </div>
           </li>
-          <li class="header_menu_links_shop" >
+          <li class="header_menu_links_shop">
             <div class="flex_row_btw relative" id="menu_shop" data-shopLink>
               <a href="">SHOP</a>
-              <button class="header_menu_dropDown-btn" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
+              <button class="button--dropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
                   <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
                 </svg>
@@ -34,7 +34,7 @@
           </li>
           <li>
             <a href="" class="header_logo" aria-label="phils">
-              <h1 class=""><img src="./src/assets/logo/logo.webp" alt=""></h1>
+              <h1 class=""><img src="./src/assets/logo/logo.webp" alt="" /></h1>
             </a>
           </li>
           <li class="header_menu_links_login">
@@ -47,9 +47,85 @@
           </li>
         </ul>
       </nav>
-      <section>
-        <nav class="header_dropDown_menu">
-
+      <section class="dropDown_container">
+        <nav class="dropDown_menu" data-dropDownMenu>
+          <section class="subDropdown_category-container">
+            <ul>
+              <li class="subDropdown_item_category " data-categoryName="shopAll">
+                <a href="">Shop All</a>
+                <button class="button--subDropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                    <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                  </svg>
+                </button>
+              </li>
+              <li class="subDropdown_item_category" data-categoryName="skin">
+                <a href="">Skin</a>
+                <button class="button--subDropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                    <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                  </svg>
+                </button>
+              </li>
+              <li class="subDropdown_item_category" data-categoryName="hair">
+                <a href="">Hair</a>
+                <button class="button--subDropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                    <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                  </svg>
+                </button>
+              </li>
+              <li class="subDropdown_item_category" data-categoryName="body">
+                <a href="">Body</a>
+                <button class="button--subDropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                    <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                  </svg>
+                </button>
+              </li>
+            </ul>
+          </section>
+          <section class="subDropdown_item_detail_container">
+            <div class="detail" data-detailOf="shopAll">
+              <ul>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="./src/assets/images/rephils.png" alt="" /></span>
+                    <p>REPHILS</p>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="./src/assets/images/allSellers.jpeg" alt="" /></span>
+                    <p>Best Sellers</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="detail" data-detailOf="skin">
+              <ul class=" ">
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="./src/assets/images/shave.jpeg" alt="" /></span>
+                    <p>Shave</p>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="./src/assets/images/cleansers.png" alt="" /></span>
+                    <p>Cleansers</p>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="./src/assets/images/moisture.png" alt="" /></span>
+                    <p>Moisturizers</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
         </nav>
       </section>
     </header>
