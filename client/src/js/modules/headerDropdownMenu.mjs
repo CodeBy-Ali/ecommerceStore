@@ -15,17 +15,18 @@ const viewFocusCategoryDetail = (focusedCategory, categoryDetailsList) =>{
   })
 }
 
-// hides all the  details container of unfocused categories;
-const hideUnFocusedCategoryDetails = (categoriesDetailContainers) => {
-  categoriesDetailContainers.forEach(categoryDetail => removeClass(categoryDetail, 'active'));
-}
-
 //  controls the submenu of the shop drop down;
 const initializeSubDropDownController = () => {
   const categoriesDetails = document.querySelectorAll('.detail');
   const categoriesHeading = document.querySelectorAll('.subDropdown_item_category')
   categoriesHeading.forEach(category => category.addEventListener('mouseenter', (e) => {
-    hideUnFocusedCategoryDetails(categoriesDetails);
+    // unHighlight the all unfocused category headings
+    categoriesHeading.forEach(categoryHeading => removeClass(categoryHeading, 'focused'));
+    // highlight the focused Category Heading.
+    addClass(category, 'focused');
+    // hide the UnFocused Category Details Containers;
+    categoriesDetails.forEach(categoryDetail => removeClass(categoryDetail, 'active'));
+
     viewFocusCategoryDetail(e.target,categoriesDetails);
   }))
 }

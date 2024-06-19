@@ -1,9 +1,8 @@
-@use '../abstracts/variables' as *;
-@use '../abstracts/mixins' as *;
-
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
 // main dropdown container
-.dropDown_container{
+.dropDown_container {
   position: absolute;
   left: 0;
   right: 0;
@@ -12,71 +11,103 @@
   background-color: $clr-dropDown-backdrop;
   transition: opacity 0.5s ease;
   opacity: 0;
-  @include respond-to(medium){
+  @include respond-to(medium) {
     top: 8.8rem;
   }
 }
 
 // dropdown in open state
-.dropDown_container.open{
+.dropDown_container.open {
   height: 100%;
   opacity: 1;
 }
 
-.dropDown_menu{
-  background-color: $clr-btn--bg-primary;
+.dropDown_menu {
+  background-color: white;
   height: 0;
-  transition: height .7s ease, opacity .7s ease, visibility .5s ease;
+  transition: height 0.7s ease, opacity 0.7s ease , padding 0.6s ease;
   opacity: 0;
   padding-inline: 8rem;
-  padding-block: 3rem;
+  padding-block: 0;
   display: grid;
-  grid-template-columns: 33rem 1fr;  
+  grid-template-columns: 33rem calc(100% - 33rem);
   overflow: hidden;
   visibility: hidden;
 }
 
-.dropDown_container.open .dropDown_menu{
-  visibility: visible;
-  height: 46rem;
-  opacity: 1;
-}
+
 
 // subDropdown categories list
-.subDropdown_category-container ul{
+.subDropdown_category-container ul {
   display: grid;
-  gap: 2rem
+  gap: 2rem;
 }
-.subDropdown_item_category{
-  font-size: 5.5rem;
-  font-family: $font-primaryBold;
-  line-height: $leading-snug;
+
+.subDropdown_item_category {
   position: relative;
 }
 
+.subDropdown_item_category a {
+  font-size: 5.5rem;
+  font-weight: $font-semibold;
+  line-height: $leading-snug;
+  color: $clr-text-secondary;
+  transition: color 0.3s ease;
+  margin-left: 5rem;
+}
+
+.dropDown_container.open {
+  & .dropDown_menu{
+    visibility: visible;
+    height: 46rem;
+    opacity: 1;
+    padding-block: 3rem;
+  }
+  & .subDropdown_item_category a{
+    margin-left: 0;
+  }
+}
+
+.subDropdown_item_category.focused a {
+  color: $clr-primary;
+}
+
 // subDropdown categories Detail list
-.subDropdown_item_detail_container  ul{
+
+.subDropdown_item_detail_container ul {
   display: flex;
   justify-content: flex-start;
   gap: 7.8rem;
   padding-block: 2rem;
   height: 100%;
+  overflow: auto;
   align-items: flex-start;
+  padding-inline: 2rem;
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(0, 0, 0) 3rem, rgb(0, 0, 0) 97%, rgba(0, 0, 0, 0));
 }
-.subDropdown_item_detail ul{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
+
+.subDropdown_item_detail_container ul::-webkit-scrollbar {
+  height: 5px;
+}
+.subDropdown_item_detail_container ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+.subDropdown_item_detail_container ul::-webkit-scrollbar-thumb {
+  background: $clr-primary;
+  border-radius: 1.2rem;
 }
 
 .subDropdown_item_detail a {
   display: grid;
   place-items: center;
-  gap: 2rem;
-  & > p{
-    font-size: $font-size-md;
-  } 
+  gap: 2.5rem;
+  & > p {
+    font-size: $font-size-base;
+    font-weight: $font-semibold;
+    letter-spacing: $letter-spacing-md;
+  }
 }
 
 .subDropdown_item_detail a span {
@@ -84,8 +115,7 @@
   height: $h-submenu-item-detail;
   display: inline-block;
   border-radius: 50%;
-  background-color: red;
-  & img{
+  & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -93,3 +123,15 @@
   }
 }
 
+.subDropdown_item_detail_container .detail {
+  visibility: hidden;
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 1s ease;
+}
+
+.subDropdown_item_detail_container .detail.active {
+  max-height: 100%;
+  visibility: visible;
+  opacity: 1;
+}

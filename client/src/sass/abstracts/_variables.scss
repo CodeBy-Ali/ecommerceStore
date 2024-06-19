@@ -3,6 +3,8 @@
 // * --------------- Fonts --------------- *
 $font-primaryBold : "eloquiaBold",sans-serif;
 $font-primaryLight: "eloquiaLight",sans-serif;
+$font-BiancoRegular: "bianco",sans-serif;
+$font-openSauceRegular: "openSauce",sans-serif;
 
 
 // *---------------- EveryElement ----------*
@@ -35,7 +37,8 @@ $leading-tight	: 1.25;
 $leading-snug	: 1.3;
 $leading-normal	: 1.5;
 $leading-relaxed	: 1.625;
-
+// letter-spacing
+$letter-spacing-md: .6px;
 
 // * ---------------- Container ------------ *
 $max-width: 1180px !default;
