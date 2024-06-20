@@ -78,3 +78,19 @@
     width: 1.8rem;
   }
 }
+
+@mixin subDropdown-button{
+  max-height: fit-content;
+  width: fit-content;
+  background-color: transparent;
+  border: none;
+  opacity: 0;
+  max-width: 0;
+  &:focus{
+    opacity: 1;
+    max-width: fit-content;
+  }
+  & svg{
+    width: $dropDown-button-svg-width;
+  }
+}
