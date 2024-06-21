@@ -94,3 +94,16 @@
     width: $dropDown-button-svg-width;
   }
 }
+
+// nav links
+@mixin navLinks{
+  background-color: transparent;
+  border: none;
+  font-weight: $font-semibold;
+  letter-spacing: $letter-spacing-lg;
+  font-size: $font-size-xsm;
+  color: $clr-primary;
+  @include respond-to('medium'){
+    font-size: $font-size-sm;
+  }
+}

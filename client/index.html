@@ -10,48 +10,60 @@
     <title>Phil's Refills</title>
   </head>
   <body>
+    <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
     <a class="button--skipToMain" href="">Skip to content</a>
+
+    <!-- Start ------------------------------- Header ------------------------------------ -->
+
     <header>
-      <nav class="header_menu_nav">
-        <ul class="flex_row_btw">
-          <li class="header_mobile_menu">
-            <div>
-              <a href="">Menu</a>
-            </div>
-          </li>
-          <li class="header_menu_links_shop">
-            <div class="flex_row_btw relative" id="menu_shop" data-shopLink>
-              <a href="">SHOP</a>
-              <button class="button--dropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
-                  <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
-                </svg>
-              </button>
-            </div>
-            <div>
-              <a href="">LEARN</a>
-            </div>
-          </li>
-          <li>
-            <a href="" class="header_logo" aria-label="phils">
-              <h1 class=""><img src="./src/assets/logo/logo.webp" alt="" /></h1>
-            </a>
-          </li>
-          <li class="header_menu_links_login">
-            <div>
-              <a href="">LOGIN</a>
-            </div>
-            <div>
-              <a href="">CART <span></span></a>
-            </div>
-          </li>
-        </ul>
-      </nav>
-      <section class="dropDown_container">
+      <section>
+        <nav class="header_menu_nav">
+          <ul class="flex_row_btw">
+            <li class="header_mobile_menu">
+              <div>
+                <button data-menuButton aria-expanded="false" aria-label="menu" aria-controls="submenu">
+                  <span class="hidden" aria-hidden="true">CLOSE</span>
+                  <span class="" aria-hidden="true">MENU</span>
+                </button>
+              </div>
+            </li>
+            <li class="header_menu_links_shop">
+              <div class="flex_row_btw relative" data-shopLink>
+                <a href="">SHOP</a>
+                <button class="button--dropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop" data-dropDownButton>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                    <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <a href="">LEARN</a>
+              </div>
+            </li>
+            <li>
+              <a href="" class="header_logo" aria-label="phils">
+                <span class=""><img src="./src/assets/logo/logo.webp" alt="" /></span>
+              </a>
+            </li>
+            <li class="header_menu_links_login">
+              <div>
+                <a href="">LOGIN</a>
+              </div>
+              <div>
+                <a href="">CART <span></span></a>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </section>
+
+      <!-- Start ---------------------------------------- DropDown_Large ---------------------------- -->
+
+      <section class="dropDown_container" id="menu_shop">
         <nav class="dropDown_menu" data-dropDownMenu>
           <section class="subDropdown_category-container">
             <ul>
-              <li class="subDropdown_item_category focused" data-categoryName="shopAll">
+              <li class="subDropdown_item_category" data-categoryName="shopAll">
                 <a href="">
                   <span>Shop All</span>
                   <button class="button--subDropDown" aria-label="Open SubMenu Shop All" aria-expanded="false" aria-controls="submenu_shop_1" role="tab" aria-selected="false">
@@ -94,75 +106,75 @@
             </ul>
           </section>
           <section class="subDropdown_item_detail_container">
-            <div class="detail active" data-detailOf="shopAll" id="submenu_shop_1" aria-orientation="horizontal" role="tablist">
+            <div class="submenu" data-subMenuOf="shopAll" id="submenu_shop_1" aria-orientation="horizontal" role="tablist">
               <ul>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/rephils.png" alt="" /></span>
-                    <p>REPHILS</p>
+                    <h3>REPHILS</h3>
                   </a>
                 </li>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/allSellers.jpeg" alt="" /></span>
-                    <p>BEST SELLERS</p>
+                    <h3>BEST SELLERS</h3>
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div class="detail" data-detailOf="skin" id="submenu_shop_2" aria-orientation="horizontal" role="tablist">
+            <div class="submenu" data-subMenuOf="skin" id="submenu_shop_2" aria-orientation="horizontal" role="tablist">
               <ul class=" ">
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/shave.jpeg" alt="" /></span>
-                    <p>SHAVE</p>
+                    <h3>SHAVE</h3>
                   </a>
                 </li>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/cleansers.png" alt="" /></span>
-                    <p>CLEANSERS</p>
+                    <h3>CLEANSERS</h3>
                   </a>
                 </li>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/moisture.png" alt="" /></span>
-                    <p>MOISTURIZERS</p>
+                    <h3>MOISTURIZERS</h3>
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div class="detail" data-detailOf="hair" id="submenu_shop_3" aria-orientation="horizontal" role="tablist">
+            <div class="submenu" data-subMenuOf="hair" id="submenu_shop_3" aria-orientation="horizontal" role="tablist">
               <ul>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/shampoo.jpeg" alt="" /></span>
-                    <p>SHAMPOO</p>
+                    <h3>SHAMPOO</h3>
                   </a>
                 </li>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/conditioner.png" alt="" /></span>
-                    <p>CONDITIONER</p>
+                    <h3>CONDITIONER</h3>
                   </a>
                 </li>
               </ul>
             </div>
 
-            <div class="detail" data-detailOf="body" id="submenu_shop_4" aria-orientation="horizontal" role="tablist">
+            <div class="submenu" data-subMenuOf="body" id="submenu_shop_4" aria-orientation="horizontal" role="tablist">
               <ul>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/handSoap.png" alt="" /></span>
-                    <p>HAND SOAPS</p>
+                    <h3>HAND SOAPS</h3>
                   </a>
                 </li>
                 <li class="subDropdown_item_detail">
                   <a href="">
                     <span><img src="./src/assets/images/bodyWash.jpeg" alt="" /></span>
-                    <p>BODY WASH</p>
+                    <h3>BODY WASH</h3>
                   </a>
                 </li>
               </ul>
@@ -170,6 +182,64 @@
           </section>
         </nav>
       </section>
-    </header>
+
+      <!-- Start ------------------------------------------ DropDown_Mobile --------------------------------------- -->
+
+      <section class="dropDown_mobile_container" id="submenu" data-mobileMenu>
+        <nav>
+          <div class="mobile_menu_shop">
+            <button class="mobile_menu_shop_Button" data-mobileMenuBtn>
+              <span>Shop</span>
+              <span class="icon_contaienr"><img src="./src/assets/icons/arrowDown.svg" alt=""></span>
+            </button>
+            <div class="mobile_submenu_shop">
+              <ul>
+                <li>
+                  <a href="">
+                    <div>
+                      <img src="./src/assets/images/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="">
+                    </div>
+                    <div>
+                      <h4>HAIR</h4>
+                      <p>Shampoo & conditioner, Refill pods, etc</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <div>
+                      <img src="./src/assets/images/Launch_DailyMoisturizer_Ecomm_058_2bfcdcd2-cec3-45c9-af30-5f7b759f1530.jpeg" alt="">
+                    </div>
+                    <div>
+                      <h4>FACE</h4>
+                      <p>Razors,creams,oils</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <div>
+                      <img src="./src/assets/images/Launch_HandSoap_FoamerBottle_Ecomm_079.jpeg" alt="">
+                    </div>
+                    <div>
+                      <h4>BODY</h4>
+                      <p>Lotions,hands soaps,refills</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mobile_menu_learn">
+            <button class="mobile_menu_learn_Button" data-mobileMenuBtn>
+              <span>Learn</span>
+              <span class="icon_contaienr"><img src="./src/assets/icons/arrowDown.svg" alt=""></span>
+            </button>
+            <div>
+              
+            </div>
+          </div>
+      </nav>
+      </header>
   </body>
 </html>

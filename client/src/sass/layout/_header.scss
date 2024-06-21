@@ -25,14 +25,21 @@
 .header_menu_links_shop > div, 
 .header_menu_links_login > div,
 .header_mobile_menu > div {
-  font-weight: $font-semibold;
-  letter-spacing: 1px;
-  font-size: $font-size-xsm;
   padding-block: $pd-navLInk-block;
   @include respond-to('medium'){
-    font-size: $font-size-sm;
     padding-block: $pd-navLink-block-lg;
   }
+}
+
+
+.header_menu_links_shop > div a, 
+.header_menu_links_login > div a,
+.header_mobile_menu > div a{
+  @include navLinks;
+}
+
+.header_mobile_menu button[data-menuButton]{
+  @include navLinks;
 }
 
 

@@ -4,10 +4,10 @@ html{
   font-size: $font-size-root;
 }
 
-a{
+a,button:not(.button--subDropDown):not(.button--dropdown){
   color: $clr-primary;
   transition:outline-offset $trans-dur-outline-offset  $trans-outline-func ;
-  &:focus{
+  &:focus-visible{
     outline: $outline-width solid $clr-outline;
     outline-offset: $outline-offset;
   }
@@ -17,4 +17,8 @@ body{
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+}
+
+button{
+  cursor: pointer;
 }
