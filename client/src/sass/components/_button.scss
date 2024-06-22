@@ -5,6 +5,10 @@
 
 
 .button{
+  &--primary{
+    @include button;
+    gap: $gap-btn
+  }
   &--skipToMain{
     @include button();
     border: none;
@@ -21,5 +25,11 @@
   }
   &--subDropDown{
     @include subDropdown-button;
-  }   
+  } 
+  &--authButton{
+    @include button;
+    background-color: white;
+    font-size: $font-size-base;
+    letter-spacing: $letter-spacing-md;
+  } 
 }

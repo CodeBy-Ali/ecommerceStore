@@ -188,11 +188,11 @@
       <section class="dropDown_mobile_container" id="submenu" data-mobileMenu>
         <nav>
           <div class="mobile_menu_shop">
-            <button class="mobile_menu_shop_Button" data-mobileMenuBtn>
+            <button class="mobile_menu_shop_Button" data-mobileMenuBtn aria-controls="submenu_shop" aria-expanded="false">
               <span>Shop</span>
               <span class="icon_contaienr"><img src="./src/assets/icons/arrowDown.svg" alt=""></span>
             </button>
-            <div class="mobile_submenu_shop">
+            <div class="mobile_submenu_shop" id="submenu_shop">
               <ul>
                 <li>
                   <a href="">
@@ -231,15 +231,33 @@
             </div>
           </div>
           <div class="mobile_menu_learn">
-            <button class="mobile_menu_learn_Button" data-mobileMenuBtn>
+            <button class="mobile_menu_learn_Button" data-mobileMenuBtn aria-expanded="false" aria-controls="submenu_learn" aria-label="submenu">
               <span>Learn</span>
               <span class="icon_contaienr"><img src="./src/assets/icons/arrowDown.svg" alt=""></span>
             </button>
-            <div>
-              
+            <div class="mobile_submenu_learn" id="submenu_learn">
+              <a href="">ABOUT US</a>
             </div>
           </div>
-      </nav>
-      </header>
+        </nav>
+        <div class="mobile_signUp_link_container">
+          <a href="" class="button--authButton">Sign Up</a>
+          <a href="" class="button--authButton">Log In</a>
+        </div>
+      <section>
+    </header>
+    <main>
+      <section class="hero">
+        <h1>Ditch Plastic</h1>
+        <p>Supercharged performance personal care on a mission to slash your plastic footprint. Low impact packaging, high impact results.</p>
+        <a href="" class="button--primary">
+          <span>Shop All</span>
+          <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16.1836 3.4165L19.8972 7.49984L16.1836 11.5832" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </section>
+    </main>
   </body>
 </html>

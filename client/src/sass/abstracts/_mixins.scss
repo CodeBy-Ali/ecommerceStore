@@ -33,10 +33,12 @@
   border: 1px solid $clr-primary;
   padding-inline: $pd-btn-inline;
   padding-block: $pd-btn-block;
-  font-family: $font-primaryBold;
   font-weight: $font-semibold;
   line-height: $leading-btn;
+  text-align: center;
+  width: fit-content;
   transition: background-color $trans-dur linear, outline-offset $trans-dur linear;
+  @include flex-row-jc(center);
   @include respond-to(medium) {
     font-size: $font-size-base;
     padding-block: $pd-btn-block-lg;

@@ -56,7 +56,7 @@
 .subDropdown_item_category a {
   transition: color 0.3s ease;
   display: inline-block;
-  padding-left: 6rem;
+  padding-left: 4rem;
   transition: padding 0.5s ease, opacity 0.5s ease;
   opacity: 0;
   width: 100%;
@@ -69,16 +69,16 @@
   max-width: fit-content;
 }
 .subDropdown_category-container ul li:first-child a {
-  transition-delay: 0.1s;
+  transition-delay: 0.2s;
 }
 .subDropdown_category-container ul li:nth-child(2) a {
   transition-delay: 0.3s;
 }
 .subDropdown_category-container ul li:nth-child(3) a {
-  transition-delay: 0.5s;
+  transition-delay: 0.4s;
 }
 .subDropdown_category-container ul li:nth-child(4) a {
-  transition-delay: 0.7s;
+  transition-delay: 0.5s;
 }
 
 .dropDown_container.open {
@@ -169,6 +169,8 @@
   height: 0;
   overflow: hidden;
   position: absolute;
+  display: flex;
+  flex-direction: column;
   left: 0;
   @include respond-to(medium) {
     display: none;
@@ -179,12 +181,11 @@
   }
   &.open {
     border-top: 1px solid $clr-border;
-    height: 100%;
+    height: calc(100% - $height-header-sm);
   }
 }
 .mobile_menu_learn button,
 .mobile_menu_shop button {
-  margin-bottom: 3rem;
   width: 100%;
   @include flex-row-jc(space-between);
   font-size: $font-size-mobile-menu-heading;
@@ -206,6 +207,9 @@
     pointer-events: none;
   }
 }
+.mobile_menu_shop button{
+  margin-bottom: $m-mobile-submenu;
+}
 
 // Start ------------------------------ mobile_submenu --------------------------->
 .mobile_submenu_shop {
@@ -217,6 +221,7 @@
   & ul {
     display: grid;
     gap: 1.6rem;
+    padding-inline: 1px;
     & li{
       border-radius: 2rem;
       background-color: $clr--bg-mobile-submenu;
@@ -236,7 +241,7 @@
 .mobile_menu_shop button.open + .mobile_submenu_shop{
   max-height: 48rem;
   opacity: 1;
-  padding-bottom: 3rem;
+  padding-bottom: $pd-mobile-submenu;
   & li{
     margin-left: 0;
     opacity: 1;
@@ -267,8 +272,40 @@
   }
 }
 
+// submenu learn
+.mobile_submenu_learn{
+  max-height: 0;
+  transition: max-height .9s ease, opacity .6s ease;
+  opacity: 0;
+  overflow: hidden;
+  & a{
+    margin-left: 2rem;
+    padding-top: $pd-mobile-submenu;
+    font-size: $font-size-xsm;
+    font-weight: $font-semibold;
+    color: $clr-text-secondary;
+    letter-spacing: $letter-spacing-xl;
+    transition: margin .6s ease;
+  }
+}
 
-// // mobile menu learn
-// .mobile_menu_learn{
-//   padding-top: 3rem;
-// }
+.mobile_menu_learn button.open + .mobile_submenu_learn{
+  opacity: 1;
+  max-height: 6rem;
+  margin-left: 0;
+  & a{
+    margin-left: 0;
+  }
+}
+
+// mobile util links signUp/Login
+.mobile_signUp_link_container{
+  padding-inline: $pd-inline-mobile-signUp;
+  padding-top: $pd-top-mobile-signUp;
+  padding-bottom: $pd-bottom-mobile-singUp;
+  background-color: $clr--bg-mobile-submenu;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8rem;
+  margin-top: auto;
+}

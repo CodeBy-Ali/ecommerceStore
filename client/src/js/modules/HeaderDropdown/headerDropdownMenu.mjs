@@ -1,6 +1,17 @@
 import Util from "../utils/domUtils.mjs";
+      
 
+// hide the UnFocused Category Details Containers;
+const hideAllSubMenus = () => {
+  const submenusList = document.querySelectorAll(".submenu");
+  submenusList.forEach((submenu) => Util.removeClass(submenu, "open"));
+}
 
+ // unHighlight the all unfocused category headings
+const resetFocusOfSubMenuHeadings = () => {
+  const subMenuHeadings = document.querySelectorAll(".subDropdown_item_category");
+  subMenuHeadings.forEach((heading) => Util.removeClass(heading, "focused"));
+}
 
 // unHides the detail container of currently focused category.
 const openSubmenu = (focusedCategory, submenusList) => {
@@ -18,13 +29,10 @@ const initializeSubDropDownController = () => {
   const categoriesHeading = document.querySelectorAll(".subDropdown_item_category");
   categoriesHeading.forEach((category) =>
     category.addEventListener("mouseenter", (e) => {
-      // unHighlight the all unfocused category headings
-      categoriesHeading.forEach((categoryHeading) => Util.removeClass(categoryHeading, "focused"));
+      resetFocusOfSubMenuHeadings();
       // highlight the focused Category Heading.
       Util.addClass(category, "focused");
-      // hide the UnFocused Category Details Containers;
-      submenusList.forEach((submenu) => Util.removeClass(submenu, "open"));
-
+      hideAllSubMenus();
       openSubmenu(e.target, submenusList);
     })
   );
@@ -59,7 +67,13 @@ const headerDropdownMenuController_large = () => {
 
   const toggleStateIfEnter = (e) => { console.log(e.key); if (e.key === "Enter" || e.keyCode === 13) { toggleState(); console.log(e.key) } };
 
-  shopLink.addEventListener("mouseenter", (e) => {toggleState(), showFirstSubmenu()});
+  shopLink.addEventListener("mouseenter", (e) => {
+    toggleState(),
+    resetFocusOfSubMenuHeadings();
+    hideAllSubMenus();
+    showFirstSubmenu()
+  });
+  
   shopLink.addEventListener("mouseleave", toggleState);
   dropDownMenu.addEventListener("mouseenter",toggleState);
   dropDownMenu.addEventListener("mouseleave", toggleState);

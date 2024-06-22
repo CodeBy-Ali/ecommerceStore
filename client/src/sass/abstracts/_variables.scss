@@ -23,6 +23,7 @@ $clr-text-secondary: rgb(117, 117, 117);
 $clr-text-quaternary: rgb(98, 98, 98); 
 $clr-text-primary: rgb(128, 128, 128);
 $clr-border: rgb(219, 219, 219);
+$clr-accent: rgb(226, 249, 73);;
 // font
 $font-size-root: 10px;
 $font-size-base: 1.6rem;
@@ -41,6 +42,7 @@ $leading-relaxed	: 1.625;
 // letter-spacing
 $letter-spacing-md: .6px;
 $letter-spacing-lg: 1px;
+$letter-spacing-xl : 1.5px;
 // padding
 $pd-body-inline-base: 1.6rem;
 // * ---------------- Container ------------ *
@@ -75,8 +77,10 @@ $clr-btn-focus: rgb(127,127,127);
 
 $pd-btn-inline: 1.6rem;
 $pd-btn-inline-lg: 2rem;
-$pd-btn-block: 1rem;
-$pd-btn-block-lg: 1.2rem;
+$pd-btn-block: .8rem;
+$pd-btn-block-lg: 1rem;
+
+$gap-btn: 1.4rem;
 
 $focus-offset-btn: 5px;
 $focus-width-btn: 3px;
@@ -96,3 +100,11 @@ $font-size-item-detail: 5.4rem;
 // *---------------- Mobile-Drop-Down-Menu ------------ *
 $clr--bg-mobile-submenu: rgb(239, 237, 233);
 $font-size-mobile-menu-heading: 3rem;
+$pd-mobile-submenu: 3rem;
+$m-mobile-submenu: 3rem;
+
+$pd-inline-mobile-signUp: 1.7rem;
+$pd-top-mobile-signUp: 1.9rem;
+$pd-bottom-mobile-singUp: 2.2rem;
+
+// *----------------- Hero-Section ----------------------*

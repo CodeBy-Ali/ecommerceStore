@@ -40,6 +40,9 @@
 
 .header_mobile_menu button[data-menuButton]{
   @include navLinks;
+  & > span{
+    pointer-events: none;
+  }
 }
 
 
