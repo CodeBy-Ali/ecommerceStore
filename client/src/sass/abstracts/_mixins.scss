@@ -24,6 +24,15 @@
   @content;
 }
 
+@mixin flex-col-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @content
+}
+
+
 // button
 @mixin button($trans-dur: 0.3s) {
   border-radius: $br-btn;

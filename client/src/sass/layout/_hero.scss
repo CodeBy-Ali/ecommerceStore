@@ -1,8 +1,76 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+
+.hero_mainDetail{
+  width: 100%;
+  max-width: $width-medium;
+  text-align: center;
+  margin-inline: auto;
+  padding-inline: $pd-hero-main-inline;
+  padding-top: $pd-hero-main-top;
+  padding-bottom: $pd-hero-main-bottom;
+  @include respond-to(small){
+    padding-inline: $pd-hero-main-inline-sm;
+    padding-top: $pd-hero-main-top-sm;
+    padding-bottom: $pd-hero-main-bottom-sm;
+  }
+  @include flex-col-center;
+
+  & > h1{
+    font-size: $font-size-h1-sm;
+    @include respond-to(medium){
+      font-size: $font-size-h1-md;
+    }
+    @include respond-to(large){
+      font-size: $font-size-h1-lg;
+    }
+  }
+
+  & > p{
+    font-size: $font-size-sm;
+    margin-bottom: 3rem;
+    padding-top: 2rem;
+    max-width: 69rem;
+    line-height: $leading-relaxed;
+    color: $clr-text-secondary;
+    @include respond-to(medium){
+      font-size: $font-size-hero-p-md;
+    }
+  }
+}
+
+//  image scroll
+.hero_scrollImage_container{
+  padding-bottom: 6rem;
+  margin-bottom: 10rem;
+}
+
+.hero_image_scroller{
+  display: flex;
+  gap: 3rem;
+  overflow-x: scroll;
+  & > span{
+    min-width: 42rem;
+    height: 42rem;
+    aspect-ratio: 1/1;
+    display: inline-block;
+    border-radius: 28%;
+    overflow: hidden;
+  }
+
+  & > span img{
+    border-radius: inherit;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
 
 
 
 
 
-
-
-
+#test{
+  min-height: 100vh;
+}

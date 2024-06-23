@@ -8,10 +8,10 @@
   right: 0;
   height: 0%;
   top: 7.4rem;
+  visibility: hidden;
   background-color: $clr-dropDown-backdrop;
-  transition: opacity 0.5s ease;
-  opacity: 0;
   display: none;
+  overflow: hidden;
   @include respond-to(medium) {
     top: $height-header-lg;
     display: block;
@@ -20,15 +20,14 @@
 
 // dropdown in open state
 .dropDown_container.open {
+  visibility: visible;
   height: 100%;
-  opacity: 1;
 }
 
 .dropDown_menu {
   background-color: white;
   height: 0;
   transition: height 0.7s ease, opacity 0.7s ease, padding 0.8s ease;
-  opacity: 0;
   padding-inline: 8rem;
   padding-block: 0;
   display: grid;
@@ -85,13 +84,27 @@
   & .dropDown_menu {
     visibility: visible;
     height: 46rem;
-    opacity: 1;
     padding-block: 3rem;
   }
   & .subDropdown_item_category a {
     padding-left: 0;
     opacity: 1;
   }
+}
+.subDropdown_item_detail_container{
+  opacity: 0;
+  transform: translateY(-2rem);
+  transition: opacity .9s ease .3s , transform .9s ease .1s;
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.dropDown_container.open .subDropdown_item_detail_container{
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 36rem;
+  visibility: visible;
 }
 
 .subDropdown_item_category.focused a span {
@@ -129,7 +142,7 @@
   display: grid;
   place-items: center;
   gap: 2.5rem;
-  & > p {
+  & > h3 {
     font-size: $font-size-base;
     font-weight: $font-semibold;
     letter-spacing: $letter-spacing-md;
@@ -153,7 +166,7 @@
   visibility: hidden;
   opacity: 0;
   max-height: 0;
-  transition: opacity 1s ease;
+  transition: opacity 1s ease ;
 }
 
 .subDropdown_item_detail_container .submenu.open {

@@ -1,35 +1,8 @@
-// eloquia bold font
+// rand regular
 @font-face {
-  font-family: "eloquiaBold";
-  src: url("/fonts/eloquiadisplay-extrabold-webfont.woff2") format("woff2"),
-       url("/fonts/eloquiadisplay-extrabold-webfont.woff") format(("woff")),
-       url("/fonts/eloquiaDisplay-ExtraBold.otf") format('otf');
-  font-weight: normal;
-  font-style: normal;
-}
-// eloquia light font
-@font-face {
-  font-family: "eloquiaLight";
-  src: url('/fonts/eloquiatext-extralight-webfont.woff2') format("woff2"),
-        url('/fonts/EloquiaTextExtLt.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-// bianco font
-@font-face {
-  font-family: "bianco";
-  src: url("/fonts/BiancoSans-Regular.woff2") format("woff2"),
-       url("/fonts/BiancoSans-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-// Open Sauce font
-@font-face {
-  font-family: "openSauce";
-  src: url("/fonts/opensauceone-regular-webfont.woff2") format("woff2"),
-       url("/fonts/opensauceone-regular-webfont.woff") format("woff");
+  font-family: "randRegular";
+  src: url("/fonts/Rand-Regular.woff2") format("woff2"),
+       url("/fonts/Rand-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

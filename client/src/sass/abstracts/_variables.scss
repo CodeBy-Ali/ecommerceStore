@@ -1,11 +1,7 @@
 @use '../base/fonts' as *;
 
 // * --------------- Fonts --------------- *
-$font-primaryBold : "eloquiaBold",sans-serif;
-$font-primaryLight: "eloquiaLight",sans-serif;
-$font-BiancoRegular: "bianco",sans-serif;
-$font-openSauceRegular: "openSauce",sans-serif;
-
+$font-primary : "randRegular",sans-serif,Helvetica;
 
 // *---------------- EveryElement ----------*
 $outline-offset: 5px;
@@ -49,7 +45,8 @@ $pd-body-inline-base: 1.6rem;
 $max-width: 1180px !default;
 $pd-container : 2rem;
 
-
+// width
+$width-medium: 120rem;
 
 
 // *------------------- Logo --------------- *
@@ -108,3 +105,15 @@ $pd-top-mobile-signUp: 1.9rem;
 $pd-bottom-mobile-singUp: 2.2rem;
 
 // *----------------- Hero-Section ----------------------*
+
+$font-size-h1-lg: 11.4rem;
+$font-size-h1-md: 9rem;
+$font-size-h1-sm: clamp(6rem,5vw,7rem);
+$font-size-hero-p-md: 1.8rem;
+
+$pd-hero-main-inline-sm: 8rem;
+$pd-hero-main-top-sm: 12rem;
+$pd-hero-main-bottom-sm: 12.4rem;
+$pd-hero-main-inline: 2.4rem;
+$pd-hero-main-top: 5.5rem;
+$pd-hero-main-bottom: 6rem;
