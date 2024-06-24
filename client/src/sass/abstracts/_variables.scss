@@ -19,7 +19,10 @@ $clr-text-secondary: rgb(117, 117, 117);
 $clr-text-quaternary: rgb(98, 98, 98); 
 $clr-text-primary: rgb(128, 128, 128);
 $clr-border: rgb(219, 219, 219);
-$clr-accent: rgb(226, 249, 73);;
+$clr-accent: rgb(226, 249, 73);
+$clr-bg-primary: rgb(239, 237, 233);
+$clr-focus: rgb(127,127,127);
+$clr-bg-secondary: #f9f8f6;;
 // font
 $font-size-root: 10px;
 $font-size-base: 1.6rem;
@@ -42,7 +45,7 @@ $letter-spacing-xl : 1.5px;
 // padding
 $pd-body-inline-base: 1.6rem;
 // * ---------------- Container ------------ *
-$max-width: 1180px !default;
+$max-width-container-collection: 1300px;
 $pd-container : 2rem;
 
 // width
@@ -64,13 +67,11 @@ $trans-func-headerDropDown: cubic-bezier(0.39, 0.58, 0.57, 1);
 $trans-dur-headerDropDown: .7s;
 $clr-dropDown-backdrop: rgba(0, 0, 0, 0.3);
 $height-header-sm: 7.5rem; 
-$height-header-lg: 8rem;
+$height-header-lg: 8.9rem;
 
 
 
 // * --------------- Button --------------- *
-$clr-btn--bg-primary: rgb(226, 249, 73);
-$clr-btn-focus: rgb(127,127,127);
 
 $pd-btn-inline: 1.6rem;
 $pd-btn-inline-lg: 2rem;
@@ -95,7 +96,7 @@ $h-submenu-item-detail: 24.6rem;
 $font-size-item-detail: 5.4rem;
 
 // *---------------- Mobile-Drop-Down-Menu ------------ *
-$clr--bg-mobile-submenu: rgb(239, 237, 233);
+
 $font-size-mobile-menu-heading: 3rem;
 $pd-mobile-submenu: 3rem;
 $m-mobile-submenu: 3rem;
@@ -117,3 +118,7 @@ $pd-hero-main-bottom-sm: 12.4rem;
 $pd-hero-main-inline: 2.4rem;
 $pd-hero-main-top: 5.5rem;
 $pd-hero-main-bottom: 6rem;
+
+// image slider
+$width-hero-image-scroll: clamp(13rem,calc(5rem + 20vw),42.4rem);
+$gap-hero-image-scroll: 3rem;

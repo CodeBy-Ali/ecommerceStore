@@ -1,0 +1,68 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.hero {
+  text-align: center;
+  padding-inline: 4.6rem;
+  padding-top: 4.8rem;
+  padding-bottom: 4.3rem;
+  background-color: $clr-bg-primary;
+  @include respond-to(medium) {
+    padding-inline: 7rem;
+    padding-top: 8rem;
+    padding-bottom: 7rem;
+  }
+
+  & > h1 {
+    font-size: 3.5rem;
+    @include respond-to(medium) {
+      font-size: 8rem;
+    }
+  }
+}
+
+.hero_category_nav_section{
+  background-color: $clr-bg-secondary;
+}
+
+.hero_category_nav{
+  display: flex;
+  padding-inline: 2rem;
+  padding-top: 1.7rem;
+  padding-bottom: 1rem;
+  @include container;
+  @include respond-to(medium){
+    padding-top: 2rem;
+    padding-inline: 4rem;
+    padding-bottom: .8rem;
+  }
+  & > p{
+    font-size: $font-size-xsm;
+    white-space: nowrap;
+    margin-right: 3rem;
+    padding-bottom: 1rem;
+    @include respond-to(medium){
+      font-size: 1.8rem;
+      margin-right: 6rem;
+    }
+  }
+}
+
+.hero_category_nav  ul{
+  display: flex;
+  font-size: $font-size-xsm;
+  font-weight: $font-semibold;
+  letter-spacing: $letter-spacing-xl;
+  gap: 4rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  @include scrollBar(4px);
+  @include respond-to(medium){
+    font-size: $font-size-base;
+    gap: 6rem;
+  }
+
+  & > li {
+    white-space: nowrap;
+  }
+}

@@ -29,7 +29,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @content
+  @content;
 }
 
 
@@ -37,7 +37,7 @@
 @mixin button($trans-dur: 0.3s) {
   border-radius: $br-btn;
   color: $clr-primary;
-  background-color: $clr-btn--bg-primary;
+  background-color: $clr-accent;
   font-size: $font-size-sm;
   border: 1px solid $clr-primary;
   padding-inline: $pd-btn-inline;
@@ -56,10 +56,6 @@
   &:hover {
     background-color: $clr-primary;
     color: white;
-  }
-  &:focus {
-    outline: 3px solid $clr-btn-focus;
-    outline-offset: $focus-offset-btn;
   }
 }
 
@@ -117,4 +113,27 @@
   @include respond-to('medium'){
     font-size: $font-size-sm;
   }
+}
+
+// scrollBar
+@mixin scrollBar($height: 5px){
+  &::-webkit-scrollbar {
+    height: $height;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $clr-primary;
+    border-radius: 1.2rem;
+  }
+}
+
+// container 
+@mixin container($max-width: 1300px){
+  width: 100%;
+  max-width: $max-width;
+  margin-inline: auto;
 }

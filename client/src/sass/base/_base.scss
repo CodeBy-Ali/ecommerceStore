@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 html{
   font-size: $font-size-root;
@@ -14,7 +15,11 @@ a,button:not(.button--subDropDown):not(.button--dropdown){
 }
 
 body{
-  overflow: hidden;
+  padding-top: $height-header-sm;
+  @include respond-to(medium){
+    padding-top: $height-header-lg;
+  }
+  min-height: 300vh;
 }
 
 button{
