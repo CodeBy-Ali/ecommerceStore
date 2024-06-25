@@ -19,7 +19,7 @@ body{
   @include respond-to(medium){
     padding-top: $height-header-lg;
   }
-  min-height: 300vh;
+  height: 100vh;
 }
 
 button{

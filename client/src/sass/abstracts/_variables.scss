@@ -22,7 +22,8 @@ $clr-border: rgb(219, 219, 219);
 $clr-accent: rgb(226, 249, 73);
 $clr-bg-primary: rgb(239, 237, 233);
 $clr-focus: rgb(127,127,127);
-$clr-bg-secondary: #f9f8f6;;
+$clr-bg-secondary: #f9f8f6;
+$clr-product-bg: rgb(240, 236, 232);
 // font
 $font-size-root: 10px;
 $font-size-base: 1.6rem;
@@ -122,3 +123,5 @@ $pd-hero-main-bottom: 6rem;
 // image slider
 $width-hero-image-scroll: clamp(13rem,calc(5rem + 20vw),42.4rem);
 $gap-hero-image-scroll: 3rem;
+
+// *----------------------- Collections-Page -------------------*

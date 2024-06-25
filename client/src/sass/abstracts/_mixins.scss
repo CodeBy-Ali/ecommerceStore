@@ -24,14 +24,13 @@
   @content;
 }
 
-@mixin flex-col-center{
+@mixin flex-col-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   @content;
 }
-
 
 // button
 @mixin button($trans-dur: 0.3s) {
@@ -81,46 +80,46 @@
     overflow: visible;
     max-height: auto;
   }
-  & > svg{
+  & > svg {
     width: 1.8rem;
   }
 }
 
-@mixin subDropdown-button{
+@mixin subDropdown-button {
   max-height: fit-content;
   width: fit-content;
   background-color: transparent;
   border: none;
   opacity: 0;
   max-width: 0;
-  &:focus{
+  &:focus {
     opacity: 1;
     max-width: fit-content;
   }
-  & svg{
+  & svg {
     width: $dropDown-button-svg-width;
   }
 }
 
 // nav links
-@mixin navLinks{
+@mixin navLinks {
   background-color: transparent;
   border: none;
   font-weight: $font-semibold;
   letter-spacing: $letter-spacing-lg;
   font-size: $font-size-xsm;
   color: $clr-primary;
-  @include respond-to('medium'){
+  @include respond-to("medium") {
     font-size: $font-size-sm;
   }
 }
 
 // scrollBar
-@mixin scrollBar($height: 5px){
+@mixin scrollBar($height: 5px) {
   &::-webkit-scrollbar {
     height: $height;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: transparent;
   }
@@ -131,9 +130,43 @@
   }
 }
 
-// container 
-@mixin container($max-width: 1300px){
+// container
+@mixin container($max-width: 1300px) {
   width: 100%;
   max-width: $max-width;
   margin-inline: auto;
+}
+
+// category-section of collection page
+@mixin category-section($mr-top-sm: 9rem) {
+  margin-top: 3rem;
+  padding-inline: 1.8rem;
+  margin-bottom: 4rem;
+  @include respond-to(small) {
+    margin-top: $mr-top-sm;
+    padding-inline: 2rem;
+    margin-bottom: 8rem;
+  }
+  .category_section_header {
+    @include flex-row-jc(space-between);
+    margin-bottom: 3rem;
+    & h2 {
+      font-size: 2rem;
+      @include respond-to(small) {
+        font-size: 3.5rem;
+      }
+    }
+    & > p{
+      color: $clr-primary;
+      font-weight: $font-semibold;
+      font-size: $font-size-xsm;
+      letter-spacing: $letter-spacing-xl;
+      @include respond-to(small){
+        font-size: $font-size-base;
+      }
+    }
+    & > p span:first-child{
+      margin-right: 3px;
+    }
+  }
 }

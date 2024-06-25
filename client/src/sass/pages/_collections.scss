@@ -1,6 +1,13 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
+
+
+html{
+  scroll-behavior: smooth;
+  // scroll-padding-top: 3rem;
+}
+
 .hero {
   text-align: center;
   padding-inline: 4.6rem;
@@ -64,5 +71,59 @@
 
   & > li {
     white-space: nowrap;
+  }
+}
+
+
+
+.category_section{
+  border-bottom: 1px solid $clr-border;
+}
+.category_section_wrapper{
+  @include container;
+  @include category-section();
+}
+
+.bestSellers_section{
+  @include category-section(5rem);
+}
+
+
+.products_container{
+  margin-top: 5rem;
+  @include respond-to(medium){
+    margin-top: 6.5rem;
+  }
+}
+
+
+
+.products_container ul {
+  min-height: 60rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 4rem;
+  
+  & > li {
+    padding-inline: 2rem;
+  }
+
+  @include respond-to(small) {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 6rem;
+    column-gap: 4rem;
+    & > li {
+      padding-inline: 0rem;
+    }
+  }
+  
+  @include respond-to(medium) {
+    row-gap: 5rem;
+    column-gap: 3rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond-to(large){
+    column-gap: 6rem;
   }
 }

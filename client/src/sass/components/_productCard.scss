@@ -1,0 +1,61 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+.product_card {
+  background-color: $clr-product-bg;
+  border-radius: 6rem;
+  overflow: hidden;
+  position: relative;
+  max-height: 54.3rem;
+  @include respond-to(small) {
+    max-height: 42rem;
+  }
+  @include respond-to(medium) {
+    max-height: 36.3rem;
+  }
+}
+
+.product_card a{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.product_card .product_card_info {
+  margin-top: 3.5rem;
+  text-align: center;
+  color: $clr-primary;
+  margin-bottom: 1.6rem;
+
+  @include respond-to(medium) {
+    margin-top: 4.5rem;
+  }
+
+  & > p:first-child {
+    font-size: 1.8rem;
+    font-weight: $font-semibold;
+    margin-bottom: 1rem;
+    line-height: 3rem;
+  }
+
+  & > p:last-child {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    @include respond-to(medium) {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+.product_card .product_card_image {
+  height: 100%;
+  width: 100%;
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
