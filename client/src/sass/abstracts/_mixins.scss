@@ -44,6 +44,7 @@
   font-weight: $font-semibold;
   line-height: $leading-btn;
   text-align: center;
+  white-space: nowrap;
   width: fit-content;
   transition: background-color $trans-dur linear, outline-offset $trans-dur linear;
   @include flex-row-jc(center);
@@ -168,5 +169,35 @@
     & > p span:first-child{
       margin-right: 3px;
     }
+  }
+}
+
+// product card layout
+@mixin productCard_layout{
+  background-color: $clr-product-bg;
+  border-radius: 4rem;
+  overflow: hidden;
+  max-height: 54.3rem;
+  @include respond-to(small) {
+    max-height: 42rem;
+  }
+  @include respond-to(medium) {
+    max-height: 36.3rem;
+    border-radius: 6rem;
+  }
+}
+
+// product banner layout
+@mixin productBanner_layout{
+  background-color: $clr-product-banner-bg;
+  border-radius: 2rem;
+  overflow: hidden;
+  max-height: 23rem;
+  @include respond-to(small) {
+    max-height: 30rem;
+  }
+  @include respond-to(medium) {
+    max-height: 31.4rem;
+    border-radius: 6rem;
   }
 }

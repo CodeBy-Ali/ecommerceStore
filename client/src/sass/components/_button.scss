@@ -20,6 +20,16 @@
       top: 0;
     }
   }
+  &--productBanner{
+    @include button;
+    gap: calc($gap-btn - 2px);
+    font-size: $font-size-xsm;
+    padding-block: .4rem;
+    @include respond-to(small){
+      padding-block: 1rem;
+      font-size: 1.4rem;
+    }
+  }
   &--dropdown{
     @include dropDown-button(-2rem);
   }

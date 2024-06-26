@@ -103,9 +103,10 @@ html{
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 4rem;
-  
+  align-content: flex-start;
   & > li {
     padding-inline: 2rem;
+    height: fit-content;
   }
 
   @include respond-to(small) {
@@ -126,4 +127,10 @@ html{
   @include respond-to(large){
     column-gap: 6rem;
   }
+}
+
+.products_container ul .banner_card_wrapper{
+  grid-column: span 2;
+  padding-inline: 0;
+  height: 100%;
 }
