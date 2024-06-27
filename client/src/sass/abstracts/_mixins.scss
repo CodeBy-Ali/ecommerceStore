@@ -117,6 +117,8 @@
 
 // scrollBar
 @mixin scrollBar($height: 5px) {
+  scrollbar-color: $clr-primary;
+  
   &::-webkit-scrollbar {
     height: $height;
   }
@@ -175,15 +177,15 @@
 // product card layout
 @mixin productCard_layout{
   background-color: $clr-product-bg;
-  border-radius: 4rem;
-  overflow: hidden;
+  border-radius: $radius-product-card;
+  // overflow: hidden;
   max-height: 54.3rem;
   @include respond-to(small) {
     max-height: 42rem;
   }
   @include respond-to(medium) {
     max-height: 36.3rem;
-    border-radius: 6rem;
+    border-radius: $radius-product-card-md;
   }
 }
 

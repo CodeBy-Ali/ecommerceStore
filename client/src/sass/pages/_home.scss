@@ -49,6 +49,7 @@
 
 .hero_image_scroller{
   overflow-x: scroll;
+  scrollbar-width: none;
   &::-webkit-scrollbar{
     width: 0;
     height: 0;

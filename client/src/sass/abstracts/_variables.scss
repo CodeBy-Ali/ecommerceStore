@@ -25,6 +25,7 @@ $clr-focus: rgb(127,127,127);
 $clr-bg-secondary: #f9f8f6;
 $clr-product-bg: rgb(240, 236, 232);
 $clr-product-banner-bg: rgb(208, 221, 219);
+$clr-bg-product-image: #E3E2DE;
 // font
 $font-size-root: 10px;
 $font-size-base: 1.6rem;
@@ -126,3 +127,5 @@ $width-hero-image-scroll: clamp(13rem,calc(5rem + 20vw),42.4rem);
 $gap-hero-image-scroll: 3rem;
 
 // *----------------------- Collections-Page -------------------*
+$radius-product-card: 4rem;
+$radius-product-card-md: 6rem;
