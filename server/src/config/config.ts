@@ -9,17 +9,16 @@ dotenv.config({ path: envPath });
 type Config = {
   host: string,
   port: number | any,
-  databaseURI: string | undefined,
+  databaseURI: string,
   dir: {
     views: string,
   }
 }
 
-console.log(process.env.MONGODB_URI)
 const config: Config = {
   host: process.env.HOST || `127.0.0.1`,
   port: process.env.PORT || 3000,
-  databaseURI:  process.env.MONGODB_URI,
+  databaseURI:  process.env.MONGODB_URI || 'mongodb://localhost:27017/myDb',
   dir: {
     views: path.join(__dirname, '..', 'views'),
   }

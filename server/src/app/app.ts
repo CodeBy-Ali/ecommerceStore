@@ -1,17 +1,15 @@
-import express,{ Express, Request, Response } from "express";
-import config from "./config/config";
 import compression from 'compression';
+import express,{ Express, Request, Response } from "express";
+import config from "../config/config";
 
 
 
-const { host, port, dir } = config;
-
-// app
+// create app instance
 const app: Express = express();
 
 // set view engine
 app.set('view engine', 'ejs');
-app.set('views', dir.views);
+app.set('views', config.dir.views);
 
 // don't identify express
 app.disable('x-powered-by');
@@ -28,15 +26,8 @@ app.use(express.json())
 
 
 app.get('/', (req: Request, res: Response) => {
-  console.log(req.url)
   res.send("<h1>First Express App</h1>");
 })
 
 
-app.listen(port, host, () : void=> {
-  console.log(`Server Running at http://${host}:${port}`);
-})
-
-
-
-
+export default app;
