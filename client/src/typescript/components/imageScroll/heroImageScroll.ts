@@ -16,9 +16,9 @@ const moveInnerScroller = (innerScroller:HTMLElement | null): void => {
   }
 };
 
-const createHeroImageScroll = ():void=> {
+const heroImageScroll = ():void=> {
   const innerScroller: HTMLElement | null = document.querySelector("[data-imageInnerScroller]") as HTMLElement;
   document.addEventListener("scroll", ():void => moveInnerScroller(innerScroller));
 };
 
-export default createHeroImageScroll;
+export default heroImageScroll;

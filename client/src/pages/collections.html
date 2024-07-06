@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Muhammad Ali Hassan" />
-    <script src="../js/main.js" type="module" defer></script>
+    <script src="../typescript/main.ts" type="module" defer></script>
     <link rel="stylesheet" href="../sass/main.scss" />
     <link rel="stylesheet" href="../sass/pages/_collections.scss">
     <title>Phil's Refills</title>
@@ -251,7 +251,7 @@
 
     <main>
       <!-- Start----------------------------------------- Hero-Section -------------------------------------- -->
-      <section class="hero">
+      <section class="collections_hero_section">
         <h1>Shop All</h1>
       </section>
       <!-- Start----------------------------------------- Category-Navigation ---------------------------------- -->
@@ -283,7 +283,65 @@
             <p><span>3</span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
-            <ul>
+            <ul class="products_list">
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="">
+                    <span class="visually-hidden">The EveryThing Bar</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p>The EveryThing Bar</p>
+                    <p>$14.99</p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="../assets/images/product/TheEverythingBar_Ecomm_106_720x.webp" alt="">
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="">
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="product_card">
+                  <a href="">
+                    <span class="visually-hidden">The EveryThing Bar</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p>The EveryThing Bar</p>
+                    <p>$14.99</p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="../assets/images/product/TheEverythingBar_Ecomm_106_720x.webp" alt="">
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="">
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
               <li>
                 <div class="product_card">
                   <a href="">
@@ -341,6 +399,80 @@
           </div>
         </div>
        </section>
+       <!-- Start ------------------------------------------------------ Body-Section ------------------------------------------------ -->
+        <section class="category_section">
+          <div class="category_section_wrapper">
+            <div class="category_section_header">
+              <h2>
+                <a href="">Body</a>
+              </h2>
+              <p><span>8</span> <span>PRODUCTS</span></p>
+            </div>
+            <div class="products_container">
+              <ul>
+                <li>
+                  <div class="product_card">
+                    <a href="">
+                      <span class="visually-hidden">The EveryThing Bar</span>
+                    </a>
+                    <div class="product_card_info">
+                      <p>The EveryThing Bar</p>
+                      <p>$14.99</p>
+                    </div>
+                    <div class="product_card_image">
+                      <img src="../assets/images/product/TheEverythingBar_Ecomm_106_720x.webp" alt="">
+                    </div>
+                    <div class="product_addToCart_container">
+                      <form action="">
+                        <div class="addTOCart_action">
+                          <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                            <span class="action_btn_text">Add to bag</span>
+                            <span class="plus_icon_btn">
+                              <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                            </span>
+                          </button>
+                          <span class="plus_icon">
+                            <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="product_card">
+                    <a href="">
+                      <span class="visually-hidden">The EveryThing Bar</span>
+                    </a>
+                    <div class="product_card_info">
+                      <p>The EveryThing Bar</p>
+                      <p>$14.99</p>
+                    </div>
+                    <div class="product_card_image">
+                      <img src="../assets/images/product/TheEverythingBar_Ecomm_106_720x.webp" alt="">
+                    </div>
+                    <div class="product_addToCart_container">
+                      <form action="">
+                        <div class="addTOCart_action">
+                          <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                            <span class="action_btn_text">Add to bag</span>
+                            <span class="plus_icon_btn">
+                              <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                            </span>
+                          </button>
+                          <span class="plus_icon">
+                            <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
     </main>
   </body>
 </html>

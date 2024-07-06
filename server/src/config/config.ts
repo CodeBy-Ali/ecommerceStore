@@ -12,6 +12,7 @@ type Config = {
   databaseURI: string,
   dir: {
     views: string,
+    static: string,
   }
 }
 
@@ -21,7 +22,9 @@ const config: Config = {
   databaseURI:  process.env.MONGODB_URI || 'mongodb://localhost:27017/myDb',
   dir: {
     views: path.join(__dirname, '..', 'views'),
+    static: path.join(__dirname, '../../../client/dist'),
   }
 }
+
 
 export default config;

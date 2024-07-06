@@ -1,9 +1,9 @@
 import checker from "vite-plugin-checker"
-
-export default {
+import { defineConfig } from "vite"
+export default defineConfig({
   plugins: [
     checker({
       typescript: true,
     })
   ]
-} 
+}) 
