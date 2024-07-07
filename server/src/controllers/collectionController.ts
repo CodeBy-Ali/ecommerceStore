@@ -3,9 +3,13 @@ import Product, { IProduct } from "../model/productModel";
 import { HydratedDocument, Model } from "mongoose";
 
 export const renderCollectionsView = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const products: HydratedDocument<IProduct>[] = await Product.find();
-    res.render('collections',products );
+  try {  
+    const allProducts: Array<IProduct> = await Product.find().lean(); 
+    const bestSellers: Array<IProduct> = await Product.find().sort({'salesCount': 'descending'}).limit(3).lean();
+    res.render('collections', {
+      "bestSellers": bestSellers,
+      "body": allProducts.filter((product: IProduct) => product.category === 'body'),
+    });
   } catch (error) {
     res.status(500).json({
       success: false,

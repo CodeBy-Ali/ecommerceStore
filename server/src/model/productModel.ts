@@ -1,4 +1,4 @@
-import { Schema ,model} from "mongoose";
+import { Schema ,model, Document,Model} from "mongoose";
 
 
 export interface IProduct{
@@ -10,9 +10,11 @@ export interface IProduct{
   weight: string,
   category: string,
   image: string,
+  salesCount: number,
+  stockQuantity: number,
 }
 
-const productSchema= new Schema<IProduct>({
+const productSchema:Schema = new Schema<IProduct>({
   title: {
     type: String,
     required: true,
@@ -26,7 +28,6 @@ const productSchema= new Schema<IProduct>({
   price: {
     type: Number,
     required: true,
-    trim: true,
   },
   usage: {
     type: String,
@@ -52,9 +53,17 @@ const productSchema= new Schema<IProduct>({
     type: String,
     required: true,
     trim: true
+  },
+  salesCount: {
+    type: Number,
+    required: true,
+  },
+  stockQuantity: {
+    type: Number,
+    required: true,
   }
 })
 
-const Product = model<IProduct>("Product", productSchema);
+const Product = model<IProduct>("products", productSchema);
 
 export default Product;
