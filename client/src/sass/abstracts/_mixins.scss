@@ -118,7 +118,7 @@
 // scrollBar
 @mixin scrollBar($height: 5px) {
   scrollbar-color: $clr-primary;
-  
+
   &::-webkit-scrollbar {
     height: $height;
   }
@@ -159,23 +159,23 @@
         font-size: 3.5rem;
       }
     }
-    & > p{
+    & > p {
       color: $clr-primary;
       font-weight: $font-semibold;
       font-size: $font-size-xsm;
       letter-spacing: $letter-spacing-xl;
-      @include respond-to(small){
+      @include respond-to(small) {
         font-size: $font-size-base;
       }
     }
-    & > p span:first-child{
+    & > p span:first-child {
       margin-right: 3px;
     }
   }
 }
 
 // product card layout
-@mixin productCard_layout{
+@mixin productCard_layout {
   background-color: $clr-product-bg;
   border-radius: $radius-product-card;
   // overflow: hidden;
@@ -190,7 +190,7 @@
 }
 
 // product banner layout
-@mixin productBanner_layout{
+@mixin productBanner_layout {
   background-color: $clr-product-banner-bg;
   border-radius: 2rem;
   overflow: hidden;
@@ -202,4 +202,52 @@
     max-height: 31.4rem;
     border-radius: 6rem;
   }
+}
+
+// form input field
+
+@mixin formInput {
+  width: 100%;
+  padding-inline: 1.8rem;
+  padding-block: 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 6.5rem;
+  font-size: 1.1rem;
+  line-height: 4rem;
+  height: 4rem;
+  color: black;
+  font-weight: $font-semibold;
+  padding-top: 1.2rem;
+  
+  &::placeholder {
+    color: white;
+  }
+
+  &:not(:placeholder-shown) + label, &:focus + label {
+    top: 0.5rem;
+    font-size: 0.8rem;
+    transform: translateY(0);
+    @include respond-to(medium) {
+      font-size: 1rem;
+    }
+  }
+
+  @include respond-to(medium){
+    font-size: $font-size-sm;
+    padding-top: 1.2rem;
+  }
+}
+
+// form input label
+@mixin formInputLabel{
+  position: absolute;
+  font-size: 1.1rem;
+  color: $clr-text-secondary;
+  font-weight: $font-semibold;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;    
+  left: 1.9rem;
+  transition: all .2s ease;
 }

@@ -11,7 +11,7 @@
   </head>
   <body data-page="home">
     <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
-    <a class="button--skipToMain" href="">Skip to content</a>
+    <a class="button--skipToMain" href="#main">Skip to content</a>
 
     <!-- Start ------------------------------- Header ------------------------------------ -->
 
@@ -66,7 +66,7 @@
               <li class="subDropdown_item_category" data-categoryName="shopAll">
                 <a href="">
                   <span>Shop All</span>
-                  <button class="button--subDropDown" aria-label="Open SubMenu Shop All" aria-expanded="false" aria-controls="submenu_shop_1" role="tab" aria-selected="false">
+                  <button class="button--subDropDown" aria-label="Open SubMenu Shop All" aria-expanded="false" aria-controls="submenu_shop_1" role="tab" >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
                     </svg>
@@ -76,7 +76,7 @@
               <li class="subDropdown_item_category" data-categoryName="skin">
                 <a href="">
                   <span>Skin</span>
-                  <button class="button--subDropDown" aria-label="Open submenu skin" aria-expanded="false" aria-controls="submenu_shop_2" role="tab" aria-selected="false">
+                  <button class="button--subDropDown" aria-label="Open submenu skin" aria-expanded="false" aria-controls="submenu_shop_2" role="tab" >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
                     </svg>
@@ -86,7 +86,7 @@
               <li class="subDropdown_item_category" data-categoryName="hair">
                 <a href="">
                   <span>Hair</span>
-                  <button class="button--subDropDown" aria-label="Open submenu hair" aria-expanded="false" aria-controls="submenu_shop_3" role="tab" aria-selected="false">
+                  <button class="button--subDropDown" aria-label="Open submenu hair" aria-expanded="false" aria-controls="submenu_shop_3" role="tab" >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
                     </svg>
@@ -96,7 +96,7 @@
               <li class="subDropdown_item_category" data-categoryName="body">
                 <a href="">
                   <span>Body</span>
-                  <button class="button--subDropDown" aria-label="open submenu body" aria-expanded="false" aria-controls="submenu_shop_4" role="tab" aria-selected="false">
+                  <button class="button--subDropDown" aria-label="open submenu body" aria-expanded="false" aria-controls="submenu_shop_4" role="tab" >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
                     </svg>
@@ -249,7 +249,7 @@
 
     <!-- Start ----------------------------------------- Main ---------------------------------------------- -->
 
-    <main>
+    <main id="main">
       <!-- Start --------------------------------------- Hero-Section ----------------------------------------- -->
       <section class="hero">
         <div class="hero_mainDetail">
@@ -275,7 +275,92 @@
           </div>
         </div>
       </section>
-      
     </main>
+    <!-- Start ------------------------------------------------ Footer ------------------------------------------------ -->
+     <footer>
+      <div class="footer_wrapper">
+          <div class="footer_logo_wrapper">
+            <a href=""><img src="src/assets/logo/logoFooter.png" alt="phils"></a>
+          </div>
+          <section class="footer_form_subscribe">
+            <p class="footer_form_heading">GET YOUR PHIL WITH THE LATEST UPDATES</p>
+            <form action="">
+              <p>
+                <input type="email" id="contactForm-Email" name="contactEmail" placeholder="Email Address" required autocomplete="email">
+                <label for="contactForm-Email" class="contactForm-label" aria-hidden="false">Email Address</label>
+              </p>
+              <p>
+                <button class="footer_formSubmitBtn" type="submit">Sign UP Now</button>
+              </p>
+            </form>
+          </section>
+          <section class="footer_menu">
+            <div class="footer_accordion_shop footer_accordion" data-accordion>
+              <p class="footer_menu_heading">SHOP</p>
+              <button class="accordion_button" aria-expanded="false"  id="tab-shop" aria-controls="panel-shop"  data-accordionBtn>
+                <span>SHOP</span>
+                <span class="accordion_button_arrowIcon"><img src="src/assets/icons/circleDownArrowSvgWhite.png" alt=""></span>
+              </button>
+              <ul class="accordion_itemList"  id="panel-shop" aria-labelledby="tab-shop">
+                <li><a href="">New</a></li>
+                <li><a href="">Best Sellers</a></li>
+                <li><a href="">Kits & Gifts</a></li>
+                <li><a href="">Shop All</a></li>
+              </ul>
+            </div>
+
+            <div class="footer_accordion_Learn footer_accordion" data-accordion>
+              <p class="footer_menu_heading">LEARN</p>
+              <button class="accordion_button" aria-expanded="false"  id="tab-learn" aria-controls="panel-learn"  data-accordionBtn>
+                <span>LEARN</span>
+                <span class="accordion_button_arrowIcon"><img src="src/assets/icons/circleDownArrowSvgWhite.png" alt=""></span>
+              </button>
+              <ul class="accordion_itemList"   id="panel-learn" aria-labelledby="tab-learn">
+                <li><a href="">About Us</a></li>
+                <li><a href="">Ingredient Phil</a></li>
+                <li><a href="">Sustainability</a></li>
+              </ul>
+            </div>
+
+            <div class="footer_accordion_shop footer_accordion" data-accordion>
+              <p class="footer_menu_heading">HELP</p>
+              <button class="accordion_button" aria-expanded="false"  id="tab-help" aria-controls="panel-help"  data-accordionBtn>
+                <span>HELP</span>
+                <span class="accordion_button_arrowIcon"><img src="src/assets/icons/circleDownArrowSvgWhite.png" alt=""></span>
+              </button>
+              <ul class="accordion_itemList"  id="panel-help" aria-labelledby="tab-help">
+                <li><a href="">Contact</a></li>
+                <li><a href="">Shipping & returns</a></li>
+                <li><a href="">FAQ's</a></li>
+              </ul>
+            </div>
+          </section>
+          <!-- Start------------------------------------------- Social Media logos-------------------------------- -->
+          <section class="footer_socialIcons_section">
+            <ul>
+              <li><a href="" aria-label="phils on instagram"><img src="src/assets/icons/instagram.svg" alt=""></a></li>
+              <li><a href="" aria-label="phils on twitter"><img src="src/assets/icons/twitter.svg" alt=""></a></li>
+              <li><a href="" aria-label="phils on facebook"><img src="src/assets/icons/facebooks.svg" alt=""></a></li>
+              <li><a href="" aria-label="phils on tiktok"><img src="src/assets/icons/tiktok.svg" width="40" alt=""></a></li>
+              
+            </ul>
+          </section>
+          <!-- Start -------------------------------------------- Privacy Policy ----------------------------------- -->
+
+          <section class="footer_privacyPolicy_section">
+            <ul class="footer_privacyPlocies_list">
+              <li>
+                © Phil’s. All Rights Reserved.
+              </li>
+              <li>
+                <a href="">Terms of Service</a>
+              </li>
+              <li>
+                <a href="">Privacy Policy</a>
+              </li>
+            </ul>
+          </section>
+      </div>
+     </footer>
   </body>
 </html>

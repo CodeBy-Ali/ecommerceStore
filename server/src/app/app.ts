@@ -22,6 +22,12 @@ app.use(express.urlencoded({ extended: false }));
 // parse req body of content json
 app.use(express.json())
 
+// log routes
+app.use((req, res, next) => {
+  console.log(req.url);
+  next();
+})
+
 // serve static files
 app.use(express.static(config.dir.static));
 

@@ -5,13 +5,16 @@ html{
   font-size: $font-size-root;
 }
 
-a,button:not(.button--subDropDown):not(.button--dropdown){
-  color: $clr-primary;
+a,button:not(.button--subDropDown):not(.button--dropdown):not(.accordion_button){
   transition:outline-offset $trans-dur-outline-offset  $trans-outline-func ;
   &:focus-visible{
     outline: $outline-width solid $clr-outline;
     outline-offset: $outline-offset;
   }
+}
+
+a{
+  color: $clr-primary;
 }
 
 body{

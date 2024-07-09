@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" crossorigin src="/assets/index-CHzCtOz3.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-tUqVTw39.css">
+    <script type="module" crossorigin src="/assets/index-CdpTm1bj.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DKCfFQtP.css">
     <title>Phil's Refills</title>
   </head>
   <body data-page="collections">
@@ -42,7 +42,7 @@
             <h2>
               <a href="">Best Sellers</a>
             </h2>
-            <p><span>3</span> <span>PRODUCTS</span></p>
+            <p><span><%= bestSellers.length %></span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
             <ul class="products_list">
@@ -113,11 +113,103 @@
             <h2>
               <a href="">Body</a>
             </h2>
-            <p><span>8</span> <span>PRODUCTS</span></p>
+            <p><span><%= body.length %></span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
             <ul>
               <% body.forEach(product =>{ %>
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="">
+                    <span class="visually-hidden"><%= product.title %></span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p>$ <%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.image %>" alt="" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="">
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- Start ------------------------------------------------------ Cleansers-Section ------------------------------------------------ -->
+      <section class="category_section">
+        <div class="category_section_wrapper">
+          <div class="category_section_header">
+            <h2>
+              <a href="">Cleansers</a>
+            </h2>
+            <p><span><%= cleansers.length %></span> <span>PRODUCTS</span></p>
+          </div>
+          <div class="products_container">
+            <ul>
+              <% cleansers.forEach(product =>{ %>
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="">
+                    <span class="visually-hidden"><%= product.title %></span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p>$ <%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.image %>" alt="" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="">
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- Start ------------------------------------------------------ Conditioners-Section ------------------------------------------------ -->
+      <section class="category_section">
+        <div class="category_section_wrapper">
+          <div class="category_section_header">
+            <h2>
+              <a href="">Conditioners</a>
+            </h2>
+            <p><span><%= conditioners.length %></span> <span>PRODUCTS</span></p>
+          </div>
+          <div class="products_container">
+            <ul>
+              <% conditioners.forEach(product =>{ %>
               <li class="product_list_item">
                 <div class="product_card">
                   <a href="">

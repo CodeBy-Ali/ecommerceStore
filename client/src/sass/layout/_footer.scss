@@ -1,0 +1,286 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+.footer_wrapper {
+  padding-inline: 2.4rem;
+  padding-top: 5.5rem;
+  padding-bottom: 1.8rem;
+  background-color: $clr-primary;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  @include respond-to(medium) {
+    padding-top: 6rem;
+    padding-inline: 8rem;
+    padding-bottom: 3.5rem;
+    display: grid;
+    grid-template-columns: minmax(auto, 50rem) 1fr;
+  }
+}
+
+// ~ ---------------- Logo-Section ----------------- -->
+.footer_logo_wrapper {
+  margin-inline: auto;
+  width: fit-content;
+
+  & > a img {
+    width: 13rem;
+  }
+
+  @include respond-to(medium) {
+    margin-inline: 0;
+    & > a img {
+      width: 18rem;
+    }
+  }
+}
+
+//  ~ ---------------------- Contact-Form ---------------- -->
+.footer_form_subscribe {
+  text-align: center;
+  margin-bottom: 4.7rem;
+  @include respond-to(medium) {
+    margin-top: 10rem;
+    order: 1;
+    display: inline-block;
+    max-width: 50rem;
+  }
+}
+
+.footer_form_heading {
+  font-size: $font-size-xsm;
+  font-weight: $font-semibold;
+  text-align: center;
+  margin-bottom: 2.8rem;
+  margin-top: 5rem;
+  letter-spacing: $letter-spacing-xl;
+  @include respond-to(medium) {
+    font-size: $font-size-base;
+    text-align: start;
+  }
+}
+
+.footer_form_subscribe form {
+  @include flex-row-jc(center);
+  & > p:first-child {
+    position: relative;
+    width: 100%;
+
+    // &:not( input:placeholder-shown) .contactForm-label{
+    //   top: .5rem;
+    //   font-size: .8rem;
+    //   transform: translateY(0);
+    //   @include respond-to(medium){
+    //     font-size: 1rem;
+    //   }
+    // }
+  }
+
+  & .contactForm-label {
+    @include formInputLabel;
+  }
+
+  & input {
+    @include formInput;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  & .footer_formSubmitBtn {
+    border-top-right-radius: 6.5rem;
+    border-bottom-right-radius: 6.5rem;
+    padding-inline: 1.4rem;
+    height: 4rem;
+    line-height: 4rem;
+    border: none;
+    color: $clr-primary;
+    font-weight: $font-semibold;
+    background-color: $clr-accent;
+    font-size: $font-size-xsm;
+    white-space: nowrap;
+  }
+
+  @include respond-to(medium) {
+    & input,
+    & .footer_formSubmitBtn {
+      height: 4.7rem;
+      line-height: 4.7rem;
+    }
+
+    & input {
+      font-size: $font-size-sm;
+      padding-top: 1.2rem;
+    }
+
+    & .contactForm-label {
+      font-size: 1.3rem;
+    }
+
+    & .footer_formSubmitBtn {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+//  ~ ---------------------- Accordion/Menu -------------- -->
+.footer_menu {
+  margin-bottom: 4rem;
+
+  .footer_menu_heading {
+    display: none;
+    font-size: $font-size-sm;
+    letter-spacing: $letter-spacing-xl;
+    margin-bottom: 1.6rem;
+    font-weight: $font-semibold;
+  }
+  @include respond-to(medium) {
+    padding-top: 1rem;
+    justify-self: end;
+    display: grid;
+    grid-template-columns: repeat(3, 17rem);
+    & .footer_menu_heading {
+      display: block;
+    }
+  }
+
+  @include respond-to(large) {
+    grid-template-columns: repeat(3, 20rem);
+  }
+}
+
+.footer_accordion {
+  font-size: $font-size-xsm;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.507);
+
+  &:last-child {
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.507);
+  }
+
+  & .accordion_button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding-top: 1.6rem;
+    padding-bottom: 1.5rem;
+    font-weight: $font-semibold;
+    letter-spacing: $letter-spacing-xl;
+    width: 100%;
+    @include flex-row-jc(space-between);
+    & img {
+      width: 2rem;
+    }
+  }
+
+  & .accordion_itemList li:last-child {
+    margin-bottom: 1.5rem;
+  }
+
+  & .accordion_itemList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    & a {
+      color: white;
+    }
+  }
+
+  & .accordion_button_arrowIcon img {
+    transition: transform 0.5s ease;
+  }
+  @include respond-to(small) {
+    font-size: $font-size-sm;
+  }
+
+  @include respond-to(medium) {
+    border-top: none;
+    & .accordion_button {
+      display: none;
+    }
+
+    & .accordion_itemList {
+      max-height: 20rem;
+      gap: 1.2rem;
+      visibility: visible;
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+}
+
+.footer_accordion.active .accordion_itemList {
+  transition: all 2s ease;
+  max-height: 60rem;
+  visibility: visible;
+}
+
+.footer_accordion.active .accordion_button img {
+  transform: rotate(180deg);
+}
+
+//  ~ ------------------------ Social-Media-Icons ---------------- -->
+.footer_socialIcons_section {
+  margin-bottom: 5rem;
+  @include respond-to(medium) {
+    display: inline-block;
+    order: 2;
+    margin-top: auto;
+  }
+}
+
+.footer_socialIcons_section ul {
+  @include flex-row-jc(center);
+  gap: 2.6rem;
+  cursor: pointer;
+
+  & a {
+    display: inline-block;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: $clr-accent;
+    @include flex-row-jc(center);
+  }
+
+  & a > img {
+    width: 2rem;
+  }
+
+  & li:nth-child(3) a img {
+    width: 4rem;
+  }
+
+  @include respond-to(medium) {
+    justify-content: flex-end;
+  }
+}
+
+// ~ ----------------------------- Privacy-Policy -------------------------- -->
+
+.footer_privacyPolicy_section {
+  @include respond-to(medium) {
+    order: 3;
+  }
+}
+
+.footer_privacyPolicy_section ul {
+  @include flex-row-jc(center);
+  text-align: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+
+  & li a {
+    color: white;
+  }
+
+  @include respond-to(medium) {
+    justify-content: flex-start;
+    font-size: $font-size-xsm;
+  }
+}

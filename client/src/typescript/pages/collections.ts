@@ -1,6 +1,18 @@
 
-const initCollectionsPage = ():void => {
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+const initCollectionsPage = (): void => {
 }
 
 export default initCollectionsPage;

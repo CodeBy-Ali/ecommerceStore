@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="src/typescript/main.ts" type="module" defer></script>
+    <link rel="stylesheet" href="./src/sass/main.scss" />
+    <title>Phil's Refills</title>
+  </head>
+  <body>
+    <!-- START ---------------------------- Main ----------------- -->
+    <main>
+      <h1>Create account</h1>
+      <section>
+        <form action="">
+          <ul>
+            <li>
+              <input type="text" id="firstName" name="firstName" placeholder="First name" required autocomplete="given-name">
+              <label for="firstName" class="" aria-hidden="false">First Name</label>
+            </li>
+            <li>
+              <input type="text" id="lastName" name="lastName" placeholder="Last name" required autocomplete="given-name">
+              <label for="lastName" class="" aria-hidden="false">Last Name</label>
+            </li>
+            <li>
+              <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email">
+              <label for="email" class="" aria-hidden="false">Email</label>
+            </li>
+            <li>
+              <input type="password" id="password" name="password" placeholder="password" required>
+              <label for="email" class="" aria-hidden="false">Password</label>
+            </li>
+          </ul>
+          <p>
+            <button type="submit">Create</button>
+          </p>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

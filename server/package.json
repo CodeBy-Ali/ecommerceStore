@@ -6,7 +6,7 @@
     "start": "nodemon dist/index.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",

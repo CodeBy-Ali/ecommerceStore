@@ -285,6 +285,7 @@ header{
 .dropDown_mobile_container {
   width: 100%;
   height: 0;
+  visibility: hidden;
   overflow: hidden;
   position: absolute;
   display: flex;
@@ -299,6 +300,7 @@ header{
     padding-top: 3.2rem;
   }
   &.open {
+    visibility: visible;
     border-top: 1px solid $clr-border;
     height: calc(100vh - $height-header-sm);
     height: calc(100svh - $height-header-sm);

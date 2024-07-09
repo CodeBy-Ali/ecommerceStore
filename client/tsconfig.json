@@ -5,6 +5,7 @@
     "strict": true,
     "isolatedModules": true,
     "skipLibCheck": true,
+    "strictNullChecks": true
   },
   "include": ["src"],
 }
