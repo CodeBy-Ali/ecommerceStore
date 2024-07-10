@@ -66,15 +66,6 @@
   & > p:first-child {
     position: relative;
     width: 100%;
-
-    // &:not( input:placeholder-shown) .contactForm-label{
-    //   top: .5rem;
-    //   font-size: .8rem;
-    //   transform: translateY(0);
-    //   @include respond-to(medium){
-    //     font-size: 1rem;
-    //   }
-    // }
   }
 
   & .contactForm-label {

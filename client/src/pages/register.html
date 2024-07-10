@@ -3,39 +3,376 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="src/typescript/main.ts" type="module" defer></script>
-    <link rel="stylesheet" href="./src/sass/main.scss" />
+    <script src="../typescript/main.ts" type="module" defer></script>
+    <link rel="stylesheet" href="../sass/main.scss" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Phil's Refills</title>
   </head>
-  <body>
+  <body data-page="register">
+     <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
+     <a class="button--skipToMain" href="#main">Skip to content</a>
+
+     <!-- Start ------------------------------- Header ------------------------------------ -->
+ 
+     <header>
+       <section> 
+         <nav class="header_menu_nav">
+           <ul class="flex_row_btw">
+             <li class="header_mobile_menu">
+               <div>
+                 <button data-menuButton aria-expanded="false" aria-label="menu" aria-controls="submenu">
+                   <span class="hidden" aria-hidden="true">CLOSE</span>
+                   <span class="" aria-hidden="true">MENU</span>
+                 </button>
+               </div>
+             </li>
+             <li class="header_menu_links_shop">
+               <div class="flex_row_btw relative" data-shopLink>
+                 <a href="">SHOP</a>
+                 <button class="button--dropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop" data-dropDownButton>
+                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                     <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                   </svg>
+                 </button>
+               </div>
+               <div>
+                 <a href="">LEARN</a>
+               </div>
+             </li>
+             <li>
+               <a href="" class="header_logo" aria-label="phils">
+                 <span class=""><img src="../assets/logo/logo.webp" alt="" /></span>
+               </a>
+             </li>
+             <li class="header_menu_links_login">
+               <div>
+                 <a href="../pages/login.html">LOGIN</a>
+               </div>
+               <div>
+                 <a href="">CART <span></span></a>
+               </div>
+             </li>
+           </ul>
+         </nav>
+       </section>
+ 
+       <!-- Start ---------------------------------------- DropDown_Large ---------------------------- -->
+ 
+       <section class="dropDown_container" id="menu_shop">
+         <nav class="dropDown_menu" data-dropDownMenu>
+           <section class="subDropdown_category-container">
+             <ul>
+               <li class="subDropdown_item_category" data-categoryName="shopAll">
+                 <a href="">
+                   <span>Shop All</span>
+                   <button class="button--subDropDown" aria-label="Open SubMenu Shop All" aria-expanded="false" aria-controls="submenu_shop_1" role="tab" >
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                     </svg>
+                   </button>
+                 </a>
+               </li>
+               <li class="subDropdown_item_category" data-categoryName="skin">
+                 <a href="">
+                   <span>Skin</span>
+                   <button class="button--subDropDown" aria-label="Open submenu skin" aria-expanded="false" aria-controls="submenu_shop_2" role="tab" >
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                     </svg>
+                   </button>
+                 </a>
+               </li>
+               <li class="subDropdown_item_category" data-categoryName="hair">
+                 <a href="">
+                   <span>Hair</span>
+                   <button class="button--subDropDown" aria-label="Open submenu hair" aria-expanded="false" aria-controls="submenu_shop_3" role="tab" >
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                     </svg>
+                   </button>
+                 </a>
+               </li>
+               <li class="subDropdown_item_category" data-categoryName="body">
+                 <a href="">
+                   <span>Body</span>
+                   <button class="button--subDropDown" aria-label="open submenu body" aria-expanded="false" aria-controls="submenu_shop_4" role="tab" >
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                       <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                     </svg>
+                   </button>
+                 </a>
+               </li>
+             </ul>
+           </section>
+           <section class="subDropdown_item_detail_container">
+             <div class="submenu" data-subMenuOf="shopAll" id="submenu_shop_1" aria-orientation="horizontal" role="tablist">
+               <ul>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/rephils.png" alt="" /></span>
+                     <h3>REPHILS</h3>
+                   </a>
+                 </li>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/allSellers.jpeg" alt="" /></span>
+                     <h3>BEST SELLERS</h3>
+                   </a>
+                 </li>
+               </ul>
+             </div>
+ 
+             <div class="submenu" data-subMenuOf="skin" id="submenu_shop_2" aria-orientation="horizontal" role="tablist">
+               <ul class=" ">
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/shave.jpeg" alt="" /></span>
+                     <h3>SHAVE</h3>
+                   </a>
+                 </li>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/cleansers.png" alt="" /></span>
+                     <h3>CLEANSERS</h3>
+                   </a>
+                 </li>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/moisture.png" alt="" /></span>
+                     <h3>MOISTURIZERS</h3>
+                   </a>
+                 </li>
+               </ul>
+             </div>
+ 
+             <div class="submenu" data-subMenuOf="hair" id="submenu_shop_3" aria-orientation="horizontal" role="tablist">
+               <ul>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/shampoo.jpeg" alt="" /></span>
+                     <h3>SHAMPOO</h3>
+                   </a>
+                 </li>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/conditioner.png" alt="" /></span>
+                     <h3>CONDITIONER</h3>
+                   </a>
+                 </li>
+               </ul>
+             </div>
+ 
+             <div class="submenu" data-subMenuOf="body" id="submenu_shop_4" aria-orientation="horizontal" role="tablist">
+               <ul>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/handSoap.png" alt="" /></span>
+                     <h3>HAND SOAPS</h3>
+                   </a>
+                 </li>
+                 <li class="subDropdown_item_detail">
+                   <a href="">
+                     <span><img src="../assets/images/bodyWash.jpeg" alt="" /></span>
+                     <h3>BODY WASH</h3>
+                   </a>
+                 </li>
+               </ul>
+             </div>
+           </section>
+         </nav>
+       </section>
+ 
+       <!-- Start ------------------------------------------ DropDown_Mobile --------------------------------------- -->
+ 
+       <section class="dropDown_mobile_container" id="submenu" data-mobileMenu>
+         <nav>
+           <div class="mobile_menu_shop">
+             <button class="mobile_menu_shop_Button" data-mobileMenuBtn aria-controls="submenu_shop" aria-expanded="false">
+               <span>Shop</span>
+               <span class="icon_contaienr"><img src="../assets/icons/arrowDown.svg" alt=""></span>
+             </button>
+             <div class="mobile_submenu_shop" id="submenu_shop">
+               <ul>
+                 <li>
+                   <a href="">
+                     <div>
+                       <img src="../assets/images/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="">
+                     </div>
+                     <div>
+                       <h4>HAIR</h4>
+                       <p>Shampoo & conditioner, Refill pods, etc</p>
+                     </div>
+                   </a>
+                 </li>
+                 <li>
+                   <a href="">
+                     <div>
+                       <img src="../assets/images/Launch_DailyMoisturizer_Ecomm_058_2bfcdcd2-cec3-45c9-af30-5f7b759f1530.jpeg" alt="">
+                     </div>
+                     <div>
+                       <h4>FACE</h4>
+                       <p>Razors,creams,oils</p>
+                     </div>
+                   </a>
+                 </li>
+                 <li>
+                   <a href="">
+                     <div>
+                       <img src="../assets/images/Launch_HandSoap_FoamerBottle_Ecomm_079.jpeg" alt="">
+                     </div>
+                     <div>
+                       <h4>BODY</h4>
+                       <p>Lotions,hands soaps,refills</p>
+                     </div>
+                   </a>
+                 </li>
+               </ul>
+             </div>
+           </div>
+           <div class="mobile_menu_learn">
+             <button class="mobile_menu_learn_Button" data-mobileMenuBtn aria-expanded="false" aria-controls="submenu_learn" aria-label="submenu">
+               <span>Learn</span>
+               <span class="icon_contaienr"><img src="../assets/icons/arrowDown.svg" alt=""></span>
+             </button>
+             <div class="mobile_submenu_learn" id="submenu_learn">
+               <a href="">ABOUT US</a>
+             </div>
+           </div>
+         </nav>
+         <div class="mobile_signUp_link_container">
+           <a href="" class="button--authButton">Sign Up</a>
+           <a href="" class="button--authButton">Log In</a>
+         </div>
+       <section>
+     </header>
+ 
     <!-- START ---------------------------- Main ----------------- -->
     <main>
-      <h1>Create account</h1>
-      <section>
-        <form action="">
-          <ul>
-            <li>
-              <input type="text" id="firstName" name="firstName" placeholder="First name" required autocomplete="given-name">
-              <label for="firstName" class="" aria-hidden="false">First Name</label>
-            </li>
-            <li>
-              <input type="text" id="lastName" name="lastName" placeholder="Last name" required autocomplete="given-name">
-              <label for="lastName" class="" aria-hidden="false">Last Name</label>
-            </li>
-            <li>
-              <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email">
-              <label for="email" class="" aria-hidden="false">Email</label>
-            </li>
-            <li>
-              <input type="password" id="password" name="password" placeholder="password" required>
-              <label for="email" class="" aria-hidden="false">Password</label>
-            </li>
-          </ul>
-          <p>
-            <button type="submit">Create</button>
-          </p>
-        </form>
+      <section class="auth_form_container">
+        <h1>Create account</h1>
+        <section>
+          <form action="" data-registerForm>
+            <ul class="form_fields_list">
+              <li class="form_field">
+                <input type="text" id="firstName" name="firstName" placeholder="First name" maxlength="50" required autocomplete="given-name" />
+                <label for="firstName" class="" aria-hidden="false">First Name</label>
+              </li>
+              <li class="form_field">
+                <input type="text" id="lastName" name="lastName" placeholder="Last name" required maxlength="50" autocomplete="given-name" />
+                <label for="lastName" class="" aria-hidden="false">Last Name</label>
+              </li>
+              <li class="form_field">
+                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" />
+                <label for="email" class="" aria-hidden="false">Email</label>
+                <div class="error_message">
+                  <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
+                   <span>Email is invalid</span>
+                 </div>
+              </li>
+              <li class="form_field">
+                <button class="togglePassword_visibility_button" type="button" data-eyeIconButton>
+                  <i class="fas fa-eye-slash eye_icon" ></i>
+                </button>
+                <input type="password" id="password" name="password" placeholder="password" required data-passwordField/>
+                <label for="email" class="" aria-hidden="false">Password</label>
+                <div class="error_message">
+                 <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
+                  <span>Password is weak</span>
+                </div>
+              </li>
+            </ul>
+            <p>
+              <button type="submit" class="button--formSubmit" data-submitButton>Create</button>
+            </p>
+          </form>
+        </section>
       </section>
     </main>
+     <!-- Start ------------------------------------------------ Footer ------------------------------------------------ -->
+     <footer>
+      <div class="footer_wrapper">
+          <div class="footer_logo_wrapper">
+            <a href=""><img src="../assets/logo/logoFooter.png" alt="phils"></a>
+          </div>
+          <section class="footer_form_subscribe">
+            <p class="footer_form_heading">GET YOUR PHIL WITH THE LATEST UPDATES</p>
+            <form action="">
+              <p>
+                <input type="email" id="contactForm-Email" name="contactEmail" placeholder="Email Address" required autocomplete="email">
+                <label for="contactForm-Email" class="contactForm-label" aria-hidden="false">Email Address</label>
+              </p>
+              <p>
+                <button class="footer_formSubmitBtn" type="submit">Sign UP Now</button>
+              </p>
+            </form>
+          </section>
+          <section class="footer_menu">
+            <div class="footer_accordion_shop footer_accordion" data-accordion>
+              <p class="footer_menu_heading">SHOP</p>
+              <button class="accordion_button" aria-expanded="false"  id="tab-shop" aria-controls="panel-shop"  data-accordionBtn>
+                <span>SHOP</span>
+                <span class="accordion_button_arrowIcon"><img src="../assets/icons/circleDownArrowSvgWhite.png" alt=""></span>
+              </button>
+              <ul class="accordion_itemList"  id="panel-shop" aria-labelledby="tab-shop">
+                <li><a href="">New</a></li>
+                <li><a href="">Best Sellers</a></li>
+                <li><a href="">Kits & Gifts</a></li>
+                <li><a href="">Shop All</a></li>
+              </ul>
+            </div>
+
+            <div class="footer_accordion_Learn footer_accordion" data-accordion>
+              <p class="footer_menu_heading">LEARN</p>
+              <button class="accordion_button" aria-expanded="false"  id="tab-learn" aria-controls="panel-learn"  data-accordionBtn>
+                <span>LEARN</span>
+                <span class="accordion_button_arrowIcon"><img src="../assets/icons/circleDownArrowSvgWhite.png" alt=""></span>
+              </button>
+              <ul class="accordion_itemList"   id="panel-learn" aria-labelledby="tab-learn">
+                <li><a href="">About Us</a></li>
+                <li><a href="">Ingredient Phil</a></li>
+                <li><a href="">Sustainability</a></li>
+              </ul>
+            </div>
+
+            <div class="footer_accordion_shop footer_accordion" data-accordion>
+              <p class="footer_menu_heading">HELP</p>
+              <button class="accordion_button" aria-expanded="false"  id="tab-help" aria-controls="panel-help"  data-accordionBtn>
+                <span>HELP</span>
+                <span class="accordion_button_arrowIcon"><img src="../assets/icons/circleDownArrowSvgWhite.png" alt=""></span>
+              </button>
+              <ul class="accordion_itemList"  id="panel-help" aria-labelledby="tab-help">
+                <li><a href="">Contact</a></li>
+                <li><a href="">Shipping & returns</a></li>
+                <li><a href="">FAQ's</a></li>
+              </ul>
+            </div>
+          </section>
+          <!-- Start------------------------------------------- Social Media logos-------------------------------- -->
+          <section class="footer_socialIcons_section">
+            <ul>
+              <li><a href="" aria-label="phils on instagram"><img src="../assets/icons/instagram.svg" alt=""></a></li>
+              <li><a href="" aria-label="phils on twitter"><img src="../assets/icons/twitter.svg" alt=""></a></li>
+              <li><a href="" aria-label="phils on facebook"><img src="../assets/icons/facebooks.svg" alt=""></a></li>
+              <li><a href="" aria-label="phils on tiktok"><img src="../assets/icons/tiktok.svg" width="40" alt=""></a></li>
+              
+            </ul>
+          </section>
+          <!-- Start -------------------------------------------- Privacy Policy ----------------------------------- -->
+
+          <section class="footer_privacyPolicy_section">
+            <ul class="footer_privacyPlocies_list">
+              <li>
+                © Phil’s. All Rights Reserved.
+              </li>
+              <li>
+                <a href="">Terms of Service</a>
+              </li>
+              <li>
+                <a href="">Privacy Policy</a>
+              </li>
+            </ul>
+          </section>
+      </div>
+     </footer>
   </body>
 </html>

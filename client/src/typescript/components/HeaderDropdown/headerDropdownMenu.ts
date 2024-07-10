@@ -1,15 +1,15 @@
-import Util from "../utils/domUtils";
+import DOMUtil from "../utils/domUtils";
 
 // hide the UnFocused Category Details Containers;
 const hideAllSubMenus = ():void => {
   const submenusList: NodeListOf<HTMLElement> = document.querySelectorAll(".submenu");
-  submenusList.forEach((submenu) => Util.removeClass(submenu, "open"));
+  submenusList.forEach((submenu) => DOMUtil.removeClass(submenu, "open"));
 };
 
 // unHighlight the all unfocused category headings
 const resetFocusOfSubMenuHeadings = ():void => {
   const subMenuHeadings: NodeListOf<HTMLElement> = document.querySelectorAll(".subDropdown_item_category");
-  subMenuHeadings.forEach((heading) => Util.removeClass(heading, "focused"));
+  subMenuHeadings.forEach((heading) => DOMUtil.removeClass(heading, "focused"));
 };
 
 // unHides the detail container of currently focused category.
@@ -17,7 +17,7 @@ const openSubmenu = (focusedCategory: HTMLElement | null, submenusList: NodeList
   const focusedCategoryName = focusedCategory?.getAttribute("data-categoryName");
   submenusList.forEach((menu: HTMLElement) => {
     if (menu.getAttribute("data-subMenuOf") === focusedCategoryName) {
-      Util.addClass(menu, "open");
+      DOMUtil.addClass(menu, "open");
     }
   });
 };
@@ -30,7 +30,7 @@ const initializeSubDropDownController = (): void => {
     category.addEventListener("mouseenter", (e: Event) => {
       resetFocusOfSubMenuHeadings();
       // highlight the focused Category Heading.
-      Util.addClass(category, "focused");
+      DOMUtil.addClass(category, "focused");
       hideAllSubMenus();
       const focusedCategory: HTMLElement = e.target as HTMLElement;
       openSubmenu(focusedCategory, submenusList);
@@ -42,15 +42,15 @@ const initializeSubDropDownController = (): void => {
 const showFirstSubmenu = (): void => {
   const subMenuHeading: HTMLElement | null = document.querySelector(".subDropdown_category-container > ul li:first-child");
   const subMenuContainer: HTMLElement | null = document.querySelector(".subDropdown_item_detail_container > div:first-child");
-  subMenuHeading && Util.addClass(subMenuHeading, "focused");
-  subMenuContainer && Util.addClass(subMenuContainer, "open");
+  subMenuHeading && DOMUtil.addClass(subMenuHeading, "focused");
+  subMenuContainer && DOMUtil.addClass(subMenuContainer, "open");
 };
 
 // toggles the menu between open and close
 const toggleDropdownMenuState = (dropdownMenu: HTMLElement | null, shopLink: HTMLElement | null, openMenuButton: HTMLElement | null): void => {
-  dropdownMenu && Util.toggleClass(dropdownMenu, "open");
-  shopLink && Util.toggleClass(shopLink, "open");
-  openMenuButton && Util.toggleAttributeBoolean(openMenuButton, "aria-expanded");
+  dropdownMenu && DOMUtil.toggleClass(dropdownMenu, "open");
+  shopLink && DOMUtil.toggleClass(shopLink, "open");
+  openMenuButton && DOMUtil.toggleAttributeBoolean(openMenuButton, "aria-expanded");
 };
 
 // controls the main shop dropdown menu in the header

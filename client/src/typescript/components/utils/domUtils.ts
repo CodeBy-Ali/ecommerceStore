@@ -1,4 +1,4 @@
-class Util{
+class DOMUtils{
   
   static addClass(element:HTMLElement | null, className:string):void {
     element?.classList.add(className)
@@ -30,4 +30,4 @@ class Util{
   }
 }
 
-export default Util;
+export default DOMUtils;

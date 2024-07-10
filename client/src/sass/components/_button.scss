@@ -1,50 +1,70 @@
-@use '../abstracts/variables' as *;
-@use '../abstracts/mixins' as *;
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
-
-
-
-.button{
-  &--primary{
+.button {
+  &--primary {
     @include button;
-    gap: $gap-btn
+    gap: $gap-btn;
   }
-  &--skipToMain{
+
+  &--skipToMain {
     @include button();
     border: none;
     pointer-events: none;
     position: absolute;
     top: -100px;
     left: 0;
-    &:focus{
+    &:focus {
       top: 0;
     }
-    &:focus-visible{
+    &:focus-visible {
       top: 0;
     }
     z-index: 200;
   }
-  &--productBanner{
+
+  &--productBanner {
     @include button;
     gap: calc($gap-btn - 2px);
     font-size: $font-size-xsm;
-    padding-block: .4rem;
-    @include respond-to(small){
+    padding-block: 0.4rem;
+    @include respond-to(small) {
       padding-block: 1rem;
       font-size: 1.4rem;
     }
   }
-  &--dropdown{
+
+  &--dropdown {
     @include dropDown-button(-2rem);
   }
-  &--subDropDown{
+
+  &--subDropDown {
     @include subDropdown-button;
-  } 
-  &--authButton{
+  }
+
+  &--authButton {
     @include button;
     background-color: white;
     font-size: $font-size-base;
     letter-spacing: $letter-spacing-md;
     width: 100%;
-  } 
+  }
+
+  &--formSubmit {
+    border-radius: $br-btn;
+    background-color: $clr-accent;
+    color: $clr-primary;
+    border: none;
+    height: 4.7rem;
+    line-height: 4.7rem;
+    cursor: pointer;
+    width: 11.5rem;
+    font-size: $font-size-base;
+    font-weight: $font-semibold;
+    margin-inline: auto;
+    text-align: center;
+    display: block;
+    margin-top: 6.4rem;
+    margin-bottom: 2.4rem;
+  }
 }

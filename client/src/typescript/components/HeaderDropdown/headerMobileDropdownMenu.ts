@@ -1,15 +1,15 @@
-import Util from "../utils/domUtils";
+import DOMUtil from "../utils/domUtils";
 
 
 // toggles the state of mobile submenu
 const toggleMobileSubMenuState = (e:Event):void => {
-  Util.toggleClass(e.target as HTMLElement, "open");
+  DOMUtil.toggleClass(e.target as HTMLElement, "open");
 };
 
 // toggles the state of the mobile dropdown menu between open and close
 const toggleMobileMenuState = ():void => {
   const mobileMenuContainer: HTMLElement | null = document.querySelector("[data-mobileMenu]");
-  Util.toggleClass(mobileMenuContainer, "open");
+  DOMUtil.toggleClass(mobileMenuContainer, "open");
 };
 
 // toggle teh state of menu button between open and close.
@@ -17,9 +17,9 @@ const changeMenuButtonState = (menuButton:HTMLElement | null):void => {
   if (!menuButton) return;
   const menuButtonStates: HTMLElement[] = Array.from(menuButton?.children) as HTMLElement[];
   menuButtonStates.forEach((stateElement: HTMLElement ) => {
-    Util.toggleClass(stateElement, "hidden");
+    DOMUtil.toggleClass(stateElement, "hidden");
   });
-  Util.toggleAttributeBoolean(menuButton, "aria-expanded");
+  DOMUtil.toggleAttributeBoolean(menuButton, "aria-expanded");
 };
 
 // opens and closes the mobile sub menu Shop
@@ -28,9 +28,9 @@ const toggleMobileShopSubMenu = (e:Event): void => {
   const mobileMenuButton: HTMLElement | null = e.target as HTMLElement;
   const isMenuExpanded = mobileMenuButton?.getAttribute("aria-expanded");
   if (isMenuExpanded === "true") {
-    Util.addClass(shopSubMenuShopBtn, "open");
+    DOMUtil.addClass(shopSubMenuShopBtn, "open");
   } else {
-    Util.removeClass(shopSubMenuShopBtn, "open");
+    DOMUtil.removeClass(shopSubMenuShopBtn, "open");
   }
 };
 

@@ -1,18 +1,18 @@
-import Util from "../utils/domUtils";
+import DOMUtil from "../utils/domUtils";
 
 const closeNonSelectedOpenAccordions = (accordions: HTMLElement[],accordionButtons:HTMLElement[]): void => {
   accordions.forEach((accordion, index) => {
-    Util.removeClass(accordion, 'active');
+    DOMUtil.removeClass(accordion, 'active');
     const accordionButton:HTMLElement | null = accordionButtons[index];
-    if (accordionButton && Util.checkAttributeValue(accordionButton, 'aria-expanded', 'true')) {
-      Util.toggleAttributeBoolean(accordionButton, "aria-expanded");
+    if (accordionButton && DOMUtil.checkAttributeValue(accordionButton, 'aria-expanded', 'true')) {
+      DOMUtil.toggleAttributeBoolean(accordionButton, "aria-expanded");
     }
   })
 }
 
 const toggleCurrentAccordion = (accordion: HTMLElement,accordionButton:HTMLElement): void => {
-  Util.toggleClass(accordion, 'active');
-  Util.toggleAttributeBoolean(accordionButton, 'aria-expanded');
+  DOMUtil.toggleClass(accordion, 'active');
+  DOMUtil.toggleAttributeBoolean(accordionButton, 'aria-expanded');
 }
 
 
