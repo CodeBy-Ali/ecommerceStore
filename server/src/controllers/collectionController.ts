@@ -1,7 +1,9 @@
-import { Request, Response } from "express";
+import {Request,Response} from 'express'
 import Product, { IProduct } from "../model/productModel";
-import { HydratedDocument, Model } from "mongoose";
 
+
+
+// render collection view
 export const renderCollectionsView = async (req: Request, res: Response): Promise<void> => {
   try {  
     const allProducts: Array<IProduct> = await Product.find().lean(); 

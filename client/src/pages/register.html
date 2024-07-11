@@ -10,7 +10,12 @@
   </head>
   <body data-page="register">
      <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
+
      <a class="button--skipToMain" href="#main">Skip to content</a>
+
+     <!-- START ------------------------------ Notification-Center ----------------------- -->
+
+     <div class="notification_center" data-notificationCenter></div>
 
      <!-- Start ------------------------------- Header ------------------------------------ -->
  
@@ -46,7 +51,7 @@
              </li>
              <li class="header_menu_links_login">
                <div>
-                 <a href="../pages/login.html">LOGIN</a>
+                 <a href="/account/login">LOGIN</a>
                </div>
                <div>
                  <a href="">CART <span></span></a>
@@ -256,10 +261,18 @@
               <li class="form_field">
                 <input type="text" id="firstName" name="firstName" placeholder="First name" maxlength="50" required autocomplete="given-name" />
                 <label for="firstName" class="" aria-hidden="false">First Name</label>
+                <div class="error_message">
+                  <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
+                   <span>Valid FirstName required</span>
+                 </div>
               </li>
               <li class="form_field">
                 <input type="text" id="lastName" name="lastName" placeholder="Last name" required maxlength="50" autocomplete="given-name" />
                 <label for="lastName" class="" aria-hidden="false">Last Name</label>
+                <div class="error_message">
+                  <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
+                   <span>Valid lastName required</span>
+                 </div>
               </li>
               <li class="form_field">
                 <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" />
@@ -270,7 +283,7 @@
                  </div>
               </li>
               <li class="form_field">
-                <button class="togglePassword_visibility_button" type="button" data-eyeIconButton>
+                <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
                   <i class="fas fa-eye-slash eye_icon" ></i>
                 </button>
                 <input type="password" id="password" name="password" placeholder="password" required data-passwordField/>

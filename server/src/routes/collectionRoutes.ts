@@ -1,10 +1,11 @@
-import { RequestHandler, Router } from "express";
+import { Router } from "express";
 import { renderCollectionsView } from "../controllers/collectionController";
 
 
-const router:Router = Router();
 
-// get all collections
+const router: Router = Router();
+
+
 router.get('/',renderCollectionsView);
 
 

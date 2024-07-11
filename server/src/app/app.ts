@@ -1,7 +1,9 @@
 import compression from 'compression';
 import express,{ Express, Request, Response } from "express";
 import config from "../config/config";
-import collectionRoutes from "../routes/collectionRoutes";
+import pagesRoutes from '../routes/pageRoutes';
+import authRoutes from '../routes/authRoutes';
+import collectionRoutes from '../routes/collectionRoutes';
 
 // create app instance
 const app: Express = express();
@@ -22,17 +24,13 @@ app.use(express.urlencoded({ extended: false }));
 // parse req body of content json
 app.use(express.json())
 
-// log routes
-app.use((req, res, next) => {
-  console.log(req.url);
-  next();
-})
 
 // serve static files
 app.use(express.static(config.dir.static));
 
 
-// assigning routes
+app.use("/", pagesRoutes);
+app.use("/account", authRoutes);
 app.use("/collections", collectionRoutes);
 
 export default app;

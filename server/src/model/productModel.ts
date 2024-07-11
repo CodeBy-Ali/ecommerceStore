@@ -1,4 +1,4 @@
-import { Schema, model, Document, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 export interface IProduct {
   title: string;
