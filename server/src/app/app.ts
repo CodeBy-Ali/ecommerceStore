@@ -1,16 +1,40 @@
 import compression from 'compression';
 import express,{ Express, Request, Response } from "express";
-import config from "../config/config";
+import configManager from "../config/config";
 import pagesRoutes from '../routes/pageRoutes';
 import authRoutes from '../routes/authRoutes';
 import collectionRoutes from '../routes/collectionRoutes';
-
+import session, { Cookie } from 'express-session'
+import MongoStore from 'connect-mongo';
+import {v4 as uuidv4} from 'uuid'
 // create app instance
 const app: Express = express();
 
+
+//  config variables
+const sessionName = configManager.getSessionConfig().name;
+const sessionSecret = configManager.getSessionConfig().secret;
+const databaseURI = configManager.getDatabaseConfig().URI;
+const staticDir = configManager.getDirConfig().static;
+const cookieMaxAge = configManager.getSessionConfig().cookieMaxAge;
+// initialize session
+app.use(session({
+  name: sessionName,
+  secret: sessionSecret,
+  store: MongoStore.create({
+    mongoUrl: databaseURI,
+  }),
+  saveUninitialized: false,
+  resave: false,
+  genid: () => uuidv4(),
+  cookie: {
+    maxAge: cookieMaxAge,
+    httpOnly: false,
+  },
+}))
 // set view engine
 app.set('view engine', 'ejs');
-app.set('views', config.dir.views);
+app.set('views', configManager.getDirConfig().view);
 
 // don't identify express
 app.disable('x-powered-by');
@@ -24,9 +48,8 @@ app.use(express.urlencoded({ extended: false }));
 // parse req body of content json
 app.use(express.json())
 
-
 // serve static files
-app.use(express.static(config.dir.static));
+app.use(express.static(staticDir));
 
 
 app.use("/", pagesRoutes);

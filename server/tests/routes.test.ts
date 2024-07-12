@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "../src/config/config";
+import configManager from "../src/config/config";
 
 import { assertHtmlResponse } from "./utils";
 
@@ -12,7 +12,8 @@ describe("Get /", (): void => {
 describe("Get /collections", () => {
   // connecting to database before each test
   beforeEach(async () => {
-    await mongoose.connect(config.databaseURI);
+    const { URI } = configManager.getDatabaseConfig();
+    await mongoose.connect(URI);
   });
 
   // close the database connection after each test 

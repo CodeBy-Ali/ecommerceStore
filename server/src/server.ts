@@ -1,9 +1,9 @@
-import config from "./config/config";
+import configManager from "./config/config";
 import app from "./app/app";
 import mongoose from "mongoose";
 
-const { host, port, databaseURI } = config;
-
+const { host, port} = configManager.getServerConfig();
+const databaseURI:string = configManager.getDatabaseConfig().URI;
 
 // connect to database and start the server
 mongoose.connect(databaseURI)
