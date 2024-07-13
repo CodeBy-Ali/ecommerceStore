@@ -1,3 +1,6 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
 .notification_center{
   position: absolute;
   top: -50%;
@@ -9,6 +12,7 @@
     opacity: 1;
     top: 0;
   }
+  z-index: 250;
 }
 
 .notification{

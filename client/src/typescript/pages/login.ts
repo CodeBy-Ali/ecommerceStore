@@ -20,7 +20,7 @@ const handleFormSubmit = async (e:Event,signInForm: HTMLFormElement): Promise<vo
   const [emailField, passwordField] = Array.from(signInForm.elements) as [HTMLInputElement, HTMLInputElement];
 
   try {
-    const response = await fetch('/login', {
+    const response = await fetch('/account/login', {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
@@ -29,16 +29,14 @@ const handleFormSubmit = async (e:Event,signInForm: HTMLFormElement): Promise<vo
       })
     })
 
-    const responseBody = await response.json();
     if (!response.ok) {
+      const responseBody = await response.json();
       displayResponseNotification(responseBody?.message, false);
       return;
     }
 
     if (response.redirected) {
       window.location.href = response.url;
-    } else {
-      displayResponseNotification(responseBody?.message,true)
     }
 
   } catch (error) {
@@ -54,7 +52,7 @@ const handleFormSubmit = async (e:Event,signInForm: HTMLFormElement): Promise<vo
 
 
 //  initialize Register page
-const initRegisterPage = (): void => {
+const initLoginPage = (): void => {
   const eyeIconButton: HTMLElement | null = document.querySelector('[data-eyeIconButton]');
   const eyeIcon = document.querySelector('.eye_icon') as HTMLElement;
   const passwordField = document.querySelector('[data-passwordField]') as HTMLInputElement;
@@ -73,4 +71,4 @@ const initRegisterPage = (): void => {
 
 }
 
-export default initRegisterPage;
+export default initLoginPage;

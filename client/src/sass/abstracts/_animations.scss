@@ -19,3 +19,22 @@
     opacity: 0;
   }
 }
+
+
+
+@keyframes dropIn {
+  0%{
+    transform: translateY(-100%);
+  }
+
+  80%{
+    transform:  translateY(70%);
+  }
+
+  100%{
+    transform:  translateY(60%);
+  }
+  
+}
+
+

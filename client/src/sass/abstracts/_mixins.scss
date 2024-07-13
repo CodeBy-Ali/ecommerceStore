@@ -1,4 +1,6 @@
 @use "../abstracts/variables" as *;
+@use "../abstracts//animations" as *;
+
 // breakPoints manager for responsive design
 @mixin respond-to($breakpoint) {
   @if $breakpoint == "small" {
@@ -250,4 +252,19 @@
   pointer-events: none;    
   left: 1.9rem;
   transition: all .2s ease;
+}
+
+// notification
+@mixin notification($clr-bg){
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: $clr-bg;
+  color: white;
+  font-size: $font-size-base;
+  padding-block: 2rem;
+  padding-inline: 2.8rem;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.19);
+  white-space: nowrap;
+  margin-block: 1rem;
+  animation: dropIn .3s ease forwards;
 }

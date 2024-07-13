@@ -35,6 +35,7 @@ export const displayResponseNotification = (message: string,isResponseOk:boolean
   const notificationCenter = document.querySelector("[data-notificationCenter]");
   const responseSuccessClass = "notification--success";
   const responseFailureClass = "notification--error"
+  console.log(message);
 
   const createNotification = (textContent:string, className:string) => {
     const container = document.createElement("div");
@@ -45,7 +46,9 @@ export const displayResponseNotification = (message: string,isResponseOk:boolean
     return container;
   };
   
-  const notification = createNotification(message,isResponseOk ? responseSuccessClass : responseFailureClass);
+  const notificationType = isResponseOk ? responseSuccessClass : responseFailureClass;
+  const notification = createNotification(message,notificationType);
   notificationCenter?.appendChild(notification);
+  console.log(notificationCenter,notification) 
   setTimeout(() => notificationCenter?.removeChild(notification), 3000);
 }

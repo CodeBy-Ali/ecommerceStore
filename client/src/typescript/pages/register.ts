@@ -23,7 +23,7 @@ const handleFormSubmit = async(e:Event,registerForm:HTMLFormElement): Promise<vo
   ];
 
   try {
-    const response = await fetch('/register', {
+    const response = await fetch('/account/register', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -36,18 +36,16 @@ const handleFormSubmit = async(e:Event,registerForm:HTMLFormElement): Promise<vo
       })
     })
 
-    const responseBody = await response.json();
     if (!response.ok) {
+      const responseBody = await response.json();
       displayResponseNotification(responseBody?.message, false);
       return;
     }
 
     if (response.redirected) {
       window.location.href = response.url;
-    } else {
-      displayResponseNotification(responseBody?.message,true)
     }
-
+    
   } catch (error) {
     console.log(error);
   }

@@ -6,17 +6,31 @@ import authRoutes from '../routes/authRoutes';
 import collectionRoutes from '../routes/collectionRoutes';
 import session, { Cookie } from 'express-session'
 import MongoStore from 'connect-mongo';
-import {v4 as uuidv4} from 'uuid'
-// create app instance
-const app: Express = express();
+import { v4 as uuidv4 } from 'uuid'
+import mongoose from 'mongoose';
 
 
-//  config variables
+//  config constants
 const sessionName = configManager.getSessionConfig().name;
 const sessionSecret = configManager.getSessionConfig().secret;
 const databaseURI = configManager.getDatabaseConfig().URI;
 const staticDir = configManager.getDirConfig().static;
 const cookieMaxAge = configManager.getSessionConfig().cookieMaxAge;
+
+
+
+// create app instance
+const app: Express = express();
+
+// add custom user property in sessionData interface
+declare module 'express-session' {
+  interface SessionData{
+    user: {
+      _id: mongoose.Types.ObjectId;
+    }
+  }
+}
+
 // initialize session
 app.use(session({
   name: sessionName,
@@ -47,6 +61,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // parse req body of content json
 app.use(express.json())
+
 
 // serve static files
 app.use(express.static(staticDir));

@@ -2,7 +2,7 @@
 import initCollectionsPage from "./pages/collections";
 import initHomePage from "./pages/home";
 import initRegisterPage from "./pages/register";
-
+import initLoginPage from "./pages/login";
 // components
 import headerDropdownMenuController_large from "./components/HeaderDropdown/headerDropdownMenu";
 import headerDropdownMenuController_Mobile from "./components/HeaderDropdown/headerMobileDropdownMenu";
@@ -26,6 +26,8 @@ const App = (): void => {
       break;
     case 'register':
       initRegisterPage();
+    case 'login':
+      initLoginPage();
   }
 }
 

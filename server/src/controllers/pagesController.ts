@@ -4,8 +4,8 @@ import { join } from "path";
 
 // render home view
 export const renderHomeView = (req: Request, res: Response) => {
-  const staticDirPath = configManager.getDirConfig()?.static;
-  res.sendFile(join(staticDirPath,'index.html'))
+  const user = req.session.user;
+  res.render('home',{user});
 }
 
 
