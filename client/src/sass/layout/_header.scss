@@ -8,7 +8,7 @@ header{
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: $z-index-header;
   background-color: white;
 }
 .header_menu_nav ul{
@@ -44,6 +44,10 @@ header{
 .header_menu_links_shop > div a, 
 .header_menu_links_login > div a,
 .header_mobile_menu > div a{
+  @include navLinks;
+}
+
+.header_menu_links_login .header_cart_button{
   @include navLinks;
 }
 

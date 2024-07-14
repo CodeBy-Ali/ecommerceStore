@@ -48,6 +48,7 @@ $letter-spacing-lg: 1px;
 $letter-spacing-xl : 1.5px;
 // padding
 $pd-body-inline-base: 1.6rem;
+
 // * ---------------- Container ------------ *
 $max-width-container-collection: 1300px;
 $pd-container : 2rem;
@@ -72,7 +73,6 @@ $trans-dur-headerDropDown: .7s;
 $clr-dropDown-backdrop: rgba(0, 0, 0, 0.3);
 $height-header-sm: 7.5rem; 
 $height-header-lg: 8.9rem;
-
 
 
 // * --------------- Button --------------- *
@@ -130,3 +130,13 @@ $gap-hero-image-scroll: 3rem;
 // *----------------------- Collections-Page -------------------*
 $radius-product-card: 4rem;
 $radius-product-card-md: 6rem;
+
+// * -------------------------- Z-index ------------------------*
+$z-index-header: 10;
+$z-index-overlay: 30;
+$z-index-cart: 40;
+$z-index-notification: 50;
+
+//  * ----------------------------- Transition ------------------ *
+
+$transition-md: .5s;

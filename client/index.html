@@ -13,6 +13,7 @@
     <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
     <a class="button--skipToMain" href="#main">Skip to content</a>
 
+    <div class="overLay" data-overLay></div>
     <!-- Start ------------------------------- Header ------------------------------------ -->
 
     <header>
@@ -50,7 +51,7 @@
                 <a href="src/pages/login.html">LOGIN</a>
               </div>
               <div>
-                <a href="">CART <span></span></a>
+                <button data-cartButton class="header_cart_button">CART <span></span></button>
               </div>
             </li>
           </ul>
@@ -247,6 +248,19 @@
       <section>
     </header>
 
+    <!-- START ------------------------------------------- Cart-Section -------------------------------------- -->
+     <section id="cartSection" class="cart_drawer-section" data-cartDrawer>
+      <div class="cart-wrapper">
+        <section class="cart_header_section">
+          <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>4</span>&rpar;</h2>
+          <p class="cart_header_message">Spend $47.02 more or add a subscription to get free shipping!</p>
+          <div class="cart_freeShipping_progressBar_wrapper">
+            <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar></span>
+          </div>
+          <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+        </section>
+      </div>
+     </section>
     <!-- Start ----------------------------------------- Main ---------------------------------------------- -->
 
     <main id="main">

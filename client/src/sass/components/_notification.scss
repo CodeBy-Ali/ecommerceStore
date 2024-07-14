@@ -5,14 +5,13 @@
   position: absolute;
   top: -50%;
   right:6rem;
-  z-index: 10;
   opacity: 0;
   transition: opacity .3s ease;
   &:has(> div){
     opacity: 1;
     top: 0;
   }
-  z-index: 250;
+  z-index: $z-index-notification;
 }
 
 .notification{

@@ -1,4 +1,5 @@
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 // // main content container
 // .container{
@@ -34,4 +35,29 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+
+.overLay{
+  position: fixed;
+  top: -$height-header-sm;
+  height: calc(100% + $height-header-sm);
+  width: 100vw;
+  background-color: black;
+  opacity: 0;
+  visibility: hidden;
+  z-index: $z-index-overlay;
+  transition: all .5s ease-in;
+  @include respond-to(medium){
+    top: -$height-header-lg;
+    height: calc(100% + $height-header-lg);
+  }
+  &.active{
+    opacity: .4;
+    visibility: visible;
+  }
+}
+
+.hideOverflow{
+  overflow: hidden;
 }
