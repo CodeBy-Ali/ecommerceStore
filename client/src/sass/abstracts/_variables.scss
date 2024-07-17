@@ -15,6 +15,7 @@ $clr-outline: rgb(127,127,127);
 // *---------------- Body ------------------*
 // color
 $clr-primary: rgb(32, 61, 59);
+$clr-primaryDark: #092826;
 $clr-text-secondary: rgb(117, 117, 117);
 $clr-text-quaternary: rgb(98, 98, 98); 
 $clr-text-primary: rgb(128, 128, 128);
@@ -139,4 +140,9 @@ $z-index-notification: 50;
 
 //  * ----------------------------- Transition ------------------ *
 
+$transition-base: .3s;
 $transition-md: .5s;
+
+//  * ---------------------------- Border-Radius ------------------ *
+
+$br-large: 6.4rem;

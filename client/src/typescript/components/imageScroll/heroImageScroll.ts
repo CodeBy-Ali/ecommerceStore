@@ -1,10 +1,11 @@
 // returns true of the given element is visible with in viewport else returns false
 const isElementInView = (element:HTMLElement | null):boolean | void => {
   const windowHeight = window.innerHeight;
-  const elementRect = element?.getBoundingClientRect();
+  const elementRect: DOMRect | undefined  = element?.getBoundingClientRect();
   if (elementRect) {
     return elementRect.top <= windowHeight && (elementRect.top + elementRect.height) > 0;
   }
+  return false;
 };
 
 // translates the inner scroll in negative X direction about 1/5th of the document Scroll;

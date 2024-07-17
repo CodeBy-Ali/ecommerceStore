@@ -2,7 +2,7 @@ import { Schema, model, } from "mongoose";
 
 
 // interface represents the user document in database
-interface IUser{
+export interface IUser{
   firstName: string,
   lastName: string,
   email: string,

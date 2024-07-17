@@ -1,11 +1,11 @@
 import { Response, Request, NextFunction } from "express";
 
-interface LoginRequestBody {
+export interface LoginRequestBody {
   email: string;
   password: string;
 }
 
-interface RegisterRequestBody {
+export interface RegisterRequestBody {
   firstName: string;
   lastName: string;
   email: string;
@@ -22,7 +22,7 @@ export const validateAuthBody = (req: Request, res: Response, next: NextFunction
   try {
     const { email, password } = req.body as LoginRequestBody;
     if (!email || !password) throw new Error("Email and password are required");
-    if (!isEmailValid(email)) throw new Error("Invalid Email");
+    if (!isEmailValid(email)) throw new Error("Invalid email");
     if (!isPasswordValid(password)) throw new Error("Invalid password");
     return next();
   } catch (error) {
@@ -41,8 +41,9 @@ export const validateRegisterBody = (req: Request, res: Response, next: NextFunc
 
     if (!isNameValid(firstName)) throw new Error("FirstName is invalid");
     if (!isNameValid(lastName)) throw new Error("LastName is invalid");
-    if (!isEmailValid(email)) throw new Error("Invalid Email");
+    if (!isEmailValid(email)) throw new Error("Invalid email");
     if (!isPasswordValid(password)) throw new Error("Invalid password");
+    return next();
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     res.status(400).json(message);

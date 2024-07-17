@@ -28,6 +28,7 @@ const App = (): void => {
       break;
     case 'register':
       initRegisterPage();
+      break;
     case 'login':
       initLoginPage();
   }

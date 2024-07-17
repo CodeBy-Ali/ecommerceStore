@@ -50,6 +50,16 @@
     width: 100%;
   }
 
+  &--checkout{
+    @include button;
+    background-color: $clr-primary;
+    color: white;
+    width: 100%;
+    &:hover{
+      background-color: $clr-primaryDark;
+    }
+  }
+
   &--formSubmit {
     border-radius: $br-btn;
     background-color: $clr-accent;

@@ -20,7 +20,7 @@ class ConfigManager{
       port: Number(process.env.PORT) || 3000,
     }
     this.databaseConfig = {
-      URI: process.env.MONGODB_URI || "mongodb://localhost:27017/test"
+      URI: (process.env.NODE_ENV != "TEST" ? process.env.MONGODB_URI : process.env.MONGODB_TEST_URI)  || "mongodb://localhost:27017/test",
     }
     this.dirConfig = {
       view: path.join(__dirname, '..', 'views'),

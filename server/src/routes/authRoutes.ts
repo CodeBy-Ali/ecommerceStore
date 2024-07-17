@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validateAuthBody } from "../middlewares/validator";
+import { validateAuthBody,validateRegisterBody } from "../middlewares/validator";
 import { redirectIfAuthorized } from "../middlewares/authenticate";
 import {
   sendLoginPage,
@@ -14,9 +14,9 @@ router.get("/register", sendRegisterPage);
 
 router.get("/login", sendLoginPage);
 
-router.post('/register', registerNewUser);
+router.post('/register',validateRegisterBody, registerNewUser);
 
-router.post('/login', redirectIfAuthorized, authenticateUser);
+router.post('/login', validateAuthBody, redirectIfAuthorized, authenticateUser);
 
 // router.post('/register', validateAuthInput, registerNewUser);
 export default router;
