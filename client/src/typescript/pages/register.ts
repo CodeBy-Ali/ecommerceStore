@@ -12,15 +12,12 @@ const handleFormSubmit = async(e:Event,registerForm:HTMLFormElement): Promise<vo
     throw new Error('Register form elements are missing or form is invalid')
   }
   
-
   if (!isFormValid(registerForm)) return;
 
-  const [firstNameField, lastNameField, emailField, passwordField] = Array.from(registerForm.elements) as [
-    HTMLInputElement,
-    HTMLInputElement,
-    HTMLInputElement,
-    HTMLInputElement,
-  ];
+  const firstNameField = document.querySelector<HTMLInputElement>('[data-firstNameField]');
+  const lastNameField = document.querySelector<HTMLInputElement>('[data-lastNameField]');
+  const emailField = document.querySelector<HTMLInputElement>('[data-emailField]');
+  const passwordField = document.querySelector<HTMLInputElement>('[data-passwordField]');
 
   try {
     const response = await fetch('/account/register', {
@@ -29,10 +26,10 @@ const handleFormSubmit = async(e:Event,registerForm:HTMLFormElement): Promise<vo
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        firstName: firstNameField.value,
-        lastName: lastNameField.value,
-        email: emailField.value,
-        password: passwordField.value,
+        firstName: firstNameField?.value,
+        lastName: lastNameField?.value,
+        email: emailField?.value,
+        password: passwordField?.value,
       })
     })
 

@@ -117,6 +117,7 @@
 }
 
 .addTOCart_action{
+  // pointer-events: none;
   position: relative;
   border-radius: 4.4rem;
   transition: all .7s ease;
@@ -141,10 +142,12 @@
   transition: opacity .7s ease;
   font-size: $font-size-base;
   font-weight: $font-semibold;
+
   @include flex-row-jc(center);
   
   & .action_btn_text{
     display:none;
+    pointer-events: none;
   }
   
   @include respond-to(small){

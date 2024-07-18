@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" crossorigin src="/assets/main-A_TxVllv.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-BnGVPio3.css">
+    <script type="module" crossorigin src="/assets/main-DiZ_SARm.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-MR-5jJQg.css">
     <title>Phil's Refills</title>
   </head>
   <body data-page="collections">
@@ -62,9 +62,10 @@
                     <img src="<%= product.image %>" alt="" />
                   </div>
                   <div class="product_addToCart_container">
-                    <form action="">
+                    <form action="/cart/add" id="" novalidate="novalidate">
+                      <input type="hidden" name="product-id" value="<%= product._id.toString() %>">
                       <div class="addTOCart_action">
-                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn" data-addToCartBtn data-product-id="<%= product._id %>">
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
@@ -133,9 +134,10 @@
                     <img src="<%= product.image %>" alt="" />
                   </div>
                   <div class="product_addToCart_container">
-                    <form action="">
+                    <form action="/cart/add" data-addToCartForm>
+                      <input type="hidden" name="id" value="<%= product._id.toString() %>">
                       <div class="addTOCart_action">
-                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn" data-addToCartBtn>
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
@@ -179,9 +181,10 @@
                     <img src="<%= product.image %>" alt="" />
                   </div>
                   <div class="product_addToCart_container">
-                    <form action="">
+                    <form action="/cart/add" data-addToCartForm>
+                      <input type="hidden" name="id" value="<%= product._id.toString() %>">
                       <div class="addTOCart_action">
-                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn" data-addToCartBtn>
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
@@ -227,7 +230,7 @@
                   <div class="product_addToCart_container">
                     <form action="">
                       <div class="addTOCart_action">
-                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn" data-addToCartBtn>
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />

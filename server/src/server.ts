@@ -9,7 +9,6 @@ const databaseURI: string = configManager.getDatabaseConfig().URI;
 mongoose
   .connect(databaseURI)
   .then(() => {
-    console.log("Connected to database");
     app.listen(port, host, () => {
       console.log(`Server listening at http://${host}:${port}`);
     });

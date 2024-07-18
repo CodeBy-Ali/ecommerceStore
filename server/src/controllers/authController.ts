@@ -76,6 +76,7 @@ export const authenticateUser = async (req: Request, res: Response, next:NextFun
     })    
 
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: "Internal Server Error" });
   }
 };

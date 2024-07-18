@@ -3,6 +3,7 @@ import express,{ Express, Request, Response } from "express";
 import configManager from "../config/config";
 import pagesRoutes from '../routes/pageRoutes';
 import authRoutes from '../routes/authRoutes';
+import cartRoutes from '../routes/cartRoutes';
 import collectionRoutes from '../routes/collectionRoutes';
 import session, { Cookie } from 'express-session'
 import MongoStore from 'connect-mongo';
@@ -83,5 +84,6 @@ app.use(express.static(staticDir));
 app.use("/", pagesRoutes);
 app.use("/account", authRoutes);
 app.use("/collections", collectionRoutes);
+app.use('/cart', cartRoutes);
 
 export default app;

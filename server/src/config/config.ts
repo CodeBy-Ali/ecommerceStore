@@ -32,7 +32,7 @@ class ConfigManager{
     this.sessionConfig = {
       name: "SessionId",
       secret: process.env.SESSION_SECRET || 'somestrongsecretstringisalwaysgoodthanbad',
-      cookieMaxAge: 2 * 60  * 1000  // 5,184,000,000 2 months
+      cookieMaxAge: 20 * 60  * 1000  // 5,184,000,000 2 months
     }
   }
 

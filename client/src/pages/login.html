@@ -257,10 +257,10 @@
       <section class="auth_form_container">
         <h1>Login</h1>
         <section>
-          <form action="" data-signInForm>
+          <form action="" data-signInForm class="signIn_form">
             <ul class="form_fields_list">
               <li class="form_field">
-                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" />
+                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" data-emailField/>
                 <label for="email" class="" aria-hidden="false">Email</label>
                 <div class="error_message">
                   <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
@@ -272,7 +272,7 @@
                   <i class="fas fa-eye-slash eye_icon" ></i>
                 </button>
                 <input type="password" id="password" name="password" placeholder="password" data-passwordField required />
-                <label for="email" class="" aria-hidden="false">Password</label>
+                <label for="password" class="" aria-hidden="false">Password</label>
                 <div class="error_message">
                   <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
                    <span>Enter a strong password</span>

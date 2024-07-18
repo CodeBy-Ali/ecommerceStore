@@ -17,15 +17,16 @@ const handleFormSubmit = async (e:Event,signInForm: HTMLFormElement): Promise<vo
 
   if (!isFormValid(signInForm)) return;
 
-  const [emailField, passwordField] = Array.from(signInForm.elements) as [HTMLInputElement, HTMLInputElement];
-
+  const emailField = document.querySelector<HTMLInputElement>(`[data-emailField]`);
+  const passwordField = document.querySelector<HTMLInputElement>(`[data-passwordField]`);
+  
   try {
     const response = await fetch('/account/login', {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        email: emailField.value,
-        password: passwordField.value,
+        email: emailField?.value,
+        password: passwordField?.value,
       })
     })
 

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../sass/pages/_collections.scss">
     <title>Phil's Refills</title>
   </head>
-  <body>
+  <body data-page="collections">
     <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
     <a class="button--skipToMain" href="">Skip to content</a>
 
@@ -51,7 +51,7 @@
                 <a href="">LOGIN</a>
               </div>
               <div>
-                <button class="header_cart_button">CART <span></span></button>
+                <button class="header_cart_button" data-cartButton>CART <span></span></button>
               </div>
             </li>
           </ul>
@@ -247,6 +247,67 @@
         </div>
       <section>
     </header>
+
+     <!-- START ------------------------------------------- Cart-Section -------------------------------------- -->
+     <section id="cartSection" class="cart_drawer-section" data-cartDrawer>
+      <div class="cart-wrapper">
+        <section class="cart_header_section">
+          <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>4</span>&rpar;</h2>
+          <p class="cart_header_message">Spend $47.02 more or add a subscription to get free shipping!</p>
+          <div class="cart_freeShipping_progressBar_wrapper">
+            <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar></span>
+          </div>
+          <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+        </section>
+        <section class="cartItems_container">
+          <ul>
+            <li class="cartItem">
+              <div class="cartItem_image_container">
+                <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg"  alt="">
+              </div>
+              <div class="cartItem_details">
+                
+                <div class="cartItem_heading_container">
+                  <a href="">The EveryThing Bar</a>
+                  <p class="cartItem_price">$14.99</p>
+                </div>
+
+                <div class="cartItem_quantity_container">
+                  <div class="cartItem_quantity_wrapper">
+                    <button class="decrease_cartQuantity_button" data-decreaseCartQuantityBtn>
+                      <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
+                      <span>-</span>
+                    </button>
+
+                    <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
+                      <span>Product The EveryThing Bar quantity</span>
+                    </label>
+                    <input class="cartItem_quantity_input" type="number" min="1" max="200" value="1" name="quantity" id="Quantity-The-EveryThing-Bar">
+
+                    <button data-increaseCartQuantityBtn class="increase_cartQuantity_button">
+                      <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
+                      <span>+</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <a href="" class="remove_cartItem">remove</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="cart_footer_section">
+          <div class="cart_footer_totalPrize_container">
+            <p>SUBTOTAl</p>
+            <p>$23</p>
+          </div>
+          <a href="" class="button--checkout">Checkout</a>
+        </section>
+      </div>
+     </section>
     <!-- Start ----------------------------------------- Main ---------------------------------------------- -->
 
     <main>
@@ -297,9 +358,10 @@
                     <img src="/assets/castileSoap.jpg" alt="">
                   </div>
                   <div class="product_addToCart_container">
-                    <form action="">
+                    <form action="/cart/add" class="addToCart_form_1">
+                      <input type="hidden" name="productId" class="productId" value="1" name="productId">
                       <div class="addTOCart_action">
-                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-product-id="1">
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">

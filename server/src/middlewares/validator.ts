@@ -21,13 +21,14 @@ const isPasswordValid = (password: string): boolean => /(?=.*\d)(?=.*[a-z])(?=.*
 export const validateAuthBody = (req: Request, res: Response, next: NextFunction): void => {
   try {
     const { email, password } = req.body as LoginRequestBody;
+    console.log(password)
     if (!email || !password) throw new Error("Email and password are required");
     if (!isEmailValid(email)) throw new Error("Invalid email");
     if (!isPasswordValid(password)) throw new Error("Invalid password");
     return next();
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    res.status(400).json(message);
+    res.status(400).json({message: message});
   }
 };
 
