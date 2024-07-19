@@ -1,10 +1,11 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "nodemon dist/index.js",
-    "dev": "nodemon src/server.ts",
+    "dev": "tsx watch ./src/server.ts",
     "build": "tsc",
     "test": "jest --detectOpenHandles"
   },
@@ -22,6 +23,7 @@
     "express-session": "^1.18.0",
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.5",
+    "nanoid": "^5.0.7",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
@@ -40,8 +42,6 @@
     "superagent": "^9.0.2",
     "supertest": "^7.0.0",
     "ts-jest": "^29.1.5",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
     "tsc": "^2.0.4",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0"

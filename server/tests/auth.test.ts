@@ -1,21 +1,21 @@
 import mongoose from "mongoose";
-import configManager from "../src/config/config";
+import configManager from "../src/config/config.ts";
 import request from "supertest";
-import app from "../src/app/app";
-import User,{IUser} from "../src/model/userModel";
+import app from "../src/app/app.ts";
+import User,{IUser} from "../src/model/userModel.ts";
 import bcrypt from "bcrypt";
 import {
   mockRegisterReqBody,
   IMockRegisterBody,
   mockLoginReqBody,
   IMockLoginBody
-} from "./utils";
+} from "./utils.ts";
 
 describe("POST /account/register", () => {
   // connecting to database before all test
   beforeAll(async () => {
-    const { URI } = configManager.getDatabaseConfig();
-    await mongoose.connect(URI);
+    const { TEST_URI } = configManager.getDatabaseConfig();
+    await mongoose.connect(TEST_URI);
   });
 
   // close the database connection after each test

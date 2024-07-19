@@ -12,7 +12,7 @@ const handleFormSubmit = async(e:Event,registerForm:HTMLFormElement): Promise<vo
     throw new Error('Register form elements are missing or form is invalid')
   }
   
-  if (!isFormValid(registerForm)) return;
+if (!isFormValid(registerForm)) return;
 
   const firstNameField = document.querySelector<HTMLInputElement>('[data-firstNameField]');
   const lastNameField = document.querySelector<HTMLInputElement>('[data-lastNameField]');

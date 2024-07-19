@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../src/app/app";
+import app from "../src/app/app.ts";
 
 export const assertHtmlPageResponse = async (route: string, expectedPage: string): Promise<void> => {
   const response = await request(app).get(route);

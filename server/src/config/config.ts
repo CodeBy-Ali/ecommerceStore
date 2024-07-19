@@ -2,13 +2,13 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 // import .env file
-const envPath = path.join(__dirname,'..','..','.env');
+const envPath = path.join(import.meta.dirname,'..','..','.env');
 dotenv.config({ path: envPath });
 
 
 class ConfigManager{
   private serverConfig: { host: string, port: number };
-  private databaseConfig: {URI: string};
+  private databaseConfig: {URI: string,TEST_URI:string};
   private dirConfig: { view: string, static: string };
   private bcryptConfig: {saltRounds: number}
   private sessionConfig: {name: string, secret: string,cookieMaxAge: number };
@@ -20,11 +20,12 @@ class ConfigManager{
       port: Number(process.env.PORT) || 3000,
     }
     this.databaseConfig = {
-      URI: (process.env.NODE_ENV != "TEST" ? process.env.MONGODB_URI : process.env.MONGODB_TEST_URI)  || "mongodb://localhost:27017/test",
+      URI: process.env.MONGODB_URI  || "mongodb://localhost:27017/myDb",
+      TEST_URI: process.env.MONGODB_TEST_URI || "mongodb://localhost:27017/test",
     }
     this.dirConfig = {
-      view: path.join(__dirname, '..', 'views'),
-      static: path.join(__dirname, '../../../client/dist')
+      view: path.join(import.meta.dirname, '..', 'views'),
+      static: path.join(import.meta.dirname, '../../../client/dist')
     }
     this.bcryptConfig = {
       saltRounds: 10,
@@ -32,7 +33,7 @@ class ConfigManager{
     this.sessionConfig = {
       name: "SessionId",
       secret: process.env.SESSION_SECRET || 'somestrongsecretstringisalwaysgoodthanbad',
-      cookieMaxAge: 20 * 60  * 1000  // 5,184,000,000 2 months
+      cookieMaxAge: 60 * 60  * 1000  // 5,184,000,000 2 months
     }
   }
 

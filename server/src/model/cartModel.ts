@@ -1,13 +1,14 @@
 import mongoose,{Schema,model} from "mongoose"
+import { Document } from "mongoose";
 
 
 
-
-interface ICartItem{
-  productId: mongoose.Schema.Types.ObjectId;
+export interface ICartItem{
+  productId: mongoose.Types.ObjectId;
   quantity: number,
 }
-interface ICart{
+
+export interface ICart extends Document{
   userId:  mongoose.Schema.Types.ObjectId,
   items: Array<ICartItem>
 }

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import configManager from "../src/config/config";
+import configManager from "../src/config/config.ts";
 
 
-import { assertHtmlPageResponse } from "./utils";
+import { assertHtmlPageResponse } from "./utils.ts";
 
 describe("Get /", (): void => {
   test("it should return home page", async (): Promise<void> => {
@@ -13,8 +13,8 @@ describe("Get /", (): void => {
 describe("Get /collections", () => {
   // connecting to database before all test
   beforeAll(async () => {
-    const { URI } = configManager.getDatabaseConfig();
-    await mongoose.connect(URI);
+    const { TEST_URI } = configManager.getDatabaseConfig();
+    await mongoose.connect(TEST_URI);
   });
 
   // close the database connection after all test 

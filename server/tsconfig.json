@@ -10,5 +10,11 @@
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "ts-node": {
+    "esm": true,
+    "compiler": "typescript"
   }
 }

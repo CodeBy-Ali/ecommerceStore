@@ -1,53 +1,47 @@
 import { Request, Response } from "express";
-import mongoose, { ObjectId } from "mongoose";
-import Cart from "../model/cartModel";
-import Product from "../model/productModel";
-
-
+import mongoose from "mongoose";
+import Cart,{ICart} from "../model/cartModel.ts";
+import Product, { IProduct } from "../model/productModel.ts";
+type ObjectId = mongoose.Types.ObjectId;
 
 
 export const addProductToCart = async (req: Request, res: Response) => {
-  const { productId } = req.body;
-  if (!productId) {
-    res.status(400).json({ message: "ProductId is required" });
+  const { productPubId } = req.body;
+  if (!productPubId) {
+    return res.status(400).json({ message: "ProductId is required" });
   }
 
-  if (!req.session.user) return;
+  if (!req.session.user) {
+    res.status(401).json({message: "Login required to add products to cart"})
+  };
 
   try {
-    const userId = req.session.user;
-    const productObjectId = new mongoose.Types.ObjectId(productId)
-    const userCart = await Cart.findOne({ userId: userId });
-    if (!userCart) {
-      const newUserCart = new Cart({
-        userId: userId,
-        items: [
-          {
-            productId: productObjectId, 
-            quantity: 1           
-          }
-        ],
-      });
-      await newUserCart.save();
-      return;
+    const userId = req.session.user as ObjectId;
+    const product = await Product.findOne({ pubId: productPubId });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
-    let itemFound = false;
-    for (const item of userCart.items) {
-      if (String(item.productId) === String(productObjectId)) {
-        item.quantity++;
-        itemFound = true;
-      }
+    
+    const productId = product?._id;
+    const cart = await Cart.findOne({ userId: userId });
+
+    // create new cart if not already present
+    if (!cart) {
+      const newCart = createCart(productId,userId);
+      await newCart.save();
+      const cartProducts = await fetchProducts(newCart.items.map( item => item.productId));
+      return res.status(201).json({ cartItems: cartProducts});
     }
 
-    console.log(productObjectId)
-    // if (!itemFound) {
-    //   userCart.items.push({ productId: productObjectId, quantity: 1 });
-    // }
-    // userCart.updateOne({ $push: { items: productObjectId } });
-    // console.log(userCart);
-    // await Cart.findOneAndUpdate({ userId: userId }, { $push: { items: productObjectId } });
-    const product = await Product.findById(productObjectId);
-    res.status(201).json({ message: "success"});
+    // increase the quantity if item is already present in cart else add the item
+    const cartItem = cart.items.find((item) => item.productId.equals(productId));
+    if (cartItem) cartItem.quantity++;
+    else cart.items.push({ productId: productId, quantity: 1 });
+    await cart.save();
+    
+    // store all cart item detail objects in array
+    const cartProducts = await fetchProducts(cart.items.map( item => item.productId));
+    res.status(201).json({ cartItems: cartProducts});
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -55,3 +49,28 @@ export const addProductToCart = async (req: Request, res: Response) => {
 };
 
 
+function createCart(productId:ObjectId, userId:ObjectId):ICart {
+  return new Cart({
+    userId: userId,
+    items: [
+      {
+        productId: productId,
+        quantity: 1
+      }
+    ]
+  })
+} 
+
+async function fetchProducts(productsIds: Array<ObjectId>) {
+  const products =  await Promise.all(
+    productsIds.map(async (productId)  => {
+      try {
+        return await Product.findById(productId).lean();
+      }   catch (error) {
+        console.log(`Error fetching product with ID: ${productId}`)
+        return null;
+      }
+    })
+  );
+  return products.filter(product => product !== null);
+}

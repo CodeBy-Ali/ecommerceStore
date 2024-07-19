@@ -16,7 +16,7 @@ const addProductToCart = async (e: Event) => {
   e.preventDefault();
   const targetButton = e.target as HTMLElement;
   if (!targetButton) return;
-  const productId = targetButton.getAttribute('data-product-id');
+  const productId = targetButton.getAttribute('data-product-publicId');
   
   try {
     const response = await fetch('/cart/add', {
@@ -24,7 +24,7 @@ const addProductToCart = async (e: Event) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ productId: productId }),
+      body: JSON.stringify({ productPubId: productId }),
     })
     const productData = await response.json();
     console.log(productData)

@@ -1,5 +1,5 @@
-import configManager from "./config/config";
-import app from "./app/app";
+import configManager from "./config/config.ts";
+import app from "./app/app.ts"; 
 import mongoose from "mongoose";
 
 const { host, port } = configManager.getServerConfig();
@@ -17,3 +17,4 @@ mongoose
     console.log(error);
     process.exit(1);
   });
+ 

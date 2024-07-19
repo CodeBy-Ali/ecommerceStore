@@ -1,6 +1,10 @@
 import { Schema, model } from "mongoose";
 
+import { nanoid } from "nanoid";
+console.log(nanoid(10))
+
 export interface IProduct {
+  pubId: string,
   title: string;
   description: string;
   price: number;
@@ -15,6 +19,10 @@ export interface IProduct {
 
 const productSchema: Schema = new Schema<IProduct>(
   {
+    pubId: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,

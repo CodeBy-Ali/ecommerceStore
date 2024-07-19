@@ -1,9 +1,9 @@
-import productList from './productList';
-import Product, { IProduct } from '../src/model/productModel';
+import productList from './productList.ts';
+import Product, { IProduct } from '../src/model/productModel.ts';
 import { HydratedDocument, Model, Document } from 'mongoose';
 import mongoose from 'mongoose';
-import config from '../src/config/config';
-
+import configManager from '../src/config/config.ts';
+import { nanoid } from 'nanoid';
 
 
 
@@ -29,14 +29,14 @@ const updateProduct = async(filter: object, update: object, options: object): Pr
 
 (async () => {
   try {
-    await mongoose.connect(config.databaseURI);
+    await mongoose.connect(configManager.getDatabaseConfig().URI);
     // for (const product of productList) {
     //   await addProduct(product, Product);
     //   console.log(`${product.title} successfully added to database`);
     // }
     // console.log('All products added to database.')
-    const filter:object = { title: "Daily Moisturizer - First Phil" };
-    const update: object = { category: ["moisturizer", "face"] };
+    const filter:object = { title: "Shaving Cream" };
+    const update: object = { pubId: nanoid(10) };
     const options: object = { returnOriginal: false };
     const updatedProduct  = await updateProduct(filter, update, options);
     console.log(updatedProduct);

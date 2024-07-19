@@ -1,13 +1,12 @@
-import configManager from "../config/config";
+import configManager from "../config/config.ts";
 import { Request, Response,NextFunction } from "express";
 import { join, resolve } from "path";
-import User from "../model/userModel";
+import User from "../model/userModel.ts";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
 // config constants
 const staticDirPath = configManager.getDirConfig()?.static;
-
 
 
 
