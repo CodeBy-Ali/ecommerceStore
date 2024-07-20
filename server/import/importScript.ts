@@ -3,8 +3,7 @@ import Product, { IProduct } from '../src/model/productModel.ts';
 import { HydratedDocument, Model, Document } from 'mongoose';
 import mongoose from 'mongoose';
 import configManager from '../src/config/config.ts';
-import { nanoid } from 'nanoid';
-
+import { customAlphabet, nanoid } from 'nanoid';
 
 
 
@@ -35,9 +34,12 @@ const updateProduct = async(filter: object, update: object, options: object): Pr
     //   console.log(`${product.title} successfully added to database`);
     // }
     // console.log('All products added to database.')
-    const filter:object = { title: "Shaving Cream" };
-    const update: object = { pubId: nanoid(10) };
-    const options: object = { returnOriginal: false };
+    const {alphabet,size } = configManager.getNanoIdConfig();
+    const nanoId = customAlphabet(alphabet, size);
+
+    const filter:object = { title: "Daily Moisturizer - First Phil" };
+    const update: object = { pubId: nanoId() };
+    const options: object = { returnOriginal: nanoid() };
     const updatedProduct  = await updateProduct(filter, update, options);
     console.log(updatedProduct);
   } catch (error) {

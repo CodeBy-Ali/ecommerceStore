@@ -1,11 +1,19 @@
-import configManager from "../config/config";
+import configManager from "../config/config.ts";
 import {Request,Response} from 'express'
-import { join } from "path";
-
+import Cart, { ICart } from "../model/cartModel.ts";
+import { populateCartItems } from "../utils/utils.ts";
+import { Document } from "mongoose";
 // render home view
-export const renderHomeView = (req: Request, res: Response) => {
+export const renderHomeView = async(req: Request, res: Response) => {
   const user = req.session.user;
-  res.render('home',{user});
+  try {
+    const cart = await Cart.findOne({ userId: user }).lean();
+    const cartItems = cart ? await populateCartItems(cart.items) : []; 
+    res.render('home', { user, cartItems });
+  } catch(error) {
+    console.log(error);
+    res.status(500).render('serverError');
+  }
 }
 
 

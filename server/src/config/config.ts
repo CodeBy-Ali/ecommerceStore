@@ -12,6 +12,7 @@ class ConfigManager{
   private dirConfig: { view: string, static: string };
   private bcryptConfig: {saltRounds: number}
   private sessionConfig: {name: string, secret: string,cookieMaxAge: number };
+  private nanoIdConfig: { alphabet: string,size: number };
   private static instance: ConfigManager;
 
   private constructor() {
@@ -34,6 +35,10 @@ class ConfigManager{
       name: "SessionId",
       secret: process.env.SESSION_SECRET || 'somestrongsecretstringisalwaysgoodthanbad',
       cookieMaxAge: 60 * 60  * 1000  // 5,184,000,000 2 months
+    }
+    this.nanoIdConfig = {
+      alphabet: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz',
+      size: 10,
     }
   }
 
@@ -62,6 +67,10 @@ class ConfigManager{
 
   public getSessionConfig() {
     return this.sessionConfig;
+  }
+
+  public getNanoIdConfig() {
+    return this.nanoIdConfig;
   }
 }
 

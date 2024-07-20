@@ -221,12 +221,13 @@
   color: black;
   font-weight: $font-semibold;
   padding-top: 1.2rem;
-  
+
   &::placeholder {
     color: white;
   }
 
-  &:not(:placeholder-shown) + label, &:focus + label {
+  &:not(:placeholder-shown) + label,
+  &:focus + label {
     top: 0.5rem;
     font-size: 0.8rem;
     transform: translateY(0);
@@ -235,28 +236,28 @@
     }
   }
 
-  @include respond-to(medium){
+  @include respond-to(medium) {
     font-size: $font-size-sm;
     padding-top: 1.2rem;
   }
 }
 
 // form input label
-@mixin formInputLabel{
+@mixin formInputLabel {
   position: absolute;
   font-size: 1.1rem;
   color: $clr-text-secondary;
   font-weight: $font-semibold;
   top: 50%;
   transform: translateY(-50%);
-  pointer-events: none;    
+  pointer-events: none;
   left: 1.9rem;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 
 // notification
-@mixin notification($clr-bg){
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+@mixin notification($clr-bg) {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: $clr-bg;
   color: white;
   font-size: $font-size-base;
@@ -266,11 +267,10 @@
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.19);
   white-space: nowrap;
   margin-block: 1rem;
-  animation: dropIn .3s ease forwards;
+  animation: dropIn 0.3s ease forwards;
 }
 
-
-@mixin navButton{
+@mixin navButton {
   background-color: transparent;
   color: $clr-primary;
   letter-spacing: $letter-spacing-lg;
@@ -281,4 +281,40 @@
   padding: 1rem;
   top: 1.2rem;
   right: 1rem;
+}
+
+// dropDown Collection
+@mixin dropDown_CollectionList {
+  display: grid;
+  gap: 1.6rem;
+  padding-inline: 1px;
+
+  & li {
+    border-radius: 2rem;
+    background-color: $clr-bg-primary;
+
+    & a {
+      display: grid;
+      padding: 1.6rem;
+      gap: 2rem;
+      align-items: center;
+      grid-template-columns: 13rem 1fr;
+      & > div:first-child img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 1rem;
+      }
+
+      & > div:last-child h4 {
+        font-size: $font-size-md;
+        margin-bottom: 1rem;
+        letter-spacing: $letter-spacing-lg;
+      }
+
+      & > div:last-child p {
+        font-size: $font-size-sm;
+      }
+    }
+  }
 }

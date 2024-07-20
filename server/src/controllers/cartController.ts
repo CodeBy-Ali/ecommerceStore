@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
 import Cart,{ICart} from "../model/cartModel.ts";
-import Product, { IProduct } from "../model/productModel.ts";
+import Product from "../model/productModel.ts";
+import { populateCartItems } from "../utils/utils.ts";
 type ObjectId = mongoose.Types.ObjectId;
 
 
@@ -12,7 +13,7 @@ export const addProductToCart = async (req: Request, res: Response) => {
   }
 
   if (!req.session.user) {
-    res.status(401).json({message: "Login required to add products to cart"})
+    return res.status(401).json({message: "Login required to add products to cart"})
   };
 
   try {
@@ -29,7 +30,7 @@ export const addProductToCart = async (req: Request, res: Response) => {
     if (!cart) {
       const newCart = createCart(productId,userId);
       await newCart.save();
-      const cartProducts = await fetchProducts(newCart.items.map( item => item.productId));
+      const cartProducts = await populateCartItems(newCart.items);
       return res.status(201).json({ cartItems: cartProducts});
     }
 
@@ -40,7 +41,7 @@ export const addProductToCart = async (req: Request, res: Response) => {
     await cart.save();
     
     // store all cart item detail objects in array
-    const cartProducts = await fetchProducts(cart.items.map( item => item.productId));
+    const cartProducts = await populateCartItems(cart.items);
     res.status(201).json({ cartItems: cartProducts});
   } catch (error) {
     console.log(error);
@@ -61,16 +62,3 @@ function createCart(productId:ObjectId, userId:ObjectId):ICart {
   })
 } 
 
-async function fetchProducts(productsIds: Array<ObjectId>) {
-  const products =  await Promise.all(
-    productsIds.map(async (productId)  => {
-      try {
-        return await Product.findById(productId).lean();
-      }   catch (error) {
-        console.log(`Error fetching product with ID: ${productId}`)
-        return null;
-      }
-    })
-  );
-  return products.filter(product => product !== null);
-}

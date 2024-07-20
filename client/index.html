@@ -194,8 +194,8 @@
               <span class="icon_contaienr"><img src="./src/assets/icons/arrowDown.svg" alt=""></span>
             </button>
             <div class="mobile_submenu_shop" id="submenu_shop">
-              <ul>
-                <li>
+              <ul class="mobile_submenu_shop_collectionList">
+                <li class="mobile_submenu_shop_collection">
                   <a href="">
                     <div>
                       <img src="./src/assets/images/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="">
@@ -250,16 +250,16 @@
 
     <!-- START ------------------------------------------- Cart-Section -------------------------------------- -->
      <section id="cartSection" class="cart_drawer-section" data-cartDrawer>
-      <div class="cart-wrapper">
-        <section class="cart_header_section">
-          <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>4</span>&rpar;</h2>
-          <p class="cart_header_message">Spend $47.02 more or add a subscription to get free shipping!</p>
-          <div class="cart_freeShipping_progressBar_wrapper">
-            <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar></span>
-          </div>
-          <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+       <!-- <div class="cart-wrapper">
+         <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+         <section class="cart_header_section">
+           <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>4</span>&rpar;</h2>
+           <p class="cart_header_message">Spend $47.02 more or add a subscription to get free shipping!</p>
+           <div class="cart_freeShipping_progressBar_wrapper">
+             <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar></span>
+            </div>
         </section>
-        <section class="cartItems_container">
+        <section class="cartItems_container" data-cartItemsContainer>
           <ul>
             <li class="cartItem">
               <div class="cartItem_image_container">
@@ -307,6 +307,50 @@
             <p>$23</p>
           </div>
           <a href="" class="button--checkout">Checkout</a>
+        </section>
+      </div> -->
+      <div class="empty_cart_wrapper">
+        <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+        <section class="empty_cart_header_section">
+          <h2>Uh oh,looks like your  bag is empty!</h2>
+          <p>Start philling your shopping bag now</p>
+        </section>
+        <section class="empty_cart_collectionList_section">
+          <ul class="empty_cart_collectionList">
+            <li class="">
+              <a href="">
+                <div>
+                  <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="">
+                </div>
+                <div>
+                  <h4>HAIR</h4>
+                  <p>Shampoo & conditioner, Refill pods, etc</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <div>
+                  <img src="/assets/dailyMoisturizer.webp" alt="">
+                </div>
+                <div>
+                  <h4>FACE</h4>
+                  <p>Razors,creams,oils</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <div>
+                  <img src="/assets/handsoapformbottle.webp" alt="">
+                </div>
+                <div>
+                  <h4>BODY</h4>
+                  <p>Lotions,hands soaps,refills</p>
+                </div>
+              </a>
+            </li>
+          </ul>
         </section>
       </div>
      </section>

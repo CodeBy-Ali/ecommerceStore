@@ -3,12 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" crossorigin src="/assets/main-C2aptPA1.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main-MR-5jJQg.css">   
+    <script type="module" crossorigin src="/assets/main-DF6gtxf9.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-DM86y-ib.css">  
     <title>Phil's Refills</title>
   </head>
   <body data-page="home">
+
+    <a class="button--skipToMain" href="#main">Skip to content</a>
+
+    <div class="overLay" data-overLay></div>
+
+    <!-- Start ------------------------------- Header ------------------------------------- -->
     <header><%- include('./partials/_header.ejs',{user}) %></header>
+
+    <!-- Start ------------------------------------- Cart ---------------------------------- -->
+     <%- include('./partials/_cart.ejs',{cartItems})%>
     <main id="main">
       <!-- Start --------------------------------------- Hero-Section ----------------------------------------- -->
       <section class="hero">
