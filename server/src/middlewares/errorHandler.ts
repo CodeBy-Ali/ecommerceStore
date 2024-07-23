@@ -1,8 +1,16 @@
 import { Request,Response,NextFunction,} from "express"
 
 const errorHandler = (err:any, req:Request, res:Response, next:NextFunction) => {
-  console.log(err);
-  res.status(500).json({ message: "Internal Server Error" });
+  console.log(err.stack);
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500);
+  if (req.accepts('application/json, json')) {
+    res.json({ message: "Internal Server Error" });
+  } else if (req.accepts('html')) {
+    res.render('error', { error: err });
+  }else res.send(`Oh no, Something went wrong!`)
 }
 
 export default errorHandler;
