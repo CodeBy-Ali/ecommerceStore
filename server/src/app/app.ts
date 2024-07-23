@@ -1,14 +1,15 @@
 import compression from 'compression';
 import express,{ Express, Request, Response } from "express";
-import configManager from "../config/config";
-import pagesRoutes from '../routes/pageRoutes';
-import authRoutes from '../routes/authRoutes';
-import cartRoutes from '../routes/cartRoutes';
-import collectionRoutes from '../routes/collectionRoutes';
+import configManager from "../config/config.ts";
+import pagesRoutes from '../routes/pageRoutes.ts';
+import authRoutes from '../routes/authRoutes.ts';
+import cartRoutes from '../routes/cartRoutes.ts';
+import collectionRoutes from '../routes/collectionRoutes.ts';
 import session, { Cookie } from 'express-session'
 import MongoStore from 'connect-mongo';
 import { v4 as uuidv4 } from 'uuid'
 import mongoose from 'mongoose';
+import errorHandler from '../middlewares/errorHandler.ts';
 import { MongoClient } from 'mongodb';
 //  config constants
 const sessionName = configManager.getSessionConfig().name;
@@ -26,7 +27,7 @@ const app: Express = express();
 declare module 'express-session' {
   interface SessionData{
     user: {
-      _id: mongoose.Types.ObjectId;
+      _id: mongoose.Types.ObjectId | string;
     }
   }
 }
@@ -71,19 +72,20 @@ app.use(express.urlencoded({ extended: false }));
 // parse req body of content json
 app.use(express.json())
 
-// // logger
-// app.use((req, res, next) => {
-//   console.log(req.url, req.method)
-//   next();
-// })
 
 // serve static files
 app.use(express.static(staticDir));
 
-
+// assign routes 
 app.use("/", pagesRoutes);
 app.use("/account", authRoutes);
 app.use("/collections", collectionRoutes);
 app.use('/cart', cartRoutes);
+
+// response to unhandled routes
+// app.all('*',unhandledRoutes)
+
+// handle uncaught errors
+app.use(errorHandler)
 
 export default app;
