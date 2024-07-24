@@ -44,6 +44,8 @@
     font-size: $font-size-xsm;
   }
 }
+
+
 .cart-wrapper{
   position: relative;
   height: 100%;
@@ -154,7 +156,9 @@
     & .remove_cartItem{
       margin-left: 1.6rem;
       text-decoration: underline;
-
+      background-color: transparent;
+      border: none;
+      color: $clr-primary;
       &:hover{
         text-decoration: none;
       }
@@ -256,7 +260,7 @@
     }
   }
 }
-
+ 
 
 
 // Start ---------------------- Empty-Cart -------------------->
