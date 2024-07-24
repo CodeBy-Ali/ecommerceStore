@@ -28,6 +28,11 @@ class DOMUtils{
     const isCurrentAttributeTrue = element?.getAttribute(attributeName) === "true";
     element?.setAttribute(attributeName,isCurrentAttributeTrue ? "false" : "true");
   }
+
+  static addTextContent(element: HTMLElement | null, textContent: string | number): void{
+    if (element) element.textContent = String(textContent);
+    else console.log('Need a valid HTMLElement to add textContent');
+  }
 }
 
 export default DOMUtils;
