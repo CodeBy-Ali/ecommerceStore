@@ -28,7 +28,7 @@
         </a>
       </li>
       <li class="header_menu_links_login">
-        <% if(user) { %>
+        <% if(user && user.isLoggedIn) { %>
         <div>
           <a href="/account">MY ACCOUNT</a>
         </div>
@@ -39,7 +39,7 @@
         <% } %>
 
         <div>
-          <button data-cartButton class="header_cart_button">CART <span></span></button>       
+          <button data-cartButton class="header_cart_button">CART &lpar;<span data-headerCartQuantity><%= cartItems.reduce((total,{quantity}) => total+=quantity,0) %></span>&rpar;</button>       
         </div>
       </li>
     </ul>
@@ -99,13 +99,13 @@
         <ul>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/rephils-BdVvRZlr.png" alt="" /></span>
+              <span><img src="/assets/rephils.png" alt="" /></span>
               <h3>REPHILS</h3>
             </a>
           </li>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/allSellers-DZRCkMmP.jpeg" alt="" /></span>
+              <span><img src="/assets/allSellers.jpeg" alt="" /></span>
               <h3>BEST SELLERS</h3>
             </a>
           </li>
@@ -116,19 +116,19 @@
         <ul class=" ">
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/shave-N7TIWdFg.jpeg" alt="" /></span>
+              <span><img src="/assets/shave.jpeg" alt="" /></span>
               <h3>SHAVE</h3>
             </a>
           </li>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/cleansers-Dofzo6SI.png" alt="" /></span>
+              <span><img src="/assets/cleansers.png" alt="" /></span>
               <h3>CLEANSERS</h3>
             </a>
           </li>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/moisture-sF7ArFmb.png" alt="" /></span>
+              <span><img src="/assets/moisture.png" alt="" /></span>
               <h3>MOISTURIZERS</h3>
             </a>
           </li>
@@ -139,13 +139,13 @@
         <ul>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/shampoo-BcyWWl_8.jpeg" alt="" /></span>
+              <span><img src="/assets/shampoo.jpeg" alt="" /></span>
               <h3>SHAMPOO</h3>
             </a>
           </li>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/conditioner-B8l5Q_fj.png" alt="" /></span>
+              <span><img src="/assets/conditioner.png" alt="" /></span>
               <h3>CONDITIONER</h3>
             </a>
           </li>
@@ -156,13 +156,13 @@
         <ul>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/handSoap-rIkDszOB.png" alt="" /></span>
+              <span><img src="/assets/handSoap.png" alt="" /></span>
               <h3>HAND SOAPS</h3>
             </a>
           </li>
           <li class="subDropdown_item_detail">
             <a href="">
-              <span><img src="/assets/bodyWash-D6gBOoUm.jpeg" alt="" /></span>
+              <span><img src="/assets/bodyWash.jpeg" alt="" /></span>
               <h3>BODY WASH</h3>
             </a>
           </li>
@@ -186,7 +186,7 @@
           <li>
             <a href="">
               <div>
-                <img src="/assets/Launch_TheEverythingBar_Ecomm_106-B_p9eWks.jpeg" alt="" />
+                <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="" />
               </div>
               <div>
                 <h4>HAIR</h4>
@@ -197,7 +197,7 @@
           <li>
             <a href="">
               <div>
-                <img src="data:image/jpeg;base64,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" alt="" />
+                <img src="/assets/Launch_DailyMoisturizer_Ecomm_058_2bfcdcd2-cec3-45c9-af30-5f7b759f1530.jpeg" alt="">
               </div>
               <div>
                 <h4>FACE</h4>
@@ -208,7 +208,7 @@
           <li>
             <a href="">
               <div>
-                <img src="/assets/Launch_HandSoap_FoamerBottle_Ecomm_079-C_IaeSRA.jpeg" alt="" />
+                <img src="/assets/Launch_HandSoap_FoamerBottle_Ecomm_079.jpeg" alt="" />
               </div>
               <div>
                 <h4>BODY</h4>
@@ -222,7 +222,7 @@
     <div class="mobile_menu_learn">
       <button class="mobile_menu_learn_Button" data-mobileMenuBtn aria-expanded="false" aria-controls="submenu_learn" aria-label="submenu">
         <span>Learn</span>
-        <span class="icon_contaienr"><img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'%20?%3e%3c!DOCTYPE%20svg%20PUBLIC%20'-//W3C//DTD%20SVG%201.1//EN'%20'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3e%3csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20version='1.1'%20width='1080'%20height='1080'%20viewBox='0%200%201080%201080'%20xml:space='preserve'%3e%3cdesc%3eCreated%20with%20Fabric.js%205.2.4%3c/desc%3e%3cdefs%3e%3c/defs%3e%3cg%20transform='matrix(1%200%200%201%20540%20540)'%20id='c65c9aae-d98a-4e7c-88d9-7f1283382249'%20%3e%3crect%20style='stroke:%20none;%20stroke-width:%201;%20stroke-dasharray:%20none;%20stroke-linecap:%20butt;%20stroke-dashoffset:%200;%20stroke-linejoin:%20miter;%20stroke-miterlimit:%204;%20fill:%20rgb(255,255,255);%20fill-rule:%20nonzero;%20opacity:%201;%20visibility:%20hidden;'%20vector-effect='non-scaling-stroke'%20x='-540'%20y='-540'%20rx='0'%20ry='0'%20width='1080'%20height='1080'%20/%3e%3c/g%3e%3cg%20transform='matrix(1%200%200%201%20540%20540)'%20id='8a92634a-6be0-48e4-abad-f32a5039def6'%20%3e%3c/g%3e%3cg%20transform='matrix(45%200%200%2045%20540%20540)'%20%3e%3cg%20style=''%20%3e%3cg%20transform='matrix(1%200%200%201%200%200)'%20%3e%3cpath%20style='stroke:%20none;%20stroke-width:%201;%20stroke-dasharray:%20none;%20stroke-linecap:%20butt;%20stroke-dashoffset:%200;%20stroke-linejoin:%20miter;%20stroke-miterlimit:%204;%20fill:%20rgb(113,137,114);%20fill-rule:%20nonzero;%20opacity:%201;'%20vector-effect='non-scaling-stroke'%20transform='%20translate(-12,%20-12)'%20d='M%20-0.00000200283%2011.999%20C%20-0.00000257978%205.39956%205.4%200.00000150025%2012%209.23262e-7%20C%2018.6%203.46272e-7%2024%205.39956%2024%2011.999%20C%2024%2018.5985%2018.6%2023.998%2012%2023.998%20C%205.4%2024.118%20-0.0000014154%2018.7185%20-0.00000200283%2011.999%20C%20-0.00000199234%2012.119%20-0.00000199234%2012.119%20-0.00000200283%2011.999%20Z%20M%2022.2%2011.999%20C%2022.2%206.35948%2017.64%201.79985%2012%201.67986%20C%206.36%201.67986%201.8%206.23949%201.68%2011.879%20C%201.68%2017.5186%206.24%2022.0782%2011.88%2022.1982%20C%2011.88%2022.1982%2011.88%2022.1982%2012%2022.1982%20C%2017.64%2022.1982%2022.2%2017.6386%2022.2%2011.999%20Z'%20stroke-linecap='round'%20/%3e%3c/g%3e%3cg%20transform='matrix(1%200%200%201%200%20-0.77)'%20%3e%3cpath%20style='stroke:%20none;%20stroke-width:%201;%20stroke-dasharray:%20none;%20stroke-linecap:%20butt;%20stroke-dashoffset:%200;%20stroke-linejoin:%20miter;%20stroke-miterlimit:%204;%20fill:%20rgb(113,137,114);%20fill-rule:%20nonzero;%20opacity:%201;'%20vector-effect='non-scaling-stroke'%20transform='%20translate(-12,%20-11.23)'%20d='M%208.52031%2014.1587%20L%2012.0003%2010.679%20L%2015.4803%2014.1587%20C%2015.8403%2014.5187%2016.4403%2014.5187%2016.8003%2014.1587%20C%2017.1603%2013.7988%2017.1603%2013.1988%2016.8003%2012.8388%20L%2012.0003%208.03924%20L%207.20031%2012.8388%20C%206.84031%2013.1988%206.84031%2013.7988%207.20031%2014.1587%20C%207.44031%2014.5187%208.04031%2014.5187%208.52031%2014.1587%20C%208.52031%2014.1587%208.40031%2014.2787%208.52031%2014.1587%20Z'%20stroke-linecap='round'%20/%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e" alt="" /></span>
+        <span class="icon_contaienr"><img src="/assets/arrowDown.svg" alt=""></span>
       </button>
       <div class="mobile_submenu_learn" id="submenu_learn">
         <a href="">ABOUT US</a>
