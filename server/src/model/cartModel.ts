@@ -9,22 +9,29 @@ export interface ICartItem{
 }
 
 export interface ICart extends Document{
-  userId:  mongoose.Schema.Types.ObjectId,
+  userId: mongoose.Schema.Types.ObjectId,
   items: Array<ICartItem>
 }
 
-const itemSchema = new Schema<ICartItem>({
-  productId: mongoose.Schema.Types.ObjectId,
-  quantity: Number,
-})
 
 const cartSchema:Schema = new Schema<ICart>({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+   
     unique: true,
   },
-  items: [itemSchema]
+  items: [{
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    }
+  }]
 })
 
 const Cart = model<ICart>("cart", cartSchema);
