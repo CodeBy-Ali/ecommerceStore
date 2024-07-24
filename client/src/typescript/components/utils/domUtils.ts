@@ -33,6 +33,15 @@ class DOMUtils{
     if (element) element.textContent = String(textContent);
     else console.log('Need a valid HTMLElement to add textContent');
   }
+
+  static getElement<Type>(selector:string): Type|null{
+    const element = document.querySelector(selector);
+    if (!element) {
+      console.log(`Element with selector '${selector}' not found`);
+      return null;
+    }
+    return element as Type;
+  }
 }
 
 export default DOMUtils;
