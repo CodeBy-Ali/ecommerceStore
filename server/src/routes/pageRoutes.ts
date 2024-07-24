@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { renderHomeView,} from '../controllers/pagesController';
+import { renderHomeView,} from '../controllers/pagesController.ts';
 
 
 

@@ -9,7 +9,7 @@ export const renderHomeView = async(req: Request, res: Response) => {
   try {
     const cart = await Cart.findOne({ userId: user }).lean();
     const cartItems = cart ? await populateCartItems(cart.items) : []; 
-    res.render('home', { user, cartItems });
+    res.render('home', { user, cartItems});
   } catch(error) {
     console.log(error);
     res.status(500).render('serverError');

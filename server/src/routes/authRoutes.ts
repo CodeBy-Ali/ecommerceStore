@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { validateAuthBody,validateRegisterBody } from "../middlewares/validator";
-import { redirectIfAuthorized } from "../middlewares/authenticate";
+import { validateAuthBody,validateRegisterBody } from "../middlewares/validator.ts";
+import { redirectIfAuthorized } from "../middlewares/authenticate.ts";
 import {
   sendLoginPage,
   sendRegisterPage,
   registerNewUser,
   authenticateUser
-} from "../controllers/authController";
+} from "../controllers/authController.ts";
 
 const router: Router = Router();
 

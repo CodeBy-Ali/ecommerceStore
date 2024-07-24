@@ -1,5 +1,5 @@
 import compression from 'compression';
-import express,{ Express, Request, Response } from "express";
+import express,{ Express } from "express";
 import configManager from "../config/config.ts";
 import pagesRoutes from '../routes/pageRoutes.ts';
 import authRoutes from '../routes/authRoutes.ts';
@@ -11,6 +11,11 @@ import { v4 as uuidv4 } from 'uuid'
 import mongoose from 'mongoose';
 import errorHandler from '../middlewares/errorHandler.ts';
 import { MongoClient } from 'mongodb';
+import unassignedRoutesHandler from '../middlewares/unassignedRoutes.ts';
+
+
+
+
 //  config constants
 const sessionName = configManager.getSessionConfig().name;
 const sessionSecret = configManager.getSessionConfig().secret;
@@ -19,7 +24,7 @@ const staticDir = configManager.getDirConfig().static;
 const cookieMaxAge = configManager.getSessionConfig().cookieMaxAge;
 
 
-
+ 
 // create app instance
 const app: Express = express();
 
@@ -28,6 +33,7 @@ declare module 'express-session' {
   interface SessionData{
     user: {
       _id: mongoose.Types.ObjectId | string;
+      isLoggedIn: boolean,
     }
   }
 }
@@ -83,7 +89,7 @@ app.use("/collections", collectionRoutes);
 app.use('/cart', cartRoutes);
 
 // response to unhandled routes
-// app.all('*',unhandledRoutes)
+app.all('*', unassignedRoutesHandler);
 
 // handle uncaught errors
 app.use(errorHandler)
