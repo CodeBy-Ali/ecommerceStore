@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import { nanoid } from "nanoid";
-console.log(nanoid(10))
+
 
 export interface IProduct {
   pubId: string,
