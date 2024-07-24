@@ -6,7 +6,7 @@ export const populateCartItems = async (cartItems: Array<ICartItem>) =>{
     cartItems.map(async ({productId,quantity})  => {
       try {
         return {
-          product: await Product.findById(productId, { title: 1, image: 1, price: 1, _id: 0 }).lean(),
+          product: await Product.findById(productId, { title: 1, image: 1, price: 1, _id: 1 }).lean(),
           quantity: quantity,
         }
       }   catch (error) {
