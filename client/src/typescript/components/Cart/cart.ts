@@ -4,82 +4,68 @@ import { displayResponseNotification } from "../utils/util";
 interface IProduct {
   title: string;
   price: number;
-  pubId: string;
+  _id: string;
   image: string;
 }
 
-interface ICartItem{
-  product: IProduct,
-  quantity: number,
+interface ICartItem {
+  product: IProduct;
+  quantity: number;
 }
 
 
+interface ICart{
+  items: [ICartItem]
+}
 
-const renderUpdatedCart = (cartItems: Array<ICartItem>) => {
-  console.log(cartItems);
-  const cartItemsContainer = document.querySelector("[data-cartItemsContainer]");
-  if (cartItemsContainer) cartItemsContainer.innerHTML = "";
-  
-  const list = document.createElement('ul');
-  const listItems = cartItems
-    .map(({product,quantity}) => {
-      return `
-            <li class="cartItem">
-              <div class="cartItem_image_container">
-                <a href="/products/${product.title}">
-                  <img src="${product.image}"  alt="">
-                </a>
-              </div>
-              <div class="cartItem_details">
-                
-                <div class="cartItem_heading_container">
-                  <a href="">${product.title}</a>
-                  <p class="cartItem_price">${product.price}</p>
-                </div>
-
-                <div class="cartItem_quantity_container">
-                  <div class="cartItem_quantity_wrapper">
-                    <button class="decrease_cartQuantity_button" data-decreaseCartQuantityBtn>
-                      <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
-                      <span>-</span>
-                    </button>
-
-                    <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
-                      <span>Product The EveryThing Bar quantity</span>
-                    </label>
-                    <input class="cartItem_quantity_input" type="number" min="1" max="200" value="${quantity}" name="quantity" id="Quantity-The-EveryThing-Bar">
-
-                    <button data-increaseCartQuantityBtn class="increase_cartQuantity_button">
-                      <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
-                      <span>+</span>
-                    </button>
-                  </div>
-
-                  <div>
-                    <a href="" class="remove_cartItem">remove</a>
-                  </div>
-                </div>
-              </div>
-            </li>`;
-    }).join("");
-
-  list.innerHTML = listItems;
-  cartItemsContainer?.appendChild(list);
+const Cart = (): void => {
+  innitCartEventListeners();
 };
 
-const addProductToCart = async (e: Event) => {
-  e.preventDefault();
+
+
+function innitCartEventListeners(): void {
+  const cartButton = document.querySelector("[data-cartButton]");
+  const closeCartButton = document.querySelector("[data-cartCloseButton]");
+  const addToCartBtn = document.querySelector<HTMLElement>("[data-addToCartBtn]");
+  const removeCartItemBtn = document.querySelector<HTMLElement>('button[data-removeCartItemBtn]');
+  const overLay = document.querySelector('[data-overlay]')
+
+  cartButton?.addEventListener("click", toggleCartDrawer);
+  closeCartButton?.addEventListener("click", toggleCartDrawer);
+  addToCartBtn?.addEventListener("click", addProductToCart);
+  removeCartItemBtn?.addEventListener('click',removeProductFromCart)
+  overLay?.addEventListener('click', toggleCartDrawer);
+}
+
+
+// closes and opens the cart menu
+function toggleCartDrawer(): void {
+  const cartDrawer = document.querySelector<HTMLElement>("[data-cartDrawer]");
+  const body = document.querySelector<HTMLElement>("body");
+  const overLay = document.querySelector<HTMLElement>("[data-overLay]");
+
+  body && DOMUtils.toggleClass(body, "hideOverflow");
+  cartDrawer && DOMUtils.toggleClass(cartDrawer, "open");
+  overLay && DOMUtils.toggleClass(overLay, "active");
+};
+
+
+async function addProductToCart (e: Event) {
   const targetButton = e.target as HTMLElement;
   if (!targetButton) return;
-  const productId = targetButton.getAttribute("data-product-publicId");
-
+  const productId = targetButton.getAttribute("data-productId");
+  
   try {
-    const response = await fetch("/cart/add", {
+    if (!productId) throw new Error('Failed to get ProductId');
+
+    const response = await fetch("/cart/items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept": "application/json",
       },
-      body: JSON.stringify({ productPubId: productId }),
+      body: JSON.stringify({ productId: productId }),
     });
 
     const responseBody = await response.json();
