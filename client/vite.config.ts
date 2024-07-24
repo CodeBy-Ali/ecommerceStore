@@ -7,6 +7,11 @@ export default defineConfig({
       input: {
         "register": resolve(__dirname, 'src/pages/register.html'),
         "login": resolve(__dirname,'src/pages/login.html'),
+      },
+      output: {
+        dir: 'dist/',
+        chunkFileNames: "assets/main.js",
+        assetFileNames: "assets/[name].[ext]"
       }
     }
   },
