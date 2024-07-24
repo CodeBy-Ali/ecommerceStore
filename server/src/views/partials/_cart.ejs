@@ -3,17 +3,17 @@
   <% if(cartItems.length > 0){ %>
     <div class="cart-wrapper">
       <section class="cart_header_section">
-        <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>4</span>&rpar;</h2>
+        <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount><%= cartItems.reduce((total,{quantity}) => total+=quantity,0)  %></span>&rpar;</h2>
         <p class="cart_header_message">Spend $47.02 more or add a subscription to get free shipping!</p>
         <div class="cart_freeShipping_progressBar_wrapper">
-          <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar></span>
+          <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar ></span>
         </div>
         <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
       </section>
       <section class="cartItems_container" data-cartItemsContainer>
         <ul>
-          <% cartItems.forEach( ({product,quantity}) => { %>
-            <li class="cartItem">
+          <% cartItems.forEach( ({quantity,product}) => { %>
+            <li class="cartItem" data-item-id="<%= product._id  %>">
               <div class="cartItem_image_container">
                 <a href="/products/the-everything-bar?varient=">
                   <img src="<%= product.image %>" width="100" height="100"  alt="">
@@ -21,7 +21,7 @@
               </div>
               <div class="cartItem_details">
                 
-                <div class="cartItem_heading_container">
+                <div class="cartItem_heading_container"> 
                   <a href=""><%= product.title  %></a>
                   <p class="cartItem_price"><%= product.price %></p>
                 </div>
@@ -45,7 +45,7 @@
                   </div>
     
                   <div>
-                    <a href="" class="remove_cartItem">remove</a>
+                    <button type="button" data-product-id="<%= product._id %>"  aria-label="Remove <%= product.title %>" class="remove_cartItem" data-removeCartItemBtn>remove</button>
                   </div>
                 </div>
               </div>
@@ -56,7 +56,7 @@
       <section class="cart_footer_section">
         <div class="cart_footer_totalPrize_container">
           <p>SUBTOTAl</p>
-          <p>$23</p>
+          <p>$ <%= cartItems.reduce((subTotal,{quantity,product})=> subTotal+=(product.price * quantity),0).toFixed(2) %></p>
         </div>
         <a href="" class="button--checkout">Checkout</a>
       </section>
