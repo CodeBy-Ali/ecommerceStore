@@ -2,7 +2,7 @@
 @use '../abstracts/variables' as *;
 
 .notification_center{
-  position: absolute;
+  position: fixed;
   top: -50%;
   right:6rem;
   opacity: 0;
