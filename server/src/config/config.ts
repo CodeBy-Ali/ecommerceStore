@@ -37,7 +37,7 @@ class ConfigManager{
       cookieMaxAge: 60 * 60  * 1000  // 5,184,000,000 2 months
     }
     this.nanoIdConfig = {
-      alphabet: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz',
+      alphabet: '0123456789abcdefghijklmnopqrstuvwxyz',
       size: 10,
     }
   }
