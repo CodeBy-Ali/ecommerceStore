@@ -5,42 +5,81 @@ import Product from "../model/productModel.ts";
 import { populateCartItems } from "../utils/utils.ts";
 type ObjectId = mongoose.Types.ObjectId;
 
-export const deleteItem = async (req: Request, res: Response) => {
+export const deleteItem = async (req: Request, res: Response,next:NextFunction) => {
   const { id } = req.params;
-  
-  if (!id) {
-    return res.status(400).json({ message: "Product id parameter is required" });
-  }
-
-  if (id.length !== 24) {
-    return res.status(400).json({ message: "Invalid product id" });
-  }
 
   try {
     const userId = req.session?.user?._id;
 
     const updatedResult = await Cart.updateOne({ userId: userId }, { $pull: { items: { productId: id } } });
     if (updatedResult.modifiedCount === 0) {
-      res.status(404).json({message: "Cart not found Or item not in cart"})
+      res.status(404).json({ message: "Cart not found Or item not in cart" });
     }
 
     const cart = await Cart.findOne({ userId: userId });
-    
+
     if (!cart) {
-     return res.status(404).json({ message: "Cart not found" });
+      return res.status(404).json({ message: "User cart not found" });
     }
 
     const populatedItems = await populateCartItems(cart.items);
     res.status(200).json({
-      items: populatedItems
+      items: populatedItems,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
+    next(error)
+ }
 };
 
 
+
+export const editItem = async (req: Request, res: Response, next: NextFunction) => {
+  const { quantity } = req.body;
+
+  const { id } = req.params;
+
+  if (!quantity) {
+    return res.status(404).json({ message: "Item quantity is required" });
+  }
+
+  if (isNaN(quantity) || Number(quantity) < 0) {
+    return res.status(422).json({ message: "Item quantity must be positive integer" });
+  }
+
+  const userId = req.session?.user?._id as ObjectId;
+
+  try {
+    const cart = await Cart.findOne({ userId: userId });
+    
+    if (!cart) {
+      return res.status(404).json({ message: "User cart not found" });
+    }
+
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    if (quantity > product.stock) {
+      return res.status(422).json({message: `Requested quantity exceeds the available stock. Only ${product.stock} items left in stock.`})
+    }
+
+    await Cart.updateOne(
+      { userId: userId },
+      { $set: { "items.$[elem].quantity": Number(quantity) } },
+      { arrayFilters: [{ "elem.productId": id }] }
+    );
+    
+    const populatedItems = await populateCartItems(cart.items);
+    res.status(200).json({
+      items: populatedItems,
+    });
+    
+  } catch (error) {
+    next(error);
+  }
+};
 
 // add product item to user Cart
 export const addItem = async (req: Request, res: Response, next: NextFunction) => {
@@ -51,11 +90,11 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
   }
 
   if (productId.length !== 24) {
-    return res.status(400).json({ message: "Invalid product id" });
+    return res.status(422).json({ message: "Invalid product id" });
   }
 
+  const userId = req.session?.user?._id as ObjectId;
   try {
-    const userId = req.session?.user?._id as ObjectId;
     const product = await Product.findById(productId);
 
     if (!product) {
@@ -82,10 +121,11 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     const cartProducts = await populateCartItems(cart.items);
     res.status(201).json({ items: cartProducts });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    next(error);
   }
 };
 
+// helper func to create Cart  document
 function createCart(productId: ObjectId, userId: ObjectId | string): ICart {
   return new Cart({
     userId: userId,

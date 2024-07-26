@@ -202,7 +202,10 @@
     background-color: transparent;
     border: none;
     padding-block: 1rem;
-
+    & > *{
+      pointer-events: none;
+    }
+    
     &.decrease_cartQuantity_button{
       padding-left: 1.2rem;
       padding-right: .5rem;

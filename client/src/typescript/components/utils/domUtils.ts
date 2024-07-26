@@ -20,7 +20,7 @@ class DOMUtils{
     return element?.getAttribute(attributeName) === attributeValue;
   }
 
-  static addAttribute(element:HTMLElement, attributeName:string, attributeValue:string):void {
+  static addAttribute(element:HTMLElement | null, attributeName:string, attributeValue:string):void {
     element?.setAttribute(attributeName, attributeValue);
   }
 

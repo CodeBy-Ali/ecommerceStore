@@ -26,9 +26,9 @@
                   <p class="cartItem_price"><%= product.price %></p>
                 </div>
     
-                <div class="cartItem_quantity_container">
-                  <div class="cartItem_quantity_wrapper">
-                    <button class="decrease_cartQuantity_button" data-decreaseCartQuantityBtn>
+                <div class="cartItem_quantity_container" >
+                  <div class="cartItem_quantity_wrapper" data-cartItem-quantity-container>
+                    <button class="decrease_cartQuantity_button" data-decrease-item-quantity>
                       <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
                       <span>-</span>
                     </button>
@@ -36,16 +36,16 @@
                     <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
                       <span>Product The EveryThing Bar quantity</span>
                     </label>
-                    <input class="cartItem_quantity_input" type="number" min="1" max="200" value="<%= quantity %>" name="quantity" id="Quantity-The-EveryThing-Bar">
+                    <input class="cartItem_quantity_input" type="number" min="1" max="<%= product.stock %>" data-key="<%= product._id %>" value="<%= quantity %>" name="quantity" data-item-quantity-input id="Quantity-<%= product.title.split(" ").join('-')%>">
     
-                    <button data-increaseCartQuantityBtn class="increase_cartQuantity_button">
+                    <button data-increase-item-quantity class="increase_cartQuantity_button">
                       <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
                       <span>+</span>
                     </button>
                   </div>
     
                   <div>
-                    <button type="button" data-product-id="<%= product._id %>"  aria-label="Remove <%= product.title %>" class="remove_cartItem" data-removeCartItemBtn>remove</button>
+                    <button type="button" data-item-id="<%= product._id %>"  aria-label="Remove <%= product.title %>" class="remove_cartItem" data-removeCartItemBtn>remove</button>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { initializeUserSession } from "../middlewares/sessionGard.ts";
-import { isAuthorized } from "../middlewares/authenticate.ts";
+import { isAuthorized, } from "../middlewares/authenticate.ts";
+import { validateReqParams } from "../middlewares/validator.ts";
 import {
   addItem,
   deleteItem,
@@ -12,7 +13,7 @@ const router: Router = Router();
 
 router.post('/items',initializeUserSession, addItem);
 
-router.patch('/item/:id',isAuthorized,editItem)
+router.patch('/items/:id',isAuthorized,validateReqParams,editItem)
 
 router.delete('/items/:id',isAuthorized,deleteItem)
 

@@ -261,7 +261,7 @@
         </section>
         <section class="cartItems_container" data-cartItemsContainer>
           <ul>
-            <li class="cartItem">
+            <li class="cartItem" data-item-id="33">
               <div class="cartItem_image_container">
                 <a href="/products/the-everything-bar?varient=">
                   <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg"  alt="">
@@ -274,9 +274,9 @@
                   <p class="cartItem_price">$14.99</p>
                 </div>
 
-                <div class="cartItem_quantity_container">
+                <div class="cartItem_quantity_container" data-cartItem-quantity-container>
                   <div class="cartItem_quantity_wrapper">
-                    <button class="decrease_cartQuantity_button" data-decreaseCartQuantityBtn>
+                    <button class="decrease_cartQuantity_button" data-decrease-item-quantity>
                       <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
                       <span>-</span>
                     </button>
@@ -284,9 +284,9 @@
                     <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
                       <span>Product The EveryThing Bar quantity</span>
                     </label>
-                    <input class="cartItem_quantity_input" type="number" min="1" max="200" value="1" name="quantity" id="Quantity-The-EveryThing-Bar">
+                    <input class="cartItem_quantity_input" type="number" min="1" max="20" value="1" minlength="1" maxlength="3" name="quantity" id="Quantity-The-EveryThing-Bar" data-item-quantity-input data-key="33">
 
-                    <button data-increaseCartQuantityBtn class="increase_cartQuantity_button">
+                    <button data-increase-item-quantity class="increase_cartQuantity_button">
                       <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
                       <span>+</span>
                     </button>

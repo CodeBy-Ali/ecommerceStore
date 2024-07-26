@@ -49,3 +49,18 @@ export const validateRegisterBody = (req: Request, res: Response, next: NextFunc
     res.status(400).json(message);
   }
 };
+
+
+
+export const validateReqParams = (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ message: "Product id is required" });
+  }
+
+  if (id.length !== 24) {
+    return res.status(422).json({ message: "Invalid product id" });
+  }
+
+  next();
+}
