@@ -12,8 +12,7 @@ import mongoose from 'mongoose';
 import errorHandler from '../middlewares/errorHandler.ts';
 import { MongoClient } from 'mongodb';
 import unassignedRoutesHandler from '../middlewares/unassignedRoutes.ts';
-
-
+import logger from '../config/logger.ts';
 
 
 //  config constants
@@ -22,7 +21,6 @@ const sessionSecret = configManager.getSessionConfig().secret;
 const databaseURI = configManager.getDatabaseConfig().URI;
 const staticDir = configManager.getDirConfig().static;
 const cookieMaxAge = configManager.getSessionConfig().cookieMaxAge;
-
 
  
 // create app instance
@@ -41,7 +39,7 @@ declare module 'express-session' {
 // crate client promise to reuse the mongo db connection;
 const mongoClientPromise: Promise<MongoClient> = new Promise((resolve, reject) => {
   mongoose.connection.on('connected', () => {
-    console.log("Connected to database ✔");
+    logger.info("Connected to database ✔");
     const client: MongoClient | unknown = mongoose.connection.getClient();
     if(client) resolve(client as MongoClient);
   })

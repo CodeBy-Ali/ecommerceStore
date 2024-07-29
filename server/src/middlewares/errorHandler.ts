@@ -1,7 +1,7 @@
 import { Request,Response,NextFunction,} from "express"
-
+import logger from "../config/logger.ts";
 const errorHandler = (err:any, req:Request, res:Response, next:NextFunction) => {
-  console.log(err.stack);
+  logger.error(err)
   if (res.headersSent) {
     return next(err);
   }

@@ -1,6 +1,7 @@
 import configManager from "./config/config.ts";
 import app from "./app/app.ts"; 
 import mongoose from "mongoose";
+import logger from "./config/logger.ts";
 
 const { host, port } = configManager.getServerConfig();
 const databaseURI: string = configManager.getDatabaseConfig().URI;
@@ -10,7 +11,7 @@ mongoose
   .connect(databaseURI)
   .then(() => {
     app.listen(port, host, () => {
-      console.log(`Server listening at http://${host}:${port}`);
+      logger.info(`Server listening at http://${host}:${port}`);
     });
   })
   .catch((error: any) => {

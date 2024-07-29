@@ -24,7 +24,8 @@
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.5",
     "nanoid": "^5.0.7",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "winston": "^3.13.1"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.24.7",
