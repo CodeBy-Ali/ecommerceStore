@@ -13,7 +13,7 @@ export interface IProduct {
   category: Array<string>;
   image: string;
   salesCount: number;
-  stockQuantity: number;
+  stock: number;
 }
 
 const productSchema: Schema = new Schema<IProduct>(
@@ -68,7 +68,7 @@ const productSchema: Schema = new Schema<IProduct>(
       type: Number,
       required: true,
     },
-    stockQuantity: {
+    stock: {
       type: Number,
       required: true,
     },
