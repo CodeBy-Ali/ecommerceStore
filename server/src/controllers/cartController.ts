@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import Cart, { ICart, ICartItem } from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
 import { populateCartItems } from "../utils/utils.ts";
+import StoreSetting from "../model/settingsModel.ts";
+
 type ObjectId = mongoose.Types.ObjectId;
 
 export const deleteItem = async (req: Request, res: Response,next:NextFunction) => {
@@ -22,9 +24,15 @@ export const deleteItem = async (req: Request, res: Response,next:NextFunction) 
       return res.status(404).json({ message: "User cart not found" });
     }
 
+    const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean();
+    if (!shippingConfig) {
+      return res.status(404).json({ message: "Store shipping config not found" });
+    }
+    // store all cart item detail objects in array
     const populatedItems = await populateCartItems(cart.items);
-    res.status(200).json({
-      items: populatedItems,
+    res.status(201).json({
+      cartItems: populatedItems,
+      storeSettings: shippingConfig,
     });
   } catch (error) {
     next(error)
@@ -49,12 +57,6 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
   const userId = req.session?.user?._id as ObjectId;
 
   try {
-    const cart = await Cart.findOne({ userId: userId });
-    
-    if (!cart) {
-      return res.status(404).json({ message: "User cart not found" });
-    }
-
     const product = await Product.findById(id);
 
     if (!product) {
@@ -62,7 +64,7 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
     }
 
     if (quantity > product.stock) {
-      return res.status(422).json({message: `Requested quantity exceeds the available stock. Only ${product.stock} items left in stock.`})
+      return res.status(422).json({ message: `Requested quantity exceeds the available stock. Only ${product.stock} items left in stock.` });
     }
 
     await Cart.updateOne(
@@ -70,10 +72,20 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
       { $set: { "items.$[elem].quantity": Number(quantity) } },
       { arrayFilters: [{ "elem.productId": id }] }
     );
+    const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean();
+    if (!shippingConfig) {
+      return res.status(404).json({ message: "Store shipping config not found" });
+    }
+    const cart = await Cart.findOne({ userId: userId });
+    
+    if (!cart) {
+      return res.status(404).json({ message: "User cart not found" });
+    }
     
     const populatedItems = await populateCartItems(cart.items);
     res.status(200).json({
-      items: populatedItems,
+      cartItems: populatedItems,
+      storeSettings: shippingConfig,
     });
     
   } catch (error) {
@@ -100,6 +112,11 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
+    // get store shipping information
+    const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean();
+    if (!shippingConfig) {
+      return res.status(404).json({ message: "Store shipping config not found" });
+    }
 
     const cart = await Cart.findOne({ userId: userId });
 
@@ -107,19 +124,29 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     if (!cart) {
       const newCart = createCart(productId, userId);
       await newCart.save();
-      const cartProducts = await populateCartItems(newCart.items);
-      return res.status(201).json({ items: cartProducts });
+      const populatedItems = await populateCartItems(newCart.items);
+      return res.status(201).json({
+        cartItems: populatedItems,
+        storeSettings: shippingConfig
+      });
     }
 
-    // increase the quantity if item is already present in cart else add the item
+    // increase the quantity if item is already present in cart and stock is available else add the item
     const cartItem = cart.items.find((item) => item.productId.equals(productId));
-    if (cartItem) cartItem.quantity++;
-    else cart.items.push({ productId: productId, quantity: 1 });
+    if (!cartItem) cart.items.push({ productId: productId, quantity: 1 });
+    else if (cartItem.quantity < product.stock) cartItem.quantity++;
+    else {
+      return res.status(422).json({ message: `Maximum stock reached. ${product.stock - cartItem.quantity} units of ${product.title} available.` });
+    }
     await cart.save();
 
+  
     // store all cart item detail objects in array
-    const cartProducts = await populateCartItems(cart.items);
-    res.status(201).json({ items: cartProducts });
+    const populatedItems = await populateCartItems(cart.items);
+    res.status(201).json({
+      cartItems: populatedItems,
+      storeSettings: shippingConfig,
+    });
   } catch (error) {
     next(error);
   }
