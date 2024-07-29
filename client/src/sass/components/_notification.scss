@@ -20,6 +20,6 @@
   }
   
   &--error{
-    @include notification($clr-error);
+    @include notification($clr-primary);
   }
 }
