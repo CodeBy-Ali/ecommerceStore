@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { renderCollectionsView } from "../controllers/collectionController";
+import { renderCollectionsView } from "../controllers/collectionController.ts";
 
 
 

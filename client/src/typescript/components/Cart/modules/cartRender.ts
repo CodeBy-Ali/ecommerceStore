@@ -1,15 +1,15 @@
 import DOMUtils from "../../utils/domUtils";
-import { ICartItem } from "../cart";
-
-export const renderCart = (cartItems: Array<ICartItem>,totalItemsQuantity:number):void  => {
+import { ICartItem, IStoreSetting } from "../cart";
+export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: number, storeSettings: IStoreSetting): void => {
   const cartDrawer = document.querySelector("[data-cartDrawer]");
   const fragment = document.createDocumentFragment();
+  const { freeShippingThreshold } = storeSettings;
   if (!cartDrawer) return console.log("Failed to select cartDrawer section Element");
   cartDrawer.innerHTML = "";
 
   if (cartItems.length === 0) {
-    const emptyCartWrapper = document.createElement('div');
-    DOMUtils.addClass(emptyCartWrapper, 'empty_cart_wrapper');
+    const emptyCartWrapper = document.createElement("div");
+    DOMUtils.addClass(emptyCartWrapper, "empty_cart_wrapper");
     fragment.appendChild(emptyCartWrapper);
 
     emptyCartWrapper.innerHTML = `
@@ -56,24 +56,26 @@ export const renderCart = (cartItems: Array<ICartItem>,totalItemsQuantity:number
           </ul>
         </section>`;
   } else {
-    const cartWrapper = document.createElement('div');
-    DOMUtils.addClass(cartWrapper, 'cart-wrapper');
+    const cartWrapper = document.createElement("div");
+    DOMUtils.addClass(cartWrapper, "cart-wrapper");
     fragment.appendChild(cartWrapper);
-
+    const subTotal = Number(cartItems.reduce((subtotal, { quantity, product }) => {
+      return (subtotal += product.price * quantity);
+    }, 0).toFixed(2));
     cartWrapper.innerHTML = `
          <section class="cart_header_section">
-           <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>${totalItemsQuantity}</span>&rpar;</h2>
-           <p class="cart_header_message">Spend $47.02 more or add a subscription to get free shipping!</p>
-           <div class="cart_freeShipping_progressBar_wrapper">
-             <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar></span>
-           </div>
-           <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+          <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>${totalItemsQuantity}</span>&rpar;</h2>
+          <p class="cart_header_message">${subTotal < freeShippingThreshold ? "Spend $" + (freeShippingThreshold - subTotal).toFixed(2) + " more  to get free shipping!" : "You've earned free shipping"}</p>
+          <div class="cart_freeShipping_progressBar_wrapper">
+            <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar style="width: ${Math.floor((subTotal / freeShippingThreshold) * 100)}%;"></span>
+          </div>
+          <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
         </section>
         <section class="cartItems_container" data-cartItemsContainer>
           <ul>
            ${cartItems
-        .map(({ product, quantity }) => {
-          return `
+             .map(({ product, quantity }) => {
+               return `
                  <li class="cartItem" data-item-id="${product._id}">
                    <div class="cartItem_image_container">
                      <a href="/products/${product.title}">
@@ -111,8 +113,8 @@ export const renderCart = (cartItems: Array<ICartItem>,totalItemsQuantity:number
                      </div>
                    </div>
                  </li>`;
-        })
-        .join("")}
+             })
+             .join("")}
           </ul>
         </section>
 
@@ -120,15 +122,11 @@ export const renderCart = (cartItems: Array<ICartItem>,totalItemsQuantity:number
           <div class="cart_footer_totalPrize_container">
             <p>SUBTOTAl</p>
             <p>
-              $${cartItems.reduce((subtotal, { quantity, product }) => {
-                  return subtotal+=(product.price*quantity)
-                }, 0)
-              }
+              $${subTotal}
             </p>
           </div>
           <a href="" class="button--checkout">Checkout</a>
         </section>`;
-  };
+  }
   cartDrawer.appendChild(fragment);
 };
-

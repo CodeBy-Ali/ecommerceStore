@@ -1,4 +1,5 @@
 import DOMUtils from "../../utils/domUtils";
+import { enterProcessingState, exitProcessingState, showNotification } from "../../utils/util";
 
 // closes and opens the cart menu
 export const toggleCartDrawer = ():void => {
@@ -81,4 +82,18 @@ export const limitQuantityToStock = (quantityContainer: HTMLDivElement, quantity
   if (decreaseButton) decreaseButton.disabled = itemQuantity <= minQuantity;
 }
 
-
+export const withProcessingState =  (fn: (e:Event) => Promise<void>):(e:Event) => Promise<void> => {
+  return async (e: Event):Promise<void> => {
+    const targetElement = e.target as HTMLElement;
+    if (!targetElement) return;
+    enterProcessingState(targetElement);
+    try {
+      await fn(e);
+    } catch (error) {
+      console.log(error);
+      showNotification('Failed to add product to cart. Please try again later..', false);
+    } finally {
+      exitProcessingState(targetElement);
+    }
+  }
+}

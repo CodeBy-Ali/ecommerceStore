@@ -3,7 +3,6 @@
 
 .cart_drawer-section {
   position: fixed;
-  background-color: white;
   right: 0;
   height: 100vh;
   top: 0;
@@ -13,6 +12,7 @@
   visibility: hidden;
   opacity: 0;
   z-index: $z-index-cart;
+  background-color: white;
   transform: translateX(100%);
   max-width: 60.4rem;
   transition: all $transition-md ease-in-out;
@@ -50,6 +50,12 @@
   position: relative;
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10.8rem;
+  @include respond-to(small){
+    padding-bottom: 15.5rem;
+  }
 }
 
 .cart-wrapper .cart_header_section {
@@ -77,8 +83,8 @@
       position: absolute;
       height: 100%;
       left: 0;
-      width: 50%;
       background-color: $clr-primary;
+      transition: all .3s ease;
     }
   }
 
@@ -100,6 +106,17 @@
 
 .cartItems_container{
   padding-block: 1rem;
+  overflow: hidden;
+  flex: 1;
+  & > ul{
+    max-height: 100%;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+      width: 0;
+      height: 0;
+      appearance: none;
+    }
+  }
 }
 .cartItem {
   padding-block: 3rem;
@@ -243,6 +260,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
+  // background-color: white;
   & .cart_footer_totalPrize_container{
     font-size: $font-size-xsm;
     font-weight: $font-semibold;
