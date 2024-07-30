@@ -1,5 +1,6 @@
 import { createLogger,transports,format } from 'winston';
 import { join } from 'path';
+import winston from 'winston/lib/winston/config/index.js';
 
 const env = process.env.NODE_ENV || 'development';
 const logDirectory = join(import.meta.dirname, '..', 'logs');
@@ -27,13 +28,27 @@ const logger = createLogger({
   ]
 })
 
+
+
+
+
+
+
+
+
 if (env !== 'production') {
   logger.add(new transports.Console({
     level: "debug",
     handleExceptions: false,
     format: format.combine(
       format.colorize(),
-      format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
+      format.printf(info => {
+        const {level,message,timestamp,...rest } = info;
+        if (Object.keys(rest).length > 0) {
+          return `${timestamp} ${level}: ${message} ${JSON.stringify(rest)}`
+        }
+        return `${timestamp} ${level}: ${message}`
+      })
     )
   }))
 }
