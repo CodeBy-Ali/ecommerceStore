@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" crossorigin src="/assets/main.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main.css" />
+    <title>Phil's Refills</title>
+  </head>
+  <body data-page="login">
+    <a class="button--skipToMain" href="#main">Skip to content</a>
+
+    <div class="overLay" data-overLay></div>
+
+    <div class="notification_center" data-notificationCenter></div>
+
+    <!-- Start ------------------------------- Header ------------------------------------- -->
+    <header><%- include('./partials/_header.ejs',{user}) %></header>
+
+    <!-- Start ------------------------------------- Cart ---------------------------------- -->
+    <%- include('./partials/_cart.ejs',{cartItems,storeSettings})%>
+
+    <!-- START ---------------------------- Main ----------------- -->
+
+    <main>
+      <section class="auth_form_container">
+        <h1>Login</h1>
+        <section>
+          <form action="" data-signInForm class="signIn_form">
+            <ul class="form_fields_list">
+              <li class="form_field">
+                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" data-emailField/>
+                <label for="email" class="" aria-hidden="false">Email</label>
+                <div class="error_message">
+                  <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
+                   <span>Email is invalid</span>
+                 </div>
+              </li>
+              <li class="form_field">
+                <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
+                  <i class="fas fa-eye-slash eye_icon" ></i>
+                </button>
+                <input type="password" id="password" name="password" placeholder="password" data-passwordField required />
+                <label for="password" class="" aria-hidden="false">Password</label>
+                <div class="error_message">
+                  <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt=""></span>
+                   <span>Enter a strong password</span>
+                 </div>
+              </li>
+            </ul>
+
+            <a href="" class="login_form_forgetPassword">Forgot your Password?</a>
+
+            <p>
+              <button type="submit" class="button--formSubmit" data-signInButton>Sign in</button>
+            </p>
+
+            <a href="/account/register" class="login_form_createAccount">Create account</a>
+          </form>
+        </section>
+      </section>
+    </main>
+
+    <!--Start ------------------------ Footer ----------------------------- -->
+    <footer><%- include('./partials/_footer.ejs') %></footer>
+  </body>
+</html>
