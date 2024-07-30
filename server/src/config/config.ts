@@ -34,7 +34,7 @@ class ConfigManager{
     this.sessionConfig = {
       name: "SessionId",
       secret: process.env.SESSION_SECRET || 'somestrongsecretstringisalwaysgoodthanbad',
-      cookieMaxAge: 60 * 60  * 1000  // 5,184,000,000 2 months
+      cookieMaxAge: 60 * 60 * 60  * 1000  // 5,184,000,000 2 months
     }
     this.nanoIdConfig = {
       alphabet: '0123456789abcdefghijklmnopqrstuvwxyz',
