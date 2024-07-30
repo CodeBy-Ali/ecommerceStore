@@ -1,5 +1,7 @@
 import { ICartItem } from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
+import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
 
 export const populateCartItems = async (cartItems: Array<ICartItem>) =>{
   const products =  await Promise.all(
@@ -17,3 +19,7 @@ export const populateCartItems = async (cartItems: Array<ICartItem>) =>{
   );
   return products.filter(product => product !== null);
 }
+
+
+
+
