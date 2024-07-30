@@ -1,12 +1,12 @@
 import configManager from "../config/config.ts";
-import {Request,Response} from 'express'
+import {NextFunction, Request,Response} from 'express'
 import Cart, { ICart } from "../model/cartModel.ts";
 import { populateCartItems } from "../utils/utils.ts";
 import { Document } from "mongoose";
 import StoreSetting from "../model/settingsModel.ts";
 
 // render home view
-export const renderHomeView = async(req: Request, res: Response) => {
+export const renderHomeView = async(req: Request, res: Response,next:NextFunction) => {
   const user = req.session.user;
   try {
     const cart = await Cart.findOne({ userId: user }).lean();
@@ -19,10 +19,7 @@ export const renderHomeView = async(req: Request, res: Response) => {
       'storeSettings': shippingConfig,
     });
   } catch(error) {
-    console.log(error);
-    res.status(500).render('serverError');
+    next(error)
   }
 }
-
-
 

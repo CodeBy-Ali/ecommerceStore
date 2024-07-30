@@ -1,11 +1,11 @@
-import {Request,Response} from 'express'
+import {NextFunction, Request,Response} from 'express'
 import Product, { IProduct } from "../model/productModel.ts";
 import { populateCartItems } from '../utils/utils.ts';
 import Cart from '../model/cartModel.ts';
 import StoreSetting from '../model/settingsModel.ts';
 
 // render collection view
-export const renderCollectionsView = async (req: Request, res: Response): Promise<void> => {
+export const renderCollectionsView = async (req: Request, res: Response,next:NextFunction): Promise<void> => {
   const user = req.session.user;
   try { 
     const allProducts: Array<IProduct> = await Product.find().lean(); 
@@ -24,9 +24,6 @@ export const renderCollectionsView = async (req: Request, res: Response): Promis
       "storeSettings": shippingConfig,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
-    });
+    next(error)
   }
 };

@@ -5,8 +5,7 @@ import Product from "../model/productModel.ts";
 import { populateCartItems } from "../utils/utils.ts";
 import StoreSetting from "../model/settingsModel.ts";
 
-type ObjectId = mongoose.Types.ObjectId;
-
+// delete item from cart
 export const deleteItem = async (req: Request, res: Response,next:NextFunction) => {
   const { id } = req.params;
 
@@ -41,6 +40,7 @@ export const deleteItem = async (req: Request, res: Response,next:NextFunction) 
 
 
 
+// increase or decrease cart quantity
 export const editItem = async (req: Request, res: Response, next: NextFunction) => {
   const { quantity } = req.body;
 
@@ -54,7 +54,7 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
     return res.status(422).json({ message: "Item quantity must be positive integer" });
   }
 
-  const userId = req.session?.user?._id as ObjectId;
+  const userId = req.session?.user?._id;
 
   try {
     const product = await Product.findById(id);
@@ -105,7 +105,11 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     return res.status(422).json({ message: "Invalid product id" });
   }
 
-  const userId = req.session?.user?._id as ObjectId;
+  const user = req.session.user;
+  if (!user) { 
+    return res.status(401).json({ message: "Unauthorized access. Please log in to continue" });
+  };
+
   try {
     const product = await Product.findById(productId);
 
@@ -118,11 +122,11 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
       return res.status(404).json({ message: "Store shipping config not found" });
     }
 
-    const cart = await Cart.findOne({ userId: userId });
+    const cart = await Cart.findOne({ userId: user._id });
 
     // create new cart if not already present
     if (!cart) {
-      const newCart = createCart(productId, userId);
+      const newCart = createCart(productId, user._id);
       await newCart.save();
       const populatedItems = await populateCartItems(newCart.items);
       return res.status(201).json({
@@ -139,8 +143,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
       return res.status(422).json({ message: `Maximum stock reached. ${product.stock - cartItem.quantity} units of ${product.title} available.` });
     }
     await cart.save();
-
-  
+    
     // store all cart item detail objects in array
     const populatedItems = await populateCartItems(cart.items);
     res.status(201).json({
@@ -153,7 +156,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
 };
 
 // helper func to create Cart  document
-function createCart(productId: ObjectId, userId: ObjectId | string): ICart {
+function createCart(productId: mongoose.Types.ObjectId, userId: mongoose.Types.ObjectId): ICart {
   return new Cart({
     userId: userId,
     items: [

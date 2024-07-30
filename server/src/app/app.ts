@@ -30,8 +30,8 @@ const app: Express = express();
 declare module 'express-session' {
   interface SessionData{
     user: {
-      _id: mongoose.Types.ObjectId | string;
-      isLoggedIn: boolean,
+      _id: mongoose.Types.ObjectId;
+      isRegistered: boolean,
     }
   }
 }
