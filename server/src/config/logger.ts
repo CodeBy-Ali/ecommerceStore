@@ -31,11 +31,6 @@ const logger = createLogger({
 
 
 
-
-
-
-
-
 if (env !== 'production') {
   logger.add(new transports.Console({
     level: "debug",
