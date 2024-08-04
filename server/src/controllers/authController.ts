@@ -3,21 +3,23 @@ import { Request, Response, NextFunction } from "express";
 import User from "../model/userModel.ts";
 import bcrypt from "bcrypt";
 import Cart, { ICart } from "../model/cartModel.ts";
-import renderStaticView from "./renderUtil.ts";
 import mongoose from "mongoose";
+import { getUserConfig } from "../utils/userUtils.ts";
 
 type ObjectId = mongoose.Types.ObjectId;
 
 
-// send register html page
-export const renderRegisterView = (req: Request, res: Response,next:NextFunction): void => {
-  renderStaticView('register',req,res,next)
-};
 
-// send login html page
-export const renderLoginView = (req: Request, res: Response,next: NextFunction): void => {
-  renderStaticView('login', req, res, next);
-};
+export const renderAuthView = async (viewName: string,req:Request, res:Response, next:NextFunction) => {
+  const user = req.session.user;
+  try {
+    const userConfig = await getUserConfig(user);
+    res.render(viewName, userConfig);
+  } catch (error) {
+    next(error)
+  }
+}
+
 
 // add new user to database
 export const registerNewUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
