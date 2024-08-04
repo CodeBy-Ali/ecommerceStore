@@ -1,6 +1,6 @@
 import compression from 'compression';
 import express,{ Express } from "express";
-import configManager from "../config/config.ts";
+import config from "../config/config.ts";
 import pagesRoutes from '../routes/pageRoutes.ts';
 import authRoutes from '../routes/authRoutes.ts';
 import cartRoutes from '../routes/cartRoutes.ts';
@@ -13,15 +13,20 @@ import errorHandler from '../middlewares/errorHandler.ts';
 import { MongoClient } from 'mongodb';
 import unassignedRoutesHandler from '../middlewares/unassignedRoutes.ts';
 import logger from '../config/logger.ts';
+import cors from 'cors';
+import logRequest from '../middlewares/logRequest.ts';
 
+
+export interface UserSession{
+  _id: mongoose.Types.ObjectId;
+  isRegistered: boolean,
+}
 
 //  config constants
-const sessionName = configManager.getSessionConfig().name;
-const sessionSecret = configManager.getSessionConfig().secret;
-const databaseURI = configManager.getDatabaseConfig().URI;
-const staticDir = configManager.getDirConfig().static;
-const cookieMaxAge = configManager.getSessionConfig().cookieMaxAge;
-
+const sessionName = config.getSessionConfig().name;
+const sessionSecret = config.getSessionConfig().secret;
+const staticDir = config.getDirConfig().static;
+const {cookieMaxAge} = config.getSessionConfig();
  
 // create app instance
 const app: Express = express();
@@ -29,12 +34,10 @@ const app: Express = express();
 // add custom user property in sessionData interface
 declare module 'express-session' {
   interface SessionData{
-    user: {
-      _id: mongoose.Types.ObjectId;
-      isRegistered: boolean,
-    }
+    user: UserSession;
   }
 }
+
 
 // crate client promise to reuse the mongo db connection;
 const mongoClientPromise: Promise<MongoClient> = new Promise((resolve, reject) => {
@@ -44,6 +47,13 @@ const mongoClientPromise: Promise<MongoClient> = new Promise((resolve, reject) =
     if(client) resolve(client as MongoClient);
   })
 })
+
+
+// add cors
+app.use(cors({
+  origin: config.getCorsConfig().origin,
+  optionsSuccessStatus: 200,
+}))
 
 // initialize session
 app.use(session({
@@ -62,7 +72,7 @@ app.use(session({
 }))
 // set view engine
 app.set('view engine', 'ejs');
-app.set('views', configManager.getDirConfig().view);
+app.set('views', config.getDirConfig().view);
 
 // don't identify express
 app.disable('x-powered-by');
@@ -76,6 +86,8 @@ app.use(express.urlencoded({ extended: false }));
 // parse req body of content json
 app.use(express.json())
 
+// log request urls
+app.use(logRequest);
 
 // serve static files
 app.use(express.static(staticDir));
