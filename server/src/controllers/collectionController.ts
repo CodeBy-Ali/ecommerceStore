@@ -1,29 +1,56 @@
-import {NextFunction, Request,Response} from 'express'
+import { NextFunction, Request, Response } from "express";
 import Product, { IProduct } from "../model/productModel.ts";
-import { populateCartItems } from '../utils/utils.ts';
-import Cart from '../model/cartModel.ts';
-import StoreSetting from '../model/settingsModel.ts';
+import { getUserConfig } from "../utils/userUtils.ts";
+import { capitalizeFirstLetter } from "../utils/utils.ts";
 
 // render collection view
-export const renderCollectionsView = async (req: Request, res: Response,next:NextFunction): Promise<void> => {
+export const renderAllCollectionsView = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const user = req.session.user;
-  try { 
-    const allProducts: Array<IProduct> = await Product.find().lean(); 
-    const bestSellers: Array<IProduct> = await Product.find().sort({'salesCount': 'descending'}).limit(3).lean();
-    const cart = await Cart.findOne({ userId: user }).lean();
-    const cartItems = cart ? await populateCartItems(cart.items) : []; 
-    const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' }).lean();
-    if (!shippingConfig) throw new Error('shipping_config document not found');
-    res.render('collections', {
-      "bestSellers": bestSellers,
-      "body": allProducts.filter((product: IProduct) => product.category.includes('body')),
-      "cleansers": allProducts.filter((product: IProduct) => product.category.includes('cleanser')),
-      "conditioners": allProducts.filter((product: IProduct) => product.category.includes('conditioner')),
-      "user": user,
-      "cartItems": cartItems,
-      "storeSettings": shippingConfig,
+  try {
+    const allProducts: Array<IProduct> = await Product.find().lean();
+    const bestSellers: Array<IProduct> = await Product.find().sort({ salesCount: "descending" }).limit(3).lean();
+    const userConfig = await getUserConfig(user);
+
+    res.render("allCollections", {
+      ...userConfig,
+      bestSellers: bestSellers,
+      body: allProducts.filter((product: IProduct) => product.category.includes("body")),
+      cleansers: allProducts.filter((product: IProduct) => product.category.includes("cleansers")),
+      conditioners: allProducts.filter((product: IProduct) => product.category.includes("conditioner")),
     });
   } catch (error) {
-    next(error)
+    next(error);
   }
 };
+
+export const renderBestSellerCollectionView = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const user = req.session.user;
+  try {
+    const userConfig = await getUserConfig(user);
+    const bestSellerProducts: Array<IProduct> = await Product.find().sort({ salesCount: "descending" }).limit(3).lean();
+    res.render("collection", {
+      ...userConfig,
+      collectionName: "Best Sellers",
+      products: bestSellerProducts,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+export const renderCollectionView = async (collectionName: string, req: Request, res: Response, next: NextFunction): Promise<void> => {
+  const user = req.session.user;
+  try {
+    const userConfig = await getUserConfig(user);
+    const products = await Product.find({ category: collectionName });
+
+    res.render('collection', {
+      ...userConfig,
+      collectionName: capitalizeFirstLetter(collectionName),
+      products,
+    })
+  } catch (error){
+    next(error)
+  }
+}

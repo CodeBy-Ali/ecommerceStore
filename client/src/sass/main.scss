@@ -15,13 +15,9 @@
 @use 'components/cart';
 @use 'components/loader';
 
-@use 'pages/collections';
 @use 'pages/home';
-@use 'pages//register-Login';
-
+@use 'pages/register-Login';
+@use 'pages/collections';
+ 
 @use 'layout/header';
 @use 'layout/footer';
-
-   
-// @use 'pages/home';
-// @use 'pages/collections'

@@ -1,5 +1,5 @@
 // pages
-import initCollectionsPage from "./pages/collections";
+import initCollectionPage from "./pages/collections";
 import initHomePage from "./pages/home";
 import initRegisterPage from "./pages/register";
 import initLoginPage from "./pages/login";
@@ -23,8 +23,8 @@ const App = (): void => {
     case 'home':
       initHomePage();
       break;
-    case 'collections':
-      initCollectionsPage();
+    case 'collection':
+      initCollectionPage();
       break;
     case 'register':
       initRegisterPage();

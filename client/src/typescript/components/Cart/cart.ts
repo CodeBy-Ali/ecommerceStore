@@ -1,7 +1,17 @@
 import DOMUtils from "../utils/domUtils";
 import { showNotification } from "../utils/util";
 import { renderCart } from "./modules/cartRender";
-import { toggleCartDrawer, updateHeaderTotalCartItemsCount, getCartQuantityInputField, renderUpdatedQuantity, getUpdatedQuantity, getCartItemId, limitQuantityToStock, withProcessingState } from "./modules/cartUtils";
+import {
+  toggleCartDrawer,
+  updateHeaderTotalCartItemsCount,
+  getCartQuantityInputField,
+  renderUpdatedQuantity,
+  getUpdatedQuantity,
+  getCartItemId,
+  limitQuantityToStock,
+  withProcessingState
+} from "../utils/cartUtils";
+
 
 interface IProduct {
   title: string;
@@ -21,7 +31,7 @@ export interface ICartItem {
   quantity: number;
 }
 
-interface IResponseBody {
+export interface IResponseBody {
   cartItems: [ICartItem];
   storeSettings: IStoreSetting;
 }
@@ -40,14 +50,12 @@ const Cart = (): void => {
 function innitCartEventListeners(): void {
   const cartButton = document.querySelector("[data-cartButton]");
   const closeCartButton = document.querySelector("[data-cartCloseButton]");
-  const addToCartButtons = document.querySelectorAll<HTMLElement>("[data-addToCartBtn]");
   const removeCartItemBtn = document.querySelector<HTMLElement>("button[data-removeCartItemBtn]");
   const overLay = document.querySelector("[data-overlay]");
   const itemQuantityContainers = document.querySelectorAll("div[data-cartItem-quantity-container]");
 
   cartButton?.addEventListener("click", toggleCartDrawer);
   closeCartButton?.addEventListener("click", toggleCartDrawer);
-  addToCartButtons?.forEach(button => button.addEventListener("click", addProductToCart));
   removeCartItemBtn?.addEventListener("click", removeProductFromCart);
   overLay?.addEventListener("click", toggleCartDrawer);
   ["click", "input"].forEach((event) => itemQuantityContainers.forEach((itemContainer) => itemContainer.addEventListener(event, updateItemQuantity)));
@@ -71,32 +79,7 @@ function updateItemQuantity(e: Event): void {
   updateItemQuantityInDB(itemId, updatedQuantity);
 }
 
-const addProductToCart: (e:Event) => Promise<void> = withProcessingState(async (e: Event) => {
-  const targetButton = e.target as HTMLElement;
-  if (!targetButton) return;
-  const productId = targetButton.getAttribute("data-productId");
-  if (!productId) throw new Error("Failed to get ProductId");
-  const response = await fetch("/cart/items", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({ productId: productId }),
-  });
-  const responseBody = await response.json();
-  if (!response.ok) {
-    showNotification(responseBody?.message, false);
-    return;
-  }
-  const { cartItems, storeSettings } = responseBody as IResponseBody;
-  const totalCartItems = cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-  renderCart(cartItems, totalCartItems, storeSettings);
-  updateHeaderTotalCartItemsCount(totalCartItems);
-  toggleCartDrawer();
-  Cart();
-});
- 
+
 async function removeProductFromCart(e: Event): Promise<void> {
   const removeButton = e.target as HTMLElement;
   const itemId = removeButton.getAttribute("data-item-id");

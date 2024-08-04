@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import Cart, { ICart, ICartItem } from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
-import { populateCartItems } from "../utils/utils.ts";
 import StoreSetting from "../model/settingsModel.ts";
+import { populateCartItems } from "../utils/cartUtils.ts";
 
 // delete item from cart
 export const deleteItem = async (req: Request, res: Response,next:NextFunction) => {

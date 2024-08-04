@@ -3,6 +3,7 @@
 
 html{
   font-size: $font-size-root;
+  scroll-behavior: smooth;
 }
 
 a,button:not(.button--subDropDown):not(.button--dropdown):not(.accordion_button){

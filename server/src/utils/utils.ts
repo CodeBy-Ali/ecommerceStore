@@ -1,25 +1,25 @@
-import { ICartItem } from "../model/cartModel.ts";
-import Product from "../model/productModel.ts";
-import mongoose from "mongoose";
-import { ObjectId } from "mongodb";
+import logger from "../config/logger.ts";
 
-export const populateCartItems = async (cartItems: Array<ICartItem>) =>{
-  const products =  await Promise.all(
-    cartItems.map(async ({productId,quantity})  => {
-      try {
-        return {
-          product: await Product.findById(productId, { title: 1, image: 1, price: 1, stock: 1, _id: 1 }).lean(),
-          quantity: quantity,
-        }
-      }   catch (error) {
-        console.log(`Error fetching product with ID: ${productId}`)
-        return null;
-      }
-    })
-  );
-  return products.filter(product => product !== null);
+
+
+export const stringToBoolean = (string: string): boolean| undefined => {
+  // return string.toLocaleLowerCase() === 'true' ? true
+  //         : string.toLocaleLowerCase() === 'false' ? false
+  //         : undefined;
+  switch (string.toLowerCase()) {
+    case "true":
+      return true;
+    case "false":
+      return false;
+    default:
+      logger.warn(`Invalid boolean string: ${string}`);
+      return undefined;
+  }
 }
 
 
+export const capitalizeFirstLetter = (word: string):string => { 
+  return word.charAt(0).toUpperCase() + word.slice(1);
+};
 
 
