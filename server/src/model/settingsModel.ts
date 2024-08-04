@@ -1,12 +1,12 @@
 import { Schema,model } from 'mongoose';
 
-interface IStoreSetting{
+export interface IStoreSettings{
   _id: string,
   freeShippingThreshold: number,
   currency: string,
 }
 
-const storeSettingsSchema = new Schema<IStoreSetting>({
+const storeSettingsSchema = new Schema<IStoreSettings>({
   _id: {
     type: String,
   },
@@ -24,7 +24,7 @@ const storeSettingsSchema = new Schema<IStoreSetting>({
   timestamps: true,
 });
 
-const StoreSetting = model<IStoreSetting>('StoreSettings', storeSettingsSchema);
+const StoreSetting = model<IStoreSettings>('StoreSettings', storeSettingsSchema);
 
 
 export default StoreSetting;
