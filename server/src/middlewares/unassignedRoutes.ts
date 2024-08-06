@@ -5,7 +5,10 @@ const unassignedRoutesHandler = (req:Request, res:Response, next:NextFunction) =
   if  (req.accepts('html')) {
     res.render('error', { error: '404 not Found' });
   }else if (req.accepts(['application/json' ,'json'])) {
-    res.json({ message: `${req.originalUrl} not found` });
+    res.json({
+      status: 'fail',
+      message: `${req.originalUrl} not found`
+    });
   }else res.send(`404 not Found`)
 }
 

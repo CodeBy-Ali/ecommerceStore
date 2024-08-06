@@ -26,16 +26,19 @@ const addProductToCart: (e: Event) => Promise<void> = withProcessingState(async 
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    body: JSON.stringify({ productId: productId }),
+    body: JSON.stringify({
+      productId: productId,
+      quantity: 1
+    }),
   });
   const responseBody = await response.json();
-  if (!response.ok) {
+  const { data,status } = responseBody as IResponseBody;
+  if (!response.ok || status !== 'success') {
     showNotification(responseBody?.message, false);
     return;
   }
-  const { cartItems, storeSettings } = responseBody as IResponseBody;
-  const totalCartItems = cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-  renderCart(cartItems, totalCartItems, storeSettings);
+  const totalCartItems = data.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
+  renderCart(data.cartItems, totalCartItems, data.storeSettings);
   updateHeaderTotalCartItemsCount(totalCartItems);
   toggleCartDrawer();
   Cart();

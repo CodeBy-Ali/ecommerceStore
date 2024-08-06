@@ -9,7 +9,10 @@ export const protectRoute = (req: Request, res: Response, next: NextFunction) =>
 
 export const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
   if (req.session.user) next();
-  else res.status(401).json({ message: "Unauthorized access. Please log in to continue" });
+  else res.status(401).json({
+    status: 'fail',
+    message: "Unauthorized access. Please log in to continue"
+  });
 };
 
 export const redirectIfRegistered = (req: Request, res: Response, next: NextFunction) => {
@@ -23,3 +26,5 @@ export const redirectIfRegistered = (req: Request, res: Response, next: NextFunc
     res.redirect("/");
   }
 };
+
+

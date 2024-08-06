@@ -9,7 +9,11 @@ const errorHandler = (err:any, req:Request, res:Response, next:NextFunction) => 
   if  (req.accepts('html')) {
     res.render('error', { error: err });
   }else if (req.accepts('application/json, json')) {
-    res.json({ message: "Internal Server Error" });
+    res.json({
+      status: "error",
+      message:"Internal Server Error"
+    });
+
   }else res.send(`Oh no, Something went wrong!`)
 }
 

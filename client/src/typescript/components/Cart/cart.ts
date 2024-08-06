@@ -32,8 +32,12 @@ export interface ICartItem {
 }
 
 export interface IResponseBody {
-  cartItems: [ICartItem];
-  storeSettings: IStoreSetting;
+  status: string,
+  message?: string,
+  data: {
+    cartItems: [ICartItem];
+    storeSettings: IStoreSetting;
+  }
 }
 
 const Cart = (): void => {
@@ -94,13 +98,13 @@ async function removeProductFromCart(e: Event): Promise<void> {
     });
 
     const responseBody = await response.json();
-    if (!response.ok) {
+    const { data ,status} = responseBody as IResponseBody;
+    if (!response.ok || status !== 'success') {
       showNotification(responseBody?.message, false);
       return;
     }
-    const { cartItems, storeSettings } = responseBody as IResponseBody;
-    const totalCartItems = cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-    renderCart(cartItems, totalCartItems, storeSettings);
+    const totalCartItems = data?.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
+    renderCart(data?.cartItems, totalCartItems, data?.storeSettings);
     updateHeaderTotalCartItemsCount(totalCartItems);
     Cart();
   } catch (error) {
@@ -123,13 +127,13 @@ async function updateItemQuantityInDB(itemId: string, quantity: number): Promise
     });
 
     const responseBody = await response.json();
-    if (!response.ok) {
+    const { data, status } = responseBody as IResponseBody;
+    if (!response.ok || status !== 'success') {
       showNotification(responseBody?.message, false);
       return;
     }
-    const { cartItems, storeSettings } = responseBody as IResponseBody;
-    const totalCartItems = cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-    renderCart(cartItems, totalCartItems, storeSettings);
+    const totalCartItems = data.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
+    renderCart(data.cartItems, totalCartItems, data.storeSettings);
     updateHeaderTotalCartItemsCount(totalCartItems);
     Cart();
   } catch (error) {

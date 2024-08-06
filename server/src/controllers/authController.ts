@@ -27,7 +27,10 @@ export const registerNewUser = async (req: Request, res: Response, next: NextFun
   try {
     const duplicateUser = await User.findOne({ email: email });
     if (duplicateUser) {
-      res.status(400).json({ message: "Email already Registered" });
+      res.status(400).json({
+        status: "fail",
+        message: "Email already Registered"
+      });
       return;
     }
 
@@ -73,13 +76,19 @@ export const authenticateUser = async (req: Request, res: Response, next: NextFu
     // check if user with current email already exist in db
     const registeredUser = await User.findOne({ email });
     if (!registeredUser) {
-      res.status(404).json({ message: "We couldn't find an account with that email address" });
+      res.status(404).json({
+        status: "fail",
+        message: "We couldn't find an account with that email address"
+      });
       return;
     }
     // compare the password
     const isPasswordCorrect: boolean = await bcrypt.compare(password, registeredUser.passwordHash);
     if (!isPasswordCorrect) {
-      res.status(401).json({ message: "Incorrect password" });
+      res.status(401).json({
+        status: "fail",
+        message: "Incorrect password"
+      });
       return;
     }
 
@@ -127,11 +136,11 @@ async function mergeAnonymousCartWithRegisteredUser(anonymousUserId:ObjectId,reg
       await registeredUserCart.save({session});
       await Cart.deleteOne({ userId: anonymousUserId },{session});
     }
-    session.commitTransaction();
+    await session.commitTransaction();
   } catch (error) {
-    session.abortTransaction();
+    await session.abortTransaction();
     throw error;
   } finally {
-    session.endSession()   
+    await session.endSession()   
   }
 }
