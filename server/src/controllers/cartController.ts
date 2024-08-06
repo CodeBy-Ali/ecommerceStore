@@ -5,6 +5,8 @@ import Product from "../model/productModel.ts";
 import StoreSetting from "../model/settingsModel.ts";
 import { populateCartItems } from "../utils/cartUtils.ts";
 
+
+// TODO Refactor cart controllers functions to make them modular
 // delete item from cart
 export const deleteItem = async (req: Request, res: Response,next:NextFunction) => {
   const { id } = req.params;

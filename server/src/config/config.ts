@@ -3,7 +3,7 @@ import path from 'path';
 import { stringToBoolean } from '../utils/utils.ts';
 
 // import .env file
-const envPath = path.join(import.meta.dirname,'..','..','.env');
+const envPath = path.join(__dirname,'..','..','.env');
 dotenv.config({ path: envPath });
 
 class ConfigManager{
@@ -30,8 +30,8 @@ class ConfigManager{
       URI: process.env[`MONGODB_URI_${this.env}`]  || "mongodb://localhost:27017/myDb",
     }
     this.dirConfig = {
-      view: path.join(import.meta.dirname, '..', 'views'),
-      static: path.join(import.meta.dirname, '../../../client/dist')
+      view: path.join(__dirname, '..', 'views'),
+      static: path.join(__dirname, '../../../client/dist')
     }
     this.bcryptConfig = {
       saltRounds: 10,
@@ -106,3 +106,4 @@ class ConfigManager{
 }
 
 export default ConfigManager.getInstance();
+

@@ -1,9 +1,9 @@
 import { createLogger,transports,format } from 'winston';
 import { join } from 'path';
-import winston from 'winston/lib/winston/config/index.js';
+import config from './config.ts';
 
-const env = process.env.NODE_ENV || 'development';
-const logDirectory = join(import.meta.dirname, '..', 'logs');
+const env = process.env.NODE_ENV;
+const logDirectory = join(__dirname, '..', 'logs');
 
 const logger = createLogger({
   level: 'info',
@@ -30,8 +30,7 @@ const logger = createLogger({
 
 
 
-
-if (env !== 'production') {
+if (env !== 'PROD') {
   logger.add(new transports.Console({
     level: "debug",
     handleExceptions: false,

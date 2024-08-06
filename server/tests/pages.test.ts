@@ -13,8 +13,8 @@ describe("Get /", (): void => {
 describe("Get /collections", () => {
   // connecting to database before all test
   beforeAll(async () => {
-    const { TEST_URI } = configManager.getDatabaseConfig();
-    await mongoose.connect(TEST_URI);
+    const { URI } = configManager.getDatabaseConfig();
+    await mongoose.connect(URI);
   });
 
   // close the database connection after all test 
@@ -22,8 +22,8 @@ describe("Get /collections", () => {
     await mongoose.connection.close();
   });
 
-  test("it should return collections page", async (): Promise<void> => {
-    await assertHtmlPageResponse("/collections","collections");
+  test("should return All Collections page", async (): Promise<void> => {
+    await assertHtmlPageResponse("/collections","collection");
   });
 });
 
