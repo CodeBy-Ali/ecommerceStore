@@ -6,7 +6,6 @@ import { mockProduct, } from "./utils.ts";
 import User from "../src/model/userModel.ts";
 import Product from "../src/model/productModel.ts";
 import { ICartItem } from "../src/model/cartModel.ts";
-import { json } from "stream/consumers";
 import { CartItemDetail } from '../src/utils/cartUtils.ts';
 
 describe("Get /cart/items", () => {

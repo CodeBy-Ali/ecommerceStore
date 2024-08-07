@@ -1,16 +1,16 @@
 import { NextFunction, Request, Response } from "express";
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 import Cart, { ICart, ICartItem } from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
 import StoreSetting from "../model/settingsModel.ts";
 import { populateCartItems } from "../utils/cartUtils.ts";
+import logger from "../config/logger.ts";
 
 
 // TODO Refactor cart controllers functions to make them modular
 // delete item from cart
 export const deleteItem = async (req: Request, res: Response,next:NextFunction) => {
   const { id } = req.params;
-
   try {
     const userId = req.session?.user?._id;
     const updatedResult = await Cart.updateOne({ userId: userId }, { $pull: { items: { productId: id } } });
@@ -21,10 +21,7 @@ export const deleteItem = async (req: Request, res: Response,next:NextFunction) 
     if (!cart) {
       return res.status(404).json({ status: 'fail',message: "User cart not found" });
     }
-    const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean();
-    if (!shippingConfig) {
-      return res.status(404).json({ status: 'fail',message: "Store shipping config not found" });
-    }
+    const shippingConfig = await getShippingConfig();
     // store all cart item detail objects in array
     const populatedItems = await populateCartItems(cart.items);
     res.status(201).json({
@@ -45,26 +42,11 @@ export const deleteItem = async (req: Request, res: Response,next:NextFunction) 
 export const editItem = async (req: Request, res: Response, next: NextFunction) => {
   const { quantity } = req.body;
   const { id } = req.params;
-  if (!quantity) {
-    return res.status(400).json({
-      status: 'fail',
-      message: "Missing required filed: quantity"
-    });
-  }
-  if (isNaN(quantity) || Number(quantity) < 0) {
-    return res.status(422).json({
-      status: 'fail',
-      message: "Item quantity must be positive integer"
-    });
-  }
   const userId = req.session?.user?._id;
   try {
     const product = await Product.findById(id);
     if (!product) {
-      return res.status(404).json({
-        status: 'fail',
-        message: "Product not found"
-      });
+      return res.status(404).json({status: 'fail',message: "Product not found"});
     }
     if (quantity > product.stock) {
       return res.status(422).json({
@@ -77,22 +59,11 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
       { $set: { "items.$[elem].quantity": Number(quantity) } },
       { arrayFilters: [{ "elem.productId": id }] }
     );
-    const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean();
-    if (!shippingConfig) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Store shipping config not found"
-      });
-    }
+    const shippingConfig = await getShippingConfig();
     const cart = await Cart.findOne({ userId: userId });
-    
     if (!cart) {
-      return res.status(404).json({
-        status: 'fail',
-        message: "User cart not found"
-      });
+      return res.status(404).json({status: 'fail',message: "User cart not found"});
     }
-    
     const populatedItems = await populateCartItems(cart.items);
     res.status(200).json({
       status: "success",
@@ -110,45 +81,18 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
 // add product item to user Cart
 export const addItem = async (req: Request, res: Response, next: NextFunction) => {
   const { productId,quantity } = req.body;
-  if (!productId) {
-    return res.status(400).json({
-      status: 'fail',
-      message: "Missing required field: productId"
-    });
-  }
-  if (isNaN(quantity) || Number(quantity) < 0) {
-    return res.status(422).json({
-      status: 'fail',
-      message: "Invalid request: quantity must be positive integer"
-    });
-  }
   const user = req.session.user;
-  if (!user) { 
-    return res.status(401).json({
-      status: 'fail',
-      message: "Unauthorized access. Please log in to continue"
-    });
-  };
+  
   try {
     const product = await Product.findById(productId);
     if (!product) {
-      return res.status(404).json({
-        status: 'fail',
-        message: "Product not found"
-      });
+      return res.status(404).json({status: 'fail',message: "Product not found"});
     }
-    // get store shipping information
-    const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean() || {};
-    if (!shippingConfig) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Store shipping config not found"
-      });
-    }
-    const cart = await Cart.findOne({ userId: user._id });
+    const shippingConfig = await getShippingConfig();
+    const cart = await Cart.findOne({ userId: user?._id });
     // create new cart if not already present
     if (!cart) {
-      const newCart = createCart(productId,Number(quantity), user._id);
+      const newCart = createCart(productId,Number(quantity), user?._id);
       await newCart.save();
       const populatedItems = await populateCartItems(newCart.items);
       return res.status(201).json({
@@ -185,7 +129,10 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
 };
 
 // helper func to create Cart  document
-function createCart(productId: mongoose.Types.ObjectId,quantity:number, userId: mongoose.Types.ObjectId): ICart {
+function createCart(productId: mongoose.Types.ObjectId,quantity:number, userId: mongoose.Types.ObjectId| undefined): ICart {
+  if (!userId) {
+    throw new Error('Unauthorized access!. Received Request to create user cart with undefined userId');
+  }
   return new Cart({
     userId: userId,
     items: [
@@ -195,4 +142,14 @@ function createCart(productId: mongoose.Types.ObjectId,quantity:number, userId: 
       },
     ],
   });
+}
+
+
+async function getShippingConfig() {
+  const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean();
+  if (!shippingConfig) {
+    logger.error("Missing shipping Configuration document");
+    throw new Error("Unable to find shipping Configuration document");
+  }
+  return shippingConfig;
 }
