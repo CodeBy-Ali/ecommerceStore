@@ -57,10 +57,9 @@ export const validateReqParams = (req: Request, res: Response, next: NextFunctio
   if (!id) {
     return res.status(400).json({ message: "Missing required filed: productId" });
   }
-
+  
   if (id.length !== 24) {
     return res.status(422).json({ message: "Invalid parameter: productId must be 24 character string" });
   }
-
   next();
 }
