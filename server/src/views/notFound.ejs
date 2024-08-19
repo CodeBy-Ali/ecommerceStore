@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" crossorigin src="/assets/main.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main.css" />
+    <title>Phil's Refills</title>
+  </head>
+  <body data-page="home">
+    <a class="button--skipToMain" href="#main">Skip to content</a>
+
+    <div class="overLay" data-overLay></div>
+
+    <div class="notification_center" data-notificationCenter></div>
+
+    <!-- Start ------------------------------- Header ------------------------------------- -->
+    <header><%- include('./partials/_header.ejs',{user}) %></header>
+
+    <!-- Start ------------------------------------- Cart ---------------------------------- -->
+    <%- include('./partials/_cart.ejs',{cartItems,storeSettings})%>
+    <!-- Start --------------------------- Main -------------------------------------------- -->
+    <main>
+      <section class="notFound_hero_section">
+        <h3 class="notFound_404_code_heading">404</h3>
+        <h1 class="notFound_test_heading">Page not Found</h1>
+        <a href="/collections" class="button--primary button_continue_shopping">Continue Shopping</a>
+      </section>
+    </main>
+    <!-- START -------------------------------------- Footer ---------------------------------------------------- -->
+
+    <footer><%- include('./partials/_footer.ejs') %></footer>
+  </body>
+</html>

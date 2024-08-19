@@ -5,13 +5,9 @@ export const validateCartRequest = (req:Request, res:Response, next:NextFunction
   const id  = req.params.id || req.body.productId;
   
   if (!id) {
-    return res.status(400).json({ message: "Missing required filed: productId" });
+    return res.status(400).json({ message: "Missing required parameter: productId" });
   }
   
-  if (id.length !== 24) {
-    return res.status(422).json({ message: "Invalid parameter: productId must be 24 character string" });
-  }
-
   if (!quantity) {
     return res.status(400).json({
       status: 'fail',

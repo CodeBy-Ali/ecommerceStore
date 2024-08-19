@@ -118,102 +118,17 @@
 .footer_menu {
   margin-bottom: 4rem;
 
-  .footer_menu_heading {
-    display: none;
-    font-size: $font-size-sm;
-    letter-spacing: $letter-spacing-xl;
-    margin-bottom: 1.6rem;
-    font-weight: $font-semibold;
-  }
   @include respond-to(medium) {
     padding-top: 1rem;
     justify-self: end;
     display: grid;
     grid-template-columns: repeat(3, 17rem);
-    & .footer_menu_heading {
-      display: block;
-    }
-  }
-
-  @include respond-to(large) {
-    grid-template-columns: repeat(3, 20rem);
   }
 }
 
-.footer_accordion {
-  font-size: $font-size-xsm;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.507);
 
-  &:last-child {
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.507);
-  }
 
-  & .accordion_button {
-    background-color: transparent;
-    border: none;
-    color: white;
-    padding-top: 1.6rem;
-    padding-bottom: 1.5rem;
-    font-weight: $font-semibold;
-    letter-spacing: $letter-spacing-xl;
-    width: 100%;
-    @include flex-row-jc(space-between);
-    & img {
-      width: 2rem;
-    }
-  }
 
-  & .accordion_itemList li:last-child {
-    margin-bottom: 1.5rem;
-  }
-
-  & .accordion_itemList {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    max-height: 0;
-    visibility: hidden;
-    overflow: hidden;
-    transition: all 0.5s ease;
-    & a {
-      color: white;
-    }
-  }
-
-  & .accordion_button_arrowIcon img {
-    transition: transform 0.5s ease;
-  }
-  @include respond-to(small) {
-    font-size: $font-size-sm;
-  }
-
-  @include respond-to(medium) {
-    border-top: none;
-    & .accordion_button {
-      display: none;
-    }
-
-    & .accordion_itemList {
-      max-height: 20rem;
-      gap: 1.2rem;
-      visibility: visible;
-    }
-
-    &:last-child {
-      border: none;
-    }
-  }
-}
-
-.footer_accordion.active .accordion_itemList {
-  transition: all 2s ease;
-  max-height: 60rem;
-  visibility: visible;
-}
-
-.footer_accordion.active .accordion_button img {
-  transform: rotate(180deg);
-}
 
 //  ~ ------------------------ Social-Media-Icons ---------------- -->
 .footer_socialIcons_section {

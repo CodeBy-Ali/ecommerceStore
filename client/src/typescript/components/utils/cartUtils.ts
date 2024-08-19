@@ -1,5 +1,5 @@
 import DOMUtils from "./domUtils";
-import { enterProcessingState, exitProcessingState, showNotification } from "./util";
+import { enterProcessingState, exitProcessingState, showNotification } from "./pagesUtils";
 
 // closes and opens the cart menu
 export const toggleCartDrawer = (): void => {
@@ -17,20 +17,23 @@ export const updateHeaderTotalCartItemsCount = (totalCartItems: number): void =>
   DOMUtils.addTextContent(cartQuantityContainer, totalCartItems);
 };
 
-export const getUpdatedQuantity = (clickedElement: HTMLElement, quantityInputField: HTMLInputElement): number | undefined => {
-  const itemStock = Number(quantityInputField?.max);
+/* -increases or decreases the quantity based on the button clicked
+   -keeps the quantity with in the stock range
+   -Defaults to minimum quantity if quantity is below the minimum range
+   -Defaults to max stock  if entered quantity is greater than available stock
+*/
+export const updateItemQuantity = (quantityContainer: HTMLDivElement, clickedElement: HTMLElement, quantityInputField: HTMLInputElement): number | null => {
   const minQuantity = Number(quantityInputField?.min);
-
-  if (quantityInputField.value.length < 1) {
-    return;
-  }
-
+  const itemStock = Number(quantityInputField?.max);
+  if (quantityInputField.value.length < 1) return null;
   const itemQuantity = Number(quantityInputField?.value.replaceAll(/[\s-]/g, ""));
-  const increase = clickedElement.matches("[data-increase-item-quantity]");
-  const decrease = clickedElement.matches("[data-decrease-item-quantity]");
+  const increase = clickedElement.getAttribute("data-counter-type") === "increase";
+  const decrease = clickedElement.getAttribute("data-counter-type") === "decrease";
 
   const updatedQuantity = increase ? Math.min(itemQuantity + 1, itemStock) : decrease ? Math.max(itemQuantity - 1, minQuantity) : itemQuantity > itemStock ? itemStock : itemQuantity < minQuantity ? minQuantity : itemQuantity;
 
+  renderUpdatedQuantity(updatedQuantity, quantityInputField);
+  limitQuantityToStock(quantityContainer, quantityInputField);
   return updatedQuantity;
 };
 
@@ -62,8 +65,8 @@ export const renderUpdatedQuantity = (updatedQuantity: number, quantityInputFiel
 };
 
 export const limitQuantityToStock = (quantityContainer: HTMLDivElement, quantityInputField: HTMLInputElement) => {
-  const increaseButton = quantityContainer.querySelector<HTMLButtonElement>("[data-increase-item-quantity]");
-  const decreaseButton = quantityContainer.querySelector<HTMLButtonElement>("[data-decrease-item-quantity]");
+  const increaseButton = quantityContainer.querySelector<HTMLButtonElement>(`[data-counter-type="increase"]`);
+  const decreaseButton = quantityContainer.querySelector<HTMLButtonElement>(`[data-counter-type="decrease"]`);
   const itemStock = Number(quantityInputField?.max);
   const minQuantity = Number(quantityInputField?.min);
   const itemQuantity = Number(quantityInputField?.value);
@@ -71,18 +74,18 @@ export const limitQuantityToStock = (quantityContainer: HTMLDivElement, quantity
   if (decreaseButton) decreaseButton.disabled = itemQuantity <= minQuantity;
 };
 
-export const withProcessingState = (fn: (e: Event) => Promise<void>): ((e: Event) => Promise<void>) => {
-  return async (e: Event): Promise<void> => {
-    const targetElement = e.target as HTMLElement;
-    if (!targetElement) return;
-    enterProcessingState(targetElement);
+export const withProcessingState = (fn: (productId:string,quantity:number) => Promise<void>) => {
+  return async (actionButton:HTMLButtonElement,productId:string,quantity:number): Promise<void> => {
+    actionButton && enterProcessingState(actionButton);
+    if (!quantity) quantity = 1;
     try {
-      await fn(e);
+      if (!productId) throw new Error("Missing required argument: ProductId");
+      await fn(productId,quantity);
     } catch (error) {
       console.log(error);
       showNotification("Failed to add product to cart. Please try again later..", false);
     } finally {
-      exitProcessingState(targetElement);
+      actionButton && exitProcessingState(actionButton);
     }
   };
 };

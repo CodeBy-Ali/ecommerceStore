@@ -1,27 +1,22 @@
-import { Schema, model } from "mongoose";
-
-
+import mongoose, { Schema, model } from "mongoose";
 
 export interface IProduct {
-  pubId: string,
   title: string;
   description: string;
   price: number;
   usage: string;
   ingredients: string;
   weight: string;
-  category: Array<string>;
-  image: string;
+  categories: Array<string>;
+  images: Array<string>;
   salesCount: number;
   stock: number;
+  slug: string;
+  boughtTogether?: mongoose.Types.ObjectId;
 }
 
-const productSchema: Schema = new Schema<IProduct>(
+const productSchema = new Schema<IProduct>(
   {
-    pubId: {
-      type: String,
-      required: true,
-    },
     title: {
       type: String,
       required: true,
@@ -35,6 +30,12 @@ const productSchema: Schema = new Schema<IProduct>(
     price: {
       type: Number,
       required: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
     },
     usage: {
       type: String,
@@ -51,7 +52,7 @@ const productSchema: Schema = new Schema<IProduct>(
       required: true,
       trim: true,
     },
-    category: [
+    categories: [
       {
         type: String,
         required: true,
@@ -59,11 +60,17 @@ const productSchema: Schema = new Schema<IProduct>(
         enum: ["body", "face", "hair", "handSoap", "moisturizer", "shave", "shampoo", "rephils", "bodyWash", "conditioner", "cleanser"],
       },
     ],
-    image: {
-      type: String,
-      required: true,
-      trim: true,
+    images: {
+      type: [
+        {
+          type: String,
+          required: true,
+          trim: true,
+        },
+      ],
+      validate: [(val: Array<string>) => val.length >= 3, "product must have minimum 3 images src url"],
     },
+
     salesCount: {
       type: Number,
       required: true,
@@ -79,5 +86,13 @@ const productSchema: Schema = new Schema<IProduct>(
 );
 
 const Product = model<IProduct>("products", productSchema);
+
+// add boughtTogether product 
+productSchema.add({
+  boughtTogether: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Product
+  }
+})
 
 export default Product;

@@ -15,7 +15,7 @@
     @media screen and (min-width: 1200px) {
       @content;
     }
-  }
+  } 
 }
 
 // flexbox space between
@@ -316,5 +316,136 @@
         font-size: $font-size-sm;
       }
     }
+  }
+}
+
+
+
+@mixin item_Quantity_spinner($input-width: 3.5rem){
+  border-radius: $br-large;
+  border: 1px solid $clr-border;
+  @include flex-row-jc(space-between);
+  font-size: $font-size-sm;
+  flex: 1;
+  max-width: 8.6rem;
+  font-weight: $font-semibold;
+
+  & .item_quantity_input{
+    width: $input-width;
+    text-align: center;
+    text-decoration: none;
+    font-weight: $font-semibold;
+    outline: none;
+    border: none;
+    &::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+  }
+  & > button {
+    font-weight: $font-semibold;
+    background-color: transparent;
+    border: none;
+    padding-block: 1rem;
+    & > *{
+      pointer-events: none;
+    }
+    
+    &.decrease_Quantity_button{
+      padding-left: 1.2rem;
+      padding-right: .5rem;
+    }
+    &.increase_Quantity_button{
+      padding-right: 1.2rem;
+      padding-left: .5rem;
+    }
+  }
+
+  @include respond-to(medium){
+    font-size: $font-size-base;
+    max-width: 9.8rem;
+    & > button{
+      font-size: $font-size-base;
+      padding-block: 1.4rem;
+      &.decrease_Quantity_button{
+        padding-left: 1.7rem;
+        padding-right: .5rem;
+      }
+      &.increase_Quantity_button{
+        padding-right: 1.7rem;
+        padding-left: .5rem;
+      }
+    }
+  }
+}
+
+// accordion 
+
+@mixin accordion{
+  font-size: $font-size-xsm;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.507);
+
+  &:last-child {
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.507);
+  }
+
+  & .accordion_button {
+    background-color: transparent;
+    border: none;
+    padding-top: 1.6rem;
+    padding-bottom: 1.5rem;
+    font-weight: $font-semibold;
+    letter-spacing: $letter-spacing-xl;
+    color: $clr-primary;
+    width: 100%;
+    @include flex-row-jc(space-between);
+    & img {
+      width: 2rem;
+    }
+  }
+
+  & .accordion_heading {
+    display: none;
+    font-size: $font-size-sm;
+    letter-spacing: $letter-spacing-xl;
+    margin-bottom: 1.6rem;
+    font-weight: $font-semibold;
+  }
+
+  & .accordion_itemList li:last-child {
+    margin-bottom: 1.5rem;
+  }
+
+  & .accordion_itemList,
+  & .accordion_item{
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    max-height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    & a {
+      color: white;
+    }
+  }
+
+  & .accordion_button_arrowIcon img {
+    transition: transform 0.5s ease;
+  }
+  
+  &.active .accordion_itemList, 
+  &.active .accordion_item {
+    transition: all 2s ease;
+    max-height: 60rem;
+    visibility: visible;
+  }
+  
+  &.active .accordion_button img {
+    transform: rotate(180deg);
+  }
+  @include respond-to(small) {
+    font-size: $font-size-sm;
   }
 }

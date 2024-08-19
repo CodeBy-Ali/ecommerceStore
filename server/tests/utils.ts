@@ -37,6 +37,7 @@ export const mockProduct: IProduct = {
   stock: 10,
 }
 
+
 export const assertHtmlPageResponse = async (route: string, expectedPage: string): Promise<void> => {
   const response = await request(app).get(route);
 

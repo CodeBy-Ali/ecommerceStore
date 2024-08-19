@@ -193,62 +193,7 @@
 
 
 .cartItem_details .cartItem_quantity_wrapper{
-  border-radius: $br-large;
-  border: 1px solid $clr-border;
-  @include flex-row-jc(space-between);
-  font-size: $font-size-sm;
-  flex: 1;
-  max-width: 8.6rem;
-  font-weight: $font-semibold;
-
-  & .cartItem_quantity_input{
-    width: 3.5rem;
-    text-align: center;
-    text-decoration: none;
-    font-weight: $font-semibold;
-    outline: none;
-    border: none;
-    &::-webkit-inner-spin-button{
-      -webkit-appearance: none;
-      margin: 0;
-    }
-
-  }
-  & > button {
-    font-weight: $font-semibold;
-    background-color: transparent;
-    border: none;
-    padding-block: 1rem;
-    & > *{
-      pointer-events: none;
-    }
-    
-    &.decrease_cartQuantity_button{
-      padding-left: 1.2rem;
-      padding-right: .5rem;
-    }
-    &.increase_cartQuantity_button{
-      padding-right: 1.2rem;
-      padding-left: .5rem;
-    }
-  }
-
-  @include respond-to(medium){
-    font-size: $font-size-base;
-    max-width: 9.8rem;
-    & > button{
-      font-size: $font-size-base;
-      padding-block: 1.4rem;
-      &.decrease_cartQuantity_button{
-        padding-left: 1.7rem;
-        padding-right: .5rem;
-      }
-      &.increase_cartQuantity_button{
-        padding-right: 1.7rem;
-        padding-left: .5rem;
-      }
-    }
-  }
+  @include item_Quantity_spinner;
 }
 
 

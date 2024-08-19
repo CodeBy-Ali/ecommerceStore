@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Muhammad Ali Hassan" />
+    <link rel="stylesheet" href="../sass/main.scss" />
+    <link rel="stylesheet" href="../sass/pages/_collections.scss" />
+    <script src="../typescript/main.ts" type="module" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <title>Phil's Refills</title>
+  </head>
+  <body data-page="product">
+    <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
+    <a class="button--skipToMain" href="">Skip to content</a>
+
+    <!-- Start ------------------------------- Header ------------------------------------ -->
+
+    <header>
+      <section>
+        <nav class="header_menu_nav">
+          <ul class="flex_row_btw">
+            <li class="header_mobile_menu">
+              <div>
+                <button data-menuButton aria-expanded="false" aria-label="menu" aria-controls="submenu">
+                  <span class="hidden" aria-hidden="true">CLOSE</span>
+                  <span class="" aria-hidden="true">MENU</span>
+                </button>
+              </div>
+            </li>
+            <li class="header_menu_links_shop">
+              <div class="flex_row_btw relative" data-shopLink>
+                <a href="">SHOP</a>
+                <button class="button--dropdown" aria-label="Open Menu Shop" aria-expanded="false" aria-controls="menu_shop" data-dropDownButton>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                    <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                  </svg>
+                </button>
+              </div>
+              <div>
+                <a href="">LEARN</a>
+              </div>
+            </li>
+            <li>
+              <a href="" class="header_logo" aria-label="phils">
+                <span class=""><img src="../assets/logo/logo.webp" alt="" /></span>
+              </a>
+            </li>
+            <li class="header_menu_links_login">
+              <div>
+                <a href="">LOGIN</a>
+              </div>
+              <div>
+                <button class="header_cart_button" data-cartButton>CART <span></span></button>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </section>
+
+      <!-- Start ---------------------------------------- DropDown_Large ---------------------------- -->
+
+      <section class="dropDown_container" id="menu_shop">
+        <nav class="dropDown_menu" data-dropDownMenu>
+          <section class="subDropdown_category-container">
+            <ul>
+              <li class="subDropdown_item_category" data-categoryName="shopAll">
+                <a href="">
+                  <span>Shop All</span>
+                  <button class="button--subDropDown" aria-label="Open SubMenu Shop All" aria-expanded="false" aria-controls="submenu_shop_1" role="tab" aria-selected="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                      <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                    </svg>
+                  </button>
+                </a>
+              </li>
+              <li class="subDropdown_item_category" data-categoryName="skin">
+                <a href="">
+                  <span>Skin</span>
+                  <button class="button--subDropDown" aria-label="Open submenu skin" aria-expanded="false" aria-controls="submenu_shop_2" role="tab" aria-selected="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                      <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                    </svg>
+                  </button>
+                </a>
+              </li>
+              <li class="subDropdown_item_category" data-categoryName="hair">
+                <a href="">
+                  <span>Hair</span>
+                  <button class="button--subDropDown" aria-label="Open submenu hair" aria-expanded="false" aria-controls="submenu_shop_3" role="tab" aria-selected="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                      <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                    </svg>
+                  </button>
+                </a>
+              </li>
+              <li class="subDropdown_item_category" data-categoryName="body">
+                <a href="">
+                  <span>Body</span>
+                  <button class="button--subDropDown" aria-label="open submenu body" aria-expanded="false" aria-controls="submenu_shop_4" role="tab" aria-selected="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve" enable-background="new 0 0 512 512" class="">
+                      <path d="m98.9 184.7 1.8 2.1 136 156.5c4.6 5.3 11.5 8.6 19.2 8.6 7.7 0 14.6-3.4 19.2-8.6L411 187.1l2.3-2.6c1.7-2.5 2.7-5.5 2.7-8.7 0-8.7-7.4-15.8-16.6-15.8H112.6c-9.2 0-16.6 7.1-16.6 15.8 0 3.3 1.1 6.4 2.9 8.9z" fill="#203D3B" class=""></path>
+                    </svg>
+                  </button>
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section class="subDropdown_item_detail_container">
+            <div class="submenu" data-subMenuOf="shopAll" id="submenu_shop_1" aria-orientation="horizontal" role="tablist">
+              <ul>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/rephils.png" alt="" /></span>
+                    <h3>REPHILS</h3>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/allSellers.jpeg" alt="" /></span>
+                    <h3>BEST SELLERS</h3>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="submenu" data-subMenuOf="skin" id="submenu_shop_2" aria-orientation="horizontal" role="tablist">
+              <ul class=" ">
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/shave.jpeg" alt="" /></span>
+                    <h3>SHAVE</h3>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/cleansers.png" alt="" /></span>
+                    <h3>CLEANSERS</h3>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/moisture.png" alt="" /></span>
+                    <h3>MOISTURIZERS</h3>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="submenu" data-subMenuOf="hair" id="submenu_shop_3" aria-orientation="horizontal" role="tablist">
+              <ul>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/shampoo.jpeg" alt="" /></span>
+                    <h3>SHAMPOO</h3>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/conditioner.png" alt="" /></span>
+                    <h3>CONDITIONER</h3>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="submenu" data-subMenuOf="body" id="submenu_shop_4" aria-orientation="horizontal" role="tablist">
+              <ul>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/handSoap.png" alt="" /></span>
+                    <h3>HAND SOAPS</h3>
+                  </a>
+                </li>
+                <li class="subDropdown_item_detail">
+                  <a href="">
+                    <span><img src="../assets/images/bodyWash.jpeg" alt="" /></span>
+                    <h3>BODY WASH</h3>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </nav>
+      </section>
+
+      <!-- Start ------------------------------------------ DropDown_Mobile --------------------------------------- -->
+
+      <section class="dropDown_mobile_container" id="submenu" data-mobileMenu>
+        <nav>
+          <div class="mobile_menu_shop">
+            <button class="mobile_menu_shop_Button" data-mobileMenuBtn aria-controls="submenu_shop" aria-expanded="false">
+              <span>Shop</span>
+              <span class="icon_contaienr"><img src="../assets/icons/arrowDown.svg" alt="" /></span>
+            </button>
+            <div class="mobile_submenu_shop" id="submenu_shop">
+              <ul>
+                <li>
+                  <a href="">
+                    <div>
+                      <img src="../assets/images/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="" />
+                    </div>
+                    <div>
+                      <h4>HAIR</h4>
+                      <p>Shampoo & conditioner, Refill pods, etc</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <div>
+                      <img src="../assets/images/Launch_DailyMoisturizer_Ecomm_058_2bfcdcd2-cec3-45c9-af30-5f7b759f1530.jpeg" alt="" />
+                    </div>
+                    <div>
+                      <h4>FACE</h4>
+                      <p>Razors,creams,oils</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <div>
+                      <img src="../assets/images/Launch_HandSoap_FoamerBottle_Ecomm_079.jpeg" alt="" />
+                    </div>
+                    <div>
+                      <h4>BODY</h4>
+                      <p>Lotions,hands soaps,refills</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mobile_menu_learn">
+            <button class="mobile_menu_learn_Button" data-mobileMenuBtn aria-expanded="false" aria-controls="submenu_learn" aria-label="submenu">
+              <span>Learn</span>
+              <span class="icon_contaienr"><img src="../assets/icons/arrowDown.svg" alt="" /></span>
+            </button>
+            <div class="mobile_submenu_learn" id="submenu_learn">
+              <a href="">ABOUT US</a>
+            </div>
+          </div>
+        </nav>
+        <div class="mobile_signUp_link_container">
+          <a href="" class="button--authButton">Sign Up</a>
+          <a href="" class="button--authButton">Log In</a>
+        </div>
+      </section>
+    </header>
+
+    <!-- START ------------------------------------------- Cart-Section -------------------------------------- -->
+    <section id="cartSection" class="cart_drawer-section" data-cartDrawer>
+      <div class="cart-wrapper">
+        <section class="cart_header_section">
+          <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>4</span>&rpar;</h2>
+          <p class="cart_header_message">Spend $47.02 more or add a subscription to get free shipping!</p>
+          <div class="cart_freeShipping_progressBar_wrapper">
+            <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar></span>
+          </div>
+          <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+        </section>
+        <section class="cartItems_container">
+          <ul>
+            <li class="cartItem">
+              <div class="cartItem_image_container">
+                <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="" />
+              </div>
+              <div class="cartItem_details">
+                <div class="cartItem_heading_container">
+                  <a href="">The EveryThing Bar</a>
+                  <p class="cartItem_price">$14.99</p>
+                </div>
+
+                <div class="cartItem_quantity_container">
+                  <div class="cartItem_quantity_wrapper">
+                    <button class="decrease_cartQuantity_button" data-decreaseCartQuantityBtn>
+                      <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
+                      <span>-</span>
+                    </button>
+
+                    <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
+                      <span>Product The EveryThing Bar quantity</span>
+                    </label>
+                    <input class="cartItem_quantity_input" type="number" min="1" max="200" value="1" name="quantity" id="Quantity-The-EveryThing-Bar" />
+
+                    <button data-increaseCartQuantityBtn class="increase_cartQuantity_button">
+                      <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
+                      <span>+</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <a href="" class="remove_cartItem">remove</a>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="cart_footer_section">
+          <div class="cart_footer_totalPrize_container">
+            <p>SUBTOTAl</p>
+            <p>$23</p>
+          </div>
+          <a href="" class="button--checkout">Checkout</a>
+        </section>
+      </div>
+    </section>
+    <!-- START --------------------------------------- Main ------------------------------------ -->
+    <main>
+      <section class="product_section">
+        <div class="product_wrapper">
+          <!-- product-Images ----------------------- -->
+          <section class="product_images_section">
+            <div class="product_images_slider_container">
+              <swiper-container class="swiper-container-product" data-swiper-container-product-images init="false">
+                <swiper-slide class="swiper-slide">
+                  <img src="/assets/TheEverythingBar_Ecomm_106_720x.webp" draggable="false" alt="" />
+                </swiper-slide>
+                <swiper-slide class="swiper-slide">
+                  <img src="/assets/conditioner.png" draggable="false" alt="" />
+                </swiper-slide>
+                <swiper-slide class="swiper-slide">
+                  <img src="/assets/everythingebichi.webp" draggable="false" alt="" />
+                </swiper-slide>
+              </swiper-container>
+            </div>
+          </section>
+          <!-- Product-Description ---------------- -->
+          <section class="product_description_section">
+            <div class="product_description_wrapper_sticky">
+              <div class="product_description_container">
+                <div>
+                  <h1 class="product_title">The EveryThing Bar</h1>
+                  <p class="product_price">$14.99</p>
+                  <p class="product_description">Tired of a shower full of plastic bottles? Tired of buying more things than you need? Soft, manageable hair AND clean pits AND smells like the freaking beach? Look no further that this guy right here that works from the ends of your hair to the tips of your toes. The only thing you need in the shower to get yourself squeaky with upcycled plant squalane and chia seed oil. ONE BAR TO RULE THEM ALL!</p>
+                  <p class="product_weight">3.1oz (87.5g) Bar</p>
+                </div>
+                <div class="product_addToBag_wrapper">
+                  <div class="product_quantity_wrapper">
+                    <button class="decrease_Quantity_button" data-decreaseItemQuantityBtn>
+                      <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
+                      <span>-</span>
+                    </button>
+
+                    <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
+                      <span>Product The EveryThing Bar quantity</span>
+                    </label>
+                    <input class="item_quantity_input" type="number" min="1" max="200" value="1" name="quantity" id="Quantity-The-EveryThing-Bar" />
+
+                    <button data-increaseItemQuantityBtn class="increase_Quantity_button">
+                      <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
+                      <span>+</span>
+                    </button>
+                  </div>
+                  <button class="button--addToBag">Add to Bag</button>
+                </div>
+                <p class="extra_product_message">NEED EXTRA MOISTURIZER? <a href="">TRY OUR DAILY MOISTURIZER</a></p>
+              </div>
+              <!-- product-Accordion -------------------- -->
+              <div class="product_accordion_wrapper">
+                <div class="accordion" data-accordion>
+                  <button class="accordion_button" aria-expanded="false" id="tab-shop" aria-controls="panel-shop" data-accordionBtn>
+                    <span>HOW TO USE</span>
+                    <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
+                  </button>
+                  <div class="accordion_item" id="panel-shop" aria-labelledby="tab-shop">
+                    <p>Lather up and apply to wet hair working from scalp to tip. Rinse thoroughly. Lather up and also apply to your body and rinse thoroughly. Keep bar dry between uses with our Phil's sustainable soap dish.</p>
+                  </div>
+                </div>
+
+                <div class="accordion" data-accordion>
+                  <p class="accordion_heading">LEARN</p>
+                  <button class="accordion_button" aria-expanded="false" id="tab-learn" aria-controls="panel-learn" data-accordionBtn>
+                    <span>LEARN</span>
+                    <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
+                  </button>
+                  <div class="accordion_item" id="panel-learn" aria-labelledby="tab-learn">
+                    <p>Sodium Cocoyl Isethionate, Hydrogenated Vegetable Oil, Polyglyceryl-4 Laurate, Water/ Aqua, Glycerin, Natural Fragrance, Butyrospermum Parkii (Shea) Butter, Salvia Hispanica (Chia) Seed Oil, Persea Gratissima (Avocado) Oil, Squalane, Tetrasodium Glutamate Diacetate, Titanium Dioxide (CI 77891)</p>
+                  </div>
+                </div>
+
+                <div class="accordion" data-accordion>
+                  <button class="accordion_button" aria-expanded="false" id="tab-help" aria-controls="panel-help" data-accordionBtn>
+                    <span>HELP</span>
+                    <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
+                  </button>
+                  <div class="accordion_item" id="panel-help" aria-labelledby="tab-help">
+                    <p>Ethically manufactured from global components and ingredients in the USA in a facility that is this party audited for social and environmental responsibility and safety. As SEDEX members we are dedicated to transparency and responsible manufacturing.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Bought-Together ------------- -->
+              <div class="boughtTogether_wrapper">
+                <p>Frequently Bought Together</p>
+
+                <div class="bought_together_product banner_card">
+                  <div class="banner_image">
+                    <img src="/assets/dailyMoisturizer.webp" alt="" />
+                  </div>
+                  <div class="banner_detail">
+                    <div class="banner_product_heading">
+                      <p class="banner_product_title">Shave + FaceBar</p>
+                      <p class="banner_product_prize">$11.99</p>
+                    </div>
+                    <button class="button--productBanner">
+                      <span>Add to Bag</span>
+                      <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M16.1836 3.4165L19.8972 7.49984L16.1836 11.5832" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+      <!-- Scrolling-Text ----------------------------------- -->
+       <section class="scrolling_text_section">
+        <div class="scrolling_text_wrapper">
+          <div class="scrolling_text_contents">
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText1.png" alt="">
+              </span>
+              <p class="scrolling_text_item_description">
+                1 product = 1 pound of ocean bound plastic removed from the environment
+              </p>
+            </div>
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText2.png" alt="">
+              </span>
+              <p class="scrolling_text_item_description">
+                paraben free, sulface free, cruelty free, vegan, ethically manufactured
+              </p>
+            </div>
+          </div>
+          <div class="scrolling_text_contents">
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText1.png" alt="">
+              </span>
+              <p class="scrolling_text_item_description">
+                1 product = 1 pound of ocean bound plastic removed from the environment
+              </p>
+            </div>
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText2.png" alt="">
+              </span>
+              <p class="scrolling_text_item_description">
+                paraben free, sulface free, cruelty free, vegan, ethically manufactured
+              </p>
+            </div>
+          </div>
+        </div>
+       </section>
+       <section class="additional_products_section">
+         <h3 class="additional_products_heading">
+           You May Also Like
+         </h3>
+          <div class="additional_products_wrapper">
+            <swiper-container class="swiper_container_additional_product" init="false" data-swiper-container-additional-products>
+              <swiper-slide class="swiper_slide_additional_product">
+                <div class="product_card">
+                  <a href="./product.html">
+                    <span class="visually-hidden">The EveryThing Bar</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p>The EveryThing Bar</p>
+                    <p>$14.99</p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="/assets/TheEverythingBar_Ecomm_106_720x.webp" alt="">
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1">
+                      <input type="hidden" name="productId" class="productId" value="1" name="productId">
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-product-id="1">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </swiper-slide>
+
+              <swiper-slide class="swiper_slide_additional_product">
+                <div class="product_card">
+                  <a href="./product.html">
+                    <span class="visually-hidden">The EveryThing Bar</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p>The EveryThing Bar</p>
+                    <p>$14.99</p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="/assets/TheEverythingBar_Ecomm_106_720x.webp" alt="">
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1">
+                      <input type="hidden" name="productId" class="productId" value="1" name="productId">
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-product-id="1">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </swiper-slide>
+
+              <swiper-slide class="swiper_slide_additional_product">
+                <div class="product_card">
+                  <a href="./product.html">
+                    <span class="visually-hidden">The EveryThing Bar</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p>The EveryThing Bar</p>
+                    <p>$14.99</p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="/assets/TheEverythingBar_Ecomm_106_720x.webp" alt="">
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1">
+                      <input type="hidden" name="productId" class="productId" value="1" name="productId">
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-product-id="1">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="../assets/icons/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </swiper-slide>
+            </swiper-container>
+          </div>
+       </section>
+       <div class="findUs_message_container">
+        <p class="findUs_message">Find Us Exclusively Online at Zaply.co</p>
+       </div>
+    </main>
+    <!-- START -------------------------------------- Footer ------------------------------------ -->
+    <footer>
+      <div class="footer_wrapper">
+        <div class="footer_logo_wrapper">
+          <a href=""><img src="src/assets/logo/logoFooter.png" alt="phils" /></a>
+        </div>
+        <section class="footer_form_subscribe">
+          <p class="footer_form_heading">GET YOUR PHIL WITH THE LATEST UPDATES</p>
+          <form action="">
+            <p>
+              <input type="email" id="contactForm-Email" name="contactEmail" placeholder="Email Address" required autocomplete="email" />
+              <label for="contactForm-Email" class="contactForm-label" aria-hidden="false">Email Address</label>
+            </p>
+            <p>
+              <button class="footer_formSubmitBtn" type="submit">Sign UP Now</button>
+            </p>
+          </form>
+        </section>
+        <section class="footer_menu">
+          <div class="footer_accordion_shop accordion--footer" data-accordion>
+            <p class="footer_menu_heading accordion_heading">SHOP</p>
+            <button class="accordion_button" aria-expanded="false" id="tab-shop" aria-controls="panel-shop" data-accordionBtn>
+              <span>SHOP</span>
+              <span class="accordion_button_arrowIcon"><img src="src/assets/icons/circleDownArrowSvgWhite.png" alt="" /></span>
+            </button>
+            <ul class="accordion_itemList" id="panel-shop" aria-labelledby="tab-shop">
+              <li><a href="">New</a></li>
+              <li><a href="">Best Sellers</a></li>
+              <li><a href="">Kits & Gifts</a></li>
+              <li><a href="">Shop All</a></li>
+            </ul>
+          </div>
+
+          <div class="footer_accordion_Learn accordion--footer" data-accordion>
+            <p class="footer_menu_heading accordion_heading">LEARN</p>
+            <button class="accordion_button" aria-expanded="false" id="tab-learn" aria-controls="panel-learn" data-accordionBtn>
+              <span>LEARN</span>
+              <span class="accordion_button_arrowIcon"><img src="src/assets/icons/circleDownArrowSvgWhite.png" alt="" /></span>
+            </button>
+            <ul class="accordion_itemList" id="panel-learn" aria-labelledby="tab-learn">
+              <li><a href="">About Us</a></li>
+              <li><a href="">Ingredient Phil</a></li>
+              <li><a href="">Sustainability</a></li>
+            </ul>
+          </div>
+
+          <div class="footer_accordion_shop accordion--footer" data-accordion>
+            <p class="footer_menu_heading accordion_heading">HELP</p>
+            <button class="accordion_button" aria-expanded="false" id="tab-help" aria-controls="panel-help" data-accordionBtn>
+              <span>HELP</span>
+              <span class="accordion_button_arrowIcon"><img src="src/assets/icons/circleDownArrowSvgWhite.png" alt="" /></span>
+            </button>
+            <ul class="accordion_itemList" id="panel-help" aria-labelledby="tab-help">
+              <li><a href="">Contact</a></li>
+              <li><a href="">Shipping & returns</a></li>
+              <li><a href="">FAQ's</a></li>
+            </ul>
+          </div>
+        </section>
+        <!-- Start------------------------------------------- Social Media logos-------------------------------- -->
+        <section class="footer_socialIcons_section">
+          <ul>
+            <li>
+              <a href="" aria-label="phils on instagram"><img src="src/assets/icons/instagram.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href="" aria-label="phils on twitter"><img src="src/assets/icons/twitter.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href="" aria-label="phils on facebook"><img src="src/assets/icons/facebooks.svg" alt="" /></a>
+            </li>
+            <li>
+              <a href="" aria-label="phils on tiktok"><img src="src/assets/icons/tiktok.svg" width="40" alt="" /></a>
+            </li>
+          </ul>
+        </section>
+        <!-- Start -------------------------------------------- Privacy Policy ----------------------------------- -->
+
+        <section class="footer_privacyPolicy_section">
+          <ul class="footer_privacyPlocies_list">
+            <li>© Phil’s. All Rights Reserved.</li>
+            <li>
+              <a href="">Terms of Service</a>
+            </li>
+            <li>
+              <a href="">Privacy Policy</a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>

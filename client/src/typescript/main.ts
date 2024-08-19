@@ -7,31 +7,34 @@ import initLoginPage from "./pages/login";
 // components
 import headerDropdownMenuController_large from "./components/HeaderDropdown/headerDropdownMenu";
 import headerDropdownMenuController_Mobile from "./components/HeaderDropdown/headerMobileDropdownMenu";
-import Accordion from "./components/accordion/accordion";
-import Cart from "./components/Cart/cart";
-
+import initAccordion from "./components/accordion/accordion";
+import initCart from "./components/Cart/cart";
+import initProductPage from "./pages/product";
 const App = (): void => {
   // global components for all pages
   headerDropdownMenuController_Mobile();
   headerDropdownMenuController_large();
-  Accordion();
-  Cart();
-  
+  initAccordion();
+  initCart();
+
   const page: string | undefined = document.body.dataset.page;
   if (!page) throw new Error(`Failed to identify the current page.Correctly add the data-page="pageName" attribute in body tag of every page`);
   switch (page) {
-    case 'home':
+    case "home":
       initHomePage();
       break;
-    case 'collection':
+    case "collection":
       initCollectionPage();
       break;
-    case 'register':
+    case "register":
       initRegisterPage();
       break;
-    case 'login':
+    case "login":
       initLoginPage();
+      break;
+    case "product":
+      initProductPage();
   }
-}
+};
 
-document.addEventListener('DOMContentLoaded', App);
+document.addEventListener("DOMContentLoaded", App);

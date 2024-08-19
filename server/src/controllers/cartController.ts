@@ -1,13 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import mongoose, { ObjectId } from "mongoose";
-import Cart, { ICart, ICartItem } from "../model/cartModel.ts";
+import Cart from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
-import StoreSetting from "../model/settingsModel.ts";
 import { populateCartItems } from "../utils/cartUtils.ts";
-import logger from "../config/logger.ts";
+import { getShippingConfig,createCart } from "../utils/cartUtils.ts";
 
-
-// TODO Refactor cart controllers functions to make them modular
 // delete item from cart
 export const deleteItem = async (req: Request, res: Response,next:NextFunction) => {
   const { id } = req.params;
@@ -78,6 +74,10 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
+
+
+
+
 // add product item to user Cart
 export const addItem = async (req: Request, res: Response, next: NextFunction) => {
   const { productId,quantity } = req.body;
@@ -106,11 +106,11 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     // increase the quantity if item is already present in cart and stock is available else add the item
     const cartItem = cart.items.find((item) => item.productId.equals(productId));
     if (!cartItem) cart.items.push({ productId, quantity});
-    else if (cartItem.quantity < product.stock) cartItem.quantity++;
+    else if (cartItem.quantity+quantity < product.stock) cartItem.quantity+= quantity;
     else {
       return res.status(422).json({
         status: "fail",
-        message: `Maximum stock reached. ${product.stock - cartItem.quantity} units of ${product.title} available.`
+        message: `Given quantity exceeds the available stock of ${product.stock - cartItem.quantity} units.`
       });
     }
     await cart.save();
@@ -128,28 +128,3 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
-// helper func to create Cart  document
-function createCart(productId: mongoose.Types.ObjectId,quantity:number, userId: mongoose.Types.ObjectId| undefined): ICart {
-  if (!userId) {
-    throw new Error('Unauthorized access!. Received Request to create user cart with undefined userId');
-  }
-  return new Cart({
-    userId: userId,
-    items: [
-      {
-        productId,
-        quantity,
-      },
-    ],
-  });
-}
-
-
-async function getShippingConfig() {
-  const shippingConfig = await StoreSetting.findOne({ _id: 'shipping_config' },{_id:0}).lean();
-  if (!shippingConfig) {
-    logger.error("Missing shipping Configuration document");
-    throw new Error("Unable to find shipping Configuration document");
-  }
-  return shippingConfig;
-}

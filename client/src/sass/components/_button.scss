@@ -50,7 +50,8 @@
     width: 100%;
   }
 
-  &--checkout{
+  &--checkout,
+  &--addToBag{
     @include button;
     background-color: $clr-primary;
     color: white;

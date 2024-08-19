@@ -7,16 +7,17 @@ import { capitalizeFirstLetter } from "../utils/utils.ts";
 export const renderAllCollectionsView = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const user = req.session.user;
   try {
-    const allProducts: Array<IProduct> = await Product.find().lean();
+    const allProducts: Array<IProduct> = await Product.find().lean().exec();
     const bestSellers: Array<IProduct> = await Product.find().sort({ salesCount: "descending" }).limit(3).lean();
     const userConfig = await getUserConfig(user);
 
     res.render("allCollections", {
       ...userConfig,
       bestSellers: bestSellers,
-      body: allProducts.filter((product: IProduct) => product.category.includes("body")),
-      cleansers: allProducts.filter((product: IProduct) => product.category.includes("cleansers")),
-      conditioners: allProducts.filter((product: IProduct) => product.category.includes("conditioner")),
+      body: allProducts.filter((product: IProduct) => product.categories.includes("body")),
+      cleansers: allProducts.filter((product: IProduct) => product.categories.includes("cleansers")),
+      conditioners: allProducts.filter((product: IProduct) => product.categories.includes("conditioner")),
+      face: allProducts.filter((product: IProduct) => product.categories.includes("face")),
     });
   } catch (error) {
     next(error);
@@ -43,7 +44,7 @@ export const renderCollectionView = async (collectionName: string, req: Request,
   const user = req.session.user;
   try {
     const userConfig = await getUserConfig(user);
-    const products = await Product.find({ category: collectionName });
+    const products = await Product.find({ categories: collectionName });
 
     res.render('collection', {
       ...userConfig,

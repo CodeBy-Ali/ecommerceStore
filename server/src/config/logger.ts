@@ -3,7 +3,7 @@ import { join } from 'path';
 import config from './config.ts';
 
 const env = process.env.NODE_ENV;
-const logDirectory = join(__dirname, '..', 'logs');
+const logDirectory = join(import.meta.dirname, '..','..', 'logs');
 
 const logger = createLogger({
   level: 'info',
@@ -38,17 +38,10 @@ if (env !== 'PROD') {
       format.colorize(),
       format.printf(info => {
         const {level,message,timestamp,...rest } = info;
-        if (Object.keys(rest).length > 0) {
-          return `${timestamp} ${level}: ${message} ${JSON.stringify(rest)}`
-        }
         return `${timestamp} ${level}: ${message}`
       })
     )
   }))
 }
 
-
 export default logger;
-
-
-

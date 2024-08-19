@@ -1,0 +1,30 @@
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+.notFound_hero_section {
+  padding-block: 5rem;
+  margin-inline: auto;
+  width: 100%;
+  max-width: $max-width-container-collection;
+  text-align: center;
+  & .notFound_404_code_heading {
+    font-size: clamp(4rem, 5vw, 8rem);
+  }
+
+  & .notFound_test_heading {
+    font-size: clamp(6.5rem, 5vw, 11.4rem);
+  }
+
+  & .button_continue_shopping {
+    margin-top: 1.6rem;
+    margin-inline: auto;
+    display: inline-block;
+  }
+
+  @include respond-to(small) {
+    & .button_continue_shopping {
+      margin-top: 3.4rem;
+
+    }
+  }
+}

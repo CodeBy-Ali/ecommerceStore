@@ -4,6 +4,7 @@ import config from "../config/config.ts";
 import pagesRoutes from '../routes/pageRoutes.ts';
 import authRoutes from '../routes/authRoutes.ts';
 import cartRoutes from '../routes/cartRoutes.ts';
+import productRoutes from '../routes/productRoutes.ts';
 import collectionRoutes from '../routes/collectionRoutes.ts';
 import session, { Cookie } from 'express-session'
 import MongoStore from 'connect-mongo';
@@ -86,18 +87,18 @@ app.use(express.urlencoded({ extended: false }));
 // parse req body of content json
 app.use(express.json())
 
-// log request urls
-app.use(logRequest);
-
 // serve static files
 app.use(express.static(staticDir));
+
+// log request urls
+app.use(logRequest);
 
 // assign routes 
 app.use("/", pagesRoutes);
 app.use("/account", authRoutes);
 app.use("/collections", collectionRoutes);
 app.use('/cart', cartRoutes);
-
+app.use('/products', productRoutes);
 // response to unhandled routes
 app.all('*', unassignedRoutesHandler);
 

@@ -27,7 +27,7 @@ export const validateAuthBody = (req: Request, res: Response, next: NextFunction
     return next();
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    res.status(400).json({message: message});
+    res.status(400).json({ message: message });
   }
 };
 
@@ -50,16 +50,25 @@ export const validateRegisterBody = (req: Request, res: Response, next: NextFunc
   }
 };
 
-
-
-export const validateReqParams = (req: Request, res: Response, next: NextFunction) => {
+export const validateIdParam = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   if (!id) {
-    return res.status(400).json({ message: "Missing required filed: productId" });
+    return res.status(400).json({
+      status: "fail",
+      message: "Missing required parameter: productId"
+    });
   }
-  
-  if (id.length !== 24) {
-    return res.status(422).json({ message: "Invalid parameter: productId must be 24 character string" });
+  next();
+};
+
+
+export const validateNameParam = (req: Request, res: Response, next: NextFunction) => {
+  const { name } = req.params;
+  if (!name) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Missing required parameter: name"
+    });
   }
   next();
 }

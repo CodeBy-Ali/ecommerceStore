@@ -32,7 +32,7 @@
               <% products.forEach(product => { %>
               <li class="product_list_item">
                 <div class="product_card">
-                  <a href="">
+                  <a href="/products/<%= product.slug %>">
                     <span class="visually-hidden"><%= product.title %></span>
                   </a>
                   <div class="product_card_info">
@@ -40,11 +40,11 @@
                     <p>$ <%= product.price %></p>
                   </div>
                   <div class="product_card_image">
-                    <img src="<%= product.image %>" alt="" />
+                    <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
                   </div>
                   <div class="product_addToCart_container">
                     <div class="addTOCart_action" >
-                      <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+                      <button aria-label="Add to bag <%= product.title  %>" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
                         <span class="action_btn_text">Add to bag</span>
                         <span class="plus_icon_btn">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />

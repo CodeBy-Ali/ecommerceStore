@@ -4,6 +4,10 @@
 html{
   font-size: $font-size-root;
   scroll-behavior: smooth;
+  scroll-padding: $height-header-sm;
+  @include respond-to(small){
+    scroll-padding: $height-header-lg;
+  }
 }
 
 a,button:not(.button--subDropDown):not(.button--dropdown):not(.accordion_button){
@@ -23,7 +27,7 @@ body{
   @include respond-to(medium){
     padding-top: $height-header-lg;
   }
-  overflow-x: hidden;  
+  overflow-x: hidden;   
   height: 100vh;
 }
 

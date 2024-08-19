@@ -10,14 +10,18 @@
 
 @use 'components/button';
 @use 'components/productCard';
-@use 'components/bannerCard';
+@use 'components/bannerCard'; 
 @use 'components/notification';
 @use 'components/cart';
 @use 'components/loader';
+@use 'components/accordion';
+@use "components/scrollingText";
 
 @use 'pages/home';
 @use 'pages/register-Login';
 @use 'pages/collections';
- 
+@use 'pages/product';
+@use 'pages/notFound';
+
 @use 'layout/header';
 @use 'layout/footer';

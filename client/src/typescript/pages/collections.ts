@@ -1,56 +1,19 @@
-import { showNotification } from "../components/utils/util";
-import { renderCart } from "../components/Cart/modules/cartRender";
-import { IResponseBody } from "../components/Cart/cart";
-import Cart from "../components/Cart/cart";
-import {
-  withProcessingState,
-  updateHeaderTotalCartItemsCount,
-  toggleCartDrawer,
-} from "../components/utils/cartUtils";
-
-
-
-
-
-
-
-
-const addProductToCart: (e: Event) => Promise<void> = withProcessingState(async (e: Event) => {
-  const targetButton = e.target as HTMLElement;
-  if (!targetButton) return;
-  const productId = targetButton.getAttribute("data-productId");
-  if (!productId) throw new Error("Failed to get ProductId");
-  const response = await fetch("/cart/items", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      productId: productId,
-      quantity: 1
-    }),
-  });
-  const responseBody = await response.json();
-  const { data,status } = responseBody as IResponseBody;
-  if (!response.ok || status !== 'success') {
-    showNotification(responseBody?.message, false);
-    return;
-  }
-  const totalCartItems = data.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-  renderCart(data.cartItems, totalCartItems, data.storeSettings);
-  updateHeaderTotalCartItemsCount(totalCartItems);
-  toggleCartDrawer();
-  Cart();
-});
-
-
-
-
+import { addProductToCart } from "../components/Cart/cart";
+import { showNotification } from "../components/utils/pagesUtils";
 
 const initCollectionPage = (): void => {
   const addToCartButtons = document.querySelectorAll<HTMLElement>("[data-addToCartBtn]");
-  addToCartButtons?.forEach(button => button.addEventListener("click", addProductToCart));
+  addToCartButtons?.forEach((button) => button.addEventListener("click", handleAddToCart));
+};
+
+function handleAddToCart(e:Event):void { 
+    const actionButton = e.target as HTMLButtonElement;
+    const productId = actionButton.getAttribute("data-productId");
+    if (!productId) {
+      showNotification("Failed to add product to cart. Please try again later..", false);
+      throw new Error("Missing required argument: ProductId");
+    }
+    addProductToCart(actionButton, productId, 1);
 }
 
 export default initCollectionPage;

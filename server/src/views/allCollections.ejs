@@ -32,16 +32,16 @@
           <p>Jump to:</p>
           <ul>
             <li><a href="#bestSellers" aria-label="Jump to: Best Sellers">BEST SELLERS</a></li>
-            <li><a href="" aria-label="Jump to: Body">BODY</a></li>
-            <li><a href="" aria-label="Jump to: Body Wash">BODY WASH</a></li>
-            <li><a href="" aria-label="Jump to: CLeansers">CLEANSERS</a></li>
-            <li><a href="" aria-label="Jump to: Conditioners">CONDITIONERS</a></li>
-            <li><a href="" aria-label="Jump to: Face">FACE</a></li>
-            <li><a href="" aria-label="Jump to: Hair">HAIR</a></li>
-            <li><a href="" aria-label="Jump to: Hand soap">HAND SOAP</a></li>
-            <li><a href="" aria-label="Jump to: Moisturizers">MOISTURIZERS</a></li>
+            <li><a href="#body" aria-label="Jump to: Body">BODY</a></li>
+            <li><a href="#bodyWash" aria-label="Jump to: Body Wash">BODY WASH</a></li>
+            <li><a href="#cleansers" aria-label="Jump to: CLeansers">CLEANSERS</a></li>
+            <li><a href="#conditioners" aria-label="Jump to: Conditioners">CONDITIONERS</a></li>
+            <li><a href="#face" aria-label="Jump to: Face">FACE</a></li>
+            <li><a href="#hair" aria-label="Jump to: Hair">HAIR</a></li>
+            <li><a href="#handSoap" aria-label="Jump to: Hand soap">HAND SOAP</a></li>
+            <!-- <li><a href="" aria-label="Jump to: Moisturizers">MOISTURIZERS</a></li>
             <li><a href="" aria-label="Jump to: Shampoo">SHAMPOO</a></li>
-            <li><a href="" aria-label="Jump to: Shave">SHAVE</a></li>
+            <li><a href="" aria-label="Jump to: Shave">SHAVE</a></li> -->
           </ul>
         </nav>
       </section>
@@ -59,7 +59,7 @@
               <% bestSellers.forEach(product => { %>
               <li class="product_list_item">
                 <div class="product_card">
-                  <a href="">
+                  <a href="/products/<%= product.slug %>">
                     <span class="visually-hidden"><%= product.title %></span>
                   </a>
                   <div class="product_card_info">
@@ -67,7 +67,7 @@
                     <p>$ <%= product.price %></p>
                   </div>
                   <div class="product_card_image">
-                    <img src="<%= product.image %>" alt="" />
+                    <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
                   </div>
                   <div class="product_addToCart_container">
                     <div class="addTOCart_action" >
@@ -102,7 +102,7 @@
                       </h3>
                     </div>
                     <div>
-                      <a href="" class="button--productBanner">
+                      <a href="/products/shaving-cream" class="button--productBanner">
                         <span>Shop Shaving Cream</span>
                         <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -118,7 +118,7 @@
         </div>
       </section>
       <!-- Start ------------------------------------------------------ Body-Section ------------------------------------------------ -->
-      <section class="category_section">
+      <section class="category_section" id="body">
         <div class="category_section_wrapper">
           <div class="category_section_header">
             <h2>
@@ -129,40 +129,43 @@
           <div class="products_container">
             <ul>
               <% body.forEach(product =>{ %>
-              <li class="product_list_item">
-                <div class="product_card">
-                  <a href="">
-                    <span class="visually-hidden"><%= product.title %></span>
-                  </a>
-                  <div class="product_card_info">
-                    <p><%= product.title %></p>
-                    <p>$ <%= product.price %></p>
-                  </div>
-                  <div class="product_card_image">
-                    <img src="<%= product.image %>" alt="" />
-                  </div>
-                  <div class="product_addToCart_container">
-                    <div class="addTOCart_action">
-                      <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn>
-                        <span class="action_btn_text">Add to bag</span>
-                        <span class="plus_icon_btn">
+                <li class="product_list_item">
+                  <div class="product_card">
+                    <a href="/products/<%= product.slug %>">
+                      <span class="visually-hidden"><%= product.title %></span>
+                    </a>
+                    <div class="product_card_info">
+                      <p><%= product.title %></p>
+                      <p>$ <%= product.price %></p>
+                    </div>
+                    <div class="product_card_image">
+                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
+                    </div>
+                    <div class="product_addToCart_container">
+                      <div class="addTOCart_action" >
+                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                          <div class="addToCart_loading_animation_wrapper">
+                            <div class="loader"></div>
+                          </div>
+                        </button>
+                        <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
-                      </button>
-                      <span class="plus_icon">
-                        <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
-                      </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
+                </li>
               <% }) %>
             </ul>
           </div>
         </div>
       </section>
       <!-- Start ------------------------------------------------------ Cleansers-Section ------------------------------------------------ -->
-      <section class="category_section">
+      <section class="category_section" id="cleansers">
         <div class="category_section_wrapper">
           <div class="category_section_header">
             <h2>
@@ -173,40 +176,43 @@
           <div class="products_container">
             <ul>
               <% cleansers.forEach(product =>{ %>
-              <li class="product_list_item">
-                <div class="product_card">
-                  <a href="">
-                    <span class="visually-hidden"><%= product.title %></span>
-                  </a>
-                  <div class="product_card_info">
-                    <p><%= product.title %></p>
-                    <p>$ <%= product.price %></p>
-                  </div>
-                  <div class="product_card_image">
-                    <img src="<%= product.image %>" alt="" />
-                  </div>
-                  <div class="product_addToCart_container">
-                    <div class="addTOCart_action">
-                      <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn" data-addToCartBtn>
-                        <span class="action_btn_text">Add to bag</span>
-                        <span class="plus_icon_btn">
+                <li class="product_list_item">
+                  <div class="product_card">
+                    <a href="/products/<%= product.slug %>">
+                      <span class="visually-hidden"><%= product.title %></span>
+                    </a>
+                    <div class="product_card_info">
+                      <p><%= product.title %></p>
+                      <p>$ <%= product.price %></p>
+                    </div>
+                    <div class="product_card_image">
+                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
+                    </div>
+                    <div class="product_addToCart_container">
+                      <div class="addTOCart_action" >
+                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                          <div class="addToCart_loading_animation_wrapper">
+                            <div class="loader"></div>
+                          </div>
+                        </button>
+                        <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
-                      </button>
-                      <span class="plus_icon">
-                        <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
-                      </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
+                </li>
               <% }) %>
             </ul>
           </div>
         </div>
       </section>
       <!-- Start ------------------------------------------------------ Conditioners-Section ------------------------------------------------ -->
-      <section class="category_section">
+      <section class="category_section" id="conditioners">
         <div class="category_section_wrapper">
           <div class="category_section_header">
             <h2>
@@ -217,36 +223,109 @@
           <div class="products_container">
             <ul>
               <% conditioners.forEach(product =>{ %>
-              <li class="product_list_item">
-                <div class="product_card">
-                  <a href="">
-                    <span class="visually-hidden"><%= product.title %></span>
-                  </a>
-                  <div class="product_card_info">
-                    <p><%= product.title %></p>
-                    <p>$ <%= product.price %></p>
-                  </div>
-                  <div class="product_card_image">
-                    <img src="<%= product.image %>" alt="" />
-                  </div>
-                  <div class="product_addToCart_container">
-                    <form action="">
-                      <div class="addTOCart_action">
-                        <button aria-label="Add to bag The EveryThing Bar" type="submit" class="addTOCart_action_btn" data-addToCartBtn>
+                <li class="product_list_item">
+                  <div class="product_card">
+                    <a href="/products/<%= product.slug %>">
+                      <span class="visually-hidden"><%= product.title %></span>
+                    </a>
+                    <div class="product_card_info">
+                      <p><%= product.title %></p>
+                      <p>$ <%= product.price %></p>
+                    </div>
+                    <div class="product_card_image">
+                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
+                    </div>
+                    <div class="product_addToCart_container">
+                      <div class="addTOCart_action" >
+                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                           </span>
+                          <div class="addToCart_loading_animation_wrapper">
+                            <div class="loader"></div>
+                          </div>
                         </button>
                         <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
                       </div>
-                    </form>
+                    </div>
+                  </div>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- Start ------------------------------------------------------ Face-Section ------------------------------------------------ -->
+      <section class="category_section" id="face">
+        <div class="category_section_wrapper">
+          <div class="category_section_header">
+            <h2>
+              <a href="/collections/face">Face</a>
+            </h2>
+            <p><span><%= face.length %></span> <span>PRODUCTS</span></p>
+          </div>
+          <div class="products_container">
+            <ul>
+              <% face.forEach(product =>{ %>
+                <li class="product_list_item">
+                  <div class="product_card">
+                    <a href="/products/<%= product.slug %>">
+                      <span class="visually-hidden"><%= product.title %></span>
+                    </a>
+                    <div class="product_card_info">
+                      <p><%= product.title %></p>
+                      <p>$ <%= product.price %></p>
+                    </div>
+                    <div class="product_card_image">
+                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
+                    </div>
+                    <div class="product_addToCart_container">
+                      <div class="addTOCart_action" >
+                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                          <div class="addToCart_loading_animation_wrapper">
+                            <div class="loader"></div>
+                          </div>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              <% }) %>
+               <!-- Banner -->
+               <li class="banner_card_wrapper">
+                <div class="banner_card">
+                  <div class="banner_image">
+                    <img src="/assets/Phils_2023_Launch_ShavingCream_Product_HERO-copy.png" alt="" />
+                  </div>
+                  <div class="banner_detail">
+                    <div class="banner_title">
+                      <h3>
+                        <span>Infinitely</span>
+                        <span>Recyclable</span>
+                      </h3>
+                    </div>
+                    <div>
+                      <a href="/products/shaving-cream" class="button--productBanner">
+                        <span>Shop Shaving Cream</span>
+                        <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M16.1836 3.4165L19.8972 7.49984L16.1836 11.5832" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </li>
-              <% }) %>
             </ul>
           </div>
         </div>

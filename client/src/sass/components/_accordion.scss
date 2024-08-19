@@ -1,0 +1,66 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.accordion {
+  @include accordion;
+  color: black;
+  border-top: 1px solid $clr-border;
+  &:last-child {
+    border-bottom: 1px solid $clr-border;
+  }
+
+  & .accordion_item p {
+    padding-top: 0.5rem;
+    padding-bottom: 2.4rem;
+    padding-right: 2rem;
+    font-size: $font-size-sm;
+    color: $clr-primary;
+  }
+  &--footer {
+    @include accordion;
+    & .accordion_button {
+      color: white;
+    }
+
+    @include respond-to(large) {
+      grid-template-columns: repeat(3, 20rem);
+    }
+
+    @include respond-to(medium) {
+      border-top: none;
+
+      & .accordion_heading {
+        display: block;
+      }
+      & .accordion_button {
+        display: none;
+      }
+
+      & .accordion_itemList {
+        max-height: 20rem;
+        gap: 1.2rem;
+        visibility: visible;
+      }
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}
+
+.boughtTogether_wrapper {
+  padding-top: 3.5rem;
+  text-align: center;
+  & p {
+    font-size: 1.4rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @include respond-to(small){
+    padding-top: 4.5rem;
+    & p{
+      font-size: 1.8rem;
+    }
+  }
+}

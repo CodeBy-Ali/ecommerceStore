@@ -1,24 +1,22 @@
-import DOMUtils from "../utils/domUtils";
-import { showNotification } from "../utils/util";
 import { renderCart } from "./modules/cartRender";
 import {
   toggleCartDrawer,
   updateHeaderTotalCartItemsCount,
   getCartQuantityInputField,
-  renderUpdatedQuantity,
-  getUpdatedQuantity,
   getCartItemId,
   limitQuantityToStock,
+  updateItemQuantity,
   withProcessingState
 } from "../utils/cartUtils";
-
+import { handleApiResponse } from "../utils/pagesUtils";
 
 interface IProduct {
   title: string;
   price: number;
   _id: string;
-  image: string;
+  images: Array<string>;
   stock: number;
+  slug: string;
 }
 
 export interface IStoreSetting {
@@ -31,16 +29,17 @@ export interface ICartItem {
   quantity: number;
 }
 
+export interface ICartData {
+  cartItems: [ICartItem];
+  storeSettings: IStoreSetting;
+}
 export interface IResponseBody {
-  status: string,
-  message?: string,
-  data: {
-    cartItems: [ICartItem];
-    storeSettings: IStoreSetting;
-  }
+  status: string;
+  message?: string;
+  data: ICartData;
 }
 
-const Cart = (): void => {
+const initCart = (): void => {
   const itemQuantityContainers = document.querySelectorAll<HTMLDivElement>("div[data-cartItem-quantity-container]");
 
   itemQuantityContainers.forEach((quantityContainer) => {
@@ -62,32 +61,34 @@ function innitCartEventListeners(): void {
   closeCartButton?.addEventListener("click", toggleCartDrawer);
   removeCartItemBtn?.addEventListener("click", removeProductFromCart);
   overLay?.addEventListener("click", toggleCartDrawer);
-  ["click", "input"].forEach((event) => itemQuantityContainers.forEach((itemContainer) => itemContainer.addEventListener(event, updateItemQuantity)));
+  ["click", "input"].forEach((event) => {
+    itemQuantityContainers.forEach((itemContainer) => {
+      itemContainer.addEventListener(event, handleAddToCartClick);
+    });
+  });
 }
 
-function updateItemQuantity(e: Event): void {
+function handleAddToCartClick(e: Event): void {
   const quantityContainer = e.currentTarget as HTMLDivElement;
   const clickedElement = e.target as HTMLElement;
-  if (e.type === "click" && clickedElement.tagName === "INPUT") return;
-
+  if (e.type === "click" && clickedElement.tagName !== "BUTTON") return;
   const quantityInputField = getCartQuantityInputField(quantityContainer);
   if (!quantityInputField) return;
 
-  const updatedQuantity = getUpdatedQuantity(clickedElement, quantityInputField);
-  if (!updatedQuantity) return;
+  const updatedQuantity = updateItemQuantity(quantityContainer, clickedElement, quantityInputField);
+  if (!updatedQuantity) return console.log("Failed to update item quantity");
 
   const itemId = getCartItemId(quantityContainer);
   if (!itemId) return;
-  renderUpdatedQuantity(updatedQuantity, quantityInputField);
-  limitQuantityToStock(quantityContainer, quantityInputField);
-  updateItemQuantityInDB(itemId, updatedQuantity);
+  storeUpdatedQuantityInDB(itemId, updatedQuantity);
 }
+
+
 
 
 async function removeProductFromCart(e: Event): Promise<void> {
   const removeButton = e.target as HTMLElement;
   const itemId = removeButton.getAttribute("data-item-id");
-
   try {
     if (!itemId) throw new Error("Failed to get item ID");
     const response = await fetch(`/cart/items/${itemId}`, {
@@ -96,23 +97,14 @@ async function removeProductFromCart(e: Event): Promise<void> {
         Accept: "application/json",
       },
     });
-
     const responseBody = await response.json();
-    const { data ,status} = responseBody as IResponseBody;
-    if (!response.ok || status !== 'success') {
-      showNotification(responseBody?.message, false);
-      return;
-    }
-    const totalCartItems = data?.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-    renderCart(data?.cartItems, totalCartItems, data?.storeSettings);
-    updateHeaderTotalCartItemsCount(totalCartItems);
-    Cart();
+    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "storeSettings"]);
   } catch (error) {
     console.log(error);
   }
 }
 
-async function updateItemQuantityInDB(itemId: string, quantity: number): Promise<void> {
+async function storeUpdatedQuantityInDB(itemId: string, quantity: number): Promise<void> {
   try {
     const response = await fetch(`/cart/items/${itemId}`, {
       method: "PATCH",
@@ -127,18 +119,35 @@ async function updateItemQuantityInDB(itemId: string, quantity: number): Promise
     });
 
     const responseBody = await response.json();
-    const { data, status } = responseBody as IResponseBody;
-    if (!response.ok || status !== 'success') {
-      showNotification(responseBody?.message, false);
-      return;
-    }
-    const totalCartItems = data.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-    renderCart(data.cartItems, totalCartItems, data.storeSettings);
-    updateHeaderTotalCartItemsCount(totalCartItems);
-    Cart();
+    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "storeSettings"]);
   } catch (error) {
     console.log(error);
   }
 }
 
-export default Cart;
+
+export const addProductToCart = withProcessingState(async (productId: string,quantity:number) => {
+  const response = await fetch("/cart/items", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      productId,
+      quantity,
+    }),
+  });
+  const responseBody = await response.json();
+  handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "storeSettings"]);
+  toggleCartDrawer();
+});
+
+
+function updateCartState(data: ICartData) {
+  const totalCartItems = data?.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
+  renderCart(data?.cartItems, totalCartItems, data?.storeSettings);
+  updateHeaderTotalCartItemsCount(totalCartItems);
+  initCart();
+}
+export default initCart;

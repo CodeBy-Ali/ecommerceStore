@@ -8,8 +8,8 @@ import Product from "../src/model/productModel.ts";
 import { ICartItem } from "../src/model/cartModel.ts";
 import { CartItemDetail } from '../src/utils/cartUtils.ts';
 
+
 describe("Get /cart/items", () => {
-  let cookie: string;
   let mockCartItem: ICartItem;
   const agent = request.agent(app);
 
@@ -30,6 +30,9 @@ describe("Get /cart/items", () => {
     await mongoose.connection.close();
   })
 
+  beforeEach(() => {
+    jest.clearAllMocks();
+  })
 
   test('should create user session add item to user cart',async () => {
     const response = await agent.post('/cart/items').send(mockCartItem);
@@ -38,7 +41,6 @@ describe("Get /cart/items", () => {
     expect(response.text.length).toBeGreaterThan(1);
     expect(response.text).toMatch(new RegExp(mockCartItem.productId.toString()));
     expect(response.headers['set-cookie'][0]).toMatch(new RegExp(config.getSessionConfig().name))
-    cookie = response.headers['set-cookie'][0];
   })
 
   test('should update the quantity of cart item', async () => {
@@ -113,4 +115,6 @@ describe("Get /cart/items", () => {
     expect(response.text.length).toBeGreaterThan(1);
     expect(response.text).toMatch(/Invalid parameter/i);
   })
+
 });
+

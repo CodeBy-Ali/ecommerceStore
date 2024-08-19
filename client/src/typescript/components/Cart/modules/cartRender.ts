@@ -34,7 +34,7 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
             <li>
               <a href="">
                 <div>
-                  <img src="/assets/dailyMoisturizer.webp" alt="">
+                  <img src="/assets/dailyMoisturizer1.jpg" alt="">
                 </div>
                 <div>
                   <h4>FACE</h4>
@@ -78,20 +78,20 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
                return `
                  <li class="cartItem" data-item-id="${product._id}">
                    <div class="cartItem_image_container">
-                     <a href="/products/${product.title}">
-                       <img src="${product.image}"  alt="">
+                     <a href="/products/${product.slug}">
+                       <img src="${product.images[0]}"  alt="">
                      </a>
                    </div>
                    <div class="cartItem_details">
                      
                      <div class="cartItem_heading_container">
-                       <a href="">${product.title}</a>
+                       <a href="/products/${product.slug}">${product.title}</a>
                        <p class="cartItem_price">${product.price}</p>
                      </div>
      
                      <div class="cartItem_quantity_container" >
                        <div class="cartItem_quantity_wrapper" data-cartItem-quantity-container>
-                         <button class="decrease_cartQuantity_button"data-decrease-item-quantity>
+                         <button class="decrease_Quantity_button"data-decrease-item-quantity data-counter-type="decrease">
                            <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
                            <span>-</span>
                          </button>
@@ -99,9 +99,9 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
                          <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
                            <span>Product The EveryThing Bar quantity</span>
                          </label>
-                         <input class="cartItem_quantity_input" type="number" min="1" max="${product.stock}" value="${quantity}" name="quantity" data-key="${product._id}" data-item-quantity-input id="Quantity-The-EveryThing-Bar">
+                         <input class="item_quantity_input" type="number" min="1" max="${product.stock}" value="${quantity}" name="quantity" data-key="${product._id}" data-item-quantity-input id="Quantity-The-EveryThing-Bar">
      
-                         <button data-increase-item-quantity class="increase_cartQuantity_button">
+                         <button data-increase-item-quantity class="increase_Quantity_button" data-counter-type="increase">
                            <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
                            <span>+</span>
                          </button>

@@ -23,20 +23,20 @@
           <% cartItems.forEach( ({quantity,product}) => { %>
             <li class="cartItem" data-item-id="<%= product._id  %>">
               <div class="cartItem_image_container">
-                <a href="/products/the-everything-bar?varient=">
-                  <img src="<%= product.image %>" width="100" height="100"  alt="">
+                <a href="/products/<%= product.slug  %>">
+                  <img src="<%= product.images[0] %>" width="100" height="100"  alt="">
                 </a>
               </div>
               <div class="cartItem_details">
                 
                 <div class="cartItem_heading_container"> 
-                  <a href=""><%= product.title  %></a>
+                  <a href="/products/<%= product.slug  %>"><%= product.title  %></a>
                   <p class="cartItem_price"><%= product.price %></p>
                 </div>
     
                 <div class="cartItem_quantity_container" >
                   <div class="cartItem_quantity_wrapper" data-cartItem-quantity-container>
-                    <button class="decrease_cartQuantity_button" data-decrease-item-quantity>
+                    <button class="decrease_Quantity_button" data-decrease-item-quantity data-counter-type="decrease">
                       <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
                       <span>-</span>
                     </button>
@@ -44,9 +44,9 @@
                     <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
                       <span>Product The EveryThing Bar quantity</span>
                     </label>
-                    <input class="cartItem_quantity_input" type="number" min="1" max="<%= product.stock %>" data-key="<%= product._id %>" value="<%= quantity %>" name="quantity" data-item-quantity-input id="Quantity-<%= product.title.split(" ").join('-')%>">
+                    <input class="item_quantity_input" type="number" min="1" max="<%= product.stock %>" data-key="<%= product._id %>" value="<%= quantity %>" name="quantity" data-item-quantity-input id="Quantity-<%= product.title.split(" ").join('-')%>">
     
-                    <button data-increase-item-quantity class="increase_cartQuantity_button">
+                    <button data-increase-item-quantity class="increase_Quantity_button" data-counter-type="increase">
                       <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
                       <span>+</span>
                     </button>
@@ -92,7 +92,7 @@
           <li>
             <a href="">
               <div>
-                <img src="/assets/dailyMoisturizer.webp" alt="">
+                <img src="/assets/dailyMoisturizer1.jpg" alt="">
               </div>
               <div>
                 <h4>FACE</h4>

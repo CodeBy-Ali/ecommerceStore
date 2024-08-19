@@ -1,0 +1,89 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/animations' as *;
+
+.scrolling_text_wrapper{
+  padding-block: 1.5rem;
+  border-block: 1px solid $clr-border-dark;
+  margin-bottom: 3rem;
+  overflow-x: scroll;
+  display: flex;
+  &::-webkit-scrollbar{
+    appearance: none;
+    width: 0;
+    height: 0;
+  }
+
+  @include respond-to(small){
+    padding-block: 2.5rem;
+  }
+
+  @include respond-to(medium){
+    padding-block: 3rem;
+  }
+}
+
+
+.scrolling_text_contents{
+  display: flex;
+  animation: scroller 27s linear infinite;
+  
+  // @include respond-to(medium){
+  //   animation: scroller 27s linear infinite;
+  // }
+}
+
+
+
+
+
+
+.scrolling_text_item{
+  display: flex;
+  text-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+
+  & .scrolling_text_item_image {
+    margin-inline: 1.5rem;
+    & img{
+      width: 5.4rem;
+    }
+  }
+
+  & .scrolling_text_item_description{
+    font-size: 1.8rem;
+    font-weight: $font-semibold;
+    color: $clr-primary;
+  }
+
+  @include respond-to(small){
+    & .scrolling_text_item_description{
+      font-size: 2.5rem;
+    }
+    & .scrolling_text_item_image{
+      margin-inline: 2rem;
+      & img{
+        width: 7rem;
+      }
+    }
+  }
+
+  @include respond-to(medium){
+    & .scrolling_text_item_image{
+      margin-inline: 2rem;
+      & img{
+        width: 7rem;
+      }
+    }
+  }
+
+  @include respond-to(large){
+    & .scrolling_text_item_image{
+      margin-inline: 2rem;
+      & img{
+        width: 8rem;
+      }
+    }
+  }
+}

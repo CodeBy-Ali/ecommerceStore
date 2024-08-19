@@ -1,4 +1,4 @@
-import { showNotification, togglePasswordVisibility } from "../components/utils/util";
+import { showNotification, togglePasswordVisibility } from "../components/utils/pagesUtils";
 import isFormValid from "../components/validator/validator";
 
 const handleFormSubmit = async (e: Event, signInForm: HTMLFormElement): Promise<void> => {
