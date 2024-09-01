@@ -1,5 +1,5 @@
 import { createLogger,transports,format } from 'winston';
-import { join } from 'path';
+import { join } from 'path'; 
 import config from './config.ts';
 
 const env = process.env.NODE_ENV;
@@ -36,6 +36,7 @@ if (env !== 'PROD') {
     handleExceptions: false,
     format: format.combine(
       format.colorize(),
+      format.errors({ stack: true }),
       format.printf(info => {
         const {level,message,timestamp,...rest } = info;
         return `${timestamp} ${level}: ${message}`
@@ -43,5 +44,20 @@ if (env !== 'PROD') {
     )
   }))
 }
+
+
+
+function one() {
+  throw new Error("Oik");
+}
+
+
+try {
+  one()
+} catch (error) {
+  logger.error(error);
+  
+}
+
 
 export default logger;

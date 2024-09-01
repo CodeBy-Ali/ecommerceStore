@@ -3,13 +3,14 @@ import initCollectionPage from "./pages/collections";
 import initHomePage from "./pages/home";
 import initRegisterPage from "./pages/register";
 import initLoginPage from "./pages/login";
-
+import initCheckoutPage from "./pages/checkout";
 // components
 import headerDropdownMenuController_large from "./components/HeaderDropdown/headerDropdownMenu";
 import headerDropdownMenuController_Mobile from "./components/HeaderDropdown/headerMobileDropdownMenu";
 import initAccordion from "./components/accordion/accordion";
 import initCart from "./components/Cart/cart";
 import initProductPage from "./pages/product";
+
 const App = (): void => {
   // global components for all pages
   headerDropdownMenuController_Mobile();
@@ -34,6 +35,8 @@ const App = (): void => {
       break;
     case "product":
       initProductPage();
+    case "checkout":
+      initCheckoutPage();
   }
 };
 

@@ -16,12 +16,15 @@
 @use 'components/loader';
 @use 'components/accordion';
 @use "components/scrollingText";
+@use 'components/form';
+
 
 @use 'pages/home';
 @use 'pages/register-Login';
 @use 'pages/collections';
 @use 'pages/product';
 @use 'pages/notFound';
+@use 'pages/_checkout';
 
 @use 'layout/header';
 @use 'layout/footer';

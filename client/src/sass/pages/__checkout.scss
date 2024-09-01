@@ -1,0 +1,437 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+// header
+
+body[data-page="checkout"] {
+  font-family: $font-checkout-page;
+  color: black;
+  padding-top: 0;
+
+  & header {
+    position: static;
+  }
+}
+
+button {
+  font-family: $font-checkout-page;
+}
+
+header {
+  height: $height-header-sm;
+
+  @include respond-to(small) {
+    height: $height-header-lg;
+  }
+}
+
+.checkout_nav {
+  @include container($container-checkout);
+  padding: 2.1rem;
+  @include flex-row-jc(space-between);
+
+  & .phils_heading_link {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  & .checkout_cart_link {
+    & span img {
+      width: 2rem;
+    }
+  }
+
+  @include respond-to(small) {
+    padding-inline: 3.8rem;
+  }
+}
+
+// --------------- main ------------->
+
+
+main{
+  @include respond-to(medium){
+    border-top: 1px solid $clr-border;
+  }
+}
+
+.checkout_section_wrapper {
+  @include respond-to(medium) {
+    display: flex;
+    flex-direction: row-reverse;
+    @include container($container-checkout);
+  }
+}
+
+.checkout_order_summary_section {
+  background-color: $clr-bg-checkout;
+  @include respond-to(medium) {
+    flex: 1;
+    border-left: 1px solid $clr-border;
+    position:sticky;
+    top: 40rem;
+  }
+}
+
+.checkout_order_summary_container {
+  & .order_summary_button {
+    & .order_summary_button_text_wrapper {
+      display: inline-block;
+      @include container($container-checkout-inner-section);
+      @include flex-row-jc(space-between);
+      padding-inline: 2.1rem;
+      padding-block: 1.7rem;
+    }
+    border: 1px solid $clr-border;
+    font-size: $font-size-sm;
+    width: 100%;
+    background-color: transparent;
+
+    & .summary_text {
+      color: $clr-text-blue;
+      display: flex;
+      align-items: center;
+
+      & .arrow_down_svg_wrapper{
+        display: inline-block;
+        margin-left: 1rem;
+      }
+
+      & svg {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+    }
+
+    & .order_total_price {
+      font-weight: $font-semibold;
+      font-size: 1.8rem;
+    }
+
+    &.open .arrow_down_svg_wrapper {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include respond-to(medium){
+    & .order_summary_button{
+      display: none;
+    }
+  }
+}
+
+.order_summary_detail_container {
+  max-height: fit-content;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease;
+  transform: translateY();
+  @include container(53rem);
+
+  & p{
+    margin-bottom: 0;
+  }
+
+  & .checkout_order_summary_wrapper {
+    // border-top: 1px solid $clr-border;
+    padding: 2.1rem 2.1rem 1.7rem 2.1rem;
+
+    & .checkout_items_list_container {
+      margin-bottom: 2rem;
+      & ul {
+        padding: 0;
+      }
+    }
+  }
+
+  &.open {
+    border-bottom: 1px solid $clr-border;
+  }
+
+  @include respond-to(medium){
+    margin: 0;
+    max-height: 200vh;
+    & .checkout_order_summary_wrapper{
+      padding: 3.8rem;
+
+    }
+    &.open{
+    border-bottom: none;
+    }
+    
+  }
+}
+
+.checkout_order_total_section {
+  font-size: $font-size-sm;
+
+  & p{
+    margin-bottom: 0
+  }
+
+  & div {
+    @include flex-row-jc(space-between);
+  }
+
+  & div:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  & div:last-child {
+    & p:first-child {
+      font-size: 19px;
+      font-weight: $font-semibold;
+    }
+
+    & p:last-child {
+      & strong {
+        font-size: 2.1rem;
+      }
+
+      & abbr {
+        font-size: $font-size-sm;
+        color: $clr-text-abbr;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.order_summary_detail_container .checkout_cart_item {
+  @include flex-row-jc(space-between);
+  font-size: $font-size-sm;
+
+  & .checkout_item_description {
+    @include flex-row-jc(center);
+
+    & p {
+      margin-left: 1.4rem;
+    }
+  }
+
+  & .checkout_cartitem_image_container {
+    width: 64px;
+    aspect-ratio: 1;
+    border: 1px solid $clr-border;
+    border-radius: 4px;
+    position: relative;
+
+    & img {
+      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    & .checkout_item_quantity {
+      position: absolute;
+      top: -1rem;
+      right: -1rem;
+      display: inline-block;
+      height: 22px;
+      width: 22px;
+      background-color: #666666;
+      border-radius: 50%;
+      font-size: $font-size-xsm;
+      font-weight: $font-semibold;
+      color: $clr-text-half-white;
+      @include flex-row-jc(center);
+    }
+  }
+}
+
+// -------------- checkout-form --------------->
+
+.checkout_form_section {
+  
+  & .checkout_form_container {
+    @include container($container-checkout-inner-section);
+    padding: 1.7rem 2.1rem;
+  }
+
+  & form input[type="text"],
+  & input:not([type="radio"]) {
+    border-radius: 5px;
+    height: 4.9rem;
+    line-height: 4.9rem;
+    font-size: $font-size-sm;
+    font-weight: normal;
+  }
+  
+  & .form_field .error_message {
+    color: $clr-error;
+    font-size: 13px;
+    position: static;
+    margin-block: 0.5rem;
+  }
+  .checkout_form_section_heading {
+    font-size: 2.1rem;
+    font-weight: $font-semibold;
+    margin-bottom: 1.2rem;
+    color: black;
+  }
+
+  @include respond-to(medium) {
+    flex: 1;
+
+    & .checkout_form_container{
+      padding: 3.8rem;
+      margin-inline: 0;
+      max-width: 100%;
+    }
+  }
+
+  
+}
+
+.checkout_form_contact_section {
+  padding: 0;
+  margin-bottom: 2rem;
+
+  & .form_field {
+    margin-bottom: 1.6rem;
+  }
+
+  & .form_subscribe_news_container {
+    @include flex-row-jc(flex-start);
+
+    & input[type="checkbox"] {
+      font-size: 4rem;
+      border-color: red;
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+
+    & .label_subscirbe_news_offers {
+      font-size: $font-size-sm;
+      margin-left: 1.1rem;
+    }
+  }
+}
+
+// delivery section
+.checkout_form_delivery_section {
+  padding: $pd-checkout-section;
+
+  & .checkout_form_field_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+
+    & .checkout_form_name_field_wrapper,
+    & .checkout_form_address_wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+  }
+
+  @include respond-to(x-small) {
+    & .checkout_form_field_wrapper {
+      & .checkout_form_name_field_wrapper,
+      & .checkout_form_address_wrapper {
+        flex-direction: row;
+
+        & .form_field {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+// payment section
+.checkout_form_payment_section {
+  padding: $pd-checkout-section;
+
+  & .checkout_form_section_heading {
+    margin-bottom: 0.6rem;
+  }
+
+  & > p {
+    font-size: $font-size-sm;
+    color: $clr-text-quaternary;
+    margin-bottom: 1.6rem;
+  }
+
+  & .accordion {
+    font-family: $font-checkout-page;
+    border-radius: 5px;
+
+    & .accordion-button {
+      padding: 0;
+
+      &::after {
+        display: none;
+      }
+
+      & > label {
+        display: inline-block;
+        padding: 1.7rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      & input[type="radio"] {
+        height: 1.8rem;
+        width: 1.8rem;
+      }
+
+      & span {
+        display: inline-block;
+        align-self: flex-end;
+        font-size: $font-size-sm;
+      }
+    }
+
+    & .accordion-body {
+      background-color: rgba(0, 0, 0, 0.043);
+      font-size: $font-size-sm;
+    }
+  }
+
+  @include respond-to(medium){
+    margin-bottom: 1rem;
+  }
+}
+
+
+// order summary section mobile
+
+.checkout_order_summary_section_mobile{
+  padding: $pd-checkout-section;
+  background-color: transparent;
+  margin-bottom: 1.5rem;
+
+  @include respond-to(medium){
+    display: none;
+  }
+}
+
+// complete order button section
+
+.checkout_complete_order_section{
+  padding: $pd-checkout-section;
+  padding-block: 2.5rem;
+
+  & .complete_order_button{
+    width: 100%;
+    font-size: 1.7rem;
+    color: white;
+    background-color: $clr-button-checkout;
+    border: none;
+    border-radius: 5px;
+    font-weight: $font-semibold;
+    padding: 1.6rem;
+  }
+
+  @include respond-to(medium){
+
+    & .complete_order_button{
+      font-size: 1.9rem;
+    }
+  }
+}

@@ -16,34 +16,6 @@
   }
 }
 
-.auth_form_container form {
-  & .form_fields_list {
-    display: flex;
-    flex-direction: column;
-    gap: 3.2rem;
-    width: 100%;
-  }
-
-  & .form_field {
-    position: relative;
-    &.validationFailed .error_message{
-      display: block
-    }
-  }
-
-  & input {
-    @include formInput;
-    border: 1px solid $clr-border;
-    height: 4.7rem;
-    line-height: 4.7rem;
-  }
-
-  & label {
-    @include formInputLabel;
-    font-size: 1.4rem;
-    font-weight: normal;
-  }
-}
 
 .login_form_forgetPassword {
   font-size: $font-size-base;
@@ -59,7 +31,7 @@
 .login_form_forgetPassword {
   font-size: $font-size-base;
   text-decoration: underline;
-  margin-top: 1.6rem;
+  margin-top: 2rem;
 
   &:hover {
     text-decoration: none;
@@ -88,14 +60,3 @@
   }
 }
 
-.error_message{
-  color: $clr-error;
-  font-size: 13px;
-  position: absolute;
-  bottom: -2.4rem;
-  left: 0;
-  display: none;
-  & span img{
-    width: 1.2rem;
-  }
-}

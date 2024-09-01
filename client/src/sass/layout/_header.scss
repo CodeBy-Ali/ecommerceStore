@@ -3,7 +3,7 @@
 @use '../abstracts/animations' as *;
 //  header 
 
-header{
+body:not([data-page="checkout"]) header{
   position: fixed;
   top: 0;
   left: 0;
@@ -11,6 +11,8 @@ header{
   z-index: $z-index-header;
   background-color: white;
 }
+
+
 .header_menu_nav ul{
   padding-inline: $pd-header-nav-inline;
   position: relative;
