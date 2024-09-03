@@ -3,13 +3,22 @@
 
 .accordion {
   @include accordion;
-  color: black;
-  border-top: 1px solid $clr-border;
-  &:last-child {
-    border-bottom: 1px solid $clr-border;
+
+  & .accordion_button {
+    width: 100%;
   }
 
-  & .accordion_item p {
+  & .accordion_body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height $transition-time-accordion ease;
+    visibility: none;
+    &.open{
+      visibility: visible;
+    }
+  }
+
+  & .accordion_body .accordion_products_body_text {
     padding-top: 0.5rem;
     padding-bottom: 2.4rem;
     padding-right: 2rem;
@@ -20,6 +29,14 @@
     @include accordion;
     & .accordion_button {
       color: white;
+    }
+    
+    & .accordion_item{
+      border-top: 0.5px solid rgba(255, 255, 255, 0.507);
+      
+      &:last-child{
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.507);
+      }
     }
 
     @include respond-to(large) {
@@ -32,14 +49,25 @@
       & .accordion_heading {
         display: block;
       }
+
+      & .accordion_item{
+        border-top: none;
+        &:last-child{
+          border-bottom: none;
+        }
+      }
+
       & .accordion_button {
         display: none;
+      }
+
+      & .accordion_body{
+        max-height: 20rem;
       }
 
       & .accordion_itemList {
         max-height: 20rem;
         gap: 1.2rem;
-        visibility: visible;
       }
 
       &:last-child {
@@ -47,6 +75,12 @@
       }
     }
   }
+}
+ 
+.accordion {
+ 
+
+  
 }
 
 .boughtTogether_wrapper {
@@ -57,9 +91,9 @@
     margin-bottom: 2.5rem;
   }
 
-  @include respond-to(small){
+  @include respond-to(small) {
     padding-top: 4.5rem;
-    & p{
+    & p {
       font-size: 1.8rem;
     }
   }

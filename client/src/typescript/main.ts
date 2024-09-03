@@ -7,16 +7,14 @@ import initCheckoutPage from "./pages/checkout";
 // components
 import headerDropdownMenuController_large from "./components/HeaderDropdown/headerDropdownMenu";
 import headerDropdownMenuController_Mobile from "./components/HeaderDropdown/headerMobileDropdownMenu";
-import initAccordion from "./components/accordion/accordion";
 import initCart from "./components/Cart/cart";
 import initProductPage from "./pages/product";
+import DOMUtils from "./components/utils/domUtils";
+import initAccordion from "./components/accordion/accordion";
 
 const App = (): void => {
   // global components for all pages
-  headerDropdownMenuController_Mobile();
-  headerDropdownMenuController_large();
-  initAccordion();
-  initCart();
+  initGlobalComponents();
 
   const page: string | undefined = document.body.dataset.page;
   if (!page) throw new Error(`Failed to identify the current page.Correctly add the data-page="pageName" attribute in body tag of every page`);
@@ -38,6 +36,17 @@ const App = (): void => {
     case "checkout":
       initCheckoutPage();
   }
+  // initialize cart for every page except checkout 
+  if(page !== "checkout") initCart();
 };
+
+
+function initGlobalComponents():void {
+  headerDropdownMenuController_Mobile();
+  headerDropdownMenuController_large();
+
+  const footerAccordion = DOMUtils.getElement<HTMLElement>('[data-footer-accordion]');
+  if(footerAccordion) initAccordion(footerAccordion);
+}
 
 document.addEventListener("DOMContentLoaded", App);

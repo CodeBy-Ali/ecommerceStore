@@ -385,12 +385,11 @@
 
 @mixin accordion {
   font-size: $font-size-xsm;
-  border-top: 0.5px solid rgba(255, 255, 255, 0.507);
-
+  
   &:last-child {
     border-bottom: 0.5px solid rgba(255, 255, 255, 0.507);
   }
-
+  
   & .accordion_button {
     background-color: transparent;
     border: none;
@@ -405,7 +404,7 @@
       width: 2rem;
     }
   }
-
+  
   & .accordion_heading {
     display: none;
     font-size: $font-size-sm;
@@ -413,37 +412,29 @@
     margin-bottom: 1.6rem;
     font-weight: $font-semibold;
   }
-
+  
   & .accordion_itemList li:last-child {
     margin-bottom: 1.5rem;
   }
 
-  & .accordion_itemList,
-  & .accordion_item {
+  
+
+  
+
+  & .accordion_itemList{
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    max-height: 0;
-    visibility: hidden;
-    overflow: hidden;
-    transition: all 0.5s ease;
     & a {
       color: white;
     }
   }
-
-  & .accordion_button_arrowIcon img {
-    transition: transform 0.5s ease;
+  
+  & .accordion_button_arrowIcon  img{
+    transition: transform $transition-time-accordion ease;
   }
 
-  &.active .accordion_itemList,
-  &.active .accordion_item {
-    transition: all 2s ease;
-    max-height: 60rem;
-    visibility: visible;
-  }
-
-  &.active .accordion_button img {
+  & .accordion_button.open .accordion_button_arrowIcon img{
     transform: rotate(180deg);
   }
   @include respond-to(small) {

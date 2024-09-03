@@ -47,17 +47,4 @@ if (env !== 'PROD') {
 
 
 
-function one() {
-  throw new Error("Oik");
-}
-
-
-try {
-  one()
-} catch (error) {
-  logger.error(error);
-  
-}
-
-
 export default logger;

@@ -21,6 +21,7 @@ $clr-text-secondary: rgb(117, 117, 117);
 $clr-text-quaternary: rgb(98, 98, 98); 
 $clr-text-primary: rgb(128, 128, 128);
 $clr-border: rgb(219, 219, 219);
+$clr-border-accordion: rgb(222,226,230);
 $clr-border-dark: rgb(194,194,194);
 $clr-accent: rgb(226, 249, 73);
 $clr-bg-primary: rgb(239, 237, 233);
@@ -35,6 +36,8 @@ $clr-text-blue: rgb(23, 115, 176);
 $clr-text-half-white: rgb(245, 245, 245);
 $clr-text-abbr: rgb(102,102,102);
 $clr-button-checkout: #1773b0;
+$clr-bg-accordion-button: rgb(240, 245, 255);
+$clr-border-accordion-active: rgb(23, 115, 176);
 
 // font
 $font-size-root: 10px;
@@ -58,6 +61,8 @@ $letter-spacing-xl : 1.5px;
 // padding
 $pd-body-inline-base: 1.6rem;
 $pd-checkout-section: 1.4rem 0;
+// transition time
+$transition-time-accordion: .4s;
 
 // * ---------------- Container ------------ *
 $max-width-container-collection: 1300px;

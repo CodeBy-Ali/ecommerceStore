@@ -355,13 +355,52 @@ main{
     margin-bottom: 1.6rem;
   }
 
-  & .accordion {
+  & .accordion_payment {
     font-family: $font-checkout-page;
-    border-radius: 5px;
+    // border-radius: 5px;
+    // border: 1px solid $clr-border-accordion;
 
-    & .accordion-button {
+    & .accordion_item:last-child{
+      & .accordion_button{
+        border-bottom: 1px solid $clr-border-accordion;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        &.open{
+          border-bottom-color: $clr-border-accordion-active;
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px;            
+        }
+      }
+
+      & .accordion_body.open{
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-bottom: 1px solid $clr-border-accordion;        
+      }
+    }
+
+    & .accordion_item:first-child{
+      & .accordion_button{
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+    }
+
+    & .accordion_button {
       padding: 0;
+      background-color: transparent;
+      border: 1px solid $clr-border-accordion;
+      border-bottom: none;
 
+      &.open{
+        background-color: $clr-bg-accordion-button;
+        border: 1px solid $clr-border-accordion-active;
+      }
+
+      // & > *{
+      //   pointer-events: none;
+      // }
       &::after {
         display: none;
       }
@@ -369,27 +408,46 @@ main{
       & > label {
         display: inline-block;
         padding: 1.7rem;
+        line-height: 2.1rem;
         width: 100%;
         display: flex;
         align-items: center;
+
         gap: 1rem;
+        // pointer-events: none;
       }
 
       & input[type="radio"] {
         height: 1.8rem;
         width: 1.8rem;
+        pointer-events: none;
       }
 
       & span {
         display: inline-block;
+        pointer-events: none;
         align-self: flex-end;
         font-size: $font-size-sm;
+        color: black;
+        letter-spacing: normal;
+        font-weight: normal;
       }
     }
 
-    & .accordion-body {
+    & .accordion_body {
       background-color: rgba(0, 0, 0, 0.043);
       font-size: $font-size-sm;
+      color: black;
+      
+      &.open{
+        border-inline: 1px solid $clr-border-accordion;
+        max-height: 20rem;
+      }
+
+      & .accordion_body_text_wrapper{
+        padding: 1.7rem;
+        line-height: 2.1rem;
+      }
     }
   }
 
