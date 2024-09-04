@@ -2,29 +2,32 @@
 @use "../abstracts/mixins" as *;
 
 .accordion {
-  @include accordion;
+  &--product{
+    @include accordion;
 
-  & .accordion_button {
-    width: 100%;
-  }
+    & .accordion_button{
+      & span{
+        font-weight: normal;      
+      }
+      & .accordion_button_arrowIcon{
+        opacity: .8;
+      }
 
-  & .accordion_body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height $transition-time-accordion ease;
-    visibility: none;
-    &.open{
-      visibility: visible;
+      & .accordion_button_arrowIcon img{
+        width: 2.2rem;
+        height: 2.2rem;
+      }
     }
+    & .accordion_item{
+      border-top: 1px solid $clr-border;
+      
+      &:last-child{
+        border-bottom: 1px solid $clr-border;
+      }
+    }
+
   }
 
-  & .accordion_body .accordion_products_body_text {
-    padding-top: 0.5rem;
-    padding-bottom: 2.4rem;
-    padding-right: 2rem;
-    font-size: $font-size-sm;
-    color: $clr-primary;
-  }
   &--footer {
     @include accordion;
     & .accordion_button {
@@ -32,6 +35,7 @@
     }
     
     & .accordion_item{
+      
       border-top: 0.5px solid rgba(255, 255, 255, 0.507);
       
       &:last-child{
@@ -77,24 +81,4 @@
   }
 }
  
-.accordion {
- 
 
-  
-}
-
-.boughtTogether_wrapper {
-  padding-top: 3.5rem;
-  text-align: center;
-  & p {
-    font-size: 1.4rem;
-    margin-bottom: 2.5rem;
-  }
-
-  @include respond-to(small) {
-    padding-top: 4.5rem;
-    & p {
-      font-size: 1.8rem;
-    }
-  }
-}

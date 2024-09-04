@@ -33,6 +33,7 @@ const App = (): void => {
       break;
     case "product":
       initProductPage();
+      break; 
     case "checkout":
       initCheckoutPage();
   }

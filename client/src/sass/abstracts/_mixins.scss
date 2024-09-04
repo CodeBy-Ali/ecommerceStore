@@ -417,9 +417,24 @@
     margin-bottom: 1.5rem;
   }
 
-  
+  & .accordion_body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height $transition-time-accordion ease;
+    visibility: none;
+    &.open{
+      visibility: visible;
+    }
+  }
 
-  
+  & .accordion_body .accordion_products_body_text {
+    padding-top: 0.5rem;
+    padding-bottom: 2.4rem;
+    padding-right: 2rem;
+    font-size: $font-size-sm;
+    color: $clr-primary;
+  }
+
 
   & .accordion_itemList{
     display: flex;

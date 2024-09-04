@@ -73,34 +73,34 @@
                   <p class="extra_product_message">NEED EXTRA MOISTURIZER? <a href="">TRY OUR DAILY MOISTURIZER</a></p>
                 </div>
                 <!-- product-Accordion -------------------- -->
-                <div class="product_accordion_wrapper">
-                  <div class="accordion" data-accordion>
-                    <button class="accordion_button" aria-expanded="false" id="tab-shop" aria-controls="panel-shop" data-accordionBtn>
+                <div class="product_accordion_wrapper accordion accordion--product" data-product-accordion>
+                  <div class="accordion_item" data-accordion-item>
+                    <button class="accordion_button" aria-expanded="false" id="tab-shop" aria-controls="panel-shop" data-accordion-button>
                       <span>HOW TO USE</span>
                       <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
                     </button>
-                    <div class="accordion_body" id="panel-shop" aria-labelledby="tab-shop">
+                    <div class="accordion_body" data-accordion-body id="panel-shop" aria-labelledby="tab-shop">
                       <p class="accordion_products_body_text"><%= product.usage  %></p>
                     </div>
                   </div>
   
-                  <div class="accordion" data-accordion>
+                  <div class="accordion_item" data-accordion-item>
                     <p class="accordion_heading">LEARN</p>
-                    <button class="accordion_button" aria-expanded="false" id="tab-learn" aria-controls="panel-learn" data-accordionBtn>
+                    <button class="accordion_button" aria-expanded="false" id="tab-learn" aria-controls="panel-learn" data-accordion-button>
                       <span>LEARN</span>
                       <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
                     </button>
-                    <div class="accordion_body" id="panel-learn" aria-labelledby="tab-learn">
+                    <div class="accordion_body" data-accordion-body id="panel-learn" aria-labelledby="tab-learn">
                       <p class="accordion_products_body_text"><%= product.ingredients  %></p>
                     </div>
                   </div>
   
-                  <div class="accordion" data-accordion>
-                    <button class="accordion_button" aria-expanded="false" id="tab-help" aria-controls="panel-help" data-accordionBtn>
+                  <div class="accordion_item" data-accordion-item>
+                    <button class="accordion_button" aria-expanded="false" id="tab-help" aria-controls="panel-help" data-accordion-button>
                       <span>HELP</span>
                       <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
                     </button>
-                    <div class="accordion_body" id="panel-help" aria-labelledby="tab-help">
+                    <div class="accordion_body" data-accordion-body id="panel-help" aria-labelledby="tab-help">
                       <p class="accordion_products_body_text">Ethically manufactured from global components and ingredients in the USA in a facility that is this party audited for social and environmental responsibility and safety. As SEDEX members we are dedicated to transparency and responsible manufacturing.</p>
                     </div>
                   </div>

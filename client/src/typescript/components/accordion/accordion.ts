@@ -18,8 +18,6 @@ const initAccordion = (accordion: HTMLElement): void => {
 function toggleAccordionState(e: Event) {
   const accordionButton = e.currentTarget as HTMLButtonElement;
   const accordionBody = accordionButton.parentElement?.querySelector<HTMLElement>("[data-accordion-body]");
-  console.log("AccordionBody: ", accordionBody);
-  console.log("AccordionButton: ", accordionButton);
   if (!accordionBody || !accordionButton) return;
   DOMUtils.toggleClass(accordionBody, "open");
   DOMUtils.toggleClass(accordionButton, "open");
@@ -42,8 +40,6 @@ function closeNonSelectedOpenAccordionItems(accordionItems: HTMLElement[]): void
 
     accordionBody.style.maxHeight = "0px";
     
-
-
     if (accordionButton && DOMUtils.checkAttributeValue(accordionButton, "aria-expanded", "true")) {
       DOMUtils.toggleAttributeBoolean(accordionButton, "aria-expanded");
     }

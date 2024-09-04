@@ -3,10 +3,15 @@ import DOMUtils from "../components/utils/domUtils";
 import { addProductToCart } from "../components/Cart/cart";
 import { updateItemQuantity } from "../components/utils/cartUtils";
 import { showNotification } from "../components/utils/pagesUtils";
+import initAccordion from "../components/accordion/accordion";
 
 const initProductPage = () => {
   const addToCartButtons = document.querySelectorAll<HTMLElement>("[data-addToCartBtn]");
+  const productAccordion = DOMUtils.getElement<HTMLElement>("[data-product-accordion]");
+  
   addToCartButtons?.forEach((button) => button.addEventListener("click", handleAddToCartClick));
+
+  if(productAccordion) initAccordion(productAccordion);
   productQuantitySpinner();
   productImageSlider();
   additionalProductSlider();
