@@ -141,9 +141,11 @@
   }
 
   & .product_addToBag_wrapper {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
+    & form {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
 
     & .product_quantity_wrapper {
       @include item_Quantity_spinner(5rem);

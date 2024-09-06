@@ -10,10 +10,10 @@ const handleFormSubmit = async (e: Event, registerForm: HTMLFormElement): Promis
 
   if (!isFormValid(registerForm)) return;
 
-  const firstNameField = document.querySelector<HTMLInputElement>("[data-firstNameField]");
-  const lastNameField = document.querySelector<HTMLInputElement>("[data-lastNameField]");
-  const emailField = document.querySelector<HTMLInputElement>("[data-emailField]");
-  const passwordField = document.querySelector<HTMLInputElement>("[data-passwordField]");
+  const firstNameField = registerForm.querySelector<HTMLInputElement>("[data-firstNameField]");
+  const lastNameField = registerForm.querySelector<HTMLInputElement>("[data-lastNameField]");
+  const emailField = registerForm.querySelector<HTMLInputElement>("[data-emailField]");
+  const passwordField = registerForm.querySelector<HTMLInputElement>("[data-passwordField]");
 
   try {
     const response = await fetch("/account/register", {

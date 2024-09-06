@@ -49,7 +49,6 @@
               </button>
               <div class="order_summary_detail_container" data-accordion-body>
                 <div class="checkout_order_summary_wrapper">
-
                   <section class="checkout_items_list_container">
                     <ul class="checkout_items_list">
                       <li class="checkout_cart_item">
@@ -92,12 +91,14 @@
 
         <section class="checkout_form_section">
           <div class="checkout_form_container">
-            <form action="">
+            <form action="" data-checkout-form>
               <section class="checkout_form_contact_section">
                 <h2 class="checkout_form_section_heading">Contact</h2>
                 <div class="form_field">
-                  <input type="text" id="email" name="email" placeholder="Email" required autocomplete="email" />
-                  <label for="email" class="" aria-hidden="false">Email</label>
+                  <div class="checkout_form_field_container">
+                    <input type="text" id="email" name="email" placeholder="Email" required autocomplete="email" />
+                    <label for="email" class="form_field_label" aria-hidden="false">Email</label>
+                  </div>
                   <div class="error_message">
                     <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                     <span>Enter a valid email</span>
@@ -114,8 +115,10 @@
                 <div class="checkout_form_field_wrapper">
                   <div class="checkout_form_name_field_wrapper">
                     <div class="form_field">
-                      <input type="text" id="first_name" name="first-name" placeholder="First Name" minlength="2" />
-                      <label for="first_name" aria-hidden="false">First Name</label>
+                      <div class="checkout_form_field_container">
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" minlength="2" />
+                        <label for="firstName" aria-hidden="false">First Name</label>
+                      </div>
                       <div class="error_message">
                         <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                         <span>Enter a first name</span>
@@ -123,8 +126,10 @@
                     </div>
 
                     <div class="form_field">
-                      <input type="text" id="last_name" name="last-name" placeholder="Last Name" minlength="2" required />
-                      <label for="last_name">Last Name</label>
+                      <div class="checkout_form_field_container">
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" minlength="2" required />
+                        <label for="lasNname">Last Name</label>
+                      </div>
                       <div class="error_message">
                         <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                         <span>Enter a last name</span>
@@ -133,8 +138,10 @@
                   </div>
 
                   <div class="form_field">
-                    <input type="text" name="address" placeholder="Address" id="address" minlength="2" required />
-                    <label for="address">Address</label>
+                    <div class="checkout_form_field_container">
+                      <input type="text" name="address" placeholder="Address" id="address" minlength="2" required />
+                      <label for="address">Address</label>
+                    </div>
                     <div class="error_message">
                       <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                       <span>Enter a address</span>
@@ -142,8 +149,10 @@
                   </div>
 
                   <div class="form_field">
-                    <input type="text" id="appartment" placeholder="Apartment, suite, etc (optional)" name="appartment" minlength="2" />
-                    <label for="appartment">Apartment, suite, etc (optional)</label>
+                    <div class="checkout_form_field_container">
+                      <input type="text" id="appartment" placeholder="Apartment, suite, etc (optional)" name="appartment" minlength="2" />
+                      <label for="appartment">Apartment, suite, etc (optional)</label>
+                    </div>
                     <div class="error_message">
                       <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                       <span>Enter a Apartment or suite</span>
@@ -152,8 +161,10 @@
 
                   <div class="checkout_form_address_wrapper">
                     <div class="form_field">
-                      <input type="text" name="city" id="city" required placeholder="City" />
-                      <label for="city">City</label>
+                      <div class="checkout_form_field_container">
+                        <input type="text" name="city" id="city" required placeholder="City" />
+                        <label for="city">City</label>
+                      </div>
                       <div class="error_message">
                         <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                         <span>Enter a city</span>
@@ -161,17 +172,21 @@
                     </div>
 
                     <div class="form_field">
-                      <input type="text" required name="province" id="province" placeholder="Province / State" />
-                      <label for="province">Province / State</label>
+                      <div class="checkout_form_field_container">
+                        <input type="text" required name="province" id="province" placeholder="Province / State" />
+                        <label for="province">Province / State</label>
+                      </div>
                       <div class="error_message">
                         <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
-                        <span>Enter a last state / province</span>
+                        <span>Enter a state / province</span>
                       </div>
                     </div>
 
                     <div class="form_field">
-                      <input type="text" required name="zipcode" placeholder="ZIP code" id="zipcode" />
-                      <label for="zipcode">ZIP code</label>
+                      <div class="checkout_form_field_container">
+                        <input type="text" required name="zipcode" placeholder="ZIP code" id="zipcode" />
+                        <label for="zipcode">ZIP code (optional)</label>
+                      </div>
                       <div class="error_message">
                         <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                         <span>Enter a ZIP / postal code</span>
@@ -180,8 +195,10 @@
                   </div>
 
                   <div class="form_field">
-                    <input type="number" required name="phone" placeholder="Phone" id="phone" />
-                    <label for="phone">Phone</label>
+                    <div class="checkout_form_field_container">
+                      <input type="number" required name="phone" placeholder="Phone" id="phone" />
+                      <label for="phone">Phone</label>
+                    </div>
                     <div class="error_message">
                       <span><img src="../assets/icons/errorIcon.svg" width="12" height="12" alt="" /></span>
                       <span>Enter a valid phone number</span>
@@ -195,12 +212,12 @@
                 <p>All transactions are secured and encrypted.</p>
                 <div class="accordion accordion_payment" id="accordionExample" data-payment-accordion>
                   <div class="accordion_item" data-accordion-item>
-                      <button class="accordion_button open" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-accordion-button>
-                        <label for="payment-cod">
-                          <input type="radio" name="payment" id="payment-cod" value="cod" checked />
-                          <span>Cash on Delivery (COD)</span>
-                        </label>
-                      </button>
+                    <button class="accordion_button open" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-accordion-button>
+                      <label for="payment-cod">
+                        <input type="radio" name="payment" id="payment-cod" value="cod" checked />
+                        <span>Cash on Delivery (COD)</span>
+                      </label>
+                    </button>
                     <div id="collapseOne" class="accordion_body open" data-bs-parent="#accordionExample" data-accordion-body>
                       <div class="accordion_body_text_wrapper">
                         <p>Please note that COD Limit is 50,000 for all over Pakistan and you have to transfer remaining amount (if any) before dispatch.</p>
@@ -208,12 +225,12 @@
                     </div>
                   </div>
                   <div class="accordion_item" data-accordion-item>
-                      <button class="accordion_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-accordion-button>
-                        <label for="payment-bank">
-                          <input type="radio" name="payment" id="payment-bank" value="bank" />
-                          <span>Bank Deposit</span>
-                        </label>
-                      </button>
+                    <button class="accordion_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-accordion-button>
+                      <label for="payment-bank">
+                        <input type="radio" name="payment" id="payment-bank" value="bank" />
+                        <span>Bank Deposit</span>
+                      </label>
+                    </button>
                     <div id="collapseTwo" class="accordion_body collapse" data-bs-parent="#accordionExample" data-accordion-body>
                       <div class="accordion_body_text_wrapper">
                         <ul>
@@ -228,12 +245,12 @@
                     </div>
                   </div>
                   <div class="accordion_item" data-accordion-item>
-                      <button class="accordion_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" data-accordion-button>
-                        <label for="payment-jazzCash">
-                          <input type="radio" name="payment" id="payment-jazzCash" value="jazz-cash" />
-                          <span>Jazz Cash</span>
-                        </label>
-                      </button>
+                    <button class="accordion_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" data-accordion-button>
+                      <label for="payment-jazzCash">
+                        <input type="radio" name="payment" id="payment-jazzCash" value="jazz-cash" />
+                        <span>Jazz Cash</span>
+                      </label>
+                    </button>
                     <div id="collapseThree" class="accordion_body collapse" data-bs-parent="#accordionExample" data-accordion-body>
                       <div class="accordion_body_text_wrapper">
                         <ul>

@@ -30,7 +30,11 @@ export const updateItemQuantity = (quantityContainer: HTMLDivElement, clickedEle
   const increase = clickedElement.getAttribute("data-counter-type") === "increase";
   const decrease = clickedElement.getAttribute("data-counter-type") === "decrease";
 
-  const updatedQuantity = increase ? Math.min(itemQuantity + 1, itemStock) : decrease ? Math.max(itemQuantity - 1, minQuantity) : itemQuantity > itemStock ? itemStock : itemQuantity < minQuantity ? minQuantity : itemQuantity;
+  const updatedQuantity = increase ? Math.min(itemQuantity + 1, itemStock)
+    : decrease ? Math.max(itemQuantity - 1, minQuantity)
+      : itemQuantity > itemStock ? itemStock 
+       : itemQuantity < minQuantity ? minQuantity
+          : itemQuantity;
 
   renderUpdatedQuantity(updatedQuantity, quantityInputField);
   limitQuantityToStock(quantityContainer, quantityInputField);

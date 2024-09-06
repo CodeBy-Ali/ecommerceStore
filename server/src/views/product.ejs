@@ -21,300 +21,204 @@
     <!-- Start ------------------------------------- Cart ---------------------------------- -->
     <%- include('./partials/_cart.ejs',{cartItems}) %>
 
-      <!-- START --------------------------------------- Main ------------------------------------ -->
-      <main>
-        <section class="product_section">
-          <div class="product_wrapper">
-            <!-- product-Images ----------------------- -->
-            <section class="product_images_section">
-              <div class="product_images_slider_container">
-                <swiper-container class="swiper-container-product" data-swiper-container-product-images init="false">
-                  <swiper-slide class="swiper-slide">
-                    <img src="<%= product.images[0]  %>" draggable="false" alt=""  />
-                  </swiper-slide>
-                  <swiper-slide class="swiper-slide">
-                    <img src="<%= product.images[1]  %>" draggable="false" alt=""  />
-                  </swiper-slide>
-                  <swiper-slide class="swiper-slide">
-                    <img src="<%= product.images[2]  %>" draggable="false" alt=""  />
-                  </swiper-slide>
-                </swiper-container>
-              </div>
-            </section>
-            <!-- Product-Description ---------------- -->
-            <section class="product_description_section">
-              <div class="product_description_wrapper_sticky">
-                <div class="product_description_container">
-                  <div>
-                    <h1 class="product_title"><%= product.title %></h1>
-                    <p class="product_price">$<%= product.price%></p>
-                    <p class="product_description"><%= product.description  %></p>
-                    <p class="product_weight"><%= product.weight  %></p>
-                  </div>
-                  <div class="product_addToBag_wrapper"> 
+    <!-- START --------------------------------------- Main ------------------------------------ -->
+    <main>
+      <section class="product_section">
+        <div class="product_wrapper">
+          <!-- product-Images ----------------------- -->
+          <section class="product_images_section">
+            <div class="product_images_slider_container">
+              <swiper-container class="swiper-container-product" data-swiper-container-product-images init="false">
+                <swiper-slide class="swiper-slide">
+                  <img src="<%= product.images[0]  %>" draggable="false" alt="" />
+                </swiper-slide>
+                <swiper-slide class="swiper-slide">
+                  <img src="<%= product.images[1]  %>" draggable="false" alt="" />
+                </swiper-slide>
+                <swiper-slide class="swiper-slide">
+                  <img src="<%= product.images[2]  %>" draggable="false" alt="" />
+                </swiper-slide>
+              </swiper-container>
+            </div>
+          </section>
+          <!-- Product-Description ---------------- -->
+          <section class="product_description_section">
+            <div class="product_description_wrapper_sticky">
+              <div class="product_description_container">
+                <div>
+                  <h1 class="product_title"><%= product.title %></h1>
+                  <p class="product_price">$<%= product.price%></p>
+                  <p class="product_description"><%= product.description %></p>
+                  <p class="product_weight"><%= product.weight %></p>
+                </div>
+                <div class="product_addToBag_wrapper">
+                  <form action="/cart/add" data-add-to-cart-form="">
                     <div class="product_quantity_wrapper" data-product-quantity-wrapper>
-                      <button class="decrease_Quantity_button" data-decrease-product-quantity-btn data-counter-type="decrease">
+                      <button class="decrease_Quantity_button" type="button" data-decrease-product-quantity-btn data-counter-type="decrease">
                         <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
                         <span>-</span>
                       </button>
-  
+
                       <label class="visually-hidden" for="Quantity-The-EveryThing-Bar">
                         <span>Product The EveryThing Bar quantity</span>
                       </label>
-                      <input class="item_quantity_input" type="number" min="1" max="<%= product.stock  %>" value="1" name="quantity" data-key="<%= product._id %>" data-product-quantity-input/>
-  
-                      <button  class="increase_Quantity_button" data-decrease-product-quantity-btn data-counter-type="increase">
+                      <input class="item_quantity_input" type="number" min="1" max="<%= product.stock  %>" value="1" name="quantity" data-key="<%= product._id %>" data-product-quantity-input />
+
+                      <button class="increase_Quantity_button" data-decrease-product-quantity-btn data-counter-type="increase" type="button">
                         <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
                         <span>+</span>
                       </button>
                     </div>
-                    <button class="button--addToBag" type="button" data-addToCartBtn data-productId="<%= product._id %>" >Add to Bag</button>
-                  </div>
-                  <p class="extra_product_message">NEED EXTRA MOISTURIZER? <a href="">TRY OUR DAILY MOISTURIZER</a></p>
+                    <input type="hidden" name="productId" value="<%= product._id  %>" class="visually-hidden product_id_input" data-product-id />
+                    <button class="button--addToBag" type="button" data-add-to-cart-btn>Add to Bag</button>
+                  </form>
                 </div>
-                <!-- product-Accordion -------------------- -->
-                <div class="product_accordion_wrapper accordion accordion--product" data-product-accordion>
-                  <div class="accordion_item" data-accordion-item>
-                    <button class="accordion_button" aria-expanded="false" id="tab-shop" aria-controls="panel-shop" data-accordion-button>
-                      <span>HOW TO USE</span>
-                      <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
-                    </button>
-                    <div class="accordion_body" data-accordion-body id="panel-shop" aria-labelledby="tab-shop">
-                      <p class="accordion_products_body_text"><%= product.usage  %></p>
-                    </div>
-                  </div>
-  
-                  <div class="accordion_item" data-accordion-item>
-                    <p class="accordion_heading">LEARN</p>
-                    <button class="accordion_button" aria-expanded="false" id="tab-learn" aria-controls="panel-learn" data-accordion-button>
-                      <span>LEARN</span>
-                      <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
-                    </button>
-                    <div class="accordion_body" data-accordion-body id="panel-learn" aria-labelledby="tab-learn">
-                      <p class="accordion_products_body_text"><%= product.ingredients  %></p>
-                    </div>
-                  </div>
-  
-                  <div class="accordion_item" data-accordion-item>
-                    <button class="accordion_button" aria-expanded="false" id="tab-help" aria-controls="panel-help" data-accordion-button>
-                      <span>HELP</span>
-                      <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
-                    </button>
-                    <div class="accordion_body" data-accordion-body id="panel-help" aria-labelledby="tab-help">
-                      <p class="accordion_products_body_text">Ethically manufactured from global components and ingredients in the USA in a facility that is this party audited for social and environmental responsibility and safety. As SEDEX members we are dedicated to transparency and responsible manufacturing.</p>
-                    </div>
+                <p class="extra_product_message">NEED EXTRA MOISTURIZER? <a href="">TRY OUR DAILY MOISTURIZER</a></p>
+              </div>
+              <!-- product-Accordion -------------------- -->
+              <div class="product_accordion_wrapper accordion accordion--product" data-product-accordion>
+                <div class="accordion_item" data-accordion-item>
+                  <button class="accordion_button" aria-expanded="false" id="tab-shop" aria-controls="panel-shop" data-accordion-button>
+                    <span>HOW TO USE</span>
+                    <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
+                  </button>
+                  <div class="accordion_body" data-accordion-body id="panel-shop" aria-labelledby="tab-shop">
+                    <p class="accordion_products_body_text"><%= product.usage %></p>
                   </div>
                 </div>
-                <!-- Bought-Together ------------- -->
-                 <% if(product.boughtTogether){ %>
-                  <div class="boughtTogether_wrapper">
-                    <p>Frequently Bought Together</p>
-    
-                    <div class="bought_together_product banner_card">
-                      <a href="/products/<%= product.boughtTogether.slug  %>">
-                        <div class="banner_image">
-                          <img src="<%= product.boughtTogether.images[0]  %>" alt="" />
-                        </div>
-                      </a>
-                      <div class="banner_detail">
-                        <div class="banner_product_heading">
-                          <a href="/products/<%= product.boughtTogether.slug  %>" class="banner_product_title"><%= product.boughtTogether.title %></a>
-                          <p class="banner_product_prize">$<%= product.boughtTogether.price %></p>
-                        </div>
-                        <button class="button--productBanner" type="button" data-addToCartBtn data-productId="product.boughtTogether._id">
-                          <span>Add to Bag</span>
-                          <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M16.1836 3.4165L19.8972 7.49984L16.1836 11.5832" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
+
+                <div class="accordion_item" data-accordion-item>
+                  <p class="accordion_heading">LEARN</p>
+                  <button class="accordion_button" aria-expanded="false" id="tab-learn" aria-controls="panel-learn" data-accordion-button>
+                    <span>LEARN</span>
+                    <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
+                  </button>
+                  <div class="accordion_body" data-accordion-body id="panel-learn" aria-labelledby="tab-learn">
+                    <p class="accordion_products_body_text"><%= product.ingredients %></p>
                   </div>
-                 <% } %>
+                </div>
+
+                <div class="accordion_item" data-accordion-item>
+                  <button class="accordion_button" aria-expanded="false" id="tab-help" aria-controls="panel-help" data-accordion-button>
+                    <span>HELP</span>
+                    <span class="accordion_button_arrowIcon"><img src="/assets/arrowDownPrimary.png" alt="" /></span>
+                  </button>
+                  <div class="accordion_body" data-accordion-body id="panel-help" aria-labelledby="tab-help">
+                    <p class="accordion_products_body_text">Ethically manufactured from global components and ingredients in the USA in a facility that is this party audited for social and environmental responsibility and safety. As SEDEX members we are dedicated to transparency and responsible manufacturing.</p>
+                  </div>
+                </div>
               </div>
-            </section>
+              <!-- Bought-Together ------------- -->
+              <% if(product.boughtTogether){ %>
+              <div class="boughtTogether_wrapper">
+                <p>Frequently Bought Together</p>
+
+                <div class="bought_together_product banner_card">
+                  <a href="/products/<%= product.boughtTogether.slug  %>">
+                    <div class="banner_image">
+                      <img src="<%= product.boughtTogether.images[0]  %>" alt="" />
+                    </div>
+                  </a>
+                  <div class="banner_detail">
+                    <form action="/cart/add" data-add-to-cart-form="">
+                      <div class="banner_product_heading">
+                        <a href="/products/<%= product.boughtTogether.slug  %>" class="banner_product_title"><%= product.boughtTogether.title %></a>
+                        <p class="banner_product_prize">$<%= product.boughtTogether.price %></p>
+                      </div>
+                      <button class="button--productBanner" type="button" data-add-to-cart-btn>
+                        <span>Add to Bag</span>
+                        <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M16.1836 3.4165L19.8972 7.49984L16.1836 11.5832" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                      </button>
+                      <input type="hidden" name="productId" value="<%= product.boughtTogether._id  %>" class="visually-hidden product_id_input" data-product-id />
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+            </div>
+          </section>
+        </div>
+      </section>
+      <!-- Scrolling-Text ----------------------------------- -->
+      <section class="scrolling_text_section">
+        <div class="scrolling_text_wrapper">
+          <div class="scrolling_text_contents">
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText1.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">1 product = 1 pound of ocean bound plastic removed from the environment</p>
+            </div>
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText2.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">paraben free, sulface free, cruelty free, vegan, ethically manufactured</p>
+            </div>
           </div>
-        </section>
-        <!-- Scrolling-Text ----------------------------------- -->
-         <section class="scrolling_text_section">
-          <div class="scrolling_text_wrapper">
-            <div class="scrolling_text_contents">
-              <div class="scrolling_text_item">
-                <span class="scrolling_text_item_image">
-                  <img src="/assets/scrollingText1.png" alt="">
-                </span>
-                <p class="scrolling_text_item_description">
-                  1 product = 1 pound of ocean bound plastic removed from the environment
-                </p>
-              </div>
-              <div class="scrolling_text_item">
-                <span class="scrolling_text_item_image">
-                  <img src="/assets/scrollingText2.png" alt="">
-                </span>
-                <p class="scrolling_text_item_description">
-                  paraben free, sulface free, cruelty free, vegan, ethically manufactured
-                </p>
-              </div>
+          <div class="scrolling_text_contents">
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText1.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">1 product = 1 pound of ocean bound plastic removed from the environment</p>
             </div>
-            <div class="scrolling_text_contents">
-              <div class="scrolling_text_item">
-                <span class="scrolling_text_item_image">
-                  <img src="/assets/scrollingText1.png" alt="">
-                </span>
-                <p class="scrolling_text_item_description">
-                  1 product = 1 pound of ocean bound plastic removed from the environment
-                </p>
-              </div>
-              <div class="scrolling_text_item">
-                <span class="scrolling_text_item_image">
-                  <img src="/assets/scrollingText2.png" alt="">
-                </span>
-                <p class="scrolling_text_item_description">
-                  paraben free, sulface free, cruelty free, vegan, ethically manufactured
-                </p>
-              </div>
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText2.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">paraben free, sulface free, cruelty free, vegan, ethically manufactured</p>
             </div>
           </div>
-         </section>
-         <!-- Additional-Products ------------------------------------- -->
-         <section class="additional_products_section">
-           <h3 class="additional_products_heading">
-             You May Also Like
-           </h3>
-            <div class="additional_products_wrapper">
-              <swiper-container class="swiper_container_additional_product" init="false" data-swiper-container-additional-products>
-                <% relatedProducts && relatedProducts.forEach((product)=>{ %>
-                  <swiper-slide class="swiper_slide_additional_product">
-                    <div class="product_card">
-                      <a href="/products/<%= product.slug %>">
-                        <span class="visually-hidden">product.title</span>
-                      </a>
-                      <div class="product_card_info">
-                        <p><%= product.title %></p>
-                        <p><%= product.price %></p>
-                      </div>
-                      <div class="product_card_image">
-                        <img src="<%= product.images[0] %>" alt="" width="511" height="341">
-                      </div>
-                      <div class="product_addToCart_container">
-                        <form action="/cart/add" class="addToCart_form_1">
-                          <input type="hidden" name="productId" class="productId" value="1" name="productId">
-                          <div class="addTOCart_action">
-                            <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
-                              <span class="action_btn_text">Add to bag</span>
-                              <span class="plus_icon_btn">
-                                <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                              </span>
-                            </button>
-                            <span class="plus_icon">
-                              <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                            </span>
-                          </div>
-                        </form>
-                      </div>
+        </div>
+      </section>
+      <!-- Additional-Products ------------------------------------- -->
+      <section class="additional_products_section">
+        <h3 class="additional_products_heading">You May Also Like</h3>
+        <div class="additional_products_wrapper">
+          <swiper-container class="swiper_container_additional_product" init="false" data-swiper-container-additional-products>
+            <% relatedProducts && relatedProducts.forEach((product)=>{ %>
+            <swiper-slide class="swiper_slide_additional_product">
+              <div class="product_card">
+                <a href="/products/<%= product.slug %>">
+                  <span class="visually-hidden">product.title</span>
+                </a>
+                <div class="product_card_info">
+                  <p><%= product.title %></p>
+                  <p><%= product.price %></p>
+                </div>
+                <div class="product_card_image">
+                  <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
+                </div>
+                <div class="product_addToCart_container">
+                  <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                    <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                    <div class="addTOCart_action">
+                      <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
+                        <span class="action_btn_text">Add to bag</span>
+                        <span class="plus_icon_btn">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </button>
+                      <span class="plus_icon">
+                        <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                      </span>
                     </div>
-                  </swiper-slide>
-                <% })  %>
-                <!-- <swiper-slide class="swiper_slide_additional_product">
-                  <div class="product_card">
-                    <a href="./product.html">
-                      <span class="visually-hidden">The EveryThing Bar</span>
-                    </a>
-                    <div class="product_card_info">
-                      <p>The EveryThing Bar</p>
-                      <p>$14.99</p>
-                    </div>
-                    <div class="product_card_image">
-                      <img src="/assets/TheEverythingBar_Ecomm_106_720x.webp" alt="" width="511" height="341">
-                    </div>
-                    <div class="product_addToCart_container">
-                      <form action="/cart/add" class="addToCart_form_1">
-                        <input type="hidden" name="productId" class="productId" value="1" name="productId">
-                        <div class="addTOCart_action">
-                          <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-product-id="1">
-                            <span class="action_btn_text">Add to bag</span>
-                            <span class="plus_icon_btn">
-                              <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                            </span>
-                          </button>
-                          <span class="plus_icon">
-                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                          </span>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </swiper-slide>
-  
-                <swiper-slide class="swiper_slide_additional_product">
-                  <div class="product_card">
-                    <a href="./product.html">
-                      <span class="visually-hidden">The EveryThing Bar</span>
-                    </a>
-                    <div class="product_card_info">
-                      <p>The EveryThing Bar</p>
-                      <p>$14.99</p>
-                    </div>
-                    <div class="product_card_image">
-                      <img src="/assets/TheEverythingBar_Ecomm_106_720x.webp" alt="" width="511" height="341">
-                    </div>
-                    <div class="product_addToCart_container">
-                      <form action="/cart/add" class="addToCart_form_1">
-                        <input type="hidden" name="productId" class="productId" value="1" name="productId">
-                        <div class="addTOCart_action">
-                          <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-product-id="1">
-                            <span class="action_btn_text">Add to bag</span>
-                            <span class="plus_icon_btn">
-                              <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                            </span>
-                          </button>
-                          <span class="plus_icon">
-                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                          </span>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </swiper-slide>
-  
-                <swiper-slide class="swiper_slide_additional_product">
-                  <div class="product_card">
-                    <a href="./product.html">
-                      <span class="visually-hidden">The EveryThing Bar</span>
-                    </a>
-                    <div class="product_card_info">
-                      <p>The EveryThing Bar</p>
-                      <p>$14.99</p>
-                    </div>
-                    <div class="product_card_image">
-                      <img src="/assets/TheEverythingBar_Ecomm_106_720x.webp" alt="" width="511" height="341">
-                    </div>
-                    <div class="product_addToCart_container">
-                      <form action="/cart/add" class="addToCart_form_1">
-                        <input type="hidden" name="productId" class="productId" value="1" name="productId">
-                        <div class="addTOCart_action">
-                          <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-addToCartBtn data-product-id="1">
-                            <span class="action_btn_text">Add to bag</span>
-                            <span class="plus_icon_btn">
-                              <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                            </span>
-                          </button>
-                          <span class="plus_icon">
-                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20">
-                          </span>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </swiper-slide> -->
-              </swiper-container>
-            </div>
-         </section>
-         <div class="findUs_message_container">
-          <p class="findUs_message">Find Us Exclusively Online at Zaply.co</p>
-         </div>
-      </main>
+                  </form>
+                </div>
+              </div>
+            </swiper-slide>
+            <% }) %>
+          </swiper-container>
+        </div>
+      </section>
+      <div class="findUs_message_container">
+        <p class="findUs_message">Find Us Exclusively Online at Zaply.co</p>
+      </div>
+    </main>
     <!-- Start ----------------------------------------- Footer ---------------------------------------------- -->
     <footer><%- include('./partials/_footer.ejs') %></footer>
   </body>

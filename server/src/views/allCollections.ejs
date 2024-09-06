@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" crossorigin src="/assets/main.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main.css">
+    <link rel="stylesheet" crossorigin href="/assets/main.css" />
     <title>Phil's Refills</title>
   </head>
   <body data-page="collection">
@@ -60,30 +60,30 @@
               <li class="product_list_item">
                 <div class="product_card">
                   <a href="/products/<%= product.slug %>">
-                    <span class="visually-hidden"><%= product.title %></span>
+                    <span class="visually-hidden">product.title</span>
                   </a>
                   <div class="product_card_info">
                     <p><%= product.title %></p>
-                    <p>$ <%= product.price %></p>
+                    <p><%= product.price %></p>
                   </div>
                   <div class="product_card_image">
-                    <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
+                    <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
                   </div>
                   <div class="product_addToCart_container">
-                    <div class="addTOCart_action" >
-                      <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
-                        <span class="action_btn_text">Add to bag</span>
-                        <span class="plus_icon_btn">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                        </button>
+                        <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
-                        <div class="addToCart_loading_animation_wrapper">
-                          <div class="loader"></div>
-                        </div>
-                      </button>
-                      <span class="plus_icon">
-                        <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
-                      </span>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </li>
@@ -129,36 +129,36 @@
           <div class="products_container">
             <ul>
               <% body.forEach(product =>{ %>
-                <li class="product_list_item">
-                  <div class="product_card">
-                    <a href="/products/<%= product.slug %>">
-                      <span class="visually-hidden"><%= product.title %></span>
-                    </a>
-                    <div class="product_card_info">
-                      <p><%= product.title %></p>
-                      <p>$ <%= product.price %></p>
-                    </div>
-                    <div class="product_card_image">
-                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
-                    </div>
-                    <div class="product_addToCart_container">
-                      <div class="addTOCart_action" >
-                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="/products/<%= product.slug %>">
+                    <span class="visually-hidden">product.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p><%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                           </span>
-                          <div class="addToCart_loading_animation_wrapper">
-                            <div class="loader"></div>
-                          </div>
                         </button>
                         <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
                       </div>
-                    </div>
+                    </form>
                   </div>
-                </li>
+                </div>
+              </li>
               <% }) %>
             </ul>
           </div>
@@ -176,36 +176,36 @@
           <div class="products_container">
             <ul>
               <% cleansers.forEach(product =>{ %>
-                <li class="product_list_item">
-                  <div class="product_card">
-                    <a href="/products/<%= product.slug %>">
-                      <span class="visually-hidden"><%= product.title %></span>
-                    </a>
-                    <div class="product_card_info">
-                      <p><%= product.title %></p>
-                      <p>$ <%= product.price %></p>
-                    </div>
-                    <div class="product_card_image">
-                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
-                    </div>
-                    <div class="product_addToCart_container">
-                      <div class="addTOCart_action" >
-                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+              <li class="product_list_item">
+                < <div class="product_card">
+                  <a href="/products/<%= product.slug %>">
+                    <span class="visually-hidden">product.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p><%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                           </span>
-                          <div class="addToCart_loading_animation_wrapper">
-                            <div class="loader"></div>
-                          </div>
                         </button>
                         <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
                       </div>
-                    </div>
+                    </form>
                   </div>
-                </li>
+                </div>
+              </li>
               <% }) %>
             </ul>
           </div>
@@ -223,36 +223,36 @@
           <div class="products_container">
             <ul>
               <% conditioners.forEach(product =>{ %>
-                <li class="product_list_item">
-                  <div class="product_card">
-                    <a href="/products/<%= product.slug %>">
-                      <span class="visually-hidden"><%= product.title %></span>
-                    </a>
-                    <div class="product_card_info">
-                      <p><%= product.title %></p>
-                      <p>$ <%= product.price %></p>
-                    </div>
-                    <div class="product_card_image">
-                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
-                    </div>
-                    <div class="product_addToCart_container">
-                      <div class="addTOCart_action" >
-                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="/products/<%= product.slug %>">
+                    <span class="visually-hidden">product.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p><%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                           </span>
-                          <div class="addToCart_loading_animation_wrapper">
-                            <div class="loader"></div>
-                          </div>
                         </button>
                         <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
                       </div>
-                    </div>
+                    </form>
                   </div>
-                </li>
+                </div>
+              </li>
               <% }) %>
             </ul>
           </div>
@@ -270,39 +270,39 @@
           <div class="products_container">
             <ul>
               <% face.forEach(product =>{ %>
-                <li class="product_list_item">
-                  <div class="product_card">
-                    <a href="/products/<%= product.slug %>">
-                      <span class="visually-hidden"><%= product.title %></span>
-                    </a>
-                    <div class="product_card_info">
-                      <p><%= product.title %></p>
-                      <p>$ <%= product.price %></p>
-                    </div>
-                    <div class="product_card_image">
-                      <img src="<%= product.images[0] %>" alt="" width="366" height="244" />
-                    </div>
-                    <div class="product_addToCart_container">
-                      <div class="addTOCart_action" >
-                        <button aria-label="Add to bag The EveryThing Bar" type="button"  class="addTOCart_action_btn" data-addToCartBtn data-productId="<%= product._id %>">
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="/products/<%= product.slug %>">
+                    <span class="visually-hidden">product.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p><%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
                           <span class="action_btn_text">Add to bag</span>
                           <span class="plus_icon_btn">
                             <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                           </span>
-                          <div class="addToCart_loading_animation_wrapper">
-                            <div class="loader"></div>
-                          </div>
                         </button>
                         <span class="plus_icon">
                           <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
                         </span>
                       </div>
-                    </div>
+                    </form>
                   </div>
-                </li>
+                </div>
+              </li>
               <% }) %>
-               <!-- Banner -->
-               <li class="banner_card_wrapper">
+              <!-- Banner -->
+              <li class="banner_card_wrapper">
                 <div class="banner_card">
                   <div class="banner_image">
                     <img src="/assets/Phils_2023_Launch_ShavingCream_Product_HERO-copy.png" alt="" />

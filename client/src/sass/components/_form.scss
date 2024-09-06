@@ -11,6 +11,19 @@ form {
 
   & .form_field {
     position: relative;
+
+
+    &:has(.checkout_form_field_container.validationFailed){
+
+      & .checkout_form_field_container input{
+        border: 2px solid $clr-error;
+      }
+      
+      & .error_message{
+        display: block;
+      }
+    }
+
     &.validationFailed .error_message{
       display: block
     }
@@ -20,14 +33,14 @@ form {
     }
   }
 
-  & .form_field > input {
+  & .form_field  input {
     @include formInput;
     border: 1px solid $clr-border;
     height: 4.7rem;
     line-height: 4.7rem;
   }
 
-  & .form_field > label {
+  & .form_field label {
     @include formInputLabel;
     font-size: 1.4rem;
     font-weight: normal;

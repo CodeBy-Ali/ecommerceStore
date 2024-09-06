@@ -259,6 +259,11 @@ main{
     font-weight: normal;
   }
   
+  & .form_field .checkout_form_field_container{
+    width: 100%;
+    position: relative;
+  }
+  
   & .form_field .error_message {
     color: $clr-error;
     font-size: 13px;

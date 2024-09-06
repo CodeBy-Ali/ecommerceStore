@@ -326,6 +326,7 @@
 @mixin item_Quantity_spinner($input-width: 3.5rem) {
   border-radius: $br-large;
   border: 1px solid $clr-border;
+  color: $clr-primary;
   @include flex-row-jc(space-between);
   font-size: $font-size-sm;
   flex: 1;
@@ -336,6 +337,7 @@
     width: $input-width;
     text-align: center;
     text-decoration: none;
+    color: $clr-primary;
     font-weight: $font-semibold;
     outline: none;
     border: none;
@@ -349,6 +351,7 @@
     background-color: transparent;
     border: none;
     padding-block: 1rem;
+    color: $clr-primary;
     & > * {
       pointer-events: none;
     }

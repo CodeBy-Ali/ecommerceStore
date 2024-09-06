@@ -6,7 +6,7 @@ import { showNotification } from "../components/utils/pagesUtils";
 import initAccordion from "../components/accordion/accordion";
 
 const initProductPage = () => {
-  const addToCartButtons = document.querySelectorAll<HTMLElement>("[data-addToCartBtn]");
+  const addToCartButtons = document.querySelectorAll<HTMLElement>("[data-add-to-cart-btn]");
   const productAccordion = DOMUtils.getElement<HTMLElement>("[data-product-accordion]");
   
   addToCartButtons?.forEach((button) => button.addEventListener("click", handleAddToCartClick));
@@ -14,12 +14,12 @@ const initProductPage = () => {
   if(productAccordion) initAccordion(productAccordion);
   productQuantitySpinner();
   productImageSlider();
-  additionalProductSlider();
+  additionalProductSlider(); 
 };
 
 export function handleAddToCartClick(e:Event) {
   const actionButton = e.target as HTMLButtonElement;
-  const productId = actionButton.getAttribute('data-productId');
+  const productId = actionButton.closest('form')?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
   const quantityInputFiled = document.querySelector<HTMLInputElement>("input[data-product-quantity-input]");
   if (!quantityInputFiled) return;
   if (!productId) {
@@ -36,6 +36,7 @@ function productQuantitySpinner() {
 
   ["click", "input"].forEach((event) =>
     productQuantityContainer.addEventListener(event, (e) => {
+      e.preventDefault();
       const clickedElement = e.target as HTMLElement;
       const quantityInputFiled = productQuantityContainer.querySelector<HTMLInputElement>("input[data-product-quantity-input]");
 
