@@ -12,4 +12,14 @@ export const renderHomeView = async(req: Request, res: Response,next:NextFunctio
   }
 }
 
+// render checkout view
+export const renderCheckoutView = async (req: Request, res: Response, next: NextFunction) => {
+  const user = req.session.user;
+  try {
+    const userConfig = await getUserConfig(user);
+    res.end("checkout");
+  } catch (error) {
+    next(error);
+  }
+}
 

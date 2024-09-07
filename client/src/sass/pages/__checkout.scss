@@ -10,18 +10,13 @@ body[data-page="checkout"] {
 
   & header {
     position: static;
+    height: $height-header-sm;
+    @include respond-to(small) {
+      height: $height-header-lg;
+    }
   }
-}
-
-button {
-  font-family: $font-checkout-page;
-}
-
-header {
-  height: $height-header-sm;
-
-  @include respond-to(small) {
-    height: $height-header-lg;
+  & button {
+    font-family: $font-checkout-page;
   }
 }
 
@@ -49,9 +44,8 @@ header {
 
 // --------------- main ------------->
 
-
-main{
-  @include respond-to(medium){
+.checkout_page_main{
+  @include respond-to(medium) {
     border-top: 1px solid $clr-border;
   }
 }
@@ -69,7 +63,7 @@ main{
   @include respond-to(medium) {
     flex: 1;
     border-left: 1px solid $clr-border;
-    position:sticky;
+    position: sticky;
     top: 40rem;
   }
 }
@@ -93,7 +87,7 @@ main{
       display: flex;
       align-items: center;
 
-      & .arrow_down_svg_wrapper{
+      & .arrow_down_svg_wrapper {
         display: inline-block;
         margin-left: 1rem;
       }
@@ -102,6 +96,7 @@ main{
         width: 1.6rem;
         height: 1.6rem;
       }
+
     }
 
     & .order_total_price {
@@ -114,8 +109,8 @@ main{
     }
   }
 
-  @include respond-to(medium){
-    & .order_summary_button{
+  @include respond-to(medium) {
+    & .order_summary_button {
       display: none;
     }
   }
@@ -125,11 +120,11 @@ main{
   max-height: fit-content;
   max-height: 0;
   overflow: hidden;
-  transition: max-height .4s ease;
+  transition: max-height 0.4s ease;
   transform: translateY();
   @include container(53rem);
 
-  & p{
+  & p {
     margin-bottom: 0;
   }
 
@@ -149,25 +144,23 @@ main{
     border-bottom: 1px solid $clr-border;
   }
 
-  @include respond-to(medium){
+  @include respond-to(medium) {
     margin: 0;
     max-height: 200vh;
-    & .checkout_order_summary_wrapper{
+    & .checkout_order_summary_wrapper {
       padding: 3.8rem;
-
     }
-    &.open{
-    border-bottom: none;
+    &.open {
+      border-bottom: none;
     }
-    
   }
 }
 
 .checkout_order_total_section {
   font-size: $font-size-sm;
 
-  & p{
-    margin-bottom: 0
+  & p {
+    margin-bottom: 0;
   }
 
   & div {
@@ -244,7 +237,6 @@ main{
 // -------------- checkout-form --------------->
 
 .checkout_form_section {
-  
   & .checkout_form_container {
     @include container($container-checkout-inner-section);
     padding: 1.7rem 2.1rem;
@@ -258,12 +250,12 @@ main{
     font-size: $font-size-sm;
     font-weight: normal;
   }
-  
-  & .form_field .checkout_form_field_container{
+
+  & .form_field .checkout_form_field_container {
     width: 100%;
     position: relative;
   }
-  
+
   & .form_field .error_message {
     color: $clr-error;
     font-size: 13px;
@@ -280,14 +272,12 @@ main{
   @include respond-to(medium) {
     flex: 1;
 
-    & .checkout_form_container{
+    & .checkout_form_container {
       padding: 3.8rem;
       margin-inline: 0;
       max-width: 100%;
     }
   }
-
-  
 }
 
 .checkout_form_contact_section {
@@ -365,28 +355,32 @@ main{
     // border-radius: 5px;
     // border: 1px solid $clr-border-accordion;
 
-    & .accordion_item:last-child{
-      & .accordion_button{
+    & .accordion_item{
+      overflow: hidden;
+    }
+
+    & .accordion_item:last-child {
+      & .accordion_button {
         border-bottom: 1px solid $clr-border-accordion;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
 
-        &.open{
+        &.open {
           border-bottom-color: $clr-border-accordion-active;
           border-bottom-left-radius: 0px;
-          border-bottom-right-radius: 0px;            
+          border-bottom-right-radius: 0px;
         }
       }
 
-      & .accordion_body.open{
+      & .accordion_body.open {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
-        border-bottom: 1px solid $clr-border-accordion;        
+        border-bottom: 1px solid $clr-border-accordion;
       }
     }
 
-    & .accordion_item:first-child{
-      & .accordion_button{
+    & .accordion_item:first-child {
+      & .accordion_button {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
       }
@@ -397,8 +391,9 @@ main{
       background-color: transparent;
       border: 1px solid $clr-border-accordion;
       border-bottom: none;
+      width: 100%;
 
-      &.open{
+      &.open {
         background-color: $clr-bg-accordion-button;
         border: 1px solid $clr-border-accordion-active;
       }
@@ -443,44 +438,45 @@ main{
       background-color: rgba(0, 0, 0, 0.043);
       font-size: $font-size-sm;
       color: black;
-      
-      &.open{
+      max-height: 0;
+      transition: max-height $transition-time-accordion ease;
+
+      &.open {
         border-inline: 1px solid $clr-border-accordion;
         max-height: 20rem;
       }
 
-      & .accordion_body_text_wrapper{
+      & .accordion_body_text_wrapper {
         padding: 1.7rem;
         line-height: 2.1rem;
       }
     }
   }
 
-  @include respond-to(medium){
+  @include respond-to(medium) {
     margin-bottom: 1rem;
   }
 }
 
-
 // order summary section mobile
 
-.checkout_order_summary_section_mobile{
+.checkout_order_summary_section_mobile {
   padding: $pd-checkout-section;
   background-color: transparent;
   margin-bottom: 1.5rem;
 
-  @include respond-to(medium){
+  @include respond-to(medium) {
     display: none;
   }
 }
 
 // complete order button section
 
-.checkout_complete_order_section{
+.checkout_complete_order_section {
   padding: $pd-checkout-section;
   padding-block: 2.5rem;
 
-  & .complete_order_button{
+  & .complete_order_button {
     width: 100%;
     font-size: 1.7rem;
     color: white;
@@ -491,10 +487,43 @@ main{
     padding: 1.6rem;
   }
 
-  @include respond-to(medium){
-
-    & .complete_order_button{
+  @include respond-to(medium) {
+    & .complete_order_button {
       font-size: 1.9rem;
     }
+  }
+}
+
+
+// policies section;
+
+
+.checkout_policies_section{
+  border-top: 1px solid $clr-border;
+  margin-bottom: 3.8rem;
+
+  @include respond-to(medium){
+    margin-inline: 3.8rem;
+  }
+}
+
+.checkout_page_policies_container{
+  padding: 1.7rem 2.1rem;
+  font-size: $font-size-sm;
+  & .checkout_page_policies_list{
+    display: flex;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+    
+    & li a{
+      color: $clr-link-color;
+      display: inline-block;
+      white-space: nowrap;
+      text-decoration: underline;
+    }
+  }
+  
+  @include respond-to(medium){
+    padding: 2rem 0;
   }
 }

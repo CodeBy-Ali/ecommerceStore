@@ -1,12 +1,10 @@
 import { Request,Response,NextFunction } from "express"
 import logger from "../config/logger.ts";
 const logRequest = (req: Request, res: Response, next: NextFunction) => {
+  next();
   const status = res.statusCode;
   const color = getStatusColorCode(status);
-  
   logger.info(`${req.method} ${req.url}  \x1b[1;${color}m%s\x1b[0m `,status);
-  next();
-
 }
 
 function getStatusColorCode(status:number) {

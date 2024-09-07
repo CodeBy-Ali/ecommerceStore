@@ -35,7 +35,7 @@ export const togglePasswordVisibility = (eyeIcon: HTMLElement, eyeIconButton: HT
 };
 
 export const showNotification = (message: string, success: boolean): void => {
-  const notificationCenter = document.querySelector("[data-notificationCenter]");
+  const notificationCenter = document.querySelector("[data-notification-center]");
   const successNotificationClass = "notification--success";
   const failureNotificationClass = "notification--error";
 
