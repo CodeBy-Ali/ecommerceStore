@@ -28,7 +28,7 @@ export const validateCartRequest = (req:Request, res:Response, next:NextFunction
 export const redirectForEmptyCart = async (req: Request, res: Response, next: NextFunction) => {
   const userId = req.session?.user?._id;
   try {
-    const cart = userId ? await Cart.findOne({ userId }).lean().exec() : undefined;
+    const cart = userId ? await Cart.findOne({ userId }).lean().exec() : null;
     if (!cart || cart.items.length === 0) {
       return res.redirect('/collections');
     }

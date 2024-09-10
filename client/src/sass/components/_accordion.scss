@@ -7,7 +7,8 @@
 
     & .accordion_button{
       & span{
-        font-weight: normal;      
+        font-weight: $font-semibold;      
+        font-size: $font-size-xsm;
       }
       & .accordion_button_arrowIcon{
         opacity: .8;

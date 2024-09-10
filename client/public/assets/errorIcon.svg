@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1080" height="1080" viewBox="0 0 1080 1080" xml:space="preserve">
+<desc>Created with Fabric.js 5.2.4</desc>
+<defs>
+</defs>
+<g transform="matrix(1 0 0 1 540 540)" id="b4b75e5d-976d-49f4-8dd4-85c19f0c36ee"  >
+<rect style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,255,255); fill-rule: nonzero; opacity: 1; visibility: hidden;" vector-effect="non-scaling-stroke"  x="-540" y="-540" rx="0" ry="0" width="1080" height="1080" />
+</g>
+<g transform="matrix(1 0 0 1 540 540)" id="5e7b5ef2-e2a5-4b1a-a50f-3569d26f8deb"  >
+</g>
+<g transform="matrix(67.5 0 0 67.5 540 540)"  >
+<g style=""   >
+		<g transform="matrix(1 0 0 1 0 0)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(207,32,47); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-8, -8)" d="M 8 1.5 C 4.410149126099842 1.5 1.5 4.410149126099842 1.5 8 C 1.5 11.589850873900158 4.410149126099842 14.5 8 14.5 C 11.589850873900158 14.5 14.5 11.589850873900158 14.5 8 C 14.5 4.410149126099842 11.589850873900158 1.5 8 1.5 z M 0 8 C 0 3.5817220013536524 3.5817220013536524 0 8 0 C 12.418277998646348 0 15.999999999999998 3.5817220013536506 16 7.999999999999998 C 16 12.418277998646348 12.418277998646348 16 8 16 C 3.5817220013536524 16 0 12.418277998646348 0 8 z" stroke-linecap="round" />
+</g>
+		<g transform="matrix(1 0 0 1 0 0.01)"  >
+<path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(207,32,47); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-8, -8.01)" d="M 7.25 9 L 7.25 4 L 8.75 4 L 8.75 9 L 7.25 9 z M 7.25 12.026 L 7.25 10.526 L 8.75 10.526 L 8.75 12.026 L 7.25 12.026 z" stroke-linecap="round" />
+</g>
+</g>
+</g>
+</svg>

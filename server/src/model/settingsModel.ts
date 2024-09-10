@@ -4,6 +4,7 @@ export interface IStoreSettings{
   _id: string,
   freeShippingThreshold: number,
   currency: string,
+  shippingRate: number,
 }
 
 const storeSettingsSchema = new Schema<IStoreSettings>({
@@ -14,12 +15,10 @@ const storeSettingsSchema = new Schema<IStoreSettings>({
     type: Number,
     required: true,    
   },
-  currency: {
-    type: String,
-    required: true,
-    enum: ['USD', 'PKR']
+  shippingRate: {
+    type: Number,
+    required: true, 
   }
-
 }, {
   timestamps: true,
 });

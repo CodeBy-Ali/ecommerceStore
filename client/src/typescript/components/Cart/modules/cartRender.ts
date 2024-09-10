@@ -86,7 +86,7 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
                      
                      <div class="cartItem_heading_container">
                        <a href="/products/${product.slug}">${product.title}</a>
-                       <p class="cartItem_price">${product.price}</p>
+                       <p class="cartItem_price">Rs ${product.price}</p>
                      </div>
      
                      <div class="cartItem_quantity_container" >
@@ -122,10 +122,10 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
           <div class="cart_footer_totalPrize_container">
             <p>SUBTOTAl</p>
             <p>
-              $${subTotal}
+              Rs ${subTotal}
             </p>
           </div>
-          <a href="" class="button--checkout">Checkout</a>
+          <a href="/checkout" class="button--checkout">Checkout</a>
         </section>`;
   }
   cartDrawer.appendChild(fragment);

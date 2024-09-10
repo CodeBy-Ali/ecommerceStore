@@ -44,7 +44,7 @@ body[data-page="checkout"] {
 
 // --------------- main ------------->
 
-.checkout_page_main{
+.checkout_page_main {
   @include respond-to(medium) {
     border-top: 1px solid $clr-border;
   }
@@ -96,7 +96,6 @@ body[data-page="checkout"] {
         width: 1.6rem;
         height: 1.6rem;
       }
-
     }
 
     & .order_total_price {
@@ -110,6 +109,8 @@ body[data-page="checkout"] {
   }
 
   @include respond-to(medium) {
+    position: sticky;
+    top: 0;
     & .order_summary_button {
       display: none;
     }
@@ -136,6 +137,9 @@ body[data-page="checkout"] {
       margin-bottom: 2rem;
       & ul {
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.4rem;
       }
     }
   }
@@ -193,6 +197,7 @@ body[data-page="checkout"] {
 
 .order_summary_detail_container .checkout_cart_item {
   @include flex-row-jc(space-between);
+  column-gap: .8rem;
   font-size: $font-size-sm;
 
   & .checkout_item_description {
@@ -201,6 +206,10 @@ body[data-page="checkout"] {
     & p {
       margin-left: 1.4rem;
     }
+
+  }
+  & .checkout_item_price{
+    white-space: nowrap;
   }
 
   & .checkout_cartitem_image_container {
@@ -251,6 +260,15 @@ body[data-page="checkout"] {
     font-weight: normal;
   }
 
+  & .form_field input[type="number"]{
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button{
+      appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+    appearance: none;
+  }
   & .form_field .checkout_form_field_container {
     width: 100%;
     position: relative;
@@ -355,7 +373,7 @@ body[data-page="checkout"] {
     // border-radius: 5px;
     // border: 1px solid $clr-border-accordion;
 
-    & .accordion_item{
+    & .accordion_item {
       overflow: hidden;
     }
 
@@ -494,36 +512,34 @@ body[data-page="checkout"] {
   }
 }
 
-
 // policies section;
 
-
-.checkout_policies_section{
+.checkout_policies_section {
   border-top: 1px solid $clr-border;
   margin-bottom: 3.8rem;
 
-  @include respond-to(medium){
+  @include respond-to(medium) {
     margin-inline: 3.8rem;
   }
 }
 
-.checkout_page_policies_container{
+.checkout_page_policies_container {
   padding: 1.7rem 2.1rem;
   font-size: $font-size-sm;
-  & .checkout_page_policies_list{
+  & .checkout_page_policies_list {
     display: flex;
     gap: 1.4rem;
     flex-wrap: wrap;
-    
-    & li a{
+
+    & li a {
       color: $clr-link-color;
       display: inline-block;
       white-space: nowrap;
       text-decoration: underline;
     }
   }
-  
-  @include respond-to(medium){
+
+  @include respond-to(medium) {
     padding: 2rem 0;
   }
 }

@@ -5,11 +5,10 @@
       <section class="cart_header_section">
         <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount><%= cartItems.reduce((total,{quantity}) => total+=quantity,0)  %></span>&rpar;</h2>
 
-        <% const subTotal = Number(cartItems.reduce((subTotal,{quantity,product})=> subTotal+=(product.price * quantity),0).toFixed(2)) %>
         <% const {freeShippingThreshold} = storeSettings %>
 
         <% if(freeShippingThreshold > subTotal){ %>
-          <p class="cart_header_message">Spend $<%= Number(freeShippingThreshold - subTotal).toFixed(2)  %> more  to get free shipping!</p>
+          <p class="cart_header_message">Spend Rs <%= Number(freeShippingThreshold - subTotal).toFixed(2)  %> more  to get free shipping!</p>
         <% }else { %>
           <p class="cart_header_message">You've earned free shipping</p>
         <% } %>
@@ -31,7 +30,7 @@
                 
                 <div class="cartItem_heading_container"> 
                   <a href="/products/<%= product.slug  %>"><%= product.title  %></a>
-                  <p class="cartItem_price"><%= product.price %></p>
+                  <p class="cartItem_price">Rs <%= product.price %></p>
                 </div>
     
                 <div class="cartItem_quantity_container" >
@@ -64,9 +63,9 @@
       <section class="cart_footer_section">
         <div class="cart_footer_totalPrize_container">
           <p>SUBTOTAl</p>
-          <p>$ <%= subTotal %></p>
+          <p>Rs <%= subTotal %></p>
         </div>
-        <a href="" class="button--checkout">Checkout</a>
+        <a href="/checkout" class="button--checkout">Checkout</a>
       </section>
     </div>
   <% }else{ %>
