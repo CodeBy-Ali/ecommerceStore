@@ -35,7 +35,7 @@
     
                 <div class="cartItem_quantity_container" >
                   <div class="cartItem_quantity_wrapper" data-cartItem-quantity-container>
-                    <button class="decrease_Quantity_button" data-decrease-item-quantity data-counter-type="decrease">
+                    <button class="decrease_Quantity_button" data-decrease-item-quantity data-counter-type="decrease" type="button" >
                       <span class="visually-hidden">Decrease Quantity for The EveryThing Var</span>
                       <span>-</span>
                     </button>
@@ -45,7 +45,7 @@
                     </label>
                     <input class="item_quantity_input" type="number" min="1" max="<%= product.stock %>" data-key="<%= product._id %>" value="<%= quantity %>" name="quantity" data-item-quantity-input id="Quantity-<%= product.title.split(" ").join('-')%>">
     
-                    <button data-increase-item-quantity class="increase_Quantity_button" data-counter-type="increase">
+                    <button data-increase-item-quantity class="increase_Quantity_button" data-counter-type="increase" type="button" >
                       <span class="visually-hidden">Increase Quantity for The EveryThing Bar</span>
                       <span>+</span>
                     </button>
@@ -79,8 +79,8 @@
         <ul class="empty_cart_collectionList">
           <li class="">
             <a href="">
-              <div>
-                <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="">
+              <div class="empty_cart_collection_image_container">
+                <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="" width="130" height="86">
               </div>
               <div>
                 <h4>HAIR</h4>
@@ -90,8 +90,8 @@
           </li>
           <li>
             <a href="">
-              <div>
-                <img src="/assets/dailyMoisturizer1.jpg" alt="">
+              <div class="empty_cart_collection_image_container">
+                <img src="/assets/dailyMoisturizer1.jpg" alt="" width="130" height="86">
               </div>
               <div>
                 <h4>FACE</h4>
@@ -101,12 +101,12 @@
           </li>
           <li>
             <a href="">
-              <div>
-                <img src="/assets/handsoapformbottle.webp" alt="">
+              <div class="empty_cart_collection_image_container">
+                <img src="/assets/handsoapformbottle.jpg" alt="" width="130" height="86">
               </div>
               <div>
                 <h4>BODY</h4>
-                <p>Lotions,hands soaps,refills</p>
+                <p>Lotions,hands soaps &amp; refills</p>
               </div>
             </a>
           </li>

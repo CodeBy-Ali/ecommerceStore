@@ -5,6 +5,7 @@
   position: fixed;
   right: 0;
   height: 100vh;
+  height: 100%;
   top: 0;
   z-index: 210;
   width: 100%;
@@ -233,10 +234,16 @@
 
 .empty_cart_wrapper{
   position: relative;
-  padding-top: 20.1rem;
-  @include respond-to(medium){
-    padding-top: 18rem;
-  }
+  padding-block: 6rem;
+  // padding-top: 20.1rem;
+  // @include respond-to(medium){
+  //   padding-top: 18rem;
+  // }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .empty_cart_header_section{
@@ -270,7 +277,7 @@
 }
 
 .empty_cart_collectionList_section{
-  max-width: 95%;
+  max-width: 93%;
   margin-inline: auto;
 
   & .empty_cart_collectionList{

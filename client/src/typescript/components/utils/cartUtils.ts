@@ -30,11 +30,7 @@ export const updateItemQuantity = (quantityContainer: HTMLDivElement, clickedEle
   const increase = clickedElement.getAttribute("data-counter-type") === "increase";
   const decrease = clickedElement.getAttribute("data-counter-type") === "decrease";
 
-  const updatedQuantity = increase ? Math.min(itemQuantity + 1, itemStock)
-    : decrease ? Math.max(itemQuantity - 1, minQuantity)
-      : itemQuantity > itemStock ? itemStock 
-       : itemQuantity < minQuantity ? minQuantity
-          : itemQuantity;
+  const updatedQuantity = increase ? Math.min(itemQuantity + 1, itemStock) : decrease ? Math.max(itemQuantity - 1, minQuantity) : itemQuantity > itemStock ? itemStock : itemQuantity < minQuantity ? minQuantity : itemQuantity;
 
   renderUpdatedQuantity(updatedQuantity, quantityInputField);
   limitQuantityToStock(quantityContainer, quantityInputField);
@@ -78,13 +74,13 @@ export const limitQuantityToStock = (quantityContainer: HTMLDivElement, quantity
   if (decreaseButton) decreaseButton.disabled = itemQuantity <= minQuantity;
 };
 
-export const withProcessingState = (fn: (productId:string,quantity:number) => Promise<void>) => {
-  return async (actionButton:HTMLButtonElement,productId:string,quantity:number): Promise<void> => {
+export const withProcessingState = (fn: (productId: string, quantity: number) => Promise<void>) => {
+  return async (actionButton: HTMLButtonElement, productId: string, quantity: number): Promise<void> => {
     actionButton && enterProcessingState(actionButton);
     if (!quantity) quantity = 1;
     try {
       if (!productId) throw new Error("Missing required argument: ProductId");
-      await fn(productId,quantity);
+      await fn(productId, quantity);
     } catch (error) {
       console.log(error);
       showNotification("Failed to add product to cart. Please try again later..", false);
