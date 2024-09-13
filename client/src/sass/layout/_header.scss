@@ -53,7 +53,7 @@ body:not([data-page="checkout"]) header{
   @include navLinks;
 }
 
-.header_mobile_menu button[data-menuButton]{
+.header_mobile_menu button[data-mobile-header-menu-button]{
   @include navLinks;
   & > span{
     pointer-events: none;
@@ -231,7 +231,6 @@ body:not([data-page="checkout"]) header{
 }
 
 // subDropdown categories Detail list
-
 .subDropdown_item_detail_container ul {
   display: flex;
   justify-content: flex-start;
@@ -288,9 +287,14 @@ body:not([data-page="checkout"]) header{
 
 // Start --------------------------------- Drop_Down_Mobile -------------------------------->
 
+// TODO toggle subDropdown accordion instead of opening both
+header:has(.dropDown_mobile_container.open){
+  height: 100%;
+}
+
 .dropDown_mobile_container {
   width: 100%;
-  height: 0;
+  height: 0%;
   visibility: hidden;
   overflow: hidden;
   position: absolute;
@@ -308,8 +312,8 @@ body:not([data-page="checkout"]) header{
   &.open {
     visibility: visible;
     border-top: 1px solid $clr-border;
-    height: calc(100vh - $height-header-sm);
-    height: calc(100svh - $height-header-sm);
+    height: calc(100% - $height-header-sm);
+    height: calc(100% - $height-header-sm);
   }
 }
 .mobile_menu_learn button,
@@ -368,9 +372,10 @@ body:not([data-page="checkout"]) header{
 }
 
 .mobile_menu_shop button.open + .mobile_submenu_shop{
-  max-height: 48rem;
   opacity: 1;
-  padding-bottom: $pd-mobile-submenu;
+  & ul{
+    padding-bottom: $pd-mobile-submenu;
+  }
   & li{
     margin-left: 0;
     opacity: 1;
