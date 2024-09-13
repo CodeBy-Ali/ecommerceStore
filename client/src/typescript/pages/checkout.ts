@@ -2,6 +2,7 @@ import initAccordion from "../components/accordion/accordion";
 import DOMUtils from "../components/utils/domUtils";
 import isFormValid from "../components/validator/validator";
 
+// TODO toggle 'show' text to 'hide' in show order summary accordion on mouse click
 const initCheckoutPage = () => {
   const orderSummaryAccordion = DOMUtils.getElement<HTMLDivElement>("div[data-order-summary-accordion]");
   const paymentAccordion = DOMUtils.getElement<HTMLElement>("[data-payment-accordion]");

@@ -39,7 +39,7 @@ export interface IResponseBody {
   data: ICartData;
 }
 
-const initCart = (): void => {
+const Cart = (): void => {
   const itemQuantityContainers = document.querySelectorAll<HTMLDivElement>("div[data-cartItem-quantity-container]");
 
   itemQuantityContainers.forEach((quantityContainer) => {
@@ -148,6 +148,6 @@ function updateCartState(data: ICartData) {
   const totalCartItems = data?.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
   renderCart(data?.cartItems, totalCartItems, data?.storeSettings);
   updateHeaderTotalCartItemsCount(totalCartItems);
-  initCart();
+  Cart();
 }
-export default initCart;
+export default Cart;

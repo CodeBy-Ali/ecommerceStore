@@ -160,10 +160,12 @@
     font-size: $font-size-sm;
     font-weight: $font-semibold;
     color: $clr-primary;
+    gap: 1rem;
     @include flex-row-jc(space-between);
 
     & .cartItem_price{
       font-weight: normal;
+      white-space: nowrap
     }
   }
 
