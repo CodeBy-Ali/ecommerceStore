@@ -354,6 +354,7 @@ header:has(.dropDown_mobile_container.open){
     display: grid;
     gap: 1.6rem;
     padding-inline: 1px;
+    padding-bottom: $pd-mobile-submenu;
     & li{
       border-radius: 2rem;
       background-color: $clr-bg-primary;
@@ -373,9 +374,6 @@ header:has(.dropDown_mobile_container.open){
 
 .mobile_menu_shop button.open + .mobile_submenu_shop{
   opacity: 1;
-  & ul{
-    padding-bottom: $pd-mobile-submenu;
-  }
   & li{
     margin-left: 0;
     opacity: 1;

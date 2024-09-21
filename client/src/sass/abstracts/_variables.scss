@@ -142,7 +142,9 @@ $pd-hero-main-bottom: 6rem;
 
 // image slider
 $width-hero-image-scroll: clamp(13rem,calc(5rem + 20vw),42.4rem);
-$gap-hero-image-scroll: 3rem;
+$gap-hero-image-scroll: 1rem;
+$gap-hero-image-scroll-md: 3rem;
+
 
 // *----------------------- Collections-Page -------------------*
 $radius-product-card: 4rem;

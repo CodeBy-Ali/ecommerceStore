@@ -1,9 +1,9 @@
 import DOMUtils from "../../utils/domUtils";
-import { ICartItem, IStoreSetting } from "../cart";
-export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: number, storeSettings: IStoreSetting): void => {
+import { ICartItem, IShippingConfig } from "../cart";
+export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: number, shippingConfig: IShippingConfig): void => {
   const cartDrawer = document.querySelector("[data-cartDrawer]");
   const fragment = document.createDocumentFragment();
-  const { freeShippingThreshold } = storeSettings;
+  const { freeShippingThreshold } = shippingConfig;
   if (!cartDrawer) return console.log("Failed to select cartDrawer section Element");
   cartDrawer.innerHTML = "";
 
@@ -13,7 +13,8 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
     fragment.appendChild(emptyCartWrapper);
 
     emptyCartWrapper.innerHTML = `
-      <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+    <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
+      <div class="empty_cart_wrapper">
         <section class="empty_cart_header_section">
           <h2>Uh oh,looks like your  bag is empty!</h2>
           <p>Start philling your shopping bag now</p>
@@ -22,8 +23,8 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
           <ul class="empty_cart_collectionList">
             <li class="">
               <a href="">
-                <div>
-                  <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="">
+                <div class="empty_cart_collection_image_container">
+                  <img src="/assets/Launch_TheEverythingBar_Ecomm_106.jpeg" alt="" width="130" height="86">
                 </div>
                 <div>
                   <h4>HAIR</h4>
@@ -33,8 +34,8 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
             </li>
             <li>
               <a href="">
-                <div>
-                  <img src="/assets/dailyMoisturizer1.jpg" alt="">
+                <div class="empty_cart_collection_image_container">
+                  <img src="/assets/dailyMoisturizer1.jpg" alt="" width="130" height="86">
                 </div>
                 <div>
                   <h4>FACE</h4>
@@ -44,24 +45,29 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
             </li>
             <li>
               <a href="">
-                <div>
-                  <img src="/assets/handsoapformbottle.webp" alt="">
+                <div class="empty_cart_collection_image_container">
+                  <img src="/assets/handsoapformbottle.jpg" alt="" width="130" height="86">
                 </div>
                 <div>
                   <h4>BODY</h4>
-                  <p>Lotions,hands soaps,refills</p>
+                  <p>Lotions,hands soaps &amp; refills</p>
                 </div>
               </a>
             </li>
           </ul>
-        </section>`;
+        </section>
+      </div>`;
   } else {
     const cartWrapper = document.createElement("div");
     DOMUtils.addClass(cartWrapper, "cart-wrapper");
     fragment.appendChild(cartWrapper);
-    const subTotal = Number(cartItems.reduce((subtotal, { quantity, product }) => {
-      return (subtotal += product.price * quantity);
-    }, 0).toFixed(2));
+    const subTotal = Number(
+      cartItems
+        .reduce((subtotal, { quantity, product }) => {
+          return (subtotal += product.price * quantity);
+        }, 0)
+        .toFixed(2)
+    );
     cartWrapper.innerHTML = `
          <section class="cart_header_section">
           <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>${totalItemsQuantity}</span>&rpar;</h2>

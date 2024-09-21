@@ -1,13 +1,5 @@
 import { renderCart } from "./modules/cartRender";
-import {
-  toggleCartDrawer,
-  updateHeaderTotalCartItemsCount,
-  getCartQuantityInputField,
-  getCartItemId,
-  limitQuantityToStock,
-  updateItemQuantity,
-  withProcessingState
-} from "../utils/cartUtils";
+import { toggleCartDrawer, updateHeaderTotalCartItemsCount, getCartQuantityInputField, getCartItemId, limitQuantityToStock, updateItemQuantity, withProcessingState } from "../utils/cartUtils";
 import { handleApiResponse } from "../utils/pagesUtils";
 
 interface IProduct {
@@ -19,7 +11,7 @@ interface IProduct {
   slug: string;
 }
 
-export interface IStoreSetting {
+export interface IShippingConfig {
   freeShippingThreshold: number;
   currency: string;
 }
@@ -31,7 +23,7 @@ export interface ICartItem {
 
 export interface ICartData {
   cartItems: [ICartItem];
-  storeSettings: IStoreSetting;
+  shippingConfig: IShippingConfig;
 }
 export interface IResponseBody {
   status: string;
@@ -53,13 +45,13 @@ const Cart = (): void => {
 function innitCartEventListeners(): void {
   const cartButton = document.querySelector("[data-cartButton]");
   const closeCartButton = document.querySelector("[data-cartCloseButton]");
-  const removeCartItemBtn = document.querySelector<HTMLElement>("button[data-removeCartItemBtn]");
+  const removeCartItemButtons = document.querySelectorAll<HTMLElement>("button[data-removeCartItemBtn]");
   const overLay = document.querySelector("[data-overlay]");
   const itemQuantityContainers = document.querySelectorAll("div[data-cartItem-quantity-container]");
 
   cartButton?.addEventListener("click", toggleCartDrawer);
   closeCartButton?.addEventListener("click", toggleCartDrawer);
-  removeCartItemBtn?.addEventListener("click", removeProductFromCart);
+  removeCartItemButtons.forEach(button => button.addEventListener("click", removeProductFromCart) );
   overLay?.addEventListener("click", toggleCartDrawer);
   ["click", "input"].forEach((event) => {
     itemQuantityContainers.forEach((itemContainer) => {
@@ -83,9 +75,6 @@ function handleAddToCartClick(e: Event): void {
   storeUpdatedQuantityInDB(itemId, updatedQuantity);
 }
 
-
-
-
 async function removeProductFromCart(e: Event): Promise<void> {
   const removeButton = e.target as HTMLElement;
   const itemId = removeButton.getAttribute("data-item-id");
@@ -98,7 +87,7 @@ async function removeProductFromCart(e: Event): Promise<void> {
       },
     });
     const responseBody = await response.json();
-    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "storeSettings"]);
+    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "shippingConfig"]);
   } catch (error) {
     console.log(error);
   }
@@ -119,14 +108,13 @@ async function storeUpdatedQuantityInDB(itemId: string, quantity: number): Promi
     });
 
     const responseBody = await response.json();
-    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "storeSettings"]);
+    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "shippingConfig"]);
   } catch (error) {
     console.log(error);
   }
 }
 
-
-export const addProductToCart = withProcessingState(async (productId: string,quantity:number) => {
+export const addProductToCart = withProcessingState(async (productId: string, quantity: number) => {
   const response = await fetch("/cart/items", {
     method: "POST",
     headers: {
@@ -139,14 +127,13 @@ export const addProductToCart = withProcessingState(async (productId: string,qua
     }),
   });
   const responseBody = await response.json();
-  handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "storeSettings"]);
+  handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "shippingConfig"]);
   toggleCartDrawer();
 });
 
-
 function updateCartState(data: ICartData) {
   const totalCartItems = data?.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-  renderCart(data?.cartItems, totalCartItems, data?.storeSettings);
+  renderCart(data?.cartItems, totalCartItems, data?.shippingConfig);
   updateHeaderTotalCartItemsCount(totalCartItems);
   Cart();
 }
