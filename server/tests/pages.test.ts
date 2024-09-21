@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import configManager from "../src/config/config.ts";
-
-
+import { mockProduct } from "./utils.ts";
+import Product, { IProduct } from "../src/model/productModel.ts";
+import config from "../src/config/config.ts";
 import { assertHtmlPageResponse } from "./utils.ts";
 
 describe("Get /", (): void => {
@@ -41,3 +42,19 @@ describe('Get /login', () => {
   })
 })
  
+describe('Get /products', () => {
+  beforeAll(async () => {
+    const { URI } = config.getDatabaseConfig();
+    await mongoose.connect(URI);
+    const product = new Product(mockProduct);
+    await product.save();
+  });
+
+  afterAll(async () => {
+    await Product.deleteMany({});
+    await mongoose.connection.close();
+  })
+  test('It should return product page', async (): Promise<void> => {
+    await assertHtmlPageResponse(`/products/${mockProduct.slug}`, "product");
+  })
+})

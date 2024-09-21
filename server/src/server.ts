@@ -11,7 +11,7 @@ mongoose
   .connect(databaseURI)
   .then(() => {
     app.listen(port, host, () => {
-      logger.info(`Server listening at http://${host}:${port}`);
+      logger.info(`Server listening at http://127.0.0.1:${port}`);
     });
   })
   .catch((error: any) => {

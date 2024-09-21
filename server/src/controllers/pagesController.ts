@@ -19,8 +19,8 @@ export const renderCheckoutView = async (req: Request, res: Response, next: Next
   const user = req.session.user;
   try {
     const userConfig = await getUserConfig(user);
-    const {subTotal,storeSettings } = userConfig;
-    const shippingCost = (storeSettings && subTotal < storeSettings?.freeShippingThreshold) ? storeSettings.shippingRate : 0;  
+    const { subTotal, shippingConfig: shippingConfig } = userConfig;
+    const shippingCost = shippingConfig && subTotal < shippingConfig?.freeShippingThreshold ? shippingConfig.shippingRate : 0;
     res.render("checkout", {
       ...userConfig,
       shippingCost,

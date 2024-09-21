@@ -3,10 +3,14 @@ import Cart from "../model/cartModel.ts";
 
 export const validateCartRequest = (req:Request, res:Response, next:NextFunction) => {
   const { quantity } = req.body;
-  const id  = req.params.id || req.body.productId;
+  const id:string  = req.params.id || req.body.productId;
   
   if (!id) {
     return res.status(400).json({ message: "Missing required parameter: productId" });
+  }
+
+  if (id.length !== 24) {
+    return res.status(400).json({ message: "Invalid parameter: productId" });
   }
   
   if (!quantity) {

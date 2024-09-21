@@ -5,7 +5,7 @@
       <section class="cart_header_section">
         <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount><%= cartItems.reduce((total,{quantity}) => total+=quantity,0)  %></span>&rpar;</h2>
 
-        <% const {freeShippingThreshold} = storeSettings %>
+        <% const {freeShippingThreshold} = shippingConfig %>
 
         <% if(freeShippingThreshold > subTotal){ %>
           <p class="cart_header_message">Spend Rs <%= Number(freeShippingThreshold - subTotal).toFixed(2)  %> more  to get free shipping!</p>

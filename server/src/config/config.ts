@@ -1,9 +1,15 @@
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath} from 'url';
 import { stringToBoolean } from '../utils/utils.ts';
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 // import .env file
-const envPath = path.join(import.meta.dirname,'..','..','.env');
+const envPath = path.join(__dirname,'..','..','.env');
 dotenv.config({ path: envPath });
 
 class ConfigManager{
@@ -16,7 +22,7 @@ class ConfigManager{
   private corsConfig: { origin: string };
   private cacheConfig: {cacheAssets:boolean,maxAge: number}
   private envConfig: {env:string,isProduction:boolean,isTesting:boolean,isDevelopment:boolean}
-  private env: string = process.env.NODE_ENV || 'DEV';
+  private env: string = process.env.NODE_ENV?.toUpperCase() || 'DEV';
   private static instance: ConfigManager;
 
 
@@ -30,8 +36,8 @@ class ConfigManager{
       URI: process.env[`MONGODB_URI_${this.env}`]  || "mongodb://localhost:27017/myDb",
     }
     this.dirConfig = {
-      view: path.join(import.meta.dirname, '..', 'views'),
-      static: path.join(import.meta.dirname, '../../../client/dist')
+      view: path.join(__dirname, '..', 'views'),
+      static: path.join(__dirname, '../../../client/dist')
     }
     this.bcryptConfig = {
       saltRounds: 10,

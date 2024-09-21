@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import logger from "../config/logger.ts";
-import Product from "../model/productModel.ts";
+import Product, { IProduct } from "../model/productModel.ts";
 import { getUserConfig } from "../utils/userUtils.ts";
 
 
@@ -10,7 +10,7 @@ export const renderProductView = async (req: Request, res: Response, next: NextF
   const user = req.session.user;
   try {
     const userConfig = await getUserConfig(user);
-    const product = await Product.findOne({ slug: name }).populate('boughtTogether').lean().exec();
+    const product:IProduct|null = await Product.findOne({ slug: name }).populate('boughtTogether').lean().exec();
     
     if (!product) {
       logger.error("Product not found. Request: %o", req);

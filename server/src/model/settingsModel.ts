@@ -1,29 +1,30 @@
-import { Schema,model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
-export interface IStoreSettings{
-  _id: string,
-  freeShippingThreshold: number,
-  currency: string,
-  shippingRate: number,
+export interface IShippingConfig {
+  _id: string;
+  freeShippingThreshold: number;
+  shippingRate: number;
 }
 
-const storeSettingsSchema = new Schema<IStoreSettings>({
-  _id: {
-    type: String,
+const shippingConfigSchema = new Schema<IShippingConfig>(
+  {
+    _id: {
+      type: String,
+    },
+    freeShippingThreshold: {
+      type: Number,
+      required: true,
+    },
+    shippingRate: {
+      type: Number,
+      required: true,
+    },
   },
-  freeShippingThreshold: {
-    type: Number,
-    required: true,    
-  },
-  shippingRate: {
-    type: Number,
-    required: true, 
+  {
+    timestamps: true,
   }
-}, {
-  timestamps: true,
-});
+);
 
-const StoreSetting = model<IStoreSettings>('StoreSettings', storeSettingsSchema);
+const ShippingConfig = model<IShippingConfig>("shippingConfigs", shippingConfigSchema);
 
-
-export default StoreSetting;
+export default ShippingConfig;

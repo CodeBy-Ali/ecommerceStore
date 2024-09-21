@@ -1,6 +1,6 @@
-import mongoose, { Schema, model } from "mongoose";
+import mongoose, { Document, Schema, model } from "mongoose";
 
-export interface IProduct {
+export interface IProduct  {
   title: string;
   description: string;
   price: number;
@@ -20,6 +20,7 @@ const productSchema = new Schema<IProduct>(
     title: {
       type: String,
       required: true,
+      unique: true,
       trim: true,
     },
     description: {

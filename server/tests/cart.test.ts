@@ -7,7 +7,8 @@ import User from "../src/model/userModel.ts";
 import Product from "../src/model/productModel.ts";
 import { ICartItem } from "../src/model/cartModel.ts";
 import { CartItemDetail } from '../src/utils/cartUtils.ts';
-
+import {jest} from '@jest/globals'
+import logger from "../src/config/logger.ts";
 
 describe("Get /cart/items", () => {
   let mockCartItem: ICartItem;
@@ -26,13 +27,14 @@ describe("Get /cart/items", () => {
 
   afterAll(async () => {
     await User.deleteMany({});
-    await Product.deleteMany({});
+    await Product.deleteOne({title: mockProduct.title});
     await mongoose.connection.close();
   })
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  })
+  // beforeEach(() => {
+  //   jest.clearAllMocks();
+    
+  // })
 
   test('should create user session add item to user cart',async () => {
     const response = await agent.post('/cart/items').send(mockCartItem);
@@ -105,12 +107,12 @@ describe("Get /cart/items", () => {
     expect(response.text).toMatch(/Product not found/i);
   })
 
-  test('should return 422 when request parameter is invalid', async () => {
+  test('should return 400 when request parameter is invalid', async () => {
     const updatedQuantity = 3;
     const response = await agent.patch('/cart/items/invalidParameter').send({
       quantity: updatedQuantity,
     })
-    expect(response.statusCode).toBe(422);
+    expect(response.statusCode).toBe(400);
     expect(response.type).toBe('application/json');
     expect(response.text.length).toBeGreaterThan(1);
     expect(response.text).toMatch(/Invalid parameter/i);

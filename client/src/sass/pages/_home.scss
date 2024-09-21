@@ -59,10 +59,11 @@
 .hero_image_inner_scroller{
   transition: transform .1s linear;
   display: grid;
+  justify-content: flex-start;
   grid-template-columns: repeat(5,$width-hero-image-scroll);
   gap: $gap-hero-image-scroll;
   & > span{
-    transform: translateX(-17rem);
+    transform: translateX(-4rem);
     aspect-ratio: 1/1;
     display: inline-block;
     border-radius: 28%;
@@ -74,6 +75,27 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  @include respond-to(x-small){
+    & > span{
+      transform: translateX(-8rem);
+    }
+  }
+  @include respond-to(small){
+    & > span{
+      transform: translateX(-11rem);
+    }
+  }
+  @include respond-to(medium){
+    & > span{
+      transform: translateX(-13rem);
+    }
+  }
+  @include respond-to(large){
+    & > span{
+      transform: translateX(-17rem);
+    }
   }
 }
 

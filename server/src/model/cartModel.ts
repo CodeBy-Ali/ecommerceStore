@@ -39,5 +39,6 @@ const cartSchema: Schema = new Schema<ICart>(
   }
 );
 
+
 const Cart = model<ICart>("cart", cartSchema);
 export default Cart;

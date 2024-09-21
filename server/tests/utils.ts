@@ -2,6 +2,7 @@ import request from "supertest";
 import app from "../src/app/app.ts";
 import { LoginRequestBody, RegisterRequestBody } from "../src/middlewares/validator.ts";
 import { IProduct } from "../src/model/productModel.ts";
+import mongoose from "mongoose";
 
 
 
@@ -24,17 +25,17 @@ export const mockLoginReqBody: LoginRequestBody = {
 }
 
 export const mockProduct: IProduct = {
-  pubId: '1234abc',
   title: 'mockProduct',
   description: "mockDescription",
-  image: 'mockSource',
+  images: ["source3.jpg","source2.jpg","source.jpg"],
   price: 0,
-  category: ['body'],
+  categories: ['body'],
   usage: "mockUsage",
   ingredients: "mockIngredients",
   weight: 'mockWeight',
   salesCount: 0,
   stock: 10,
+  slug: 'mock-product'
 }
 
 
@@ -47,3 +48,5 @@ export const assertHtmlPageResponse = async (route: string, expectedPage: string
   const regex: RegExp = new RegExp(`data-page="${expectedPage}"`, "g");
   expect(response.text).toMatch(regex);
 };
+
+

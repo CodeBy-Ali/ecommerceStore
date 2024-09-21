@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES2016",
+    "target": "ESNext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "types": ["jest"],
     "removeComments": true,
+    "isolatedModules": false,
     "preserveConstEnums": true,
     "strict": true,
     "esModuleInterop": true,
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
+    // "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
   },

@@ -267,15 +267,15 @@
 
               <!-- order summary mobile -->
               <section class="checkout_order_summary_section checkout_order_summary_section_mobile">
-                <h2 class="checkout_form_section_heading">Order summary(4)</h2>
+                <h2 class="checkout_form_section_heading">Order summary(<%= cartItems.length  %>)</h2>
                 <div class="checkout_order_total_section">
                   <div>
                     <p>Subtotal</p>
-                    <p>Rs 5,500.00</p>
+                    <p>Rs <%= subTotal  %></p>
                   </div>
                   <div>
                     <p>Shipping</p>
-                    <p>Rs 300.00</p>
+                    <p><%= (shippingCost && shippingCost > 0) ? "Rs " + shippingCost : "Free"%></p>
                   </div>
                   <div>
                     <p>
@@ -283,8 +283,7 @@
                     </p>
                     <p>
                       <abbr>PKR</abbr>
-                      <strong>Rs 5,800.00</strong>
-                    </p>
+                      <strong>Rs <%= subTotal + shippingCost %></strong>                    </p>
                   </div>
                 </div>
               </section>

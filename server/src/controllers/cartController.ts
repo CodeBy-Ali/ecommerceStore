@@ -3,6 +3,8 @@ import Cart from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
 import { populateCartItems } from "../utils/cartUtils.ts";
 import { getShippingConfig, createCart } from "../utils/cartUtils.ts";
+import logger from "../config/logger.ts";
+import ShippingConfig from "../model/settingsModel.ts";
 
 // delete item from cart
 export const deleteItem = async (req: Request, res: Response, next: NextFunction) => {
@@ -17,14 +19,14 @@ export const deleteItem = async (req: Request, res: Response, next: NextFunction
     if (!cart) {
       return res.status(404).json({ status: "fail", message: "User cart not found" });
     }
-    const storeSettings = await getShippingConfig();
+    const shippingConfig = await getShippingConfig();
     // store all cart item detail objects in array
     const populatedItems = await populateCartItems(cart.items);
     res.status(201).json({
       status: "success",
       data: {
         cartItems: populatedItems,
-        storeSettings,
+        shippingConfig,
       },
     });
   } catch (error) {
@@ -49,6 +51,7 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
       });
     }
     await Cart.updateOne({ userId: userId }, { $set: { "items.$[elem].quantity": Number(quantity) } }, { arrayFilters: [{ "elem.productId": id }] });
+    const doc = await ShippingConfig.find({});
     const shippingConfig = await getShippingConfig();
     const cart = await Cart.findOne({ userId: userId });
     if (!cart) {
@@ -59,7 +62,7 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
       status: "success",
       data: {
         cartItems: populatedItems,
-        storeSettings: shippingConfig,
+        shippingConfig,
       },
     });
   } catch (error) {
@@ -88,7 +91,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
         status: "success",
         data: {
           cartItems: populatedItems,
-          storeSettings: shippingConfig,
+          shippingConfig,
         },
       });
     }
@@ -109,7 +112,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
       status: "success",
       data: {
         cartItems: populatedItems,
-        storeSettings: shippingConfig,
+        shippingConfig,
       },
     });
   } catch (error) {

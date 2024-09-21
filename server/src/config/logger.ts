@@ -3,8 +3,13 @@ import { join } from 'path';
 import config from './config.ts';
 
 const env = process.env.NODE_ENV;
-const logDirectory = join(import.meta.dirname, '..','..', 'logs');
+import { fileURLToPath } from 'url';
+import { dirname} from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const logDirectory = join(__dirname, '..', '..', 'logs');
 const logger = createLogger({
   level: 'info',
   format: format.combine(
@@ -29,8 +34,8 @@ const logger = createLogger({
 })
 
 
-
 if (env !== 'PROD') {
+
   logger.add(new transports.Console({
     level: "debug",
     handleExceptions: false,
