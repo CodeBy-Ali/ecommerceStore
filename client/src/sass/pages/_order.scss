@@ -1,0 +1,215 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+// --------------- main ------------->
+
+body[data-page="order"] {
+  overflow: hidden;
+  padding-top: 7rem;
+  
+  @include respond-to(medium){
+    padding: 0;
+    
+  }
+}
+
+p{
+  color: $clr-text-para-black-light;
+}
+h2,h3,h4{
+  color:  $clr-text-heading-light-black;
+}
+
+// header
+.order_page_header{
+  @include respond-to(medium){
+    display: none
+  }
+}
+.order_page_header_nav {
+  @include container($container-checkout);
+  padding: 2.1rem;
+  @include flex-row-jc(space-between);
+
+  & .order_page_header_link_phils {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  @include respond-to(small) {
+    padding-inline: 3.8rem;
+  }
+}
+
+.order_page_main {
+  @include respond-to(medium) {
+    border-top: 1px solid $clr-border;
+  }
+}
+
+// main sections wrapper for order summary and order details
+.order_page_sections_wrapper {
+  min-height: 100svh;
+  @include respond-to(medium) {
+    display: flex;
+    flex-direction: row-reverse;
+    @include container($container-checkout);
+  }
+}
+
+.order_page_main .order_summary_wrapper {
+  padding: 5.8rem 4.4rem;
+}
+
+// order confirmation section
+.order_confirmation_section {
+  padding-top: 2.1rem;
+  @include respond-to(medium) {
+    padding-top: 5.6rem;
+    padding-right: 6.6rem;
+  }
+}
+
+.order_confirmation_section_container{
+
+  & >section:not(:first-child){
+    margin-bottom: 1.4rem
+  }
+  @include container($container-checkout-inner-section);
+    padding-inline: 2.1rem;
+
+  @include respond-to(medium){
+    padding-inline: 0;
+    margin-left: 2.1rem;
+    & >section:not(:first-child){
+      margin-bottom: 2.1rem
+    }
+  }
+}
+
+.order_confirmation_header{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  & .order_confirmation_header_checkmark_container{
+    
+    & img{
+      width: 4.2rem;
+      height: 4.2rem;
+    }
+  }
+  & .order_confirmation_header_text_container{
+    & p{
+      font-size: $font-size-xsm;
+      margin-bottom: .4rem;
+      color: $clr-text-secondary;
+      font-weight: $font-semibold;
+      letter-spacing: $letter-spacing-md;
+    }
+
+    & h2{
+      font-size: 2rem;
+    }
+  }
+}
+
+
+// confirmation text section
+
+.order_container{
+  border: 1px solid $clr-border;
+  border-radius: .4rem;
+  padding: 1.6rem;
+}
+
+
+.order_confirmation_text_container{
+  & p:first-child{
+    font-size: 1.8rem;
+    color: $clr-text-heading-light-black;
+    font-weight: 600;
+    opacity: .85;
+    margin-bottom: .5rem;
+  }
+
+  & p:last-child{
+    font-size: $font-size-sm;
+    color: $clr-text-para-black-light;
+  }
+}
+// order page policies section
+.order_page_main .order_policies_section {
+  margin-inline: 0;
+  padding-inline: 0;
+
+  & .order_page_policies_container{
+    padding-inline: 0;
+  }
+
+  @include respond-to(medium){
+    margin-inline: 0;
+    margin-top: 8rem;
+  }
+}
+
+// order details section 
+
+.order_confirmation_details_container{
+
+  
+  & div:not(:last-child){
+    margin-bottom: 1.8rem;
+  }
+  
+  & h2{
+    font-size: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+
+  & h3{
+    font-size: $font-size-sm;
+    font-weight: $font-semibold;
+    margin-bottom: .8rem;
+  }
+
+  & p{
+    font-size: $font-size-sm;
+    margin-bottom: .3rem;
+  }
+
+  .order_total_prize{
+    color: rgba(0, 0, 0, 0.788);
+  }
+}
+
+// continue shopping
+.continue_shopping_section{
+  text-align: center;
+  margin-bottom: 4rem;
+  
+  & .order_page_continue_shopping_link{
+    margin-bottom: 2.4rem;
+  }
+
+  & .order_page_help_text{
+    font-size: $font-size-sm;
+    color: rgba(0, 0, 0, 0.788);
+  
+    & a{
+      color: $clr-link-color;
+    }
+  }
+
+  @include respond-to(medium){
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    
+    & .order_page_continue_shopping_link{
+      margin-bottom: 0;
+    }
+  }
+}

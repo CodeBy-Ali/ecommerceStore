@@ -78,4 +78,22 @@
     margin-top: 6.4rem;
     margin-bottom: 2.4rem;
   }
+
+  &--orderConfirmationPage{
+    display: inline-block;
+    width: 100%;
+    background-color: $clr-text-blue;
+    color: white;
+    padding: 2.4rem;
+    font-size: $font-size-base;
+    font-weight: $font-semibold;
+    border-radius: .5rem;
+
+    @include respond-to(medium){
+      padding: 2rem 2.4rem;
+      font-size: $font-size-sm;
+      max-width: fit-content;
+    }
+  }
 }
+

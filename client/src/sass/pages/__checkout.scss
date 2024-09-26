@@ -58,7 +58,7 @@ body[data-page="checkout"] {
   }
 }
 
-.checkout_order_summary_section {
+.order_summary_section {
   background-color: $clr-bg-checkout;
   @include respond-to(medium) {
     flex: 1;
@@ -68,7 +68,7 @@ body[data-page="checkout"] {
   }
 }
 
-.checkout_order_summary_container {
+.order_summary_container {
   & .order_summary_button {
     & .order_summary_button_text_wrapper {
       display: inline-block;
@@ -129,11 +129,11 @@ body[data-page="checkout"] {
     margin-bottom: 0;
   }
 
-  & .checkout_order_summary_wrapper {
+  & .order_summary_wrapper {
     // border-top: 1px solid $clr-border;
     padding: 2.1rem 2.1rem 1.7rem 2.1rem;
 
-    & .checkout_items_list_container {
+    & .order_items_list_container {
       margin-bottom: 2rem;
       & ul {
         padding: 0;
@@ -151,7 +151,7 @@ body[data-page="checkout"] {
   @include respond-to(medium) {
     margin: 0;
     max-height: 200vh;
-    & .checkout_order_summary_wrapper {
+    & .order_summary_wrapper {
       padding: 3.8rem;
     }
     &.open {
@@ -160,7 +160,7 @@ body[data-page="checkout"] {
   }
 }
 
-.checkout_order_total_section {
+.order_total_section {
   font-size: $font-size-sm;
 
   & p {
@@ -195,12 +195,12 @@ body[data-page="checkout"] {
   }
 }
 
-.order_summary_detail_container .checkout_cart_item {
+.order_summary_detail_container .order_cart_item {
   @include flex-row-jc(space-between);
   column-gap: .8rem;
   font-size: $font-size-sm;
 
-  & .checkout_item_description {
+  & .order_item_description {
     @include flex-row-jc(center);
 
     & p {
@@ -208,11 +208,11 @@ body[data-page="checkout"] {
     }
 
   }
-  & .checkout_item_price{
+  & .order_item_price{
     white-space: nowrap;
   }
 
-  & .checkout_cartitem_image_container {
+  & .order_cart_item_image_container {
     width: 64px;
     aspect-ratio: 1;
     border: 1px solid $clr-border;
@@ -226,7 +226,7 @@ body[data-page="checkout"] {
       object-fit: cover;
     }
 
-    & .checkout_item_quantity {
+    & .order_item_quantity {
       position: absolute;
       top: -1rem;
       right: -1rem;
@@ -514,7 +514,7 @@ body[data-page="checkout"] {
 
 // policies section;
 
-.checkout_policies_section {
+.order_policies_section {
   border-top: 1px solid $clr-border;
   margin-bottom: 3.8rem;
 
@@ -523,10 +523,10 @@ body[data-page="checkout"] {
   }
 }
 
-.checkout_page_policies_container {
+.order_page_policies_container {
   padding: 1.7rem 2.1rem;
   font-size: $font-size-sm;
-  & .checkout_page_policies_list {
+  & .order_page_policies_list {
     display: flex;
     gap: 1.4rem;
     flex-wrap: wrap;
