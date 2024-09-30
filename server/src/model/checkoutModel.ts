@@ -1,20 +1,17 @@
 import { model, Schema } from "mongoose";
 
-
-interface ISavedCheckout{
-  firstName: string,
-  lastName: string,
-  address: string,
-  apartment?: string,
-  city: string,
-  postalCode?: string,
-  phone: number,
-  payment: string,
+export interface ICheckout {
+  firstName: string;
+  lastName: string;
+  address: string;
+  apartment?: string;
+  city: string;
+  postalCode?: string;
+  phone: number;
+  payment: string;
 }
 
-
-
-const savedCheckoutSchema = new Schema<ISavedCheckout>({
+const savedCheckoutSchema = new Schema<ICheckout>({
   firstName: {
     type: String,
     required: true,
@@ -52,9 +49,9 @@ const savedCheckoutSchema = new Schema<ISavedCheckout>({
     type: String,
     required: true,
     trim: true,
-  }
+  },
 });
 
-const SavedCheckout = model<ISavedCheckout>('savedCheckouts', savedCheckoutSchema);
+const SavedCheckout = model<ICheckout>("savedCheckouts", savedCheckoutSchema);
 
 export default SavedCheckout;

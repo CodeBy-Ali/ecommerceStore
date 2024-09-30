@@ -113,6 +113,7 @@ body[data-page="checkout"] {
     top: 0;
     & .order_summary_button {
       display: none;
+      overflow: hidden;
     }
   }
 }
@@ -287,6 +288,24 @@ body[data-page="checkout"] {
     color: black;
   }
 
+
+  & .form_subscribe_news_container,
+  & .form_save_info_container {
+    @include flex-row-jc(flex-start);
+
+    & input[type="checkbox"] {
+      font-size: 4rem;
+      border-color: red;
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+
+    & label {
+      font-size: $font-size-sm;
+      margin-left: 1.1rem;
+    }
+  }
+
   @include respond-to(medium) {
     flex: 1;
 
@@ -304,22 +323,6 @@ body[data-page="checkout"] {
 
   & .form_field {
     margin-bottom: 1.6rem;
-  }
-
-  & .form_subscribe_news_container {
-    @include flex-row-jc(flex-start);
-
-    & input[type="checkbox"] {
-      font-size: 4rem;
-      border-color: red;
-      width: 1.8rem;
-      height: 1.8rem;
-    }
-
-    & .label_subscirbe_news_offers {
-      font-size: $font-size-sm;
-      margin-left: 1.1rem;
-    }
   }
 }
 

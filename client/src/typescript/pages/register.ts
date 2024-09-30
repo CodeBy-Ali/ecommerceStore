@@ -1,5 +1,13 @@
 import { togglePasswordVisibility, showNotification } from "../components/utils/pagesUtils";
 import isFormValid from "../components/validator/validator";
+import { ISignInForm } from "./login";
+
+
+
+export interface IRegisterForm extends ISignInForm{
+  firstName: string,
+  lastName: string,
+}
 
 const handleFormSubmit = async (e: Event, registerForm: HTMLFormElement): Promise<void> => {
   e.preventDefault();
@@ -15,18 +23,22 @@ const handleFormSubmit = async (e: Event, registerForm: HTMLFormElement): Promis
   const emailField = registerForm.querySelector<HTMLInputElement>("[data-emailField]");
   const passwordField = registerForm.querySelector<HTMLInputElement>("[data-passwordField]");
 
+  if (!firstNameField || !lastNameField || !emailField || !passwordField) return;
+
+  const registerRqBody: IRegisterForm = {
+    firstName: firstNameField.value,
+    lastName: lastNameField.value,
+    email: emailField.value,
+    password: passwordField.value,
+  }
+
   try {
     const response = await fetch("/account/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        firstName: firstNameField?.value,
-        lastName: lastNameField?.value,
-        email: emailField?.value,
-        password: passwordField?.value,
-      }),
+      body: JSON.stringify(registerRqBody),
     });
 
     if (!response.ok) {

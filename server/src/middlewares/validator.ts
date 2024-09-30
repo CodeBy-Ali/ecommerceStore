@@ -1,4 +1,5 @@
 import { Response, Request, NextFunction } from "express";
+import { ICheckout } from "../model/checkoutModel.ts";
 
 export interface LoginRequestBody {
   email: string;
@@ -10,6 +11,10 @@ export interface RegisterRequestBody {
   lastName: string;
   email: string;
   password: string;
+}
+
+export interface ICheckoutRequestBody extends ICheckout {
+  cartId: string,
 }
 
 const isNameValid = (name: string): boolean => /^[a-zA-Z]+(?:[ \-'][a-zA-Z]{2,})*$/.test(name);
@@ -50,25 +55,28 @@ export const validateRegisterBody = (req: Request, res: Response, next: NextFunc
   }
 };
 
+export const validateCheckoutReqBody = (req: Request, res: Response, next: NextFunction): void => {
+  
+};
+
 export const validateIdParam = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   if (!id) {
     return res.status(400).json({
       status: "fail",
-      message: "Missing required parameter: productId"
+      message: "Missing required parameter: productId",
     });
   }
   next();
 };
-
 
 export const validateNameParam = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.params;
   if (!name) {
     return res.status(400).json({
       status: "fail",
-      message: "Missing required parameter: name"
+      message: "Missing required parameter: name",
     });
   }
   next();
-}
+};

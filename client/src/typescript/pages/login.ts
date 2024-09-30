@@ -1,6 +1,11 @@
 import { showNotification, togglePasswordVisibility } from "../components/utils/pagesUtils";
 import isFormValid from "../components/validator/validator";
 
+export interface ISignInForm {
+  email: string;
+  password: string;
+}
+
 const handleFormSubmit = async (e: Event, signInForm: HTMLFormElement): Promise<void> => {
   e.preventDefault();
 
@@ -13,14 +18,17 @@ const handleFormSubmit = async (e: Event, signInForm: HTMLFormElement): Promise<
   const emailField = document.querySelector<HTMLInputElement>(`[data-emailField]`);
   const passwordField = document.querySelector<HTMLInputElement>(`[data-passwordField]`);
 
+  if (!emailField || !passwordField) return;
+
+  const signInReqBody: ISignInForm = {
+    email: emailField?.value,
+    password: passwordField?.value,
+  };
   try {
     const response = await fetch("/account/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: emailField?.value,
-        password: passwordField?.value,
-      }),
+      body: JSON.stringify(signInReqBody),
     });
 
     if (!response.ok) {

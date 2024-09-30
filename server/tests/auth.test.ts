@@ -2,13 +2,10 @@ import mongoose from "mongoose";
 import configManager from "../src/config/config.ts";
 import request from "supertest";
 import app from "../src/app/app.ts";
-import User,{IUser} from "../src/model/userModel.ts";
+import User, { IUser } from "../src/model/userModel.ts";
 import bcrypt from "bcrypt";
-import {
-  mockRegisterReqBody,
-  mockLoginReqBody,
-} from "./utils.ts";
-import { LoginRequestBody, RegisterRequestBody } from "../src/middlewares/validator.ts";
+import { mockRegisterReqBody, mockLoginReqBody } from "./utils.ts";
+import { LoginRequestBody, RegisterRequest } from "../src/middlewares/validator.ts";
 
 describe("POST /account/register", () => {
   // connecting to database before all test
@@ -33,7 +30,7 @@ describe("POST /account/register", () => {
   });
 
   test("should return 400 for Invalid Password", async () => {
-    const mockInvalidPassword: RegisterRequestBody = { ...mockRegisterReqBody, password: "abc" };
+    const mockInvalidPassword: RegisterRequest = { ...mockRegisterReqBody, password: "abc" };
     const response = await request(app).post("/account/register").send(mockInvalidPassword);
     expect(response.type).toBe("application/json");
     expect(response.statusCode).toBe(400);
@@ -41,7 +38,7 @@ describe("POST /account/register", () => {
   });
 
   test("should return 400 for Invalid email", async () => {
-    const mockInvalidEmail  = { ...mockRegisterReqBody, email: "exampleGmail.com" };
+    const mockInvalidEmail = { ...mockRegisterReqBody, email: "exampleGmail.com" };
     const response = await request(app).post("/account/register").send(mockInvalidEmail);
     expect(response.type).toBe("application/json");
     expect(response.statusCode).toBe(400);
@@ -85,29 +82,29 @@ describe("POST /account/login", () => {
   });
 
   test("should create new user session and redirect to '/'", async () => {
-    const response = await request(app).post("/account/login").send(mockLoginReqBody); 
+    const response = await request(app).post("/account/login").send(mockLoginReqBody);
     expect(response.statusCode).toBe(302);
-    expect(response.header['location']).toBe('/'); 
-    expect(response.header['set-cookie'].length).toBeGreaterThan(0) 
+    expect(response.header["location"]).toBe("/");
+    expect(response.header["set-cookie"].length).toBeGreaterThan(0);
     const sessionNameRegExp = new RegExp(`${configManager.getSessionConfig().name}`);
-    expect(response.header['set-cookie'][0]).toMatch(sessionNameRegExp); 
+    expect(response.header["set-cookie"][0]).toMatch(sessionNameRegExp);
   });
 
   test("should return 404  for non existent email'", async () => {
-    const mockIncorrectEmail: LoginRequestBody = {...mockLoginReqBody,email:"notExample@gmail.com"}
-    const response = await request(app).post('/account/login').send(mockIncorrectEmail);
+    const mockIncorrectEmail: LoginRequestBody = { ...mockLoginReqBody, email: "notExample@gmail.com" };
+    const response = await request(app).post("/account/login").send(mockIncorrectEmail);
     expect(response.statusCode).toBe(404);
-    expect(response.type).toBe('application/json');
+    expect(response.type).toBe("application/json");
     expect(response.text).toMatch(/We couldn't find an account with that email address/);
-  }) 
+  });
 
   test("should return 401 for incorrect Password'", async () => {
-    const mockIncorrectEmail: LoginRequestBody = {...mockLoginReqBody,password:"NotPassword2$"}
-    const response = await request(app).post('/account/login').send(mockIncorrectEmail);
+    const mockIncorrectEmail: LoginRequestBody = { ...mockLoginReqBody, password: "NotPassword2$" };
+    const response = await request(app).post("/account/login").send(mockIncorrectEmail);
     expect(response.statusCode).toBe(401);
-    expect(response.type).toBe('application/json');
+    expect(response.type).toBe("application/json");
     expect(response.text).toMatch(/Incorrect password/);
-  }) 
+  });
 
   test("should return 400  for missing required fields", async () => {
     const { email, ...mockMissingField } = mockLoginReqBody;
@@ -130,7 +127,6 @@ describe("POST /account/login", () => {
     const response = await request(app).post("/account/login").send(mockInvalidPassword);
     expect(response.type).toBe("application/json");
     expect(response.statusCode).toBe(400);
-    expect(response.text).toMatch(/Invalid password/);  
+    expect(response.text).toMatch(/Invalid password/);
   });
 });
- 

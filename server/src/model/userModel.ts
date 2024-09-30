@@ -8,6 +8,9 @@ export interface IUser{
   email: string,
   passwordHash: string,
   avatar?: string,
+  address?: string,
+  addressLine2?: string,
+  postalCode?: string,
 }
 
 // user schema corresponding to user interface

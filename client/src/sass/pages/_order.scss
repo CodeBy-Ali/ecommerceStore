@@ -11,14 +11,19 @@ body[data-page="order"] {
     padding: 0;
     
   }
+
+  & p{
+    color: $clr-text-para-black-light;
+  }
+
+  & h2,
+  & h3,
+  & h4{
+    color:  $clr-text-heading-light-black;
+  }
 }
 
-p{
-  color: $clr-text-para-black-light;
-}
-h2,h3,h4{
-  color:  $clr-text-heading-light-black;
-}
+
 
 // header
 .order_page_header{

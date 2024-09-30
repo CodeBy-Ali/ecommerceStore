@@ -1,6 +1,15 @@
 import initAccordion from "../components/accordion/accordion";
 import DOMUtils from "../components/utils/domUtils";
 import isFormValid from "../components/validator/validator";
+import { IRegisterForm } from "./register";
+
+
+
+interface ICheckoutForm extends Omit<IRegisterForm,"password">{
+
+  password?: string,
+}
+
 
 // TODO toggle 'show' text to 'hide' in show order summary accordion on mouse click
 const initCheckoutPage = () => {
@@ -14,21 +23,27 @@ const initCheckoutPage = () => {
 };
 
 
+
+
 function handleCheckoutFormSubmit(e:Event) {
   e.preventDefault();
   const completeOrderBtn = e.currentTarget as HTMLButtonElement;
   const checkOutForm = DOMUtils.getElement<HTMLFormElement>('form[data-checkout-form]') || completeOrderBtn.closest('form');
   if (!checkOutForm) return console.log('CheckOutForm in undefined');
 
-  // const inputElements = Array.from(checkOutForm.elements) as HTMLElement[];
-  // inputElements.forEach(element => {
-  //   if (element instanceof HTMLInputElement) {
-  //     if (element.type === 'radio' && element.checked) {
-  //       console.log(element);
-  //     }
-  //   }
-  // })
+  const inputElements = Array.from(checkOutForm.elements) as HTMLElement[];
+  inputElements.forEach(element => {
+    if (element instanceof HTMLInputElement) {
+      if (element.type === 'radio' && element.checked) {
+        console.log(element);
+      }
+      if (element.type === 'checkbox' && element.checked) {
+        console.log(element);
+      }
+    }
+  })
   if (!isFormValid(checkOutForm)) return;
+  // console.log(checkOutForm.elements);
 }
 
 

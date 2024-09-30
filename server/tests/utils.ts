@@ -1,18 +1,10 @@
 import request from "supertest";
 import app from "../src/app/app.ts";
-import { LoginRequestBody, RegisterRequestBody } from "../src/middlewares/validator.ts";
+import { LoginRequestBody, RegisterRequest } from "../src/middlewares/validator.ts";
 import { IProduct } from "../src/model/productModel.ts";
 import mongoose from "mongoose";
 
-
-
-
-
-
-
-
-
-export const mockRegisterReqBody: RegisterRequestBody = {
+export const mockRegisterReqBody: RegisterRequest = {
   firstName: "ali",
   lastName: "hassan",
   email: "example@gmail.com",
@@ -21,23 +13,22 @@ export const mockRegisterReqBody: RegisterRequestBody = {
 
 export const mockLoginReqBody: LoginRequestBody = {
   email: mockRegisterReqBody.email,
-  password: mockRegisterReqBody.password
-}
+  password: mockRegisterReqBody.password,
+};
 
 export const mockProduct: IProduct = {
-  title: 'mockProduct',
+  title: "mockProduct",
   description: "mockDescription",
-  images: ["source3.jpg","source2.jpg","source.jpg"],
+  images: ["source3.jpg", "source2.jpg", "source.jpg"],
   price: 0,
-  categories: ['body'],
+  categories: ["body"],
   usage: "mockUsage",
   ingredients: "mockIngredients",
-  weight: 'mockWeight',
+  weight: "mockWeight",
   salesCount: 0,
   stock: 10,
-  slug: 'mock-product'
-}
-
+  slug: "mock-product",
+};
 
 export const assertHtmlPageResponse = async (route: string, expectedPage: string): Promise<void> => {
   const response = await request(app).get(route);
@@ -48,5 +39,3 @@ export const assertHtmlPageResponse = async (route: string, expectedPage: string
   const regex: RegExp = new RegExp(`data-page="${expectedPage}"`, "g");
   expect(response.text).toMatch(regex);
 };
-
-

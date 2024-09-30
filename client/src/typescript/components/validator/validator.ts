@@ -44,7 +44,6 @@ const isFormValid = (form: HTMLFormElement): boolean => {
     const isFieldValid = validate(element.value);
     if (!isFieldValid) {
       isValid = false;
-      console.log(inputFieldName,element.value)
       showValidationError(element.parentElement);
     }
   }
