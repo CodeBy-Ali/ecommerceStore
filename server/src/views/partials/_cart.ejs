@@ -1,26 +1,26 @@
 <!-- START ------------------------------------------- Cart-Section -------------------------------------- -->
 <section id="cartSection" class="cart_drawer-section" data-cartDrawer>
-  <% if(cartItems.length > 0){ %>
-    <input type="hidden" value="" name="cartId" data-cart-id>
+  <% if(cart){ %>
+    <input type="hidden" value="<%= cart._id  %>" name="cartId" data-cart-id>
     <div class="cart-wrapper">
       <section class="cart_header_section">
-        <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount><%= cartItems.reduce((total,{quantity}) => total+=quantity,0)  %></span>&rpar;</h2>
+        <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount><%= cart.items.reduce((total,{quantity}) => total+=quantity,0)  %></span>&rpar;</h2>
 
         <% const {freeShippingThreshold} = shippingConfig %>
 
-        <% if(freeShippingThreshold > subTotal){ %>
-          <p class="cart_header_message">Spend Rs <%= Number(freeShippingThreshold - subTotal).toFixed(2)  %> more  to get free shipping!</p>
+        <% if(freeShippingThreshold > cart.subTotal){ %>
+          <p class="cart_header_message">Spend Rs <%= Number(freeShippingThreshold - cart.subTotal).toFixed(2)  %> more  to get free shipping!</p>
         <% }else { %>
           <p class="cart_header_message">You've earned free shipping</p>
         <% } %>
         <div class="cart_freeShipping_progressBar_wrapper">
-          <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar style=<%= `width:${Math.floor((subTotal/freeShippingThreshold)*100)}%;` %>></span>
+          <span class="cart_freeShipping_progressBar" data-freeShippingProgressBar style=<%= `width:${Math.floor((cart.subTotal/freeShippingThreshold)*100)}%;` %>></span>
         </div>
         <button class="cart_close_button" data-cartCloseButton>CLOSE</button>
       </section>
       <section class="cartItems_container" data-cartItemsContainer>
         <ul>
-          <% cartItems.forEach( ({quantity,product}) => { %>
+          <% cart.items.forEach( ({quantity,product}) => { %>
             <li class="cartItem" data-item-id="<%= product._id  %>">
               <div class="cartItem_image_container">
                 <a href="/products/<%= product.slug  %>">
@@ -64,7 +64,7 @@
       <section class="cart_footer_section">
         <div class="cart_footer_totalPrize_container">
           <p>SUBTOTAl</p>
-          <p>Rs <%= subTotal %></p>
+          <p>Rs <%= cart.subTotal%></p>
         </div>
         <a href="/checkout" class="button--checkout">Checkout</a>
       </section>

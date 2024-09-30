@@ -39,7 +39,7 @@
         <% } %>
 
         <div>
-          <button data-cartButton class="header_cart_button">CART &lpar;<span data-headerCartQuantity><%= cartItems.reduce((total,{quantity}) => total+=quantity,0) %></span>&rpar;</button>       
+          <button data-cartButton class="header_cart_button">CART &lpar;<span data-headerCartQuantity><%= cart ? cart.items.reduce((total,{quantity}) => total+=quantity,0): 0 %></span>&rpar;</button>       
         </div>
       </li>
     </ul>

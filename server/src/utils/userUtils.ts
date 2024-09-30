@@ -17,33 +17,41 @@ interface IUserInfo extends UserSession{
 
 
 interface IPopulatedCart{
-  _id: mongoose.Types.ObjectId;
+  _id: string;
   items: CartItemDetail[],
   subTotal: number,
 }
 
 interface IUserConfig {
   user: IUserInfo | null;
-  cartItems: CartItemDetail[] | [];
+  cart: IPopulatedCart | null;
   shippingConfig: IShippingConfig | null;
-  subTotal: number;
 }
 
 export const getUserConfig = async (userSession: UserSession | undefined): Promise<IUserConfig> => {
-  if (!userSession)
-    return {
-      user: null,
-      cartItems: [],
-      shippingConfig: null,
-      subTotal: 0,
-    };
+  const emptyConfig: IUserConfig = {
+    user: null,
+    cart: null,
+    shippingConfig: null,
+  } 
+  if (!userSession) return emptyConfig ;
 
-  const cart = await Cart.findOne({ userId: userSession._id }).lean().exec();
-  const cartItems = cart ? await populateCartItems(cart.items) : [];
   const shippingConfig = await ShippingConfig.findOne({ _id: "shipping_config" }).lean().exec();
   const userInfo = userSession.isRegistered ?
-    await User.findById(userSession._id, { "passwordHash": 0 ,"_id": 0}).lean().exec() :
-    {};
+  await User.findById(userSession._id, { "passwordHash": 0 ,"_id": 0}).lean().exec() :
+  {};
+  
+  const cart = await Cart.findOne({ userId: userSession._id }).lean().exec();
+  if (!cart) return {
+    cart: null,
+    shippingConfig,
+    user: {
+      ...userSession,
+      ...userInfo,
+    }
+  };
+  
+  const cartItems = cart ? await populateCartItems(cart.items) : [];
   
   const subTotal = Number(
     cartItems
@@ -57,8 +65,11 @@ export const getUserConfig = async (userSession: UserSession | undefined): Promi
       ...userSession,
       ...userInfo
     },
-    cartItems,
-    subTotal,
-    shippingConfig
+    cart: {
+      _id: cart._id.toString(),
+      items: cartItems,
+      subTotal,
+    },
+    shippingConfig,
   };
 };
