@@ -1,5 +1,5 @@
 import { renderCart } from "./modules/cartRender";
-import { toggleCartDrawer, updateHeaderTotalCartItemsCount, getCartQuantityInputField, getCartItemId, limitQuantityToStock, updateItemQuantity, withProcessingState } from "../utils/cartUtils";
+import { toggleCartDrawer, updateHeaderTotalCartItemsCount, getCartQuantityInputField, getCartItemId, limitQuantityToStock, updateItemQuantity, withProcessingState, getTotalCartItemsQuantity } from "../utils/cartUtils";
 import { handleApiResponse } from "../utils/pagesUtils";
 
 interface IProduct {
@@ -21,8 +21,13 @@ export interface ICartItem {
   quantity: number;
 }
 
+export interface ICart{
+  _id: string,
+  items: ICartItem[]
+}
+
 export interface ICartData {
-  cartItems: [ICartItem];
+  cart: ICart;
   shippingConfig: IShippingConfig;
 }
 export interface IResponseBody {
@@ -87,7 +92,7 @@ async function removeProductFromCart(e: Event): Promise<void> {
       },
     });
     const responseBody = await response.json();
-    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "shippingConfig"]);
+    handleApiResponse<ICartData>(responseBody, updateCartState, ["cart", "shippingConfig"]);
   } catch (error) {
     console.log(error);
   }
@@ -108,7 +113,7 @@ async function storeUpdatedQuantityInDB(itemId: string, quantity: number): Promi
     });
 
     const responseBody = await response.json();
-    handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "shippingConfig"]);
+    handleApiResponse<ICartData>(responseBody, updateCartState, ["cart", "shippingConfig"]);
   } catch (error) {
     console.log(error);
   }
@@ -127,13 +132,13 @@ export const addProductToCart = withProcessingState(async (productId: string, qu
     }),
   });
   const responseBody = await response.json();
-  handleApiResponse<ICartData>(responseBody, updateCartState, ["cartItems", "shippingConfig"]);
+  handleApiResponse<ICartData>(responseBody, updateCartState, ["cart", "shippingConfig"]);
   toggleCartDrawer();
 });
 
 function updateCartState(data: ICartData) {
-  const totalCartItems = data?.cartItems.reduce((total, { quantity }) => (total += quantity), 0);
-  renderCart(data?.cartItems, totalCartItems, data?.shippingConfig);
+  const totalCartItems = getTotalCartItemsQuantity(data.cart.items);
+  renderCart(data.cart, data.shippingConfig);
   updateHeaderTotalCartItemsCount(totalCartItems);
   Cart();
 }

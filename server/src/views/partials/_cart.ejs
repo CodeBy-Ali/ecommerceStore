@@ -1,8 +1,8 @@
 <!-- START ------------------------------------------- Cart-Section -------------------------------------- -->
 <section id="cartSection" class="cart_drawer-section" data-cartDrawer>
   <% if(cart){ %>
-    <input type="hidden" value="<%= cart._id  %>" name="cartId" data-cart-id>
     <div class="cart-wrapper">
+      <input type="hidden" value="<%= cart._id  %>" name="cartId" data-cart-id>
       <section class="cart_header_section">
         <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount><%= cart.items.reduce((total,{quantity}) => total+=quantity,0)  %></span>&rpar;</h2>
 

@@ -1,13 +1,16 @@
+import { getTotalCartItemsQuantity } from "../../utils/cartUtils";
 import DOMUtils from "../../utils/domUtils";
-import { ICartItem, IShippingConfig } from "../cart";
-export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: number, shippingConfig: IShippingConfig): void => {
+import { ICart, IShippingConfig } from "../cart";
+export const renderCart = (cart: ICart, shippingConfig: IShippingConfig): void => {
   const cartDrawer = document.querySelector("[data-cartDrawer]");
   const fragment = document.createDocumentFragment();
   const { freeShippingThreshold } = shippingConfig;
+
+
   if (!cartDrawer) return console.log("Failed to select cartDrawer section Element");
   cartDrawer.innerHTML = "";
 
-  if (cartItems.length === 0) {
+  if (!cart || cart.items.length === 0) {
     const emptyCartWrapper = document.createElement("div");
     DOMUtils.addClass(emptyCartWrapper, "empty_cart_wrapper");
     fragment.appendChild(emptyCartWrapper);
@@ -62,13 +65,16 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
     DOMUtils.addClass(cartWrapper, "cart-wrapper");
     fragment.appendChild(cartWrapper);
     const subTotal = Number(
-      cartItems
+      cart.items
         .reduce((subtotal, { quantity, product }) => {
           return (subtotal += product.price * quantity);
         }, 0)
         .toFixed(2)
     );
+    const totalItemsQuantity = getTotalCartItemsQuantity(cart.items);
+
     cartWrapper.innerHTML = `
+        <input type="hidden" value="${cart._id}" name="cartId" data-cart-id>
          <section class="cart_header_section">
           <h2>Bag &lpar;<span class="cart_product_quantity" data-cartItemCount>${totalItemsQuantity}</span>&rpar;</h2>
           <p class="cart_header_message">${subTotal < freeShippingThreshold ? "Spend $" + (freeShippingThreshold - subTotal).toFixed(2) + " more  to get free shipping!" : "You've earned free shipping"}</p>
@@ -79,7 +85,7 @@ export const renderCart = (cartItems: Array<ICartItem>, totalItemsQuantity: numb
         </section>
         <section class="cartItems_container" data-cartItemsContainer>
           <ul>
-           ${cartItems
+           ${cart.items
              .map(({ product, quantity }) => {
                return `
                  <li class="cartItem" data-item-id="${product._id}">

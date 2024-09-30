@@ -1,5 +1,6 @@
 import DOMUtils from "./domUtils";
 import { enterProcessingState, exitProcessingState, showNotification } from "./pagesUtils";
+import { ICartItem } from "../Cart/cart";
 
 // closes and opens the cart menu
 export const toggleCartDrawer = (): void => {
@@ -11,6 +12,11 @@ export const toggleCartDrawer = (): void => {
   cartDrawer && DOMUtils.toggleClass(cartDrawer, "open");
   overLay && DOMUtils.toggleClass(overLay, "active");
 };
+
+
+export const  getTotalCartItemsQuantity = (items: ICartItem[]):number =>{
+  return  items.reduce((total, { quantity }) => (total += quantity), 0);
+}
 
 export const updateHeaderTotalCartItemsCount = (totalCartItems: number): void => {
   const cartQuantityContainer = document.querySelector<HTMLElement>("header span[data-headerCartQuantity]");

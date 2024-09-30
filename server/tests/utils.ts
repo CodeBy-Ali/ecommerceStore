@@ -1,10 +1,10 @@
 import request from "supertest";
 import app from "../src/app/app.ts";
-import { LoginRequestBody, RegisterRequest } from "../src/middlewares/validator.ts";
+import { LoginRequestBody,  RegisterRequestBody } from "../src/middlewares/validator.ts";
 import { IProduct } from "../src/model/productModel.ts";
 import mongoose from "mongoose";
 
-export const mockRegisterReqBody: RegisterRequest = {
+export const mockRegisterReqBody: RegisterRequestBody = {
   firstName: "ali",
   lastName: "hassan",
   email: "example@gmail.com",

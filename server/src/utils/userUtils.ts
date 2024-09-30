@@ -16,7 +16,7 @@ interface IUserInfo extends UserSession{
 }
 
 
-interface IPopulatedCart{
+export interface IPopulatedCart{
   _id: string;
   items: CartItemDetail[],
   subTotal: number,
@@ -50,7 +50,7 @@ export const getUserConfig = async (userSession: UserSession | undefined): Promi
       ...userInfo,
     }
   };
-  
+
   const cartItems = cart ? await populateCartItems(cart.items) : [];
   
   const subTotal = Number(

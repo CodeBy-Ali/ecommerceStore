@@ -5,7 +5,7 @@ import app from "../src/app/app.ts";
 import User, { IUser } from "../src/model/userModel.ts";
 import bcrypt from "bcrypt";
 import { mockRegisterReqBody, mockLoginReqBody } from "./utils.ts";
-import { LoginRequestBody, RegisterRequest } from "../src/middlewares/validator.ts";
+import { LoginRequestBody, RegisterRequestBody } from "../src/middlewares/validator.ts";
 
 describe("POST /account/register", () => {
   // connecting to database before all test
@@ -30,7 +30,7 @@ describe("POST /account/register", () => {
   });
 
   test("should return 400 for Invalid Password", async () => {
-    const mockInvalidPassword: RegisterRequest = { ...mockRegisterReqBody, password: "abc" };
+    const mockInvalidPassword: RegisterRequestBody = { ...mockRegisterReqBody, password: "abc" };
     const response = await request(app).post("/account/register").send(mockInvalidPassword);
     expect(response.type).toBe("application/json");
     expect(response.statusCode).toBe(400);

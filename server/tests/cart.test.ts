@@ -51,10 +51,10 @@ describe("Get /cart/items", () => {
     const response = await agent.patch(url).send({
       quantity: updatedQuantity
     })
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(201);
     expect(response.type).toBe('application/json');
     expect(response.text.length).toBeGreaterThan(1);
-    const targetCartItem: CartItemDetail = JSON.parse(response.text).data.cartItems.find(
+    const targetCartItem: CartItemDetail = JSON.parse(response.text).data.cart.items.find(
       (carItem: CartItemDetail) => carItem.product?._id === mockCartItem.productId
     );
     expect(targetCartItem.quantity).toBe(updatedQuantity);

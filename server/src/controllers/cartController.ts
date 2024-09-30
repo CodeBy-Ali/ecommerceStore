@@ -3,10 +3,17 @@ import Cart from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
 import { populateCartItems } from "../utils/cartUtils.ts";
 import { getShippingConfig, createCart } from "../utils/cartUtils.ts";
-import logger from "../config/logger.ts";
-import ShippingConfig from "../model/settingsModel.ts";
+import { IShippingConfig } from "../model/settingsModel.ts";
+import { ApiResponse } from "../interfaces/global.interfaces.ts";
+import { IPopulatedCart } from "../utils/userUtils.ts";
 
-// delete item from cart
+
+interface ICartData{
+  cart: Omit<IPopulatedCart,"subTotal">,
+  shippingConfig: IShippingConfig,
+}
+
+
 export const deleteItem = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   try {
@@ -15,20 +22,22 @@ export const deleteItem = async (req: Request, res: Response, next: NextFunction
     if (updatedResult.modifiedCount === 0) {
       res.status(404).json({ status: "fail", message: "Cart not found Or item not in cart" });
     }
-    const cart = await Cart.findOne({ userId: userId });
+    const cart = await Cart.findOne({ userId: userId }).lean().exec();
     if (!cart) {
       return res.status(404).json({ status: "fail", message: "User cart not found" });
     }
     const shippingConfig = await getShippingConfig();
     // store all cart item detail objects in array
     const populatedItems = await populateCartItems(cart.items);
-    res.status(201).json({
-      status: "success",
-      data: {
-        cartItems: populatedItems,
-        shippingConfig,
+    
+    const data: ICartData = {
+      cart: {
+        _id: cart._id.toString(),
+        items: populatedItems,
       },
-    });
+      shippingConfig,
+    };
+    respond<ICartData>(res, 201, data);
   } catch (error) {
     next(error);
   }
@@ -51,20 +60,20 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
       });
     }
     await Cart.updateOne({ userId: userId }, { $set: { "items.$[elem].quantity": Number(quantity) } }, { arrayFilters: [{ "elem.productId": id }] });
-    const doc = await ShippingConfig.find({});
     const shippingConfig = await getShippingConfig();
-    const cart = await Cart.findOne({ userId: userId });
+    const cart = await Cart.findOne({ userId: userId }).lean().exec();
     if (!cart) {
       return res.status(404).json({ status: "fail", message: "User cart not found" });
     }
     const populatedItems = await populateCartItems(cart.items);
-    res.status(200).json({
-      status: "success",
-      data: {
-        cartItems: populatedItems,
-        shippingConfig,
+    const data: ICartData = {
+      cart: {
+        _id: cart._id.toString(),
+        items: populatedItems,
       },
-    });
+      shippingConfig,
+    }
+    respond<ICartData>(res, 201, data);
   } catch (error) {
     next(error);
   }
@@ -81,19 +90,20 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
       return res.status(404).json({ status: "fail", message: "Product not found" });
     }
     const shippingConfig = await getShippingConfig();
-    const cart = await Cart.findOne({ userId: user?._id });
+    const cart = await Cart.findOne({ userId: user?._id }).lean().exec();
     // create new cart if not already present
     if (!cart) {
       const newCart = createCart(productId, Number(quantity), user?._id);
       await newCart.save();
       const populatedItems = await populateCartItems(newCart.items);
-      return res.status(201).json({
-        status: "success",
-        data: {
-          cartItems: populatedItems,
-          shippingConfig,
+      const data:ICartData = {
+        cart: {
+          _id: JSON.stringify(newCart._id),
+          items: populatedItems,
         },
-      });
+        shippingConfig,
+      }
+      return respond(res,201,data);
     }
     // increase the quantity if item is already present in cart and stock is available else add the item
     const cartItem = cart.items.find((item) => item.productId.equals(productId));
@@ -108,14 +118,26 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     await cart.save();
     // store all cart item detail objects in array
     const populatedItems = await populateCartItems(cart.items);
-    res.status(201).json({
-      status: "success",
-      data: {
-        cartItems: populatedItems,
-        shippingConfig,
+    const data: ICartData = {
+      cart: {
+        _id: cart._id.toString(),
+        items: populatedItems,
       },
-    });
+      shippingConfig,
+    };
+    respond<ICartData>(res, 201, data);
   } catch (error) {
     next(error);
   }
 };
+
+
+
+function respond<T>(res: Response, statusCode: number, data: T | null, message?: string,  ) {
+  const responseBody: ApiResponse<T> = {
+    status: statusCode < 300 ? "success" : statusCode < 500 ? "fail" : "error",
+    data,
+    message,
+  };
+  res.status(statusCode).json(responseBody);
+}

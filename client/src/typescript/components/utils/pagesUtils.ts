@@ -4,9 +4,10 @@ import { addProductToCart } from "../Cart/cart";
 
 export function handleApiResponse<T>(responseBody: any, implementation: (data: T) => void, requiredFields: (keyof T)[]) {
   if (!responseBody || !(typeof responseBody === "object")) {
-    return console.error("");
+    return console.error("Missing or unknown Response body");
   }
   const { status, message, data } = responseBody;
+  console.log(responseBody);
   if (status !== apiStatus.SUCCESS) {
     console.info(`Api request failed. Message: `, message);
     message && showNotification(message, false);
@@ -16,6 +17,7 @@ export function handleApiResponse<T>(responseBody: any, implementation: (data: T
   if (missingFields.length > 1) {
     return console.log(`Following fields are missing from required Fields: ${missingFields.join(", ")}`);
   }
+
   implementation(data);
 }
 
