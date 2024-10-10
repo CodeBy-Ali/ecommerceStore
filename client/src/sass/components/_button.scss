@@ -95,5 +95,29 @@
       max-width: fit-content;
     }
   }
+
+  &--checkout-page,
+  &--complete-order{
+    width: 100%;
+    font-size: 1.7rem;
+    color: white;
+    background-color: $clr-button-checkout;
+    border: none;
+    border-radius: 5px;
+    font-weight: $font-semibold;
+    padding: 1.6rem;
+    @include respond-to(medium) {
+      font-size: 1.9rem;
+    }
+  }
+
+  &--save-address{
+    font-size: 1.5rem;
+
+    @include respond-to(small){
+      max-width: 12rem;
+      margin-left: auto;
+    }
+  }
 }
 

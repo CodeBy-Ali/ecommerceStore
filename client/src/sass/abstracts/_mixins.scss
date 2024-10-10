@@ -230,7 +230,7 @@
     color: white;
   }
 
-  &:not(:placeholder-shown) + label,
+  &:not(:placeholder-shown,[type="checkbox"]) + label,
   &:focus + label {
     top: 0.5rem;
     font-size: 0.9rem;
@@ -352,7 +352,9 @@
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
+      appearance: none;
     }
+    -moz-appearance: textfield;
   }
   
   
@@ -471,5 +473,28 @@
   }
   @include respond-to(small) {
     font-size: $font-size-sm;
+  }
+}
+
+
+
+
+@mixin overLay($transitionTime: .5s){
+  position: fixed;
+  top: -$height-header-sm;
+  height: calc(100% + $height-header-sm);
+  width: 100vw;
+  background-color: black;
+  opacity: 0;
+  visibility: hidden;
+  z-index: $z-index-overlay;
+  transition: all $transitionTime ease-in;
+  @include respond-to(medium){
+    top: -$height-header-lg;
+    height: calc(100% + $height-header-lg);
+  }
+  &.active{
+    opacity: .4;
+    visibility: visible;
   }
 }

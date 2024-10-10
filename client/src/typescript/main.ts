@@ -33,6 +33,8 @@ const App = (): void => {
       break; 
     case "checkout":
       initCheckoutPage();
+    // case "order":
+    //   initOrderPage();
   }
   // initialize global components for every page except checkout 
   if (page !== "checkout" && page !== "order") { 

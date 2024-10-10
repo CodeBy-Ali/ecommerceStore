@@ -1,5 +1,9 @@
-@use '../abstracts/mixins' as *;
-@use '../abstracts/variables' as *;
+@use "../abstracts/mixins" as *;
+@use "../abstracts/variables" as *;
+
+
+// TODO fix show/hide password icon in password fields in all forms
+//  TODO fix error icons not showing in firefox under failed validation fields
 
 form {
   & .form_fields_list {
@@ -12,28 +16,27 @@ form {
   & .form_field {
     position: relative;
 
-
-    &:has(.checkout_form_field_container.validationFailed){
-
-      & .checkout_form_field_container input{
+    &:has(.checkout_form_field_container.validationFailed) {
+      & .checkout_form_field_container input {
         border: 2px solid $clr-error;
       }
-      
-      & .error_message{
+
+      & .error_message {
         display: block;
       }
     }
 
-    &.validationFailed .error_message{
-      display: block
+    &.validationFailed .error_message {
+      display: block;
     }
 
-    &.validationFailed input{
+    &.validationFailed input {
       border: 2px solid $clr-error;
     }
   }
 
-  & .form_field  input {
+
+  & .form_field input {
     @include formInput;
     border: 1px solid $clr-border;
     height: 4.7rem;
@@ -45,9 +48,18 @@ form {
     font-size: 1.4rem;
     font-weight: normal;
   }
+
+  & label[data-select-label]{
+    top: 0.5rem;
+    font-size: 0.9rem;
+    transform: translateY(0);
+    @include respond-to(medium) {
+      font-size: 1rem;
+    }
+  }
 }
 
-.error_message{
+.error_message {
   color: $clr-error;
   font-size: 13px;
   position: absolute;
@@ -55,7 +67,7 @@ form {
   left: 0;
   // margin-block: .5rem;
   display: none;
-  & span img{
+  & span img {
     width: 1.2rem;
   }
 }

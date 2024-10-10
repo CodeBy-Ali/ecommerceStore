@@ -1,12 +1,18 @@
-import { showNotification, togglePasswordVisibility } from "../components/utils/pagesUtils";
+import {
+  showNotification,
+  togglePasswordVisibility,
+} from "../components/utils/pagesUtils";
 import isFormValid from "../components/validator/validator";
 
-export interface ISignInForm {
+export interface ISignInReqBody {
   email: string;
   password: string;
 }
 
-const handleFormSubmit = async (e: Event, signInForm: HTMLFormElement): Promise<void> => {
+const handleFormSubmit = async (
+  e: Event,
+  signInForm: HTMLFormElement
+): Promise<void> => {
   e.preventDefault();
 
   if (!signInForm || signInForm.elements.length < 2) {
@@ -15,12 +21,14 @@ const handleFormSubmit = async (e: Event, signInForm: HTMLFormElement): Promise<
 
   if (!isFormValid(signInForm)) return;
 
-  const emailField = document.querySelector<HTMLInputElement>(`[data-emailField]`);
-  const passwordField = document.querySelector<HTMLInputElement>(`[data-passwordField]`);
+  const emailField =
+    document.querySelector<HTMLInputElement>(`[data-emailField]`);
+  const passwordField =
+    document.querySelector<HTMLInputElement>(`[data-passwordField]`);
 
   if (!emailField || !passwordField) return;
 
-  const signInReqBody: ISignInForm = {
+  const signInReqBody: ISignInReqBody = {
     email: emailField?.value,
     password: passwordField?.value,
   };
@@ -47,20 +55,32 @@ const handleFormSubmit = async (e: Event, signInForm: HTMLFormElement): Promise<
 
 //  initialize Register page
 const initLoginPage = (): void => {
-  const eyeIconButton: HTMLElement | null = document.querySelector("[data-eyeIconButton]");
+  const eyeIconButton: HTMLElement | null = document.querySelector(
+    "[data-eyeIconButton]"
+  );
   const eyeIcon = document.querySelector(".eye_icon") as HTMLElement;
-  const passwordField = document.querySelector("[data-passwordField]") as HTMLInputElement;
-  const signInButton: HTMLElement | null = document.querySelector("[data-signInButton]");
-  const signInForm = document.querySelector("[data-signInForm]") as HTMLFormElement;
+  const passwordField = document.querySelector(
+    "[data-passwordField]"
+  ) as HTMLInputElement;
+  const signInButton: HTMLElement | null = document.querySelector(
+    "[data-signInButton]"
+  );
+  const signInForm = document.querySelector(
+    "[data-signInForm]"
+  ) as HTMLFormElement;
 
   if (!eyeIcon || !passwordField) return;
 
   if (eyeIconButton) {
-    eyeIconButton.addEventListener("click", () => togglePasswordVisibility(eyeIcon, eyeIconButton, passwordField));
+    eyeIconButton.addEventListener("click", () =>
+      togglePasswordVisibility(eyeIcon, eyeIconButton, passwordField)
+    );
   }
 
   if (signInButton) {
-    signInButton.addEventListener("click", (e) => handleFormSubmit(e, signInForm));
+    signInButton.addEventListener("click", (e) =>
+      handleFormSubmit(e, signInForm)
+    );
   }
 };
 

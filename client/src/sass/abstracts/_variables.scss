@@ -20,6 +20,7 @@ $clr-primaryDark: #092826;
 $clr-text-heading-light-black: rgb(51,51,51);
 $clr-text-para-black-light: rgb(84,84,84);
 $clr-text-secondary: rgb(117, 117, 117);
+$clr-text-secondary-light: rgb(112,112,112);
 $clr-text-quaternary: rgb(98, 98, 98); 
 $clr-text-primary: rgb(128, 128, 128);
 $clr-border: rgb(219, 219, 219);
@@ -156,6 +157,7 @@ $radius-product-card-md: 6rem;
 $z-index-header: 10;
 $z-index-overlay: 30;
 $z-index-cart: 40;
+$z-index-address-popUp: 45;
 $z-index-notification: 50;
 
 //  * ----------------------------- Transition ------------------ *

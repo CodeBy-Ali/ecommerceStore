@@ -1,15 +1,21 @@
-import { togglePasswordVisibility, showNotification } from "../components/utils/pagesUtils";
+import {
+  togglePasswordVisibility,
+  showNotification,
+} from "../components/utils/pagesUtils";
 import isFormValid from "../components/validator/validator";
-import { ISignInForm } from "./login";
+import { ISignInReqBody } from "./login";
 
 
-
-export interface IRegisterForm extends ISignInForm{
-  firstName: string,
-  lastName: string,
+// TODO use submitForm util function to submit form
+export interface IRegisterReqBody extends ISignInReqBody {
+  firstName: string;
+  lastName: string;
 }
 
-const handleFormSubmit = async (e: Event, registerForm: HTMLFormElement): Promise<void> => {
+const handleFormSubmit = async (
+  e: Event,
+  registerForm: HTMLFormElement
+): Promise<void> => {
   e.preventDefault();
 
   if (!registerForm || registerForm.elements.length < 4) {
@@ -18,19 +24,27 @@ const handleFormSubmit = async (e: Event, registerForm: HTMLFormElement): Promis
 
   if (!isFormValid(registerForm)) return;
 
-  const firstNameField = registerForm.querySelector<HTMLInputElement>("[data-firstNameField]");
-  const lastNameField = registerForm.querySelector<HTMLInputElement>("[data-lastNameField]");
-  const emailField = registerForm.querySelector<HTMLInputElement>("[data-emailField]");
-  const passwordField = registerForm.querySelector<HTMLInputElement>("[data-passwordField]");
+  const firstNameField = registerForm.querySelector<HTMLInputElement>(
+    "[data-firstNameField]"
+  );
+  const lastNameField = registerForm.querySelector<HTMLInputElement>(
+    "[data-lastNameField]"
+  );
+  const emailField =
+    registerForm.querySelector<HTMLInputElement>("[data-emailField]");
+  const passwordField = registerForm.querySelector<HTMLInputElement>(
+    "[data-passwordField]"
+  );
 
-  if (!firstNameField || !lastNameField || !emailField || !passwordField) return;
+  if (!firstNameField || !lastNameField || !emailField || !passwordField)
+    return;
 
-  const registerRqBody: IRegisterForm = {
+  const registerRqBody: IRegisterReqBody = {
     firstName: firstNameField.value,
     lastName: lastNameField.value,
     email: emailField.value,
     password: passwordField.value,
-  }
+  };
 
   try {
     const response = await fetch("/account/register", {
@@ -57,20 +71,32 @@ const handleFormSubmit = async (e: Event, registerForm: HTMLFormElement): Promis
 
 //  initialize Register page
 const initRegisterPage = (): void => {
-  const eyeIconButton: HTMLElement | null = document.querySelector("[data-eyeIconButton]");
+  const eyeIconButton: HTMLElement | null = document.querySelector(
+    "[data-eyeIconButton]"
+  );
   const eyeIcon = document.querySelector(".eye_icon") as HTMLElement;
-  const passwordField = document.querySelector("[data-passwordField]") as HTMLInputElement;
-  const submitButton: HTMLElement | null = document.querySelector("[data-submitButton]");
-  const registerForm = document.querySelector("[data-registerForm]") as HTMLFormElement;
+  const passwordField = document.querySelector(
+    "[data-passwordField]"
+  ) as HTMLInputElement;
+  const submitButton: HTMLElement | null = document.querySelector(
+    "[data-submitButton]"
+  );
+  const registerForm = document.querySelector(
+    "[data-registerForm]"
+  ) as HTMLFormElement;
 
   if (!eyeIcon || !passwordField) return;
 
   if (eyeIconButton) {
-    eyeIconButton.addEventListener("click", () => togglePasswordVisibility(eyeIcon, eyeIconButton, passwordField));
+    eyeIconButton.addEventListener("click", () =>
+      togglePasswordVisibility(eyeIcon, eyeIconButton, passwordField)
+    );
   }
 
   if (submitButton) {
-    submitButton.addEventListener("click", (e) => handleFormSubmit(e, registerForm));
+    submitButton.addEventListener("click", (e) =>
+      handleFormSubmit(e, registerForm)
+    );
   }
 };
 

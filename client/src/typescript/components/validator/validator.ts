@@ -9,6 +9,8 @@ interface IRules {
   address: (value: string) => boolean;
   city: (value: string) => boolean;
   province: (value: string) => boolean;
+  country: (value: string) => boolean;
+
 }
 
 const validatorRules: IRules = {
@@ -18,8 +20,9 @@ const validatorRules: IRules = {
   password: (password: string): boolean => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}/.test(password),
   phone: (phone: string): boolean => /^(\+?\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4,5}$/.test(phone),
   address: (address: string): boolean => /[\w\-,\/',\s\\^]/.test(address),
-  city: (city: string): boolean => /^[a-zA-Z]+\-?[a-zA-Z\s]+$/.test(city),
-  province: (state: string): boolean => /^[a-zA-Z]+\-?[a-zA-Z\s]+$/.test(state),
+  city: (city: string): boolean => /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(city),
+  province: (state: string): boolean => /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(state),
+  country: (country:string):boolean => /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(country)
 };
 
 const showValidationError = (element: HTMLElement | null) => {

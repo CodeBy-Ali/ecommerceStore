@@ -198,7 +198,7 @@ body[data-page="checkout"] {
 
 .order_summary_detail_container .order_cart_item {
   @include flex-row-jc(space-between);
-  column-gap: .8rem;
+  column-gap: 0.8rem;
   font-size: $font-size-sm;
 
   & .order_item_description {
@@ -207,9 +207,8 @@ body[data-page="checkout"] {
     & p {
       margin-left: 1.4rem;
     }
-
   }
-  & .order_item_price{
+  & .order_item_price {
     white-space: nowrap;
   }
 
@@ -246,14 +245,11 @@ body[data-page="checkout"] {
 
 // -------------- checkout-form --------------->
 
-.checkout_form_section {
-  & .checkout_form_container {
-    @include container($container-checkout-inner-section);
-    padding: 1.7rem 2.1rem;
-  }
 
+form[data-checkout-form]{
   & form input[type="text"],
-  & input:not([type="radio"]) {
+  & input:not([type="radio"]),
+  & select {
     border-radius: 5px;
     height: 4.9rem;
     line-height: 4.9rem;
@@ -261,15 +257,29 @@ body[data-page="checkout"] {
     font-weight: normal;
   }
 
-  & .form_field input[type="number"]{
+
+
+  & .form_field input[type="number"] {
     &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button{
+    &::-webkit-inner-spin-button {
       appearance: none;
       margin: 0;
     }
     -moz-appearance: textfield;
-    appearance: none;
   }
+
+  & select {
+    width: 100%;
+    background-color: transparent;
+    padding-block: .4rem;
+    padding-inline: 1.7rem;
+    border: 1px solid $clr-border;
+    outline: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+
   & .form_field .checkout_form_field_container {
     width: 100%;
     position: relative;
@@ -288,6 +298,63 @@ body[data-page="checkout"] {
     color: black;
   }
 
+  & .form_subscribe_news_container,
+  & .form_save_info_container {
+    @include flex-row-jc(flex-start);
+
+    & input[type="checkbox"] {
+      font-size: 4rem;
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+
+    & label {
+      color: black;
+      font-size: $font-size-sm;
+      margin-left: 1.1rem;
+    }
+  }
+}
+
+.checkout_form_section {
+  & .checkout_form_container {
+    @include container($container-checkout-inner-section);
+    padding: 1.7rem 2.1rem;
+  }
+
+  & form input[type="text"],
+  & input:not([type="radio"]) {
+    border-radius: 5px;
+    height: 4.9rem;
+    line-height: 4.9rem;
+    font-size: $font-size-sm;
+    font-weight: normal;
+  }
+
+  & .form_field input[type="number"] {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+  }
+  & .form_field .checkout_form_field_container {
+    width: 100%;
+    position: relative;
+  }
+
+  & .form_field .error_message {
+    color: $clr-error;
+    font-size: 13px;
+    position: static;
+    margin-block: 0.5rem;
+  }
+  .checkout_form_section_heading {
+    font-size: 2.1rem;
+    font-weight: $font-semibold;
+    margin-bottom: 1.2rem;
+    color: black;
+  }
 
   & .form_subscribe_news_container,
   & .form_save_info_container {
@@ -323,6 +390,188 @@ body[data-page="checkout"] {
 
   & .form_field {
     margin-bottom: 1.6rem;
+  }
+}
+
+// registered account section
+.checkout_form_container {
+  & .checkout_form_account_section,
+  & .checkout_form_shipping_address_section,
+  & .checkout_form_registered_user_payment_section {
+    border-bottom: 1px solid $clr-border;
+    padding-block: 1.8rem;
+    font-size: $font-size-sm;
+  }
+
+  & button.registered_account_accordion_button {
+    color: $clr-text-secondary;
+    margin-bottom: 1rem;
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.checkout_form_shipping_address_section {
+  position: relative;
+  & .checkout_shipto_accordion_button {
+    width: 100%;
+    @include flex-row-jc(space-between);
+    & .arrow_down_svg_wrapper {
+      background-color: rgba(23, 115, 176, 0.05);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      display: inline-block;
+
+      & svg {
+        color: $clr-text-blue;
+      }
+    }
+
+    &.open .arrow_down_svg_wrapper {
+      transform: rotate(180deg);
+    }
+
+    &.open + .checkout_selected_shipping_address_container{
+      visibility: none;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+    }
+  }
+  & .checkout_selected_shipping_address_container{
+    pointer-events: none;
+    transition: opacity .5s ease;
+  }
+  & .accordion_body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease;
+  }
+  
+  & .checkout_shippingAddresses_list {
+    & li {
+      border-radius: .4rem;
+      &:has(input:checked){
+        background-color: $clr-bg-accordion-button;
+      }
+    }
+
+    
+    & label {
+      padding: 1.4rem 1rem;
+      display: grid;
+      grid-template-columns: minmax(auto,1.5rem) 1fr;
+      align-items: start;
+      gap: 1rem;
+
+      
+      & .shipping_address_country_city{
+        display: block;
+        margin-top: .5rem;
+        color: $clr-text-secondary-light;
+      }
+
+      & input{
+        border: 0px;
+        height: 1.8rem;
+        width: 1.8rem;
+      }
+    }
+  }
+
+  & .checkout_use_different_address_button {
+    background-color: transparent;
+    border: none;
+    font-size: $font-size-sm;
+    color: $clr-text-blue;
+    @include flex-row-jc(center);
+    & span:first-child {
+      display: inline-block;
+      font-size: 2.5rem;
+      margin-right: 1rem;
+    }
+  }
+}
+// add shipping address popup 
+.add_shipping_address_popUp_section{
+  background-color: transparent;
+  width: 100%;
+  position: fixed;
+  z-index: $z-index-address-popUp;
+  opacity: 0;
+  transform-origin: bottom;
+  bottom: 0;
+  max-height: 0;
+  transition: max-height .4s ease-out;
+  &.show{
+    max-height: 73rem;
+    opacity: 1;
+  }
+  
+  
+  @include respond-to(small){
+    transition: opacity .4s ease, scale .3s ease;
+    height: 100%;
+    padding-inline: 6rem;
+    max-height: 51rem;
+    max-width: 66rem;
+    bottom: -50%;
+    left: 50%;
+    scale: 0;
+    visibility: hidden;
+    transform:translateX(-50%) ;
+    &.show{
+      visibility: visible;
+      max-height: 51rem;
+      scale: 1;
+      bottom: 50%;
+      scale: 1;
+      transform: translate(-50%,50%);
+      opacity: 1;
+    }
+  }
+}
+
+.address_popUp_container{
+  border-radius: 1rem;
+  background-color: white;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  min-height: 100%;
+  padding: 1.8rem;
+
+  & .popup_heading_container{
+    position: relative;    
+    
+    & h2{
+      font-size: 2.2rem;
+      color: black
+    }
+
+    & button{
+      position: absolute;
+      right: 0;
+      top: -28%;
+      font-size: 3rem;
+      color: $clr-text-secondary;
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  @include respond-to(small){
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
+}
+
+.checkout_save_address_section{
+  display: flex;
+  padding-block: .5rem;
+  @include respond-to(small){
+    justify-content: flex-end;
   }
 }
 
@@ -496,23 +745,6 @@ body[data-page="checkout"] {
 .checkout_complete_order_section {
   padding: $pd-checkout-section;
   padding-block: 2.5rem;
-
-  & .complete_order_button {
-    width: 100%;
-    font-size: 1.7rem;
-    color: white;
-    background-color: $clr-button-checkout;
-    border: none;
-    border-radius: 5px;
-    font-weight: $font-semibold;
-    padding: 1.6rem;
-  }
-
-  @include respond-to(medium) {
-    & .complete_order_button {
-      font-size: 1.9rem;
-    }
-  }
 }
 
 // policies section;

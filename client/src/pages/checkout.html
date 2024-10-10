@@ -15,6 +15,7 @@
 
     <div class="notification_center" data-notification-center></div>
 
+    <div class="overLay" data-overlay></div>
     <!-- Start ---------------------------- Header --------------------------------------- -->
     <header>
       <nav class="checkout_nav">
@@ -27,7 +28,638 @@
       </nav>
     </header>
 
-    <!--Start --------------------------------- Main ------------------------------------ -->
+    <!--Start ----------------- Add-New-Address-PopUP ------------------------------------- -->
+
+    <section
+      class="add_shipping_address_popUp_section"
+      data-add-shipping-address-pop-up
+    >
+      <div class="address_popUp_container">
+        <div class="popup_heading_container">
+          <h2>Add address</h2>
+          <button data-close-pop-up-button>&#10005;</button>
+        </div>
+        <div>
+          <form action="" data-checkout-form>
+            <section class="checkout_form_delivery_section">
+              <div class="checkout_form_field_wrapper">
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <label for="country" aria-hidden="false" data-select-label
+                      >Country/Region</label
+                    > 
+                    <select name="country" id="country">
+                      <option value="Pakistan">Pakistan</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="checkout_form_name_field_wrapper">
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="First Name"
+                        minlength="2"
+                      />
+                      <label for="firstName" aria-hidden="false"
+                        >First Name</label
+                      >
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="../assets/icons/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a first name</span>
+                    </div>
+                  </div>
+
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="Last Name"
+                        minlength="2"
+                        required
+                      />
+                      <label for="lasNname">Last Name</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="../assets/icons/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a last name</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="Address"
+                      id="address"
+                      minlength="2"
+                      required
+                    />
+                    <label for="address">Address</label>
+                  </div>
+                  <div class="error_message">
+                    <span
+                      ><img
+                        src="../assets/icons/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
+                    <span>Enter a address</span>
+                  </div>
+                </div>
+
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <input
+                      type="text"
+                      id="appartment"
+                      placeholder="Apartment, suite, etc (optional)"
+                      name="appartment"
+                      minlength="2"
+                    />
+                    <label for="appartment"
+                      >Apartment, suite, etc (optional)</label
+                    >
+                  </div>
+                  <div class="error_message">
+                    <span
+                      ><img
+                        src="../assets/icons/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
+                    <span>Enter a Apartment or suite</span>
+                  </div>
+                </div>
+
+                <div class="checkout_form_address_wrapper">
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        name="city"
+                        id="city"
+                        required
+                        placeholder="City"
+                      />
+                      <label for="city">City</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="../assets/icons/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a city</span>
+                    </div>
+                  </div>
+
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        required
+                        name="province"
+                        id="province"
+                        placeholder="Province / State"
+                      />
+                      <label for="province">Province / State</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="../assets/icons/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a state / province</span>
+                    </div>
+                  </div>
+
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        required
+                        name="zipcode"
+                        placeholder="ZIP code"
+                        id="zipcode"
+                      />
+                      <label for="zipcode">ZIP code (optional)</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="../assets/icons/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a ZIP / postal code</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <input
+                      type="number"
+                      required
+                      name="phone"
+                      placeholder="Phone"
+                      id="phone"
+                    />
+                    <label for="phone">Phone</label>
+                  </div>
+                  <div class="error_message">
+                    <span
+                      ><img
+                        src="../assets/icons/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
+                    <span>Enter a valid phone number</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="checkout_save_address_section">
+              <button type="submit" class="button--checkout button--save-address" data-save-shipping-address-button>Save</button>
+            </section>
+          </form>
+        </div>
+      </div>
+    </section>
+        <!--Start --------------------------------- Main ------------------------------------ -->
+
+    <main class="checkout_page_main">
+      <div class="checkout_section_wrapper">
+        <section class="checkout_order_summary_section">
+          <div
+            class="checkout_order_summary_container"
+            data-order-summary-accordion
+          >
+            <div class="accordion_item" data-accordion-item>
+              <button
+                class="order_summary_button"
+                aria-expanded="false"
+                id="tab-order-summary"
+                aria-controls="panel-order-summary"
+                data-accordion-button
+              >
+                <span class="order_summary_button_text_wrapper">
+                  <span class="summary_text">
+                    <span data-checkout-summary-button-text
+                      >Show order Summary</span
+                    >
+                    <span class="arrow_down_svg_wrapper">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </span>
+                  </span>
+                  <span class="order_total_price"> Rs 29.0 </span>
+                </span>
+              </button>
+              <div class="order_summary_detail_container" data-accordion-body>
+                <div class="checkout_order_summary_wrapper">
+                  <section class="checkout_items_list_container">
+                    <ul class="checkout_items_list">
+                      <li class="checkout_cart_item">
+                        <div class="checkout_item_description">
+                          <div class="checkout_cartitem_image_container">
+                            <img src="/assets/everythingBar.webp" alt="" />
+                            <span class="checkout_item_quantity">1</span>
+                          </div>
+                          <p>The Everything Bar</p>
+                        </div>
+                        <p class="checkout_item_price">Rs 5,500.00</p>
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section class="checkout_order_total_section">
+                    <div>
+                      <p>Subtotal</p>
+                      <p>Rs 5,500.00</p>
+                    </div>
+                    <div>
+                      <p>Shipping</p>
+                      <p>Rs 300.00</p>
+                    </div>
+                    <div>
+                      <p>
+                        <storng>Total</storng>
+                      </p>
+                      <p>
+                        <abbr>PKR</abbr>
+                        <strong>Rs 5,800.00</strong>
+                      </p>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="checkout_form_section">
+          <div class="checkout_form_container">
+            <form action="" data-checkout-form>
+              <section class="checkout_form_account_section">
+                <div
+                  class="checkout_form_account_accordion"
+                  data-checkout-account-accordion
+                >
+                  <div class="accordion_item" data-accordion-item>
+                    <button
+                      type="button"
+                      class="registered_account_accordion_button"
+                      data-accordion-button
+                    >
+                      <span>Account</span>
+                    </button>
+                    <div class="accordion_body" data-accordion-body="">
+                      <p>example@gmail.com</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="checkout_form_shipping_address_section">
+                <div data-shipping-address-accordion data-accordion>
+                  <div class="accordion_item" data-accordion-item>
+                    <button
+                      class="checkout_shipto_accordion_button registered_account_accordion_button"
+                      data-accordion-button
+                      type="button"
+                    >
+                      <span> Ship to </span>
+                      <span class="arrow_down_svg_wrapper">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
+                      </span>
+                    </button>
+                    <div class="checkout_selected_shipping_address_container">
+                      <p data-selected-address-container>
+                        Zohaib Hassan, village and post office
+                        thirpal,0310500212
+                      </p>
+                    </div>
+                    <div class="accordion_body" data-accordion-body>
+                      <div class="checkout_shippingAddresses_list_container">
+                        <ul class="checkout_shippingAddresses_list" data-shipping-addresses-list>
+                          <li>
+                            <label for="address1">
+                              <input
+                                type="radio"
+                                name="shippingAddress"
+                                id="address1"
+                                value="34341234"
+                                checked
+                              />
+                              <span>
+                                <span>Zohaib Hassan, village and post officethirpal</span>
+                                <span class="shipping_address_country_city">Lahore, Pk</span>
+                                <span class="visually-hidden">03105003235</span>
+                              </span>
+                            </label>
+                          </li>
+                          <li>
+                            <label for="address2">
+                              <input
+                                type="radio"
+                                name="shippingAddress"
+                                id="address2"
+                                value="34341234"
+                              />
+                              <span>
+                                <span
+                                  >Zohaib Hassan, village and post office
+                                  thirpal</span
+                                >
+                                <span>Lahore, Pk</span>
+                              </span>
+                            </label>
+                          </li>
+                        </ul>
+                        <button
+                          type="button"
+                          class="checkout_use_different_address_button"
+                          data-add-shipping-address-btn
+                        >
+                          <span class="checkout_address_plus_icon">&plus;</span>
+                          <span>Use a different address</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="checkout_form_registered_user_payment_section">
+                <button class="registered_account_accordion_button">
+                  Shipping Method
+                </button>
+                <p>Shipping Charges <strong>Rs 200</strong></p>
+              </section>
+
+              <section class="checkout_form_payment_section">
+                <h3 class="checkout_form_section_heading">Payment</h3>
+                <p>All transactions are secured and encrypted.</p>
+                <div
+                  class="accordion accordion_payment"
+                  id="accordionExample"
+                  data-accordion
+                  data-payment-accordion
+                >
+                  <div class="accordion_item" data-accordion-item>
+                    <button
+                      class="accordion_button open"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                      data-accordion-button
+                    >
+                      <label for="payment-cod">
+                        <input
+                          type="radio"
+                          name="payment"
+                          id="payment-cod"
+                          value="cod"
+                          checked
+                        />
+                        <span>Cash on Delivery (COD)</span>
+                      </label>
+                    </button>
+                    <div
+                      id="collapseOne"
+                      class="accordion_body open"
+                      data-bs-parent="#accordionExample"
+                      data-accordion-body
+                    >
+                      <div class="accordion_body_text_wrapper">
+                        <p>
+                          Please note that COD Limit is 50,000 for all over
+                          Pakistan and you have to transfer remaining amount (if
+                          any) before dispatch.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion_item" data-accordion-item>
+                    <button
+                      class="accordion_button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                      data-accordion-button
+                    >
+                      <label for="payment-bank">
+                        <input
+                          type="radio"
+                          name="payment"
+                          id="payment-bank"
+                          value="bank"
+                        />
+                        <span>Bank Deposit</span>
+                      </label>
+                    </button>
+                    <div
+                      id="collapseTwo"
+                      class="accordion_body collapse"
+                      data-bs-parent="#accordionExample"
+                      data-accordion-body
+                    >
+                      <div class="accordion_body_text_wrapper">
+                        <ul>
+                          <li>Bank Name: Example Bank</li>
+                          <li>Branch Code: 000</li>
+                          <li>Title: Phil</li>
+                          <li>A/C #: 02010343043</li>
+                          <li>IBAN #: PK00000000000000</li>
+                          <li>
+                            Please deposit in this account and WhatsApp or
+                            message the slip on 0300 000 000. We will dispatch
+                            the product within 24 Hours through TCS
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion_item" data-accordion-item>
+                    <button
+                      class="accordion_button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                      data-accordion-button
+                    >
+                      <label for="payment-jazzCash">
+                        <input
+                          type="radio"
+                          name="payment"
+                          id="payment-jazzCash"
+                          value="jazz-cash"
+                        />
+                        <span>Jazz Cash</span>
+                      </label>
+                    </button>
+                    <div
+                      id="collapseThree"
+                      class="accordion_body collapse"
+                      data-bs-parent="#accordionExample"
+                      data-accordion-body
+                    >
+                      <div class="accordion_body_text_wrapper">
+                        <ul>
+                          <li>Jazz Cash Details.</li>
+                          <li>Muhammad</li>
+                          <li>0300000000</li>
+                          <li>
+                            Please deposit in this account and whatsapp the slip
+                            or message on 030000000. We will dispatch the
+                            product within 24 Hours through TCS
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- order summary mobile -->
+              <section
+                class="checkout_order_summary_section checkout_order_summary_section_mobile"
+              >
+                <h2 class="checkout_form_section_heading">Order summary(4)</h2>
+                <div class="checkout_order_total_section">
+                  <div>
+                    <p>Subtotal</p>
+                    <p>Rs 5,500.00</p>
+                  </div>
+                  <div>
+                    <p>Shipping</p>
+                    <p>Rs 300.00</p>
+                  </div>
+                  <div>
+                    <p>
+                      <strong>Total</strong>
+                    </p>
+                    <p>
+                      <abbr>PKR</abbr>
+                      <strong>Rs 5,800.00</strong>
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="checkout_complete_order_section">
+                <a
+                  href="./order.html"
+                  class="complete_order_button"
+                  data-complete-order-button
+                  >Complete order</a
+                >
+              </section>
+            </form>
+          </div>
+
+          <section class="checkout_policies_section">
+            <div class="checkout_page_policies_container">
+              <ul class="checkout_page_policies_list">
+                <li><a href="">Refund Policy</a></li>
+                <li><a href="">Shipping Policy</a></li>
+                <li><a href="">Privacy Policy</a></li>
+                <li><a href="">Terms of service</a></li>
+              </ul>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Muhammad Ali Hassan" />
+    <link rel="stylesheet" href="../sass/main.scss" />
+    <script src="../typescript/main.ts" type="module" defer></script>
+    <title>Phil's Refills</title>
+  </head>
+  <body data-page="checkout">
+    <a class="button--skipToMain" href="">Skip to content</a>
+
+    <div class="notification_center" data-notification-center></div>
+
+    <header>
+      <nav class="checkout_nav">
+        <a href="/" class="phils_heading_link"> Phil's </a>
+        <a href="" class="checkout_cart_link">
+          <span>
+            <img src="/assets/bag-shopping-solid.svg" alt="" />
+          </span>
+        </a>
+      </nav>
+    </header>
+
 
     <main class="checkout_page_main">
       <div class="checkout_section_wrapper">
@@ -265,7 +897,6 @@
                 </div>
               </section>
 
-              <!-- order summary mobile -->
               <section class="checkout_order_summary_section checkout_order_summary_section_mobile">
                 <h2 class="checkout_form_section_heading">Order summary(4)</h2>
                 <div class="checkout_order_total_section">
@@ -309,4 +940,4 @@
       </div>
     </main>
   </body>
-</html>
+</html> -->
