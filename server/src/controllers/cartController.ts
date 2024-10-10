@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import Cart from "../model/cartModel.ts";
 import Product from "../model/productModel.ts";
-import { populateCartItems } from "../utils/cartUtils.ts";
-import { getShippingConfig, createCart } from "../utils/cartUtils.ts";
+import { getShippingConfig, createCart, getUserCart } from "../utils/cartUtils.ts";
 import { IShippingConfig } from "../model/settingsModel.ts";
 import { ApiResponse } from "../interfaces/global.interfaces.ts";
-import { IPopulatedCart } from "../utils/userUtils.ts";
+import { IPopulatedCart, IPopulatedCartItem } from "../utils/userUtils.ts";
+import mongoose from 'mongoose';
 
 
 interface ICartData{
@@ -14,26 +14,27 @@ interface ICartData{
 }
 
 
+// TODO divide these controllers logic into smaller helper functions 
+
 export const deleteItem = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   try {
     const userId = req.session?.user?._id;
-    const updatedResult = await Cart.updateOne({ userId: userId }, { $pull: { items: { productId: id } } });
+    const updatedResult = await Cart.updateOne({ userId: userId }, { $pull: { items: { product: id } } });
     if (updatedResult.modifiedCount === 0) {
       res.status(404).json({ status: "fail", message: "Cart not found Or item not in cart" });
     }
-    const cart = await Cart.findOne({ userId: userId }).lean().exec();
+    const cart = await getUserCart(userId);
     if (!cart) {
       return res.status(404).json({ status: "fail", message: "User cart not found" });
     }
     const shippingConfig = await getShippingConfig();
     // store all cart item detail objects in array
-    const populatedItems = await populateCartItems(cart.items);
     
     const data: ICartData = {
       cart: {
         _id: cart._id.toString(),
-        items: populatedItems,
+        items: cart.items as IPopulatedCartItem[],
       },
       shippingConfig,
     };
@@ -59,17 +60,16 @@ export const editItem = async (req: Request, res: Response, next: NextFunction) 
         message: `Requested quantity exceeds the available stock. Only ${product.stock} items left in stock.`,
       });
     }
-    await Cart.updateOne({ userId: userId }, { $set: { "items.$[elem].quantity": Number(quantity) } }, { arrayFilters: [{ "elem.productId": id }] });
+    await Cart.updateOne({ userId: userId }, { $set: { "items.$[elem].quantity": Number(quantity) } }, { arrayFilters: [{ "elem.product": id }] });
     const shippingConfig = await getShippingConfig();
-    const cart = await Cart.findOne({ userId: userId }).lean().exec();
+    const cart = await getUserCart(userId);
     if (!cart) {
       return res.status(404).json({ status: "fail", message: "User cart not found" });
     }
-    const populatedItems = await populateCartItems(cart.items);
     const data: ICartData = {
       cart: {
         _id: cart._id.toString(),
-        items: populatedItems,
+        items: cart.items as IPopulatedCartItem[],
       },
       shippingConfig,
     }
@@ -85,29 +85,31 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
   const user = req.session.user;
 
   try {
-    const product = await Product.findById(productId);
+    const product = await Product.findOne({_id: productId});
     if (!product) {
       return res.status(404).json({ status: "fail", message: "Product not found" });
     }
     const shippingConfig = await getShippingConfig();
-    const cart = await Cart.findOne({ userId: user?._id }).lean().exec();
+    const cart = await Cart.findOne({userId: user?._id});
     // create new cart if not already present
     if (!cart) {
       const newCart = createCart(productId, Number(quantity), user?._id);
       await newCart.save();
-      const populatedItems = await populateCartItems(newCart.items);
       const data:ICartData = {
         cart: {
           _id: JSON.stringify(newCart._id),
-          items: populatedItems,
+          items: newCart.items as IPopulatedCartItem[],
         },
         shippingConfig,
       }
       return respond(res,201,data);
     }
     // increase the quantity if item is already present in cart and stock is available else add the item
-    const cartItem = cart.items.find((item) => item.productId.equals(productId));
-    if (!cartItem) cart.items.push({ productId, quantity });
+    const cartItem = cart.items.find((item) => {
+      return item.product instanceof mongoose.Types.ObjectId && item.product.equals(productId)
+    });
+    
+    if (!cartItem) cart.items.push({ product: productId, quantity });
     else if (cartItem.quantity + quantity < product.stock) cartItem.quantity += quantity;
     else {
       return res.status(422).json({
@@ -115,13 +117,14 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
         message: `Given quantity exceeds the available stock of ${product.stock - cartItem.quantity} units.`,
       });
     }
+
     await cart.save();
+    await cart.populate({ path: "items", populate: "product" });
     // store all cart item detail objects in array
-    const populatedItems = await populateCartItems(cart.items);
     const data: ICartData = {
       cart: {
-        _id: cart._id.toString(),
-        items: populatedItems,
+        _id: cart._id,
+        items: cart.items as IPopulatedCartItem[],
       },
       shippingConfig,
     };

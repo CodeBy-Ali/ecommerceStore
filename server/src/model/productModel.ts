@@ -15,6 +15,9 @@ export interface IProduct  {
   boughtTogether?: mongoose.Types.ObjectId;
 }
 
+
+export interface IProductDocument extends Document, IProduct { };
+
 const productSchema = new Schema<IProduct>(
   {
     title: {

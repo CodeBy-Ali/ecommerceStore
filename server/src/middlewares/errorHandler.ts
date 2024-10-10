@@ -3,7 +3,7 @@ import logger from "../config/logger.ts";
 
 
 
-interface ApiError extends Error{
+export interface ApiError extends Error{
   status: string,
   code: number,
 }

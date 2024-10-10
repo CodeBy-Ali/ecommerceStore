@@ -1,9 +1,10 @@
 import mongoose, { Schema, model } from "mongoose";
 import { Document,Types } from "mongoose";
 import { ObjectId } from "mongodb";
+import Product, { IProduct } from "./productModel.ts";
 
 export interface ICartItem {
-  productId: mongoose.Types.ObjectId;
+  product: mongoose.Types.ObjectId | IProduct;
   quantity: number;
 }
 
@@ -22,9 +23,9 @@ const cartSchema: Schema = new Schema<ICart>(
     },
     items: [
       {
-        productId: {
+        product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
+          ref: Product,
           required: true,
         },
         quantity: {

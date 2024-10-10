@@ -4,7 +4,8 @@ import User from "../model/userModel.ts";
 import bcrypt from "bcrypt";
 import Cart, { ICart } from "../model/cartModel.ts";
 import mongoose from "mongoose";
-import { getUserConfig } from "../utils/userUtils.ts";
+import { createUniqueUser, createUserSession, getUserConfig } from "../utils/userUtils.ts";
+import { IRegisterRequestBody } from "../middlewares/validator.ts";
 
 type ObjectId = mongoose.Types.ObjectId;
 
@@ -23,48 +24,24 @@ export const renderAuthView = async (viewName: string,req:Request, res:Response,
 
 // add new user to database
 export const registerNewUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const { firstName, lastName, email, password } = req.body;
+  const userInfo = req.body as IRegisterRequestBody;
   try {
-    const duplicateUser = await User.findOne({ email: email });
-    if (duplicateUser) {
+    
+    const user = await createUniqueUser(userInfo);
+    if (!user) {
       res.status(400).json({
         status: "fail",
         message: "Email already Registered"
       });
       return;
     }
-
-    const { saltRounds } = configManager.getBcryptConfig();
-    const passwordHash = await bcrypt.hash(password, saltRounds);
-
-    const user = new User({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      passwordHash: passwordHash,
-    });
-    await user.save();
-
     // assign the cart of anonymous user to the registered user.
     if (req.session.user) {
       await Cart.findOneAndUpdate({ userId: req.session.user._id }, { userId: user?._id });
     }
-
     // create new user session
-    req.session.regenerate((err) => {
-      if (err) next(err);
-
-      req.session.user = {
-        _id: user._id,
-        isRegistered: true,
-      };
-
-      // req.session.isLoggedIn = true,
-      req.session.save((err) => {
-        if (err) next(err);
-        res.redirect("/");
-      });
-    });
+    await createUserSession(user, req);
+    res.redirect('/');
   } catch (error) {
     next(error);
   }
@@ -94,21 +71,11 @@ export const authenticateUser = async (req: Request, res: Response, next: NextFu
 
     const userSession = req.session.user;
     if (userSession) {
-      await mergeAnonymousCartWithRegisteredUser(userSession._id,registeredUser._id);
+      await mergeAnonymousCartWithRegisteredUser(userSession._id,registeredUser._id as mongoose.Types.ObjectId);
     }
     
-    req.session.regenerate((err) => {
-      if (err) next(err);
-      req.session.user = {
-        _id: registeredUser._id,
-        isRegistered: true,
-      }
-
-      req.session.save((err) => {
-        if (err) next(err);
-        res.redirect("/");
-      })
-    })
+    await createUserSession(registeredUser, req);
+    res.redirect('/');
   } catch (error) {
     next(error);
   }
@@ -116,6 +83,7 @@ export const authenticateUser = async (req: Request, res: Response, next: NextFu
 
 
 
+// TODO refactor inner if/else conditions and inner loops
 async function mergeAnonymousCartWithRegisteredUser(anonymousUserId:ObjectId,registeredUserId:ObjectId) {
   const session = await mongoose.startSession()
   session.startTransaction();
@@ -129,7 +97,15 @@ async function mergeAnonymousCartWithRegisteredUser(anonymousUserId:ObjectId,reg
     
     } else if (registeredUserCart && anonymousUserCart) {
       anonymousUserCart.items.forEach(item => {
-        const duplicateItem = registeredUserCart.items.find(cartItem => (cartItem.productId).equals(item.productId));
+        const duplicateItem = registeredUserCart.items.find(cartItem => {
+          if (
+            cartItem.product instanceof mongoose.Types.ObjectId &&
+            item.product instanceof mongoose.Types.ObjectId
+          ) {
+            return (cartItem.product).equals(item.product)
+          }
+          return false;
+        });
         if (duplicateItem) duplicateItem.quantity += item.quantity;
         else registeredUserCart.items.push(item);
       })

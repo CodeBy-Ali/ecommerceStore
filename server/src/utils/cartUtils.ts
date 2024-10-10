@@ -1,52 +1,39 @@
 import { ICartItem } from "../model/cartModel.ts";
-import Product from "../model/productModel.ts";
+import Product, { IProduct } from "../model/productModel.ts";
 import mongoose from "mongoose";
 import logger from "../config/logger.ts";
 import Cart from "../model/cartModel.ts";
 import ShippingConfig from "../model/settingsModel.ts";
 import { ICart } from "../model/cartModel.ts";
 import config from "../config/config.ts";
+import { IPopulatedCart, IPopulatedCartItem } from "./userUtils.ts";
 
-export interface CartItemDetail {
-  product: {
-    _id: mongoose.Types.ObjectId;
-    title: string;
-    images: Array<string>;
-    price: number;
-    stock: number;
-    slug: string;
-  } | null;
-  quantity: number;
+
+
+
+
+export async function getUserCart(userId: mongoose.Types.ObjectId | undefined) {
+  return await Cart.findOne({ userId: userId }).populate({path: "items",populate: "product"}).lean().exec();
 }
 
-// add cart items product details
-export const populateCartItems = async (cartItems: Array<ICartItem>): Promise<CartItemDetail[]> => {
-  const products = await Promise.all(
-    cartItems.map(async ({ productId, quantity }) => {
-      try {
-        return {
-          product: await Product.findById(productId, { title: 1, slug: 1, images: 1, price: 1, stock: 1, _id: 1 }).lean().exec(),
-          quantity: quantity,
-        };
-      } catch (error) {
-        console.log(`Error fetching product with ID: ${productId}`);
-        return null;
-      }
-    })
-  );
-  return products.filter((product) => product !== null);
-};
+
 
 // create user cart document
-export function createCart(productId: mongoose.Types.ObjectId, quantity: number, userId: mongoose.Types.ObjectId | undefined): ICart {
+export function createCart(
+  productId: mongoose.Types.ObjectId,
+  quantity: number,
+  userId: mongoose.Types.ObjectId | undefined
+): ICart {
   if (!userId) {
-    throw new Error("Unauthorized access!. Received Request to create user cart with undefined userId");
+    throw new Error(
+      "Unauthorized access!. Received Request to create user cart with undefined userId"
+    );
   }
   return new Cart({
     userId: userId,
     items: [
       {
-        productId,
+        product: productId,
         quantity,
       },
     ],
@@ -54,7 +41,12 @@ export function createCart(productId: mongoose.Types.ObjectId, quantity: number,
 }
 
 export const getShippingConfig = async () => {
-  const shippingConfig = await ShippingConfig.findOne({ _id: "shipping_config" }, { _id: 0 }).lean().exec();
+  const shippingConfig = await ShippingConfig.findOne(
+    { _id: "shipping_config" },
+    { _id: 0 }
+  )
+    .lean()
+    .exec();
   if (!shippingConfig) {
     logger.error("Missing shipping Configuration document");
     throw new Error("Unable to find shipping Configuration document");
@@ -62,5 +54,11 @@ export const getShippingConfig = async () => {
   return shippingConfig;
 };
 
-
-
+export function calculateProductSubtotal(cartItems: IPopulatedCartItem[]): any {
+  const subTotal = cartItems
+    .reduce((subTotal, { quantity, product }) => {
+      return (subTotal += product ? product.price * quantity : 0);
+    }, 0)
+    .toFixed(2);
+  return parseInt(subTotal);
+}

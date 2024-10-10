@@ -1,21 +1,21 @@
-import { Schema, model, } from "mongoose";
+import mongoose, { Document, Schema, model, } from "mongoose";
 
+// TODO add news subscription feature
 
 // interface represents the user document in database
-export interface IUser{
+export interface IUser {
   firstName: string,
   lastName: string,
   email: string,
   passwordHash: string,
   avatar?: string,
-  address?: string,
-  addressLine2?: string,
-  postalCode?: string,
+  isSubscribedToNews?: boolean,
 }
-
 // user schema corresponding to user interface
 
-const userSchema = new Schema<IUser>({
+export interface IUserDocument extends IUser,Document{}
+
+const userSchema = new Schema<IUserDocument>({
   firstName: {
     type: String,
     required: true,
@@ -39,10 +39,13 @@ const userSchema = new Schema<IUser>({
   },
   avatar: {
     type: String,
+  },
+  isSubscribedToNews: {
+    type: Boolean,
   }
 })
 
 
-const User = model<IUser>("users", userSchema);
+const User = model<IUserDocument>("users", userSchema);
 
 export default User;

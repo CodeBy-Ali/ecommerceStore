@@ -9,7 +9,7 @@
   </head>
   <body data-page="checkout">
     <a class="button--skipToMain" href="#main">Skip to content</a>
-
+<!-- TODO remove save Shipping information field -->
     <div class="overLay" data-overlay></div>
 
     <div class="notification_center" data-notification-center></div>
@@ -25,41 +25,308 @@
       </nav>
     </header>
 
+    <!--Start ----------------- Add-New-Address-PopUP ------------------------------------- -->
+
+    <section
+      class="add_shipping_address_popUp_section"
+      data-add-shipping-address-pop-up
+    >
+      <div class="address_popUp_container">
+        <div class="popup_heading_container">
+          <h2>Add address</h2>
+          <button data-close-pop-up-button>&#10005;</button>
+        </div>
+        <div>
+          <form action="" data-checkout-form data-new-shipping-address-form>
+            <section class="checkout_form_delivery_section">
+              <div class="checkout_form_field_wrapper">
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <label for="country" aria-hidden="false" data-select-label
+                      >Country/Region</label
+                    > 
+                    <select name="country" id="country">
+                      <option value="Pakistan">Pakistan</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="checkout_form_name_field_wrapper">
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        placeholder="First Name"
+                        minlength="2"
+                      />
+                      <label for="firstName" aria-hidden="false"
+                        >First Name</label
+                      >
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a first name</span>
+                    </div>
+                  </div>
+
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        placeholder="Last Name"
+                        minlength="2"
+                        required
+                      />
+                      <label for="lasNname">Last Name</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a last name</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="Address"
+                      id="address"
+                      minlength="2"
+                      required
+                    />
+                    <label for="address">Address</label>
+                  </div>
+                  <div class="error_message">
+                    <span
+                      ><img
+                        src="/assets/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
+                    <span>Enter a address</span>
+                  </div>
+                </div>
+
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <input
+                      type="text"
+                      id="appartment"
+                      placeholder="Apartment, suite, etc (optional)"
+                      name="apartment"
+                      minlength="2"
+                    />
+                    <label for="appartment"
+                      >Apartment, suite, etc (optional)</label
+                    >
+                  </div>
+                  <div class="error_message">
+                    <span
+                      ><img
+                        src="/assets/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
+                    <span>Enter a Apartment or suite</span>
+                  </div>
+                </div>
+
+                <div class="checkout_form_address_wrapper">
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        name="city"
+                        id="city"
+                        required
+                        placeholder="City"
+                      />
+                      <label for="city">City</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a city</span>
+                    </div>
+                  </div>
+
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        required
+                        name="province"
+                        id="province"
+                        placeholder="Province / State"
+                      />
+                      <label for="province">Province / State</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a state / province</span>
+                    </div>
+                  </div>
+
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <input
+                        type="text"
+                        required
+                        name="zipcode"
+                        placeholder="ZIP code"
+                        id="zipcode"
+                      />
+                      <label for="zipcode">ZIP code (optional)</label>
+                    </div>
+                    <div class="error_message">
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span>Enter a ZIP / postal code</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form_field">
+                  <div class="checkout_form_field_container">
+                    <input
+                      type="number"
+                      required
+                      name="phone"
+                      placeholder="Phone"
+                      id="phone"
+                    />
+                    <label for="phone">Phone</label>
+                  </div>
+                  <div class="error_message">
+                    <span
+                      ><img
+                        src="/assets/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
+                    <span>Enter a valid phone number</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="checkout_save_address_section">
+              <button
+                type="button"
+                class="button--checkout-page button--save-address"
+                data-save-shipping-address-button
+              >
+                Save
+              </button>
+            </section>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <!--Start --------------------------------- Main ------------------------------------ -->
 
     <main class="checkout_page_main">
       <div class="checkout_section_wrapper">
         <section class="order_summary_section">
           <div class="order_summary_container" data-order-summary-accordion>
+            <input
+              type="hidden"
+              name="cartId"
+              value="<%= cart._id  %>"
+              data-cart-id
+            />
             <div class="accordion_item" data-accordion-item>
-              <button class="order_summary_button" aria-expanded="false" id="tab-order-summary" aria-controls="panel-order-summary" data-accordion-button>
+              <button
+                class="order_summary_button"
+                aria-expanded="false"
+                id="tab-order-summary"
+                aria-controls="panel-order-summary"
+                data-accordion-button
+              >
                 <span class="order_summary_button_text_wrapper">
                   <span class="summary_text">
-                    <span data-checkout-summary-button-text>Show order Summary</span>
+                    <span data-checkout-summary-button-text
+                      >Show order Summary</span
+                    >
                     <span class="arrow_down_svg_wrapper">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
                         <path d="m6 9 6 6 6-6" />
                       </svg>
                     </span>
                   </span>
-                  <span class="order_total_price"> Rs <%= subTotal  %> </span>
+                  <span class="order_total_price">
+                    Rs <%= cart.subTotal %>
+                  </span>
                 </span>
               </button>
               <div class="order_summary_detail_container" data-accordion-body>
                 <div class="order_summary_wrapper">
                   <section class="order_items_list_container">
                     <ul class="order_items_list">
-                      <% cartItems.forEach(cartItem => { %>
-                        <li class="order_cart_item">
-                          <div class="order_item_description">
-                            <div class="order_cart_item_image_container">
-                              <img src="<%= cartItem.product.images[0]  %>" alt="" />
-                              <span class="order_item_quantity"><%= cartItem.quantity %></span>
-                            </div>
-                            <p><%= cartItem.product.title  %></p>
+                      <% cart.items.forEach(cartItem => { %>
+                      <li class="order_cart_item">
+                        <div class="order_item_description">
+                          <div class="order_cart_item_image_container">
+                            <img
+                              src="<%= cartItem.product.images[0]  %>"
+                              alt=""
+                            />
+                            <span class="order_item_quantity"
+                              ><%= cartItem.quantity %></span
+                            >
                           </div>
-                          <p class="order_item_price">Rs <%= cartItem.product.price  %></p>
-                        </li>
+                          <p><%= cartItem.product.title %></p>
+                        </div>
+                        <p class="order_item_price">
+                          Rs <%= cartItem.product.price %>
+                        </p>
+                      </li>
                       <% }) %>
                     </ul>
                   </section>
@@ -67,11 +334,14 @@
                   <section class="order_total_section">
                     <div>
                       <p>Subtotal</p>
-                      <p>Rs <%= subTotal %></p>
+                      <p>Rs <%= cart.subTotal %></p>
                     </div>
                     <div>
                       <p>Shipping</p>
-                      <p><%= (shippingCost && shippingCost > 0) ? "Rs " + shippingCost : "Free"%></p>
+                      <p>
+                        <%= (shippingCost && shippingCost > 0) ? "Rs " +
+                        shippingCost : "Free"%>
+                      </p>
                     </div>
                     <div>
                       <p>
@@ -79,7 +349,7 @@
                       </p>
                       <p>
                         <abbr>PKR</abbr>
-                        <strong>Rs <%= subTotal + shippingCost %></strong>
+                        <strong>Rs <%= cart.subTotal + shippingCost %></strong>
                       </p>
                     </div>
                   </section>
@@ -91,59 +361,254 @@
 
         <section class="checkout_form_section">
           <div class="checkout_form_container">
-            <form action="" data-checkout-form>
+            <form action="" data-checkout-form data-checkout-form-main>
+              <% if(shippingAddresses && shippingAddresses.length > 0){ %>
+              <section class="checkout_form_account_section">
+                <div
+                  class="checkout_form_account_accordion"
+                  data-checkout-account-accordion
+                >
+                  <div class="accordion_item" data-accordion-item>
+                    <button
+                      type="button"
+                      class="registered_account_accordion_button"
+                      data-accordion-button
+                    >
+                      <span>Account</span>
+                    </button>
+                    <div class="accordion_body" data-accordion-body="">
+                      <p data-user-email><%= user.email  %></p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="checkout_form_shipping_address_section">
+                <div data-shipping-address-accordion data-accordion>
+                  <div class="accordion_item" data-accordion-item>
+                    <button
+                      class="checkout_shipto_accordion_button registered_account_accordion_button"
+                      data-accordion-button
+                      type="button"
+                    >
+                      <span> Ship to </span>
+                      <span class="arrow_down_svg_wrapper">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
+                      </span>
+                    </button>
+                    <div class="checkout_selected_shipping_address_container">
+                      <p data-selected-address-container>
+                       <%= shippingAddresses.reduce((accumulator,address) => { 
+                          if(address.isDefault){
+                            accumulator += `${address.firstName}, ${address.lastName}, ${address.address}, ${address.city}, ${address.country == "Pakistan" ? "PK" : address.country}, ${address.phone}`
+                          }
+                          return accumulator;
+                       },"")  %>
+                      </p>
+                    </div>
+                    <div class="accordion_body" data-accordion-body>
+                      <div class="checkout_shippingAddresses_list_container">
+                        <ul class="checkout_shippingAddresses_list" data-shipping-addresses-list>
+                          <% shippingAddresses.forEach((address,index) => { %>
+                            <li>
+                              <label for="address<%= index  %>">
+                                <input
+                                  type="radio"
+                                  name="shippingAddressId"
+                                  id="address<%= index  %>"
+                                  value="<%= address._id  %>"
+                                  <%= address.isDefault ? "checked" : ""   %>
+                                />
+                                <span>
+                                  <span>
+                                    <%=  `${address.firstName}, ${address.lastName}, ${address.address}`  %>
+                                  </span>
+                                  <span class="shipping_address_country_city">
+                                    <%= `${address.city}, ${address.country == "Pakistan" ? "PK" : address.country}`  %>
+                                  </span>
+                                  <span class="visually-hidden"><%= address.phone %></span>
+                                </span>
+                              </label>
+                            </li>
+                          <% }) %>
+                        </ul>
+                        <button
+                          type="button"
+                          class="checkout_use_different_address_button"
+                          data-add-shipping-address-btn
+                        >
+                          <span class="checkout_address_plus_icon">&plus;</span>
+                          <span>Use a different address</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="checkout_form_registered_user_payment_section">
+                <button class="registered_account_accordion_button">
+                  Shipping Method
+                </button>
+                <p>Shipping Charges · <strong>Rs <%= shippingCost  %></strong></p>
+              </section>
+
+              <% } else { %>
               <section class="checkout_form_contact_section">
-                <h2 class="checkout_form_section_heading"> <%= user.isRegistered ? "Contact" : "Create Account" %></h2>
+                <h2 class="checkout_form_section_heading">Contact</h2>
                 <div class="form_field">
                   <div class="checkout_form_field_container">
-                    <input type="text" id="email" name="email" placeholder="Email" value="<%= user.email || ''  %>" required autocomplete="email" />
-                    <label for="email" class="form_field_label" aria-hidden="false">Email</label>
+                    <input
+                      type="text"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                      value="<%= user.email || ''  %>"
+                      required
+                      autocomplete="email"
+                    />
+                    <label
+                      for="email"
+                      class="form_field_label"
+                      aria-hidden="false"
+                      >Email</label
+                    >
                   </div>
                   <div class="error_message">
-                    <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                    <span
+                      ><img
+                        src="/assets/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
                     <span>Enter a valid email</span>
                   </div>
                 </div>
-                <% if(!user.isRegistered){ %>
-                  <div class="form_field">
+                <div class="form_field">
+                  <!-- <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
+                        <i class="fas fa-eye-slash eye_icon" ></i>
+                      </button> -->
+                  <% if(!user.isRegistered){ %>
                     <div class="checkout_form_field_container">
-                      <input type="text" id="password" name="password" placeholder="password"  required autocomplete="new-password" />
-                      <label for="email" class="form_field_label" aria-hidden="false">Password</label>
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="password"
+                        required
+                        autocomplete="new-password"
+                      />
+                      <label
+                        for="email"
+                        class="form_field_label"
+                        aria-hidden="false"
+                        >Password</label
+                      >
                     </div>
                     <div class="error_message">
-                      <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
-                      <span>Password is weak. Try combination of letters(A-z),numbers and special characters</span>
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
+                      <span
+                        >Password is weak. Try combination of letters(A-z),numbers
+                        and special characters</span
+                      >
                     </div>
                   </div>
-                <% } %>
+                  <% }  %>
                 <div class="form_subscribe_news_container">
-                  <input type="checkbox" id="subscribeNews" name="subscribe" value="news" data-input-subscribe-news />
-                  <label for="subscribeNews" class="label_subscirbe_news_offers">Email me with news and offers</label>
+                  <input
+                    type="checkbox"
+                    id="subscribeNews"
+                    name="subscribeNews"
+                    value="true"
+                    data-input-subscribe-news
+                  />
+                  <label for="subscribeNews" class="label_subscirbe_news_offers"
+                    >Email me with news and offers</label
+                  >
                 </div>
               </section>
 
               <section class="checkout_form_delivery_section">
                 <h2 class="checkout_form_section_heading">Delivery</h2>
                 <div class="checkout_form_field_wrapper">
+                  <div class="form_field">
+                    <div class="checkout_form_field_container">
+                      <label for="country" aria-hidden="false" data-select-label
+                        >Country/Region</label
+                      > 
+                      <select name="country" id="country">
+                        <option value="Pakistan">Pakistan</option>
+                      </select>
+                    </div>
+                  </div>
                   <div class="checkout_form_name_field_wrapper">
                     <div class="form_field">
                       <div class="checkout_form_field_container">
-                        <input type="text" id="firstName" name="firstName" placeholder="First Name" value="<%= user.firstName || ''  %>" minlength="1" required />
-                        <label for="firstName" aria-hidden="false">First Name</label>
+                        <input
+                          type="text"
+                          id="firstName"
+                          name="firstName"
+                          placeholder="First Name"
+                          value="<%= user.firstName || ''  %>"
+                          minlength="1"
+                          required
+                        />
+                        <label for="firstName" aria-hidden="false"
+                          >First Name</label
+                        >
                       </div>
                       <div class="error_message">
-                        <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                        <span
+                          ><img
+                            src="/assets/errorIcon.svg"
+                            width="12"
+                            height="12"
+                            alt=""
+                        /></span>
                         <span>Enter a first name</span>
                       </div>
                     </div>
 
                     <div class="form_field">
                       <div class="checkout_form_field_container">
-                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" value="<%= user.lastName || ''  %>" minlength="1" required />
+                        <input
+                          type="text"
+                          id="lastName"
+                          name="lastName"
+                          placeholder="Last Name"
+                          value="<%= user.lastName || ''  %>"
+                          minlength="1"
+                          required
+                        />
                         <label for="lasNname">Last Name</label>
                       </div>
                       <div class="error_message">
-                        <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                        <span
+                          ><img
+                            src="/assets/errorIcon.svg"
+                            width="12"
+                            height="12"
+                            alt=""
+                        /></span>
                         <span>Enter a last name</span>
                       </div>
                     </div>
@@ -151,22 +616,49 @@
 
                   <div class="form_field">
                     <div class="checkout_form_field_container">
-                      <input type="text" name="address" placeholder="Address" id="address" minlength="2" required />
+                      <input
+                        type="text"
+                        name="address"
+                        placeholder="Address"
+                        id="address"
+                        minlength="2"
+                        required
+                      />
                       <label for="address">Address</label>
                     </div>
                     <div class="error_message">
-                      <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
                       <span>Enter a address</span>
                     </div>
                   </div>
 
                   <div class="form_field">
                     <div class="checkout_form_field_container">
-                      <input type="text" id="appartment" placeholder="Apartment, suite, etc (optional)" name="appartment" minlength="2" />
-                      <label for="appartment">Apartment, suite, etc (optional)</label>
+                      <input
+                        type="text"
+                        id="appartment"
+                        placeholder="Apartment, suite, etc (optional)"
+                        name="appartment"
+                        minlength="2"
+                      />
+                      <label for="appartment"
+                        >Apartment, suite, etc (optional)</label
+                      >
                     </div>
                     <div class="error_message">
-                      <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
                       <span>Enter a Apartment or suite</span>
                     </div>
                   </div>
@@ -174,33 +666,69 @@
                   <div class="checkout_form_address_wrapper">
                     <div class="form_field">
                       <div class="checkout_form_field_container">
-                        <input type="text" name="city" id="city" required placeholder="City" />
+                        <input
+                          type="text"
+                          name="city"
+                          id="city"
+                          required
+                          placeholder="City"
+                        />
                         <label for="city">City</label>
                       </div>
                       <div class="error_message">
-                        <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                        <span
+                          ><img
+                            src="/assets/errorIcon.svg"
+                            width="12"
+                            height="12"
+                            alt=""
+                        /></span>
                         <span>Enter a city</span>
                       </div>
                     </div>
 
                     <div class="form_field">
                       <div class="checkout_form_field_container">
-                        <input type="text" required name="province" id="province" placeholder="Province / State" />
+                        <input
+                          type="text"
+                          required
+                          name="province"
+                          id="province"
+                          placeholder="Province / State"
+                        />
                         <label for="province">Province / State</label>
                       </div>
                       <div class="error_message">
-                        <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                        <span
+                          ><img
+                            src="/assets/errorIcon.svg"
+                            width="12"
+                            height="12"
+                            alt=""
+                        /></span>
                         <span>Enter a state / province</span>
                       </div>
                     </div>
 
                     <div class="form_field">
                       <div class="checkout_form_field_container">
-                        <input type="text" required name="zipcode" placeholder="ZIP code" id="zipcode" />
+                        <input
+                          type="text"
+                          required
+                          name="postalCode"
+                          placeholder="ZIP code"
+                          id="zipcode"
+                        />
                         <label for="zipcode">ZIP code (optional)</label>
                       </div>
                       <div class="error_message">
-                        <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                        <span
+                          ><img
+                            src="/assets/errorIcon.svg"
+                            width="12"
+                            height="12"
+                            alt=""
+                        /></span>
                         <span>Enter a ZIP / postal code</span>
                       </div>
                     </div>
@@ -208,47 +736,116 @@
 
                   <div class="form_field">
                     <div class="checkout_form_field_container">
-                      <input type="number" required name="phone" placeholder="Phone" id="phone" />
+                      <input
+                        type="number"
+                        required
+                        name="phone"
+                        placeholder="Phone"
+                        id="phone"
+                      />
                       <label for="phone">Phone</label>
                     </div>
                     <div class="error_message">
-                      <span><img src="/assets/errorIcon.svg" width="12" height="12" alt="" /></span>
+                      <span
+                        ><img
+                          src="/assets/errorIcon.svg"
+                          width="12"
+                          height="12"
+                          alt=""
+                      /></span>
                       <span>Enter a valid phone number</span>
                     </div>
                   </div>
 
                   <div class="form_save_info_container">
-                    <input type="checkbox" id="saveInformation" name="saveInfo" value="user" data-input-subscribe-news />
-                    <label for="saveInformation" class="label_subscirbe_news_offers">Save the information for next time.</label>
+                    <input
+                      type="checkbox"
+                      id="saveCheckout"
+                      name="saveCheckout"
+                      value="true"
+                      data-input-subscribe-news
+                    />
+                    <label
+                      for="saveCheckout"
+                      class="label_subscirbe_news_offers"
+                      >Save the information for next time.</label
+                    >
                   </div>
                 </div>
               </section>
+              <% } %>
 
               <section class="checkout_form_payment_section">
                 <h3 class="checkout_form_section_heading">Payment</h3>
                 <p>All transactions are secured and encrypted.</p>
-                <div class="accordion accordion_payment" id="accordionExample" data-payment-accordion>
+                <div
+                  class="accordion accordion_payment"
+                  id="accordionExample"
+                  data-accordion
+                  data-payment-accordion
+                >
                   <div class="accordion_item" data-accordion-item>
-                    <button class="accordion_button open" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" data-accordion-button>
+                    <button
+                      class="accordion_button open"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne"
+                      aria-expanded="true"
+                      aria-controls="collapseOne"
+                      data-accordion-button
+                    >
                       <label for="payment-cod">
-                        <input type="radio" name="payment" id="payment-cod" value="cod" checked />
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          id="payment-cod"
+                          value="cod"
+                          checked
+                        />
                         <span>Cash on Delivery (COD)</span>
                       </label>
                     </button>
-                    <div id="collapseOne" class="accordion_body open" data-bs-parent="#accordionExample" data-accordion-body>
+                    <div
+                      id="collapseOne"
+                      class="accordion_body open"
+                      data-bs-parent="#accordionExample"
+                      data-accordion-body
+                    >
                       <div class="accordion_body_text_wrapper">
-                        <p>Please note that COD Limit is 50,000 for all over Pakistan and you have to transfer remaining amount (if any) before dispatch.</p>
+                        <p>
+                          Please note that COD Limit is 50,000 for all over
+                          Pakistan and you have to transfer remaining amount (if
+                          any) before dispatch.
+                        </p>
                       </div>
                     </div>
                   </div>
                   <div class="accordion_item" data-accordion-item>
-                    <button class="accordion_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-accordion-button>
+                    <button
+                      class="accordion_button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="collapseTwo"
+                      data-accordion-button
+                    >
                       <label for="payment-bank">
-                        <input type="radio" name="payment" id="payment-bank" value="bank" />
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          id="payment-bank"
+                          value="bank"
+                        />
                         <span>Bank Deposit</span>
                       </label>
                     </button>
-                    <div id="collapseTwo" class="accordion_body collapse" data-bs-parent="#accordionExample" data-accordion-body>
+                    <div
+                      id="collapseTwo"
+                      class="accordion_body collapse"
+                      data-bs-parent="#accordionExample"
+                      data-accordion-body
+                    >
                       <div class="accordion_body_text_wrapper">
                         <ul>
                           <li>Bank Name: Example Bank</li>
@@ -256,25 +853,51 @@
                           <li>Title: Phil</li>
                           <li>A/C #: 02010343043</li>
                           <li>IBAN #: PK00000000000000</li>
-                          <li>Please deposit in this account and WhatsApp or message the slip on 0300 000 000. We will dispatch the product within 24 Hours through TCS</li>
+                          <li>
+                            Please deposit in this account and WhatsApp or
+                            message the slip on 0300 000 000. We will dispatch
+                            the product within 24 Hours through TCS
+                          </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                   <div class="accordion_item" data-accordion-item>
-                    <button class="accordion_button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" data-accordion-button>
+                    <button
+                      class="accordion_button"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree"
+                      aria-expanded="false"
+                      aria-controls="collapseThree"
+                      data-accordion-button
+                    >
                       <label for="payment-jazzCash">
-                        <input type="radio" name="payment" id="payment-jazzCash" value="jazz-cash" />
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          id="payment-jazzCash"
+                          value="jazz-cash"
+                        />
                         <span>Jazz Cash</span>
                       </label>
                     </button>
-                    <div id="collapseThree" class="accordion_body collapse" data-bs-parent="#accordionExample" data-accordion-body>
+                    <div
+                      id="collapseThree"
+                      class="accordion_body collapse"
+                      data-bs-parent="#accordionExample"
+                      data-accordion-body
+                    >
                       <div class="accordion_body_text_wrapper">
                         <ul>
                           <li>Jazz Cash Details.</li>
                           <li>Muhammad</li>
                           <li>0300000000</li>
-                          <li>Please deposit in this account and whatsapp the slip or message on 030000000. We will dispatch the product within 24 Hours through TCS</li>
+                          <li>
+                            Please deposit in this account and whatsapp the slip
+                            or message on 030000000. We will dispatch the
+                            product within 24 Hours through TCS
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -283,16 +906,23 @@
               </section>
 
               <!-- order summary mobile -->
-              <section class="checkout_order_summary_section checkout_order_summary_section_mobile">
-                <h2 class="checkout_form_section_heading">Order summary(<%= cartItems.length  %>)</h2>
-                <div class="checkout_order_total_section">
+              <section
+                class="checkout_order_summary_section checkout_order_summary_section_mobile"
+              >
+                <h2 class="checkout_form_section_heading">
+                  Order summary(<%= cart.items.length %>)
+                </h2>
+                <div class="order_total_section">
                   <div>
                     <p>Subtotal</p>
-                    <p>Rs <%= subTotal  %></p>
+                    <p>Rs <%= cart.subTotal %></p>
                   </div>
                   <div>
                     <p>Shipping</p>
-                    <p><%= (shippingCost && shippingCost > 0) ? "Rs " + shippingCost : "Free"%></p>
+                    <p>
+                      <%= (shippingCost && shippingCost > 0) ? "Rs " +
+                      shippingCost : "Free"%>
+                    </p>
                   </div>
                   <div>
                     <p>
@@ -300,13 +930,20 @@
                     </p>
                     <p>
                       <abbr>PKR</abbr>
-                      <strong>Rs <%= subTotal + shippingCost %></strong>                    </p>
+                      <strong>Rs <%= cart.subTotal + shippingCost %></strong>
+                    </p>
                   </div>
                 </div>
               </section>
 
               <section class="checkout_complete_order_section">
-                <button type="submit" class="complete_order_button" data-complete-order-button>Complete order</button>
+                <button
+                  type="button"
+                  class="button--complete-order"
+                  data-complete-order-button
+                >
+                  Complete order
+                </button>
               </section>
             </form>
           </div>

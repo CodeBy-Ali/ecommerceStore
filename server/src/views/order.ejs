@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Muhammad Ali Hassan" />
+    <script type="module" crossorigin src="/assets/main.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main.css" />
+    <title>Thank you! <%= order.shippingAddress.firstName %> - Phil's Refills</title>
+  </head>
+  <body data-page="order">
+    <!-- Start ----------------------------- Skip_To_Content ---------------------------- -->
+    <a class="button--skipToMain" href="">Skip to content</a>
+
+    <div class="notification_center" data-notification-center></div>
+
+    <header class="order_page_header">
+      <nav class="order_page_header_nav">
+        <a href="/" class="order_page_header_link_phils">Phil's</a>
+      </nav>
+    </header>
+
+    <!--Start --------------------------------- Main ------------------------------------ -->
+
+    <main class="order_page_main">
+      <div class="order_page_sections_wrapper">
+        <!-- --------------------- Order-Summary-Section ---------------------------- -->
+        <section class="order_summary_section">
+          <div class="order_summary_container" data-order-summary-accordion>
+            <div class="accordion_item" data-accordion-item>
+              <button class="order_summary_button" aria-expanded="false" id="tab-order-summary" aria-controls="panel-order-summary" data-accordion-button>
+                <span class="order_summary_button_text_wrapper">
+                  <span class="summary_text">
+                    <span data-checkout-summary-button-text>Show order Summary</span>
+                    <span class="arrow_down_svg_wrapper">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </span>
+                  </span>
+                  <span class="order_total_price">RS <%= order.subTotal + order.shippingCost %> </span>
+                </span>
+              </button>
+              <div class="order_summary_detail_container" data-accordion-body>
+                <div class="order_summary_wrapper">
+                  <section class="order_items_list_container">
+                    <ul class="order_items_list">
+                      <% order.products.forEach(cartItem => { %>
+                        <li class="order_cart_item">
+                          <div class="order_item_description">
+                            <div class="order_cart_item_image_container">
+                              <img src="<%= cartItem.product.images[0]  %>" alt="" />
+                              <span class="order_item_quantity"><%= cartItem.quantity %></span>
+                            </div>
+                            <p><%= cartItem.product.title  %></p>
+                          </div>
+                          <p class="order_item_price">Rs <%= cartItem.product.price  %></p>
+                        </li>
+                      <% }) %>
+                    </ul>
+                  </section>
+
+                  <section class="order_total_section">
+                    <div>
+                      <p>Subtotal</p>
+                      <p>Rs <%= order.subTotal  %></p>
+                    </div>
+                    <div>
+                      <p>Shipping</p>
+                      <p><%= order.shippingCost || "Free" %></p>
+                    </div>
+                    <div>
+                      <p>
+                        <strong>Total</strong>
+                      </p>
+                      <p>
+                        <strong><abbr>PKR</abbr> <%= order.subTotal + order.shippingCost %></strong>
+                      </p>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- --------------------- Order-Detail-Section ---------------------------- -->
+        <section class="order_confirmation_section">
+          <div class="order_confirmation_section_container">
+            <!-- <div>
+              phils
+            </div> -->
+            <!-- order-confirmation-header -->
+            <section class="order_confirmation_header">
+              <div class="order_confirmation_header_checkmark_container">
+                <img src="/assets/checkmark.png" alt="circle checkmark icon" width="40" height="40">
+              </div>
+              <div class="order_confirmation_header_text_container">
+                <p>Order <%= order.orderId  %></p>
+                <h2>Thank you, <%= order.shippingAddress.firstName  %></h2>
+              </div>
+            </section>
+
+            <section>
+              <div class="order_confirmation_text_container order_container">
+                <p>Your order is confirmed</p>
+                <p>You'll receive and email when your order is ready</p>
+              </div>
+            </section>
+
+            <section>
+              <div class="order_confirmation_details_container order_container">
+                <h2>Order details</h2>
+                <div>
+                  <h3>Contact information</h3>
+                  <p><%= order.shippingAddress.email  %></p>
+                </div>
+                
+                <div>
+                  <h3>Shipping Address</h3>
+                  <p><%= order.shippingAddress.firstName + " " + order.shippingAddress.lastName  %></p>
+                  <p><%= order.shippingAddress.address  %></p>
+                  <p><%= order.shippingAddress.apartment %></p>
+                  <p><%= order.shippingAddress.city   %></p>
+                  <p><%= order.shippingAddress.postalCode  %></p>
+                  <p>Pakistan</p>
+                  <p><%= order.shippingAddress.phone%></p>
+                </div>
+
+                <div>
+                  <h3>Payment method</h3>
+                  <p>
+                    <%= order.paymentMethod === "cod"? `Cash On Delivery(COD)`: order.paymentMethod.toUpperCase() %> -
+                    <strong class="order_total_prize">RS <%= order.subTotal + order.shippingCost  %></strong>
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section class="continue_shopping_section">
+              <a href="/collections" class="order_page_continue_shopping_link button--orderConfirmationPage">
+                Continue shopping
+              </a>
+              <p class="order_page_help_text">Need help? <a href="">Contact us</a></p>
+            </section>
+            
+            <section class="order_policies_section">
+              <div class="order_page_policies_container">
+                <ul class="order_page_policies_list">
+                  <li><a href="">Refund Policy</a></li>
+                  <li><a href="">Shipping Policy</a></li>
+                  <li><a href="">Privacy Policy</a></li>
+                  <li><a href="">Terms of service</a></li>
+                </ul>  
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
