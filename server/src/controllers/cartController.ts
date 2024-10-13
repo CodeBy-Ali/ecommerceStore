@@ -95,6 +95,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
     if (!cart) {
       const newCart = createCart(productId, Number(quantity), user?._id);
       await newCart.save();
+      await newCart.populate({ path: "items", populate: "product" });
       const data:ICartData = {
         cart: {
           _id: JSON.stringify(newCart._id),
