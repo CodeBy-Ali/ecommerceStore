@@ -15,7 +15,6 @@ export function handleApiResponse<T>(
     return console.error("Missing or unknown Response body");
   }
   const { status, message, data } = responseBody;
-  console.log(responseBody);
   if (status !== apiStatus.SUCCESS) {
     console.info(`Api request failed. Message: `, message);
     message && showNotification(message, false);

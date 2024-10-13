@@ -287,7 +287,6 @@ body:not([data-page="checkout"]) header{
 
 // Start --------------------------------- Drop_Down_Mobile -------------------------------->
 
-// TODO toggle subDropdown accordion instead of opening both
 header:has(.dropDown_mobile_container.open){
   height: 100%;
 }

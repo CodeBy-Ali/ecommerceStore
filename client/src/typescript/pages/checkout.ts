@@ -31,9 +31,7 @@ interface ICheckoutReqBody extends IFormData {
   cartId: string;
 }
 
-// TODO change the default selection of shippings address based on selection
 // TODO toggle 'show' text to 'hide' in show order summary accordion on mouse click
-// TODO add default country pakistan in checkout form
 
 const initCheckoutPage = () => {
   initAddShippingAddressPopUp();
