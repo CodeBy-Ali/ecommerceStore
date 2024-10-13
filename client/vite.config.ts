@@ -13,7 +13,8 @@ export default defineConfig({
         chunkFileNames: "assets/main.js",
         assetFileNames: "assets/[name].[ext]"
       }
-    }
+    },
+    sourcemap: "inline"
   },
   plugins: [
     checker({
