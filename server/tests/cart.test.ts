@@ -42,7 +42,6 @@ describe("Get /cart/items", () => {
 
   test('should create user session add item to user cart',async () => {
     const response = await agent.post('/cart/items').send(mockCartReqPayload);
-    console.log(response.text);
     expect(response.statusCode).toBe(201);
     expect(response.type).toBe('application/json');
     expect(response.text.length).toBeGreaterThan(1);

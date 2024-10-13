@@ -2,12 +2,17 @@ import { NextFunction, Request, Response } from "express";
 import { ICheckoutRequestBody, IRegisterRequestBody } from "./validator.ts";
 import User from "../model/userModel.ts";
 import { createUniqueUser, createUserSession } from "../utils/userUtils.ts";
-import ShippingAddress, { IShippingAddress } from "../model/shippingAddressModel.ts";
+import ShippingAddress, {
+  IShippingAddress,
+} from "../model/shippingAddressModel.ts";
 import logger from "../config/logger.ts";
 import mongoose from "mongoose";
 import { createError } from "./errorHandler.ts";
 
-export const registerUserIfNotAlready = async (
+// TODO crate user session if user is already registered
+// TODO Add feature to login to account at checkout
+
+export const registerOrLogInUserIfNotAlready = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -36,7 +41,6 @@ export const registerUserIfNotAlready = async (
   }
 };
 
-
 export const saveShippingAddressIfChecked = async (
   req: Request,
   res: Response,
@@ -62,39 +66,41 @@ export const saveShippingAddressIfChecked = async (
 
     shippingAddress.userId = userId;
 
-    if (shippingAddressId && mongoose.isValidObjectId(shippingAddressId)) return next();
+    if (shippingAddressId && mongoose.isValidObjectId(shippingAddressId))
+      return next();
 
     const duplicateAddress = await checkForDuplicateAddress(shippingAddress);
     if (duplicateAddress) {
       req.body.shippingAddressId = duplicateAddress._id;
       return next();
-    };
+    }
 
     const defaultAddress = await createDefaultAddress(shippingAddress);
     if (defaultAddress) {
       req.body.shippingAddressId = defaultAddress._id;
       return next();
-    };
-    throw createError(400,"User shipping address is missing","fail");
+    }
+    throw createError(400, "User shipping address is missing", "fail");
   } catch (error: unknown) {
     next(error);
   }
 };
 
-
-async function checkForDuplicateAddress(shippingAddress:IShippingAddress) {
+async function checkForDuplicateAddress(shippingAddress: IShippingAddress) {
   const duplicateShippingAddress = await ShippingAddress.findOne(
-    shippingAddress    
+    shippingAddress
   );
   return duplicateShippingAddress;
 }
 
-
-async function createDefaultAddress(shippingAddress:IShippingAddress) {
-  const isDefaultAddressSet = await ShippingAddress.findOne({ userId: shippingAddress.userId, isDefault: true });
+async function createDefaultAddress(shippingAddress: IShippingAddress) {
+  const isDefaultAddressSet = await ShippingAddress.findOne({
+    userId: shippingAddress.userId,
+    isDefault: true,
+  });
   if (isDefaultAddressSet) return null;
   const defaultAddress = new ShippingAddress(shippingAddress);
   defaultAddress.isDefault = true;
-  defaultAddress.save()   
+  defaultAddress.save();
   return defaultAddress;
 }

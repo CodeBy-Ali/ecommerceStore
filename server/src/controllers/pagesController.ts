@@ -72,7 +72,6 @@ export const renderOrderView = async (
       if (!order) {
         return res.render("notFound", userConfig);
       }
-    console.log(order);
     res.render("order", {
       ...userConfig,
       order,

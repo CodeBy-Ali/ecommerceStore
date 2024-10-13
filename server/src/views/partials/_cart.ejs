@@ -1,6 +1,6 @@
 <!-- START ------------------------------------------- Cart-Section -------------------------------------- -->
 <section id="cartSection" class="cart_drawer-section" data-cartDrawer>
-  <% if(cart){ %>
+  <% if(cart && cart.items.length > 0){ %>
     <div class="cart-wrapper">
       <input type="hidden" value="<%= cart._id  %>" name="cartId" data-cart-id>
       <section class="cart_header_section">

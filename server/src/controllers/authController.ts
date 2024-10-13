@@ -88,7 +88,7 @@ async function mergeAnonymousCartWithRegisteredUser(anonymousUserId:ObjectId,reg
   const session = await mongoose.startSession()
   session.startTransaction();
   try {
-    const anonymousUserCart = await Cart.findOne({ userId: anonymousUserId}).session(session);
+    const anonymousUserCart = await Cart.findOne({ userId: anonymousUserId }).session(session);
     const registeredUserCart = await Cart.findOne({ userId: registeredUserId }).session(session);
   
     if (!registeredUserCart && anonymousUserCart) {

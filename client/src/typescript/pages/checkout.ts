@@ -138,7 +138,6 @@ function handleCheckoutFormSubmit(e: Event) {
     cartId,
     ...formData,
   };
-  console.log(checkoutReqBody);
   submitForm<ICheckoutReqBody>("/orders", checkoutReqBody);
 }
 
