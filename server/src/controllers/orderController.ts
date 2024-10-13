@@ -11,6 +11,7 @@ import mongoose from "mongoose";
 
 // TODO use mongoose transactions for creating order and remove items from cart
 
+
 export const createOrder = async (
   req: Request,
   res: Response,
@@ -20,14 +21,17 @@ export const createOrder = async (
   const user = req.session.user;
 
   try {
-    const orderInfo = await getOrderInfo(req.body);
-    const order = new Order(orderInfo);
-    await order.save();
-    removeOrderedItemsFromCart(body.cartId);
-    res.redirect(`/orders/${order._id}`);
+    const connection = mongoose.connection;
+    await connection.transaction(async () => {
+      const orderInfo = await getOrderInfo(req.body);
+      const order = new Order(orderInfo);
+      await order.save();
+      await removeOrderedItemsFromCart(body.cartId);
+      res.redirect(`/orders/${order._id}`);
+    }) 
   } catch (error: unknown) {
     next(error);
-  }
+  } 
 };
 
 
@@ -64,7 +68,6 @@ async function getOrderInfo(
   const shippingCost = subTotal > freeShippingThreshold ? 0 : shippingRate;
 
   const orderId = await createOrderId();
-  console.log(reqBody);
   return {
     orderId,
     shippingCost,
