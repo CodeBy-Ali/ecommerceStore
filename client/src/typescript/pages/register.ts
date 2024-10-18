@@ -2,9 +2,8 @@ import {
   togglePasswordVisibility,
   showNotification,
 } from "../components/utils/pagesUtils";
-import isFormValid from "../components/validator/validator";
+import areFormElementsValid from "../components/validator/validator";
 import { ISignInReqBody } from "./login";
-
 
 // TODO use submitForm util function to submit form
 export interface IRegisterReqBody extends ISignInReqBody {
@@ -22,7 +21,8 @@ const handleFormSubmit = async (
     throw new Error("Register form elements are missing or form is invalid");
   }
 
-  if (!isFormValid(registerForm)) return;
+  const formElements = Array.from(registerForm) as HTMLInputElement[];
+  if (!areFormElementsValid(formElements)) return;
 
   const firstNameField = registerForm.querySelector<HTMLInputElement>(
     "[data-firstNameField]"

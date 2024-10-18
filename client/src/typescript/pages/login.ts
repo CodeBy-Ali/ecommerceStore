@@ -1,30 +1,26 @@
+import DOMUtils from "../components/utils/domUtils";
 import {
   showNotification,
   togglePasswordVisibility,
 } from "../components/utils/pagesUtils";
-import isFormValid from "../components/validator/validator";
+import areFormElementsValid from "../components/validator/validator";
 
 export interface ISignInReqBody {
   email: string;
   password: string;
+  returnTo?:string,
 }
 
-const handleFormSubmit = async (
-  e: Event,
-  signInForm: HTMLFormElement
+export const submitLoginForm = async (
+  formElements: HTMLInputElement[],
+  returnTo?:string,
 ): Promise<void> => {
-  e.preventDefault();
-
-  if (!signInForm || signInForm.elements.length < 2) {
-    throw new Error("SingIn form elements are missing or form is invalid");
-  }
-
-  if (!isFormValid(signInForm)) return;
+  if (!areFormElementsValid(formElements)) return;
 
   const emailField =
-    document.querySelector<HTMLInputElement>(`[data-emailField]`);
+    document.querySelector<HTMLInputElement>(`input[data-email]`);
   const passwordField =
-    document.querySelector<HTMLInputElement>(`[data-passwordField]`);
+    document.querySelector<HTMLInputElement>(`input[data-password]`);
 
   if (!emailField || !passwordField) return;
 
@@ -32,6 +28,9 @@ const handleFormSubmit = async (
     email: emailField?.value,
     password: passwordField?.value,
   };
+  
+  if (returnTo) signInReqBody.returnTo = returnTo;
+
   try {
     const response = await fetch("/account/login", {
       method: "POST",
@@ -60,11 +59,9 @@ const initLoginPage = (): void => {
   );
   const eyeIcon = document.querySelector(".eye_icon") as HTMLElement;
   const passwordField = document.querySelector(
-    "[data-passwordField]"
+    "[data-password]"
   ) as HTMLInputElement;
-  const signInButton: HTMLElement | null = document.querySelector(
-    "[data-signInButton]"
-  );
+  const signInButton: HTMLElement | null = DOMUtils.getElement<HTMLButtonElement>('[data-signIn-button]')
   const signInForm = document.querySelector(
     "[data-signInForm]"
   ) as HTMLFormElement;
@@ -78,9 +75,16 @@ const initLoginPage = (): void => {
   }
 
   if (signInButton) {
-    signInButton.addEventListener("click", (e) =>
-      handleFormSubmit(e, signInForm)
-    );
+    signInButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!signInForm || signInForm.elements.length < 2) {
+        throw new Error("SingIn form elements are missing or form is invalid");
+      }
+      const formElements = Array.from(
+        signInForm.elements
+      ) as HTMLInputElement[];
+      submitLoginForm(formElements);
+    });
   }
 };
 

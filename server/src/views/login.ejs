@@ -29,7 +29,7 @@
           <form action="" data-signInForm class="signIn_form">
             <ul class="form_fields_list">
               <li class="form_field">
-                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" data-emailField/>
+                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" data-email/>
                 <label for="email" class="" aria-hidden="false">Email</label>
                 <div class="error_message">
                   <span><img src="/assets/errorIcon.svg" width="12" height="12" alt=""></span>
@@ -40,7 +40,7 @@
                 <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
                   <i class="fas fa-eye-slash eye_icon" ></i>
                 </button>
-                <input type="password" id="password" name="password" placeholder="password" data-passwordField required />
+                <input type="password" id="password" name="password" placeholder="password" data-password required />
                 <label for="password" class="" aria-hidden="false">Password</label>
                 <div class="error_message">
                   <span><img src="/assets/errorIcon.svg" width="12" height="12" alt=""></span>
@@ -52,7 +52,7 @@
             <a href="" class="login_form_forgetPassword">Forgot your Password?</a>
 
             <p>
-              <button type="submit" class="button--formSubmit" data-signInButton>Sign in</button>
+              <button type="button" class="button--formSubmit" data-signIn-button>Sign in</button>
             </p>
 
             <a href="/account/register" class="login_form_createAccount">Create account</a>

@@ -392,6 +392,21 @@ form[data-checkout-form]{
     margin-bottom: 1.6rem;
   }
 }
+// non registered account section
+.checkout_account_login_button_container{
+  display: flex;
+  padding-bottom: .4rem;
+  & .checkout_login_button {
+    margin-left: auto;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: $font-size-sm;
+    color: $clr-button-checkout;
+    border: none;
+    text-decoration: underline;
+  }
+}
+
 
 // registered account section
 .checkout_form_container {

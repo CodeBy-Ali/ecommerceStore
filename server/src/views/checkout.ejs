@@ -42,10 +42,10 @@
               <div class="checkout_form_field_wrapper">
                 <div class="form_field">
                   <div class="checkout_form_field_container">
-                    <label for="country" aria-hidden="false" data-select-label
+                    <label for="new-address-country" aria-hidden="false" data-select-label
                       >Country/Region</label
                     > 
-                    <select name="country" id="country">
+                    <select name="country" id="new-address-country">
                       <option value="Pakistan">Pakistan</option>
                     </select>
                   </div>
@@ -55,12 +55,12 @@
                     <div class="checkout_form_field_container">
                       <input
                         type="text"
-                        id="firstName"
+                        id="new-address-firstName"
                         name="firstName"
                         placeholder="First Name"
                         minlength="2"
                       />
-                      <label for="firstName" aria-hidden="false"
+                      <label for="new-address-firstName" aria-hidden="false"
                         >First Name</label
                       >
                     </div>
@@ -80,13 +80,13 @@
                     <div class="checkout_form_field_container">
                       <input
                         type="text"
-                        id="lastName"
+                        id="new-address-lastName"
                         name="lastName"
                         placeholder="Last Name"
                         minlength="2"
                         required
                       />
-                      <label for="lasNname">Last Name</label>
+                      <label for="new-address-lasNname">Last Name</label>
                     </div>
                     <div class="error_message">
                       <span
@@ -107,11 +107,11 @@
                       type="text"
                       name="address"
                       placeholder="Address"
-                      id="address"
+                      id="new-address"
                       minlength="2"
                       required
                     />
-                    <label for="address">Address</label>
+                    <label for="new-address">Address</label>
                   </div>
                   <div class="error_message">
                     <span
@@ -129,12 +129,12 @@
                   <div class="checkout_form_field_container">
                     <input
                       type="text"
-                      id="appartment"
+                      id="new-address-appartment"
                       placeholder="Apartment, suite, etc (optional)"
                       name="apartment"
                       minlength="2"
                     />
-                    <label for="appartment"
+                    <label for="new-address-appartment"
                       >Apartment, suite, etc (optional)</label
                     >
                   </div>
@@ -156,11 +156,11 @@
                       <input
                         type="text"
                         name="city"
-                        id="city"
+                        id="new-address-city"
                         required
                         placeholder="City"
                       />
-                      <label for="city">City</label>
+                      <label for="new-address-city">City</label>
                     </div>
                     <div class="error_message">
                       <span
@@ -180,10 +180,10 @@
                         type="text"
                         required
                         name="province"
-                        id="province"
+                        id="new-address-province"
                         placeholder="Province / State"
                       />
-                      <label for="province">Province / State</label>
+                      <label for="new-address-province">Province / State</label>
                     </div>
                     <div class="error_message">
                       <span
@@ -204,9 +204,9 @@
                         required
                         name="zipcode"
                         placeholder="ZIP code"
-                        id="zipcode"
+                        id="new-address-zipcode"
                       />
-                      <label for="zipcode">ZIP code (optional)</label>
+                      <label for="new-address-zipcode">ZIP code (optional)</label>
                     </div>
                     <div class="error_message">
                       <span
@@ -228,9 +228,9 @@
                       required
                       name="phone"
                       placeholder="Phone"
-                      id="phone"
+                      id="new-address-phone"
                     />
-                    <label for="phone">Phone</label>
+                    <label for="new-address-phone">Phone</label>
                   </div>
                   <div class="error_message">
                     <span
@@ -478,6 +478,7 @@
                       value="<%= user.email || ''  %>"
                       required
                       autocomplete="email"
+                      data-email
                     />
                     <label
                       for="email"
@@ -497,11 +498,11 @@
                     <span>Enter a valid email</span>
                   </div>
                 </div>
-                <div class="form_field">
-                  <!-- <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
+              <% if(!user.isRegistered){ %>
+                  <div class="form_field">
+                    <!-- <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
                         <i class="fas fa-eye-slash eye_icon" ></i>
                       </button> -->
-                  <% if(!user.isRegistered){ %>
                     <div class="checkout_form_field_container">
                       <input
                         type="password"
@@ -510,6 +511,7 @@
                         placeholder="password"
                         required
                         autocomplete="new-password"
+                        data-password
                       />
                       <label
                         for="email"
@@ -532,7 +534,10 @@
                       >
                     </div>
                   </div>
-                  <% }  %>
+                  <div class="checkout_account_login_button_container">
+                    <button type="button" class="checkout_login_button" data-checkout-account-login>Login</button>
+                  </div>
+                <% }  %>
                 <div class="form_subscribe_news_container">
                   <input
                     type="checkbox"
