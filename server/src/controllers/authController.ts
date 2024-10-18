@@ -5,7 +5,8 @@ import bcrypt from "bcrypt";
 import Cart, { ICart } from "../model/cartModel.ts";
 import mongoose from "mongoose";
 import { createUniqueUser, createUserSession, getUserConfig } from "../utils/userUtils.ts";
-import { IRegisterRequestBody } from "../middlewares/validator.ts";
+import { ILoginRequestBody, IRegisterRequestBody } from "../middlewares/validator.ts";
+import { userInfo } from "os";
 
 type ObjectId = mongoose.Types.ObjectId;
 
@@ -24,11 +25,11 @@ export const renderAuthView = async (viewName: string,req:Request, res:Response,
 
 // add new user to database
 export const registerNewUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const userInfo = req.body as IRegisterRequestBody;
+  const {returnTo,...userInfo} = req.body as IRegisterRequestBody;
   try {
     
-    const user = await createUniqueUser(userInfo);
-    if (!user) {
+    const { user ,unique} = await createUniqueUser(userInfo);
+    if (!unique) {
       res.status(400).json({
         status: "fail",
         message: "Email already Registered"
@@ -41,14 +42,14 @@ export const registerNewUser = async (req: Request, res: Response, next: NextFun
     }
     // create new user session
     await createUserSession(user, req);
-    res.redirect('/');
+    res.redirect(returnTo || '/');
   } catch (error) {
     next(error);
   }
 };
 
 export const authenticateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-  const { email, password } = req.body;
+  const { email, password ,returnTo} = req.body as ILoginRequestBody;
   try {
     // check if user with current email already exist in db
     const registeredUser = await User.findOne({ email });
@@ -75,7 +76,7 @@ export const authenticateUser = async (req: Request, res: Response, next: NextFu
     }
     
     await createUserSession(registeredUser, req);
-    res.redirect('/');
+    res.redirect(returnTo || "/");
   } catch (error) {
     next(error);
   }

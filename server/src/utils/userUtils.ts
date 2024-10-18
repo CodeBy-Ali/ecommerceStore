@@ -82,15 +82,19 @@ export const getUserConfig = async (
   };
 };
 
+
 export async function createUniqueUser(
   userInfo: IRegisterRequestBody
-): Promise<IUserDocument | null> {
+): Promise<{user:IUserDocument,unique:boolean}> {
   const { saltRounds } = configManager.getBcryptConfig();
   const passwordHash = await bcrypt.hash(userInfo.password, saltRounds);
 
   const duplicateUser = await User.findOne({ email: userInfo.email });
 
-  if (duplicateUser) return null;
+  if (duplicateUser) return {
+    unique: false,
+    user: duplicateUser,
+  };
 
   const user = new User({
     firstName: userInfo.firstName,
@@ -99,7 +103,10 @@ export async function createUniqueUser(
     passwordHash: passwordHash,
   });
   await user.save();
-  return user;
+  return {
+    user,
+    unique: true,
+  };
 }
 
 export async function createUserSession(user: IUserDocument, req: Request) {

@@ -9,10 +9,10 @@ import logger from "../config/logger.ts";
 import mongoose from "mongoose";
 import { createError } from "./errorHandler.ts";
 
-// TODO crate user session if user is already registered
+// TODO create user session if user is already registered
 // TODO Add feature to login to account at checkout
 
-export const registerOrLogInUserIfNotAlready = async (
+export const registerUserIfNotAlready = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -20,20 +20,15 @@ export const registerOrLogInUserIfNotAlready = async (
   const checkoutReqBody = req.body as ICheckoutRequestBody;
   if (!checkoutReqBody.password) return next();
   try {
+
     const { firstName, lastName, password, email } = checkoutReqBody;
-    const user = await createUniqueUser({
+    const {user} = await createUniqueUser({
       firstName,
       lastName,
       password,
       email,
     });
-    if (!user) {
-      res.status(400).json({
-        status: "fail",
-        message: "Email already Registered",
-      });
-      return;
-    }
+    
     await createUserSession(user, req);
     next();
   } catch (error: unknown) {

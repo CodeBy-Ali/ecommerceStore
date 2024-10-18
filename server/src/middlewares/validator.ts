@@ -5,6 +5,7 @@ import logger from "../config/logger.ts";
 export interface ILoginRequestBody {
   email: string;
   password: string;
+  returnTo?: string,
 }
 
 export interface IRegisterRequestBody extends ILoginRequestBody {
@@ -35,9 +36,9 @@ type ValidationFields =
   | "country"
   | "address";
 
-type IRegisterRequiredFields = keyof IRegisterRequestBody;
+type IRegisterRequiredFields = keyof Omit<IRegisterRequestBody, "returnTo">;
 
-type ILoginRequiredFields = keyof ILoginRequestBody;
+type ILoginRequiredFields = keyof Omit<ILoginRequestBody, "returnTo">;
 
 type ICheckoutRequiredFields = keyof Omit<
   ICheckoutRequestBody,
