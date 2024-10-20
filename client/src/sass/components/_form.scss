@@ -2,9 +2,7 @@
 @use "../abstracts/variables" as *;
 
 
-// TODO fix show/hide password icon in password fields in all forms
 //  TODO fix error icons not showing in firefox under failed validation fields
-
 form {
   & .form_fields_list {
     display: flex;
@@ -35,12 +33,12 @@ form {
     }
   }
 
-
   & .form_field input {
     @include formInput;
     border: 1px solid $clr-border;
     height: 4.7rem;
-    line-height: 4.7rem;
+    line-height: 4.7rem; 
+
   }
 
   & .form_field label {

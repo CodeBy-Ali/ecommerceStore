@@ -32,24 +32,7 @@ export function handleApiResponse<T>(
   implementation(data);
 }
 
-export const togglePasswordVisibility = (
-  eyeIcon: HTMLElement,
-  eyeIconButton: HTMLElement,
-  passwordField: HTMLInputElement
-) => {
-  if (passwordField.type === "password") {
-    DOMUtils.addAttribute(passwordField, "type", "text");
-    DOMUtils.addAttribute(eyeIconButton, "aria-label", "hide password");
-    DOMUtils.removeClass(eyeIcon, "fa-eye-slash");
-    DOMUtils.addClass(eyeIcon, "fa-eye");
-    eyeIcon.classList.add("fa-eye");
-  } else {
-    DOMUtils.addAttribute(eyeIconButton, "aria-label", "show password");
-    DOMUtils.addAttribute(passwordField, "type", "password");
-    DOMUtils.addClass(eyeIcon, "fa-eye-slash");
-    DOMUtils.removeClass(eyeIcon, "fa-eye");
-  }
-};
+
 
 export const showNotification = (message: string, success: boolean): void => {
   const notificationCenter = document.querySelector(
@@ -170,3 +153,35 @@ export async function submitForm<T>(url: string, body: T) {
     console.error(error);
   }
 }
+
+
+export function initPasswordVisibilityToggle(
+  togglePasswordBtn: HTMLButtonElement,
+  passwordField: HTMLInputElement
+) {
+  const eyeIcon = togglePasswordBtn.querySelector(".eye_icon") as HTMLElement;
+  if (eyeIcon) {
+    togglePasswordBtn.addEventListener("click", () =>
+      togglePasswordVisibility(eyeIcon, togglePasswordBtn, passwordField)
+    );
+  }
+}
+
+const togglePasswordVisibility = (
+  eyeIcon: HTMLElement,
+  eyeIconButton: HTMLElement,
+  passwordField: HTMLInputElement
+) => {
+  if (passwordField.type === "password") {
+    DOMUtils.addAttribute(passwordField, "type", "text");
+    DOMUtils.addAttribute(eyeIconButton, "aria-label", "hide password");
+    DOMUtils.removeClass(eyeIcon, "fa-eye-slash");
+    DOMUtils.addClass(eyeIcon, "fa-eye");
+    eyeIcon.classList.add("fa-eye");
+  } else {
+    DOMUtils.addAttribute(eyeIconButton, "aria-label", "show password");
+    DOMUtils.addAttribute(passwordField, "type", "password");
+    DOMUtils.addClass(eyeIcon, "fa-eye-slash");
+    DOMUtils.removeClass(eyeIcon, "fa-eye");
+  }
+};

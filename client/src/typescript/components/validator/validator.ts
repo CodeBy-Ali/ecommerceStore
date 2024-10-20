@@ -53,7 +53,7 @@ const areFormElementsValid = (formElements: HTMLInputElement[]): boolean => {
     const inputFieldName = element?.name as keyof IRules;
     const validate = validatorRules[inputFieldName];
     if (!validate) continue; // skip validation for elements with missing rules
-    const isFieldValid = validate(element.value);
+    const isFieldValid = validate(element.value.trim());
     if (!isFieldValid) {
       isValid = false;
       showValidationError(element.parentElement);

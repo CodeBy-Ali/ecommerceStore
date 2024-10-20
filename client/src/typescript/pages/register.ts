@@ -1,6 +1,6 @@
 import {
-  togglePasswordVisibility,
   showNotification,
+  initPasswordVisibilityToggle,
 } from "../components/utils/pagesUtils";
 import areFormElementsValid from "../components/validator/validator";
 import { ISignInReqBody } from "./login";
@@ -71,13 +71,12 @@ const handleFormSubmit = async (
 
 //  initialize Register page
 const initRegisterPage = (): void => {
-  const eyeIconButton: HTMLElement | null = document.querySelector(
+  const eyeIconButton = document.querySelector<HTMLButtonElement>(
     "[data-eyeIconButton]"
   );
-  const eyeIcon = document.querySelector(".eye_icon") as HTMLElement;
-  const passwordField = document.querySelector(
+  const passwordField = document.querySelector<HTMLInputElement>(
     "[data-passwordField]"
-  ) as HTMLInputElement;
+  );
   const submitButton: HTMLElement | null = document.querySelector(
     "[data-submitButton]"
   );
@@ -85,19 +84,15 @@ const initRegisterPage = (): void => {
     "[data-registerForm]"
   ) as HTMLFormElement;
 
-  if (!eyeIcon || !passwordField) return;
+  if (!passwordField || !eyeIconButton) return;
 
-  if (eyeIconButton) {
-    eyeIconButton.addEventListener("click", () =>
-      togglePasswordVisibility(eyeIcon, eyeIconButton, passwordField)
-    );
-  }
-
+  initPasswordVisibilityToggle(eyeIconButton,passwordField)
   if (submitButton) {
     submitButton.addEventListener("click", (e) =>
       handleFormSubmit(e, registerForm)
     );
   }
 };
+
 
 export default initRegisterPage;

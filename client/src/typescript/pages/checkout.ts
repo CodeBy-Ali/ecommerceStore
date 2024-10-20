@@ -3,6 +3,7 @@ import DOMUtils from "../components/utils/domUtils";
 import {
   extractFormData,
   IFormData,
+  initPasswordVisibilityToggle,
   logErrorWithNotification,
   submitForm,
 } from "../components/utils/pagesUtils";
@@ -32,7 +33,6 @@ interface ICheckoutForm
 interface ICheckoutReqBody extends IFormData {
   cartId: string;
 }
-
 // TODO toggle 'show' text to 'hide' in show order summary accordion on mouse click
 
 const initCheckoutPage = () => {
@@ -40,6 +40,11 @@ const initCheckoutPage = () => {
   initAccordions();
   initCheckoutForm();
   initAccountLogin();
+
+  const togglePasswordBtn = DOMUtils.getElement<HTMLButtonElement>("[data-eyeIconButton]");
+  const passwordField = DOMUtils.getElement<HTMLInputElement>("input[data-password]");
+  if (!togglePasswordBtn || !passwordField) return;
+  initPasswordVisibilityToggle(togglePasswordBtn, passwordField);
 };
 
 function initAddShippingAddressPopUp() {
