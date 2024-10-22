@@ -22,7 +22,7 @@ class ConfigManager{
   private corsConfig: { origin: string };
   private cacheConfig: {cacheAssets:boolean,maxAge: number}
   private envConfig: {env:string,isProduction:boolean,isTesting:boolean,isDevelopment:boolean}
-  private env: string = process.env.NODE_ENV?.toUpperCase() || 'DEV';
+  private env: string = process.argv[2] || process.env.NODE_ENV?.toUpperCase() || 'DEV';
   private static instance: ConfigManager;
 
 

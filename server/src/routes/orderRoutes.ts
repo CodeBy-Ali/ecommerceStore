@@ -17,6 +17,6 @@ router.post(
   createOrder
 );
 
-router.get("/:id",renderOrderView);
+router.get("/:id", renderOrderView);
 
 export default router;

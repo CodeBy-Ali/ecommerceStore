@@ -30,15 +30,10 @@ describe("Get /cart/items", () => {
   });
 
   afterAll(async () => {
-    await User.deleteMany({});
     await Product.deleteOne({title: mockProduct.title});
     await mongoose.connection.close();
   })
 
-  // beforeEach(() => {
-  //   jest.clearAllMocks();
-    
-  // })
 
   test('should create user session add item to user cart',async () => {
     const response = await agent.post('/cart/items').send(mockCartReqPayload);

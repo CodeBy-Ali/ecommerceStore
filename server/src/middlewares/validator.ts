@@ -5,7 +5,7 @@ import logger from "../config/logger.ts";
 export interface ILoginRequestBody {
   email: string;
   password: string;
-  returnTo?: string,
+  returnTo?: string;
 }
 
 export interface IRegisterRequestBody extends ILoginRequestBody {
@@ -15,13 +15,17 @@ export interface IRegisterRequestBody extends ILoginRequestBody {
 
 export interface ICheckoutRequestBody extends IShippingAddress {
   cartId: string;
-  shippingAddressId?:string,
+  shippingAddressId?: string;
   saveCheckout: boolean;
   password?: string;
   subscribeNews: boolean;
   paymentMethod: string;
 }
 
+export type IShippingAddressReqBody = Omit<
+  IShippingAddress,
+  "userId" | "isDefault"
+>;
 
 type ValidationFields =
   | "firstName"
@@ -40,18 +44,10 @@ type IRegisterRequiredFields = keyof Omit<IRegisterRequestBody, "returnTo">;
 
 type ILoginRequiredFields = keyof Omit<ILoginRequestBody, "returnTo">;
 
-type ICheckoutRequiredFields = keyof Omit<
-  ICheckoutRequestBody,
-  | "postalCode"
-  | "saveCheckout"
-  | "subscribeNews"
-  | "apartment"
-  | "cartId"
-  | "userId"
-  | "isDefault"
-  | "password"
-  | "shippingAddressId"
->;
+type IShippingAddressRequiredFields = keyof Omit<IShippingAddressReqBody,"apartment"|"postalCode">;
+
+type ICheckoutRequiredFields = keyof IShippingAddressRequiredFields &
+  "paymentMethod";
 
 interface IValidatorRules
   extends Record<ValidationFields, (arg: string) => boolean> {}
@@ -61,8 +57,10 @@ const validatorRules: IValidatorRules = {
   lastName: (name: string) => /^[a-zA-Z]+(?:[ \-'][a-zA-Z]+)*$/.test(name),
   address: (address: string) => /[\w\-,\/',\s\\^]/.test(address),
   city: (city: string) => /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(city),
-  country: (country:string) => /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(country),
-  province: (state: string) => /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(state),
+  country: (country: string) =>
+    /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(country),
+  province: (state: string) =>
+    /^[A-Za-zÀ-ÿ']+\s?\-?([A-Za-zÀ-ÿ']+\s?)+$/.test(state),
   paymentMethod: (method: string) => /cod|bank|jazz-cash/i.test(method),
   password: (password: string) =>
     /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}/.test(password),
@@ -144,24 +142,12 @@ export const validateCheckoutReqBody = (
   const checkoutBody = req.body as ICheckoutRequestBody;
   if (checkoutBody.shippingAddressId) return next();
 
-  const checkoutRequiredFields: Record<
-    ICheckoutRequiredFields,
-    string | undefined
-  > = {
-    firstName: checkoutBody["firstName"],
-    lastName: checkoutBody["lastName"],
-    paymentMethod: checkoutBody["paymentMethod"],
-    city: checkoutBody["city"],
-    email: checkoutBody["email"],
-    address: checkoutBody["address"],
-    phone: checkoutBody["phone"],
-    province: checkoutBody["province"],
-    country: checkoutBody["country"],
-  };
-
   try {
-    checkForMissingFields<ICheckoutRequiredFields>(checkoutRequiredFields);
-    validateReqFields<ICheckoutRequiredFields>(checkoutRequiredFields);
+    // as checkout body extends shipping address req body
+    validateShippingAddress(checkoutBody);
+    validateReqFields({
+      paymentMethod: checkoutBody["paymentMethod"]
+    });
     next();
   } catch (error: unknown) {
     logger.error(error);
@@ -172,6 +158,29 @@ export const validateCheckoutReqBody = (
     });
   }
 };
+
+
+export function validateShippingAddressReqBody(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+
+  const body = req.body as IShippingAddressReqBody;
+  try {
+    validateShippingAddress(body);
+    next();
+  } catch (error:unknown) {
+    logger.error(error);
+    const message = error instanceof Error ? error.message : String(error);
+    res.status(400).json({
+      status: "fail",
+      message,
+    });
+  }
+
+}
+
 
 export const validateIdParam = (
   req: Request,
@@ -231,3 +240,25 @@ function validateReqFields<T extends ValidationFields>(
     }
   }
 }
+
+function validateShippingAddress(body: IShippingAddressReqBody) {
+  const shippingAddressRequiredFields: Record<
+    IShippingAddressRequiredFields,
+    string | undefined
+  > = {
+    firstName: body["firstName"],
+    lastName: body["lastName"],
+    city: body["city"],
+    email: body["email"],
+    address: body["address"],
+    phone: body["phone"],
+    province: body["province"],
+    country: body["country"],
+  };
+  checkForMissingFields<IShippingAddressRequiredFields>(
+    shippingAddressRequiredFields
+  );
+  validateReqFields<IShippingAddressRequiredFields>(
+    shippingAddressRequiredFields
+  );
+};

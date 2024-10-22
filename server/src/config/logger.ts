@@ -51,5 +51,4 @@ if (env !== 'PROD') {
 }
 
 
-
 export default logger;
