@@ -34,7 +34,6 @@ interface ICheckoutReqBody extends IFormData {
   cartId: string;
 }
 // TODO toggle 'show' text to 'hide' in show order summary accordion on mouse click
-
 const initCheckoutPage = () => {
   initAddShippingAddressPopUp();
   initAccordions();

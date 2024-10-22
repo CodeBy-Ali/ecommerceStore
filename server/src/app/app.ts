@@ -2,7 +2,6 @@ import compression from "compression";
 import express, { Express } from "express";
 import config from "../config/config.ts";
 import pagesRoutes from "../routes/pageRoutes.ts";
-import authRoutes from "../routes/authRoutes.ts";
 import cartRoutes from "../routes/cartRoutes.ts";
 import orderRoutes from "../routes/orderRoutes.ts";
 import productRoutes from "../routes/productRoutes.ts";
@@ -93,7 +92,6 @@ app.use(logRequest);
 
 // assign routes
 app.use("/", pagesRoutes);
-app.use("/account", authRoutes);
 app.use("/collections", collectionRoutes);
 app.use("/cart", cartRoutes);
 app.use("/products", productRoutes);

@@ -9,9 +9,6 @@ import logger from "../config/logger.ts";
 import mongoose from "mongoose";
 import { createError } from "./errorHandler.ts";
 
-// TODO create user session if user is already registered
-// TODO Add feature to login to account at checkout
-
 export const registerUserIfNotAlready = async (
   req: Request,
   res: Response,
