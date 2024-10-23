@@ -234,7 +234,7 @@ function validateReqFields<T extends ValidationFields>(
     if (!validationRule) continue;
     const value = validationFields[field];
     if (!value) continue;
-    const isFieldValid = validationRule(value);
+    const isFieldValid = validationRule(value.trim());
     if (!isFieldValid) {
       throw new Error(invalidFiledMassages[field]);
     }
