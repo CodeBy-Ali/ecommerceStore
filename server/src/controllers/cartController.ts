@@ -14,7 +14,6 @@ interface ICartData{
 }
 
 
-// TODO divide these controllers logic into smaller helper functions 
 
 export const deleteItem = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
@@ -30,7 +29,6 @@ export const deleteItem = async (req: Request, res: Response, next: NextFunction
     }
     const shippingConfig = await getShippingConfig();
     // store all cart item detail objects in array
-    
     const data: ICartData = {
       cart: {
         _id: cart._id.toString(),

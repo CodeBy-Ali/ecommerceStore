@@ -9,7 +9,6 @@ import { createError } from "../middlewares/errorHandler.ts";
 import mongoose from "mongoose";
 
 
-// TODO use mongoose transactions for creating order and remove items from cart
 
 
 export const createOrder = async (
