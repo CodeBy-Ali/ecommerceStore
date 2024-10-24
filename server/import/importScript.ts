@@ -24,12 +24,12 @@ const updateProduct = async (filter: object, update: object, options: object): P
 (async () => {
   try {
     await mongoose.connect(configManager.getDatabaseConfig().URI);
-    // for (const product of productList) {
-    //   await addProduct(product, Product);
-    //   console.log(`${product.title} successfully added to database`);
-    // }
+    for (const product of productList) {
+      await addProduct(product, Product);
+      console.log(`${product.title} successfully added to database`);
+    }
 
-    // console.log('All products added to database.')
+    console.log('All products added to database.')
     // const {alphabet,size } = configManager.getNanoIdConfig();
     // const nanoId = customAlphabet(alphabet, size);
 
@@ -38,12 +38,6 @@ const updateProduct = async (filter: object, update: object, options: object): P
     // const options: object = { returnOriginal: nanoid() };
     // const updatedProduct  = await updateProduct(filter, update, options);
     // console.log(updatedProduct);
-    const aggrigate = await Product.aggregate([
-      {
-        $match: { salesCount: { $gte: 5 } }
-      }
-    ]).exec();
-    console.log(aggrigate);
     
   
   } catch (error) {

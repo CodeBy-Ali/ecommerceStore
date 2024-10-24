@@ -1,13 +1,26 @@
 import mongoose, { Document, Schema, model } from "mongoose";
 
-export interface IProduct  {
+type ProductCategory =Array<
+  | "body"
+  | "face"
+  | "hair"
+  | "handSoap"
+  | "moisturizer"
+  | "shave"
+  | "shampoo"
+  | "rephils"
+  | "bodyWash"
+  | "conditioner"
+  | "cleansers">;
+
+export interface IProduct {
   title: string;
   description: string;
   price: number;
   usage: string;
   ingredients: string;
   weight: string;
-  categories: Array<string>;
+  categories: ProductCategory;
   images: Array<string>;
   salesCount: number;
   stock: number;
@@ -15,8 +28,7 @@ export interface IProduct  {
   boughtTogether?: mongoose.Types.ObjectId;
 }
 
-
-export interface IProductDocument extends Document, IProduct { };
+export interface IProductDocument extends Document, IProduct {}
 
 const productSchema = new Schema<IProduct>(
   {
@@ -61,7 +73,19 @@ const productSchema = new Schema<IProduct>(
         type: String,
         required: true,
         trim: true,
-        enum: ["body", "face", "hair", "handSoap", "moisturizer", "shave", "shampoo", "rephils", "bodyWash", "conditioner", "cleanser"],
+        enum: [
+          "body",
+          "face",
+          "hair",
+          "handSoap",
+          "moisturizer",
+          "shave",
+          "shampoo",
+          "rephils",
+          "bodyWash",
+          "conditioner",
+          "cleansers",
+        ],
       },
     ],
     images: {
@@ -72,7 +96,10 @@ const productSchema = new Schema<IProduct>(
           trim: true,
         },
       ],
-      validate: [(val: Array<string>) => val.length >= 3, "product must have minimum 3 images src url"],
+      validate: [
+        (val: Array<string>) => val.length >= 3,
+        "product must have minimum 3 images src url",
+      ],
     },
 
     salesCount: {
@@ -91,12 +118,12 @@ const productSchema = new Schema<IProduct>(
 
 const Product = model<IProduct>("products", productSchema);
 
-// add boughtTogether product 
+// add boughtTogether product
 productSchema.add({
   boughtTogether: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Product
-  }
-})
+    ref: Product,
+  },
+});
 
 export default Product;

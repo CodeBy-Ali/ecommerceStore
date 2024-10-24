@@ -39,11 +39,7 @@ const initCheckoutPage = () => {
   initAccordions();
   initCheckoutForm();
   initAccountLogin();
-
-  const togglePasswordBtn = DOMUtils.getElement<HTMLButtonElement>("[data-eyeIconButton]");
-  const passwordField = DOMUtils.getElement<HTMLInputElement>("input[data-password]");
-  if (!togglePasswordBtn || !passwordField) return;
-  initPasswordVisibilityToggle(togglePasswordBtn, passwordField);
+  addPasswordVisibilityToggle()
 };
 
 function initAddShippingAddressPopUp() {
@@ -88,6 +84,15 @@ function initAccountLogin() {
   );
   loginButton?.addEventListener("click", handleLoginRequest);
 }
+
+
+function addPasswordVisibilityToggle() {
+  const togglePasswordBtn = DOMUtils.getElement<HTMLButtonElement>("[data-eyeIconButton]");
+  const passwordField = DOMUtils.getElement<HTMLInputElement>("input[data-password]");
+  if (!togglePasswordBtn || !passwordField) return;
+  initPasswordVisibilityToggle(togglePasswordBtn, passwordField);
+}
+
 
 // TODO replace the formData interface with more type safe one
 function handleNewAddressSubmit(e: Event) {
