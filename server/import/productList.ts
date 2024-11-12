@@ -1,20 +1,24 @@
-import mongoose from 'mongoose';
-import { IProduct } from '../src/model/productModel.ts';
-import { IShippingConfig } from '../src/model/settingsModel.ts';
+import mongoose from "mongoose";
+import { IProduct } from "../src/model/productModel.ts";
+import { IShippingConfig } from "../src/model/settingsModel.ts";
 const productList: Array<IProduct> = [
   {
-    title: "100% Plant Squalane - rePhil",
-    description: "Universal facial serum made from 100% upcycled plant squalane in biodegradable, single-use seaweed capsules.  Use for daily lightweight, easily absorbed hydration and support. Packaged in paperboard jar.",
-    price: 19.99,
-    weight: "20 single use capsules | .3mL each",
-    usage: "Twist top off, squeeze onto fingertips and apply to face and neck.  Capsule can be dissolved in hot water after use.  Or just throw it in the toilet.  Or at a friend.   It's waterway-safe, so it's all good.",
-    ingredients: "100% Planet Squalane",
-    categories: ["rephils"],
-    images: ["/assets/plantSqualaneRePhil1.jpg", "/assets/plantSqualaneRePhil2.jpg", "/assets/plantSqualaneRePhil3.jpg"],
-    salesCount: 5,
-    stock: 18,
-    slug: "plant-squalane-rephil"
-
+    title: "The Everything Bar",
+    description:"Tired of a shower full of plastic bottles? Tired of buying more things than you need? Soft, manageable hair AND clean pits AND smells like the freaking beach? Look no further that this guy right here that works from the ends of your hair to the tips of your toes.",
+    price: 14.99,
+    weight: "3.1oz (87.5g) Bar",
+    usage: "Lather up and apply to wet hair working from scalp to tip.  Rinse thoroughly.  Lather up and also apply to your body and rinse thoroughly.  Keep bar dry between uses with our Phil's sustainable soap dish.  ",
+    ingredients: "Sodium Cocoyl Isethionate, Hydrogenated Vegetable Oil, Polyglyceryl-4 Laurate, Water/ Aqua, Glycerin, Natural Fragrance, Butyrospermum Parkii (Shea) Butter, Salvia Hispanica (Chia) Seed Oil, Persea Gratissima (Avocado) Oil, Squalane.",
+    categories: ["body","cleansers","face"],
+    images: [
+      "/assets/everythingBar1.jpg",
+      "/assets/everythingBar2.jpg",
+      "/assets/everythingBar3.jpg",
+    ],
+    salesCount: 24,
+    stock: 20,
+    slug: "the-everything-bar",
+    boughtTogether: new mongoose.Types.ObjectId("672f503fad7bbf8792e3b001"),
   },
 ];
 

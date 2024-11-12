@@ -10,7 +10,10 @@ import ShippingConfig, { IShippingConfig } from "../src/model/settingsModel.ts";
 const addProduct = async (product: IProduct, model: Model<IProduct>): Promise<void> => {
   if (!product) throw new Error("Document is invalid");
   const duplicate: IProduct | null = await model.findOne({ title: product.title }).lean();
-  if (duplicate) throw new Error(`Product with title "${duplicate.title}" already present in dataBase`);
+  if (duplicate) {
+    console.warn(`Product with title "${duplicate.title}" already present in dataBase`);
+    return;
+  };
   const newProduct: HydratedDocument<IProduct> = await model.create(product);
   await newProduct.save();
 };
@@ -23,7 +26,8 @@ const updateProduct = async (filter: object, update: object, options: object): P
 
 (async () => {
   try {
-    await mongoose.connect(configManager.getDatabaseConfig().URI);
+    const { URI,name} = configManager.getDatabaseConfig();
+    await mongoose.connect(URI,{dbName: name});
     for (const product of productList) {
       await addProduct(product, Product);
       console.log(`${product.title} successfully added to database`);

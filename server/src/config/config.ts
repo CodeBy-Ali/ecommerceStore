@@ -14,7 +14,7 @@ dotenv.config({ path: envPath });
 
 class ConfigManager{
   private serverConfig: { host: string, port: number };
-  private databaseConfig: {URI: string};
+  private databaseConfig: {URI: string,name:string};
   private dirConfig: { view: string, static: string };
   private bcryptConfig: {saltRounds: number}
   private sessionConfig: {name: string, secret: string,cookieMaxAge: number };
@@ -30,10 +30,11 @@ class ConfigManager{
   private constructor() {
     this.serverConfig = {
       host: process.env.HOST || `127.0.0.1`,
-      port: Number(process.env.PORT) || 3000,
+      port: Number(process.env.PORT) || 4000,
     }
     this.databaseConfig = {
-      URI: process.env[`MONGODB_URI_${this.env}`]  || "mongodb://localhost:27017/myDb",
+      URI: process.env[`MONGODB_URI_${this.env}`] || process.env.MONGODB_URI  || "mongodb://localhost:27017/myDb",
+      name: process.env[`DATABASE_NAME_${this.env}`] || process.env.DATABASE_NAME || "myDb"
     }
     this.dirConfig = {
       view: path.join(__dirname, '..', 'views'),

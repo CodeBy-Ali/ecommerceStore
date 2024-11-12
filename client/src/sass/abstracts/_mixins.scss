@@ -39,7 +39,7 @@
 }
 
 // button
-@mixin button($trans-dur: 0.3s) {
+@mixin button($trans-dur: 0.2s) {
   border-radius: $br-btn;
   color: $clr-primary;
   background-color: $clr-accent;
