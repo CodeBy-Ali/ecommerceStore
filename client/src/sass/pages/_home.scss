@@ -127,6 +127,7 @@
 
 .squalane_image_container {
   flex: 1.4;
+  transition: transform .4s ease;
   & span{
     display: inline-block;
     width: 100%;
