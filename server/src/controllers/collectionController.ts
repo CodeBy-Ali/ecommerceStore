@@ -1,8 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import Product, { IProduct } from "../model/productModel.ts";
+import Product, { IProduct, ProductCategory } from "../model/productModel.ts";
 import { getUserConfig } from "../utils/userUtils.ts";
 import { capitalizeFirstLetter } from "../utils/utils.ts";
 
+type ProductCategoryMap = {
+  [key in ProductCategory]?: IProduct[];
+} & Object;
 // render collection view
 export const renderAllCollectionsView = async (
   req: Request,
@@ -17,25 +20,22 @@ export const renderAllCollectionsView = async (
       .limit(4)
       .lean();
     const userConfig = await getUserConfig(user);
+   
+    let productCategoryMap: ProductCategoryMap = {};
+    allProducts.forEach((product) => {
+      product.categories.forEach((category: ProductCategory) => {
+        if (productCategoryMap[category]) {
+          productCategoryMap[category].push(product);
+        } else {
+          productCategoryMap[category] = [product];
+        }
+      });
+    });
 
     res.render("allCollections", {
       ...userConfig,
-      bestSellers: bestSellers,
-      body: allProducts.filter((product: IProduct) =>
-        product.categories.includes("body")
-      ),
-      cleansers: allProducts.filter((product: IProduct) =>
-        product.categories.includes("cleansers")
-      ),
-      conditioners: allProducts.filter((product: IProduct) =>
-        product.categories.includes("conditioner")
-      ),
-      face: allProducts.filter((product: IProduct) =>
-        product.categories.includes("face")
-      ),
-      rePhils: allProducts.filter((product: IProduct) =>
-        product.categories.includes("rephils")
-      ),
+      bestSellers,
+      productCategoryMap,
     });
   } catch (error) {
     next(error);

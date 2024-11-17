@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema, model } from "mongoose";
 
-type ProductCategory =Array<
-  | "body"
+export type ProductCategory =  
+   "body"
   | "face"
   | "hair"
   | "handSoap"
@@ -11,7 +11,7 @@ type ProductCategory =Array<
   | "rephils"
   | "bodyWash"
   | "conditioner"
-  | "cleansers">;
+  | "cleansers";
 
 export interface IProduct {
   title: string;
@@ -20,7 +20,7 @@ export interface IProduct {
   usage: string;
   ingredients: string;
   weight: string;
-  categories: ProductCategory;
+  categories: ProductCategory[];
   images: Array<string>;
   salesCount: number;
   stock: number;
