@@ -1,3 +1,4 @@
+import { handleAddToCart } from "../components/utils/cartUtils";
 import DOMUtils from "../components/utils/domUtils";
 
 // returns true of the given element is visible with in viewport else returns false
@@ -36,7 +37,7 @@ function moveProductImage(...elements: HTMLElement[]) {
     if (isInView) {
       element.style.transform = `translateX(0)`;
     } else {
-      element.style.transform = `translateX(-8rem)`;
+      element.style.transform = `translateX(-7rem)`;
     }
   });
 }
@@ -60,8 +61,18 @@ const initScrollAnimations = () => {
   });
 };
 
+const initAddToCart = () => {
+  const addToCartButtons = document.querySelectorAll<HTMLElement>(
+    "[data-add-to-cart-btn]"
+  );
+  addToCartButtons?.forEach((button) =>
+    button.addEventListener("click", handleAddToCart)
+  );
+};
+
 const initHomePage = (): void => {
   initScrollAnimations();
+  initAddToCart();
 };
 
 export default initHomePage;

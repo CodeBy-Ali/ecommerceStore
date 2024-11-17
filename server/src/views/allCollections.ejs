@@ -56,7 +56,8 @@
           </div>
           <div class="products_container">
             <ul class="products_list">
-              <% bestSellers.forEach(product => { %>
+              <% bestSellers.forEach((product,index) => { %>
+              <% if(index == bestSellers.length - 1) return  %>
               <li class="product_list_item">
                 <div class="product_card">
                   <a href="/products/<%= product.slug %>">
@@ -110,6 +111,38 @@
                         </svg>
                       </a>
                     </div>
+                  </div>
+                </div>
+              </li>
+              <!-- last Product -->
+              <% const lastProduct = bestSellers[bestSellers.length-1] %>
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="/products/<%= lastProduct.slug %>">
+                    <span class="visually-hidden">lastProduct.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= lastProduct.title %></p>
+                    <p>Rs <%= lastProduct.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= lastProduct.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= lastProduct._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </li>

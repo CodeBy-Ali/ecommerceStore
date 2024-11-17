@@ -46,6 +46,165 @@
           </div>
         </div>
       </section>
+      <!-- Squalane Product Sections -->
+      <section class="squalane_capsules_section">
+        <div class="squalane_container">
+          <div class="squalane_image_container" data-squalane-image-container>
+            <span>
+              <img src="/assets/plantSqualane.webp" alt="">
+            </span>
+          </div>
+          <div class="squalane_description_container">
+            <p class="deal_top_line">The Real Deal</p>
+            <h2>Wash. <br> Reuse. <br> Rephil.</h2>
+            <p class="squalane_description">Our proprietary RePhil Jars utilize kitchenware technology to make them dishwasher safe, top rack, so you can use them again and again. Think kitchenware for your skincare.</p>
+            <a href="src/pages/collections.html" class="button--primary">
+              <span>Shop Squalane</span>
+              <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M16.1836 3.4165L19.8972 7.49984L16.1836 11.5832" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- ------------------------- Featured-products ---------------------------------- -->
+      <section id="featuredProducts" class="category_section featured_products_section">
+        <div class="category_section_wrapper">
+          <div class="">
+            <h2 class="featured_products_heading">
+              <a href="/collections/best-sellers">Featured Products</a>
+            </h2>
+          </div>
+          <div class="products_container">
+            <ul class="products_list">
+              <% featuredProducts.forEach((product ,index)=> { %>
+                <% if(index == featuredProducts.length - 1) return  %>
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="/products/<%= product.slug %>">
+                    <span class="visually-hidden">product.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p>Rs <%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+              <% }) %>
+              <!-- Banner -->
+              <li class="banner_card_wrapper">
+                <div class="banner_card">
+                  <div class="banner_image">
+                    <img src="/assets/Phils_2023_Launch_ShavingCream_Product_HERO-copy.png" alt="" />
+                  </div>
+                  <div class="banner_detail">
+                    <div class="banner_title">
+                      <h3>
+                        <span>Infinitely</span>
+                        <span>Recyclable</span>
+                      </h3>
+                    </div>
+                    <div>
+                      <a href="/products/shaving-cream" class="button--productBanner">
+                        <span>Shop Shaving Cream</span>
+                        <svg class="icon icon--arrow-right" width="23" height="15" viewBox="0 0 23 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M4.86523 7.5L19.7197 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M16.1836 3.4165L19.8972 7.49984L16.1836 11.5832" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <!--  -->
+              <% const lastProduct = featuredProducts[featuredProducts.length-1] %>
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="/products/<%= lastProduct.slug %>">
+                    <span class="visually-hidden">lastProduct.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= lastProduct.title %></p>
+                    <p>Rs <%= lastProduct.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= lastProduct.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= lastProduct._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!-- Scrolling-Text ----------------------------------- -->
+      <section class="scrolling_text_section">
+        <div class="scrolling_text_wrapper">
+          <div class="scrolling_text_contents">
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText1.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">1 product = 1 pound of ocean bound plastic removed from the environment</p>
+            </div>
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText2.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">paraben free, sulface free, cruelty free, vegan, ethically manufactured</p>
+            </div>
+          </div>
+          <div class="scrolling_text_contents">
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText1.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">1 product = 1 pound of ocean bound plastic removed from the environment</p>
+            </div>
+            <div class="scrolling_text_item">
+              <span class="scrolling_text_item_image">
+                <img src="/assets/scrollingText2.png" alt="" />
+              </span>
+              <p class="scrolling_text_item_description">paraben free, sulface free, cruelty free, vegan, ethically manufactured</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- START -------------------------------------- Footer ---------------------------------------------------- -->

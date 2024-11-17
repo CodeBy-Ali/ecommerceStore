@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 export interface IShippingConfig {
-  _id: string;
+  _id: "shipping_config";
   freeShippingThreshold: number;
   shippingRate: number;
 }
