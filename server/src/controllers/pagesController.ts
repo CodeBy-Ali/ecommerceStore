@@ -6,6 +6,7 @@ import { ApiError } from "../middlewares/errorHandler.ts";
 import Order from "../model/orderModel.ts";
 import mongoose from "mongoose";
 import ShippingAddress from "../model/shippingAddressModel.ts";
+import Product, { IProduct } from "../model/productModel.ts";
 
 // render home view
 export const renderHomeView = async (
@@ -16,7 +17,14 @@ export const renderHomeView = async (
   const user = req.session.user;
   try {
     const userConfig = await getUserConfig(user);
-    res.render("home", userConfig);
+    const featuredProducts: Array<IProduct> = await Product.find()
+    .sort({ salesCount: "descending" })
+    .limit(4)
+    .lean();
+    res.render("home", {
+      ...userConfig,
+      featuredProducts,
+    });
   } catch (error) {
     next(error);
   }

@@ -14,7 +14,7 @@ export const renderAllCollectionsView = async (
     const allProducts: Array<IProduct> = await Product.find().lean().exec();
     const bestSellers: Array<IProduct> = await Product.find()
       .sort({ salesCount: "descending" })
-      .limit(3)
+      .limit(4)
       .lean();
     const userConfig = await getUserConfig(user);
 

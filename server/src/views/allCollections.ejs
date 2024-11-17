@@ -157,11 +157,11 @@
             <h2>
               <a href="/collections/body">Body</a>
             </h2>
-            <p><span><%= body.length %></span> <span>PRODUCTS</span></p>
+            <p><span><%= productCategoryMap.body.length %></span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
             <ul>
-              <% body.forEach(product =>{ %>
+              <% productCategoryMap.body.forEach(product =>{ %>
               <li class="product_list_item">
                 <div class="product_card">
                   <a href="/products/<%= product.slug %>">
@@ -204,11 +204,11 @@
             <h2>
               <a href="/collections/cleansers">Cleansers</a>
             </h2>
-            <p><span><%= cleansers.length %></span> <span>PRODUCTS</span></p>
+            <p><span><%= productCategoryMap.cleansers.length %></span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
             <ul>
-              <% cleansers.forEach(product =>{ %>
+              <% productCategoryMap.cleansers.forEach(product =>{ %>
               <li class="product_list_item">
                 < <div class="product_card">
                   <a href="/products/<%= product.slug %>">
@@ -251,11 +251,11 @@
             <h2>
               <a href="/collections/conditioner">Conditioner</a>
             </h2>
-            <p><span><%= conditioners.length %></span> <span>PRODUCTS</span></p>
+            <p><span><%= productCategoryMap.conditioner && productCategoryMap.conditioner.length %></span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
             <ul>
-              <% conditioners.forEach(product =>{ %>
+              <% productCategoryMap.conditioner && productCategoryMap.conditioner.forEach(product =>{ %>
               <li class="product_list_item">
                 <div class="product_card">
                   <a href="/products/<%= product.slug %>">
@@ -298,11 +298,11 @@
             <h2>
               <a href="/collections/face">Face</a>
             </h2>
-            <p><span><%= face.length %></span> <span>PRODUCTS</span></p>
+            <p><span><%= productCategoryMap.face.length %></span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
             <ul>
-              <% face.forEach(product =>{ %>
+              <% productCategoryMap.face.forEach(product =>{ %>
               <li class="product_list_item">
                 <div class="product_card">
                   <a href="/products/<%= product.slug %>">
@@ -363,6 +363,53 @@
           </div>
         </div>
       </section>
+      <!-- Start ------------------------------------------------------ Moisturizers-Section ------------------------------------------------ -->
+      <section class="category_section" id="moistuirzers">
+        <div class="category_section_wrapper">
+          <div class="category_section_header">
+            <h2>
+              <a href="/collections/body">Moisturizers</a>
+            </h2>
+            <p><span><%= productCategoryMap.moisturizer.length %></span> <span>PRODUCTS</span></p>
+          </div>
+          <div class="products_container">
+            <ul>
+              <% productCategoryMap.moisturizer.forEach(product =>{ %>
+              <li class="product_list_item">
+                <div class="product_card">
+                  <a href="/products/<%= product.slug %>">
+                    <span class="visually-hidden">product.title</span>
+                  </a>
+                  <div class="product_card_info">
+                    <p><%= product.title %></p>
+                    <p>Rs <%= product.price %></p>
+                  </div>
+                  <div class="product_card_image">
+                    <img src="<%= product.images[0] %>" alt="" width="511" height="341" />
+                  </div>
+                  <div class="product_addToCart_container">
+                    <form action="/cart/add" class="addToCart_form_1" data-add-to-cart-form>
+                      <input type="hidden" name="productId" class="productId" value="<%= product._id %>" />
+                      <div class="addTOCart_action">
+                        <button aria-label="Add to bag The EveryThing Bar" type="button" class="addTOCart_action_btn" data-add-to-cart-btn>
+                          <span class="action_btn_text">Add to bag</span>
+                          <span class="plus_icon_btn">
+                            <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                          </span>
+                        </button>
+                        <span class="plus_icon">
+                          <img src="/assets/plus-solid.svg" alt="" aria-hidden="true" width="20" height="20" />
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </section>
        <!-- Start ------------------------------------------------------ rePhils ------------------------------------------------ -->
        <section class="category_section" id="rePhils">
         <div class="category_section_wrapper">
@@ -370,11 +417,11 @@
             <h2>
               <a href="/collections/rephils">rePhils</a>
             </h2>
-            <p><span><%= rePhils.length %></span> <span>PRODUCTS</span></p>
+            <p><span><%= productCategoryMap.rephils.length %></span> <span>PRODUCTS</span></p>
           </div>
           <div class="products_container">
             <ul>
-              <% rePhils.forEach(product =>{ %>
+              <% productCategoryMap.rephils.forEach(product =>{ %>
               <li class="product_list_item">
                 <div class="product_card">
                   <a href="/products/<%= product.slug %>">
