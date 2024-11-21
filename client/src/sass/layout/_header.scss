@@ -3,6 +3,8 @@
 @use '../abstracts/animations' as *;
 //  header 
 
+// TODO Fix Shop menu on mobile devices(address bar is causing issue make it fixed)
+
 body:not([data-page="checkout"]) header{
   position: fixed;
   top: 0;

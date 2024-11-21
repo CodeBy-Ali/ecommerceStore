@@ -31,13 +31,13 @@ const moveInnerScroller = (innerScroller: HTMLElement): void => {
   }
 };
 
-function moveProductImage(...elements: HTMLElement[]) {
+function moveProductImage(distanceInRem:string,...elements: HTMLElement[]) {
   elements.forEach((element) => {
     const isInView = isElementInView(element, "half");
     if (isInView) {
       element.style.transform = `translateX(0)`;
     } else {
-      element.style.transform = `translateX(-7rem)`;
+      element.style.transform = `translateX(${distanceInRem})`;
     }
   });
 }
@@ -46,6 +46,7 @@ const initScrollAnimations = () => {
   const squalaneProductImage = DOMUtils.getElement<HTMLDivElement>(
     "[data-squalane-image-container]"
   );
+  const clinicalProductImage = DOMUtils.getElement<HTMLElement>("[data-clinical-product-image-container]");
   const innerScroller: HTMLElement | null = document.querySelector(
     "[data-imageInnerScroller]"
   ) as HTMLElement;
@@ -53,11 +54,14 @@ const initScrollAnimations = () => {
   const windowWidth = window.innerWidth;
   const laptopScreen = 1400;
   console.log(windowWidth);
-  if (!squalaneProductImage || !innerScroller) return;
+  if (!squalaneProductImage || !innerScroller || !clinicalProductImage) return;
 
   document.addEventListener("scroll", () => {
     moveInnerScroller(innerScroller);
-    if (windowWidth > laptopScreen) moveProductImage(squalaneProductImage);
+    if (windowWidth > laptopScreen) {
+      moveProductImage("-7rem", squalaneProductImage);
+      moveProductImage("7rem", clinicalProductImage);
+    };
   });
 };
 

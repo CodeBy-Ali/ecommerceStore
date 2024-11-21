@@ -2,6 +2,7 @@
 @use "../abstracts/mixins" as *;
 
 // header
+// TODO show order summary button is not working 
 
 body[data-page="checkout"] {
   font-family: $font-checkout-page;
