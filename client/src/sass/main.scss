@@ -24,8 +24,9 @@
 @use 'pages/collections';
 @use 'pages/product';
 @use 'pages/notFound';
-@use 'pages/_checkout';
+@use 'pages/checkout';
 @use 'pages/order';
+@use "pages/account";
 
 @use 'layout/header';
 @use 'layout/footer';

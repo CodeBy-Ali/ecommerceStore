@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../sass/main.scss" />
+    <script src="../typescript/main.ts" type="module" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="account_page_header">
+      <h1>Phils</h1>
+    </header>
+    
+    <main class="account_page_main">
+
+      <section class="account_heading_section">
+        <h2 class="account_heading">My Account</h2>
+        <form action="/account/logout" class="account_logout_form" method="post">
+          <button>Log Out</button>
+        </form>
+      </section>
+
+      <section class="account_details_section">
+        <h3>Account Details</h3>
+        <div class="account_details_container">
+          <p class="account_owner_name">Muhammad Ali</p>
+          <div class="account_address_container">
+            <p class="account_owner_address">Village and post office Thirpal</p>
+            <p class="account_owner_city">Lahore</p>
+            <p class="account_owner_country">Pakistan</p>
+          </div>
+          <p class="account_owner_phone">Phone: 03105003235</p>
+        </div>
+      </section>
+
+      <section class="order_history_section">
+        <h3>Order History</h3>
+
+        <div class="orders_history_container_desktop">
+          <div class="orders_field_row order_field_headings">
+            <p>Order</p>
+            <p>Date</p>
+            <p>Payment Method</p>
+            <p>Fulfillment Status</p>
+            <p>Total</p>
+          </div>
+          <div>
+            <div class="orders_field_row order_fields_details">
+              <p>#AHT1234</p>
+              <p>September 21,2020</p>
+              <p>Jazz-Cash</p>
+              <p>Unfulfilled</p>
+              <p>Rs 10,900</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="orders_history_container_mobile">
+          <div class="order_detail_container">
+            <div>
+              <p>Order</p>
+              <p>#AHT1234</p>
+            </div>
+            <div>
+              <p>Date</p>
+              <p>September 21,2020</p>
+            </div>
+            <div>
+              <p>Payment Method</p>
+              <p>Jazz-Cash</p>
+            </div>
+            <div>
+              <p>Fulfillment Status</p>
+              <p>Unfulfilled</p>
+            </div>
+            <div>
+              <p>Total</p>
+              <p>Rs 10,400</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

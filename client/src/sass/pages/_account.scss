@@ -1,0 +1,152 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+
+
+
+
+
+
+
+
+.account_page_header{
+  padding: 1.4rem;
+  text-align: center;
+  & h1{
+    font-size: 2rem;
+  }
+
+  @include respond-to(medium){
+    padding: 1.6rem;
+
+    & h1{
+      font-size: 2.2rem;
+    }
+  }
+}
+
+.account_heading_section{
+  margin-bottom: 4rem;
+}
+
+.account_page_main {
+  --border-color: #f0f0f0;
+  --border: 1px solid var(--border-color);
+  padding-inline: 2rem;
+
+  & .account_heading{
+    text-align: center;
+    font-size: clamp(2.2rem ,5vw,2.6rem)
+  }
+
+  & .account_logout_form{
+
+    & button {
+      text-decoration: underline;
+      font-size: clamp($font-size-sm,5vw,$font-size-base);
+      background-color: transparent;
+      border: none;
+      color: $clr-primary;
+    }
+    display: block;
+    text-align: center;
+  }
+  & section > h3{
+    font-size: clamp(2rem ,5vw,2.4rem);
+    margin-bottom: 1.6rem;
+  }
+
+  @include respond-to(medium){
+    width: 100%;
+    max-width: 85%;
+    margin-inline:auto;
+
+    & section > h3{
+      margin-bottom:2.2rem;
+    }
+  }
+}
+
+
+
+
+.account_details_section{
+  margin-bottom: 3rem;
+
+  & .account_details_container{
+    background-color: #f3f3f3;
+    padding: 3rem;
+    font-size: $font-size-base;
+
+    & .account_owner_name{
+      font-weight: $font-semibold;
+      margin-bottom: 1rem;
+    }
+
+    & .account_address_container{
+      margin-bottom: 1rem;
+      & > p{
+        margin-bottom: .5rem;
+      }
+    }
+
+    
+  }
+  @include respond-to(medium){
+    margin-bottom: 4rem;
+    & .account_details_container{
+      width: 50%;
+    }
+  }
+}
+
+
+
+.orders_history_container_mobile{
+  @include respond-to(medium){
+    display: none;
+  }
+
+  & .order_detail_container{
+    padding-block: 2rem;
+    // border-inline: 1px solid $clr-border-dark;
+    & > div{
+      display: flex;
+      justify-content: space-between;
+      border-top: var(--border);
+      border-inline: var(--border);
+      padding: 1.5rem;
+      font-size: $font-size-base;
+    }
+  
+    & > div:last-child{
+      border-bottom: var(--border);
+    }
+  }
+}
+
+.orders_history_container_desktop{
+  display: none;
+  border-inline: var(--border);
+  border-bottom: var(--border);
+  font-size: $font-size-base;
+
+  & .orders_field_row{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    padding: 2rem;
+  }
+
+  & .order_field_headings{
+    font-weight: $font-semibold;
+    border-block: var(--border);
+  }
+
+  & .order_fields_details:not(:last-child){
+    border-bottom: var(--border);
+  }
+
+  @include respond-to(medium){
+    display: block;
+  }
+}

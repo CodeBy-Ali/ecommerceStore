@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import ShippingAddress, {
   IShippingAddress,
 } from "../model/shippingAddressModel.ts";
-import { createError } from "../middlewares/errorHandler.ts";
+import { createApiError } from "../middlewares/errorHandler.ts";
 import { IShippingAddressReqBody } from "../middlewares/validator.ts";
 
 export const addShippingAddress = async (
@@ -14,7 +14,7 @@ export const addShippingAddress = async (
   try {
     const user = req.session.user;
     if (!user)
-      return createError(
+      return createApiError(
         401,
         "Unauthorized access. Please log in to continue",
         "fail"

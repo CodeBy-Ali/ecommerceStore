@@ -1,15 +1,17 @@
-import { Request,Response,NextFunction,} from "express"
+import { Request, Response, NextFunction } from "express";
 import logger from "../config/logger.ts";
 
-
-
-export interface ApiError extends Error{
-  status: string,
-  code: number,
+export interface ApiError extends Error {
+  status: string;
+  code: number;
 }
 
-
-const errorHandler = (err: Error|ApiError, req: Request, res: Response, next: NextFunction) => {
+const errorHandler = (
+  err: Error | ApiError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (res.headersSent) {
     return next(err);
   }
@@ -18,24 +20,26 @@ const errorHandler = (err: Error|ApiError, req: Request, res: Response, next: Ne
     res.status(err.code).json({
       status: err.status,
       message: err.message,
-    })
+    });
     return;
   }
 
   logger.error(err);
-  if  (req.accepts('html')) {
-    res.render('error', { error: err });
-  }else if (req.accepts('application/json, json')) {
+  if (req.accepts("html")) {
+    res.render("error", { error: err });
+  } else if (req.accepts("application/json, json")) {
     res.json({
       status: "error",
-      message:"Internal Server Error"
+      message: "Internal Server Error",
     });
-  }else res.send(`Oh no, Something went wrong!`)
-}
+  } else res.send(`Oh no, Something went wrong!`);
+};
 
-
-
-export function createError(code: number, message: string, status: string):ApiError {
+export function createApiError(
+  code: number,
+  message: string,
+  status: string
+): ApiError {
   const apiError = new Error(message) as ApiError;
   apiError.status = status;
   apiError.code = code;

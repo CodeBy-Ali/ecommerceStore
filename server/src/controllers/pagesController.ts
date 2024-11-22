@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { getUserConfig } from "../utils/userUtils.ts";
 import Cart from "../model/cartModel.ts";
 import { getShippingConfig } from "../utils/cartUtils.ts";
-import { ApiError } from "../middlewares/errorHandler.ts";
+import { ApiError, createApiError } from "../middlewares/errorHandler.ts";
 import Order from "../model/orderModel.ts";
 import mongoose from "mongoose";
 import ShippingAddress from "../model/shippingAddressModel.ts";
@@ -18,9 +18,9 @@ export const renderHomeView = async (
   try {
     const userConfig = await getUserConfig(user);
     const featuredProducts: Array<IProduct> = await Product.find()
-    .sort({ salesCount: "descending" })
-    .limit(4)
-    .lean();
+      .sort({ salesCount: "descending" })
+      .limit(4)
+      .lean();
     res.render("home", {
       ...userConfig,
       featuredProducts,
@@ -40,7 +40,9 @@ export const renderCheckoutView = async (
   try {
     const userConfig = await getUserConfig(user);
     const { cart, shippingConfig: shippingConfig } = userConfig;
-    const shippingAddresses = user ? await ShippingAddress.find({ userId: user?._id }) : [];
+    const shippingAddresses = user
+      ? await ShippingAddress.find({ userId: user?._id })
+      : [];
     const shippingCost =
       shippingConfig &&
       cart &&
@@ -50,7 +52,7 @@ export const renderCheckoutView = async (
     res.render("checkout", {
       ...userConfig,
       shippingCost,
-      shippingAddresses
+      shippingAddresses,
     });
   } catch (error) {
     next(error);
@@ -76,14 +78,41 @@ export const renderOrderView = async (
       .populate("shippingAddress")
       .lean()
       .exec();
-    
-      if (!order) {
-        return res.render("notFound", userConfig);
-      }
+
+    if (!order) {
+      return res.render("notFound", userConfig);
+    }
     res.render("order", {
       ...userConfig,
       order,
     });
+  } catch (error: unknown) {
+    next(error);
+  }
+};
+
+export const renderUserAccountView = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const user = req.session.user;
+  try {
+    if (!user)
+      throw createApiError(
+        401,
+        "Unauthorized access. Please log in to continue",
+        "fail"
+      );
+
+    const account = await ShippingAddress.findOne({
+      userId: user._id,
+      isDefault: true,
+    });
+
+    const orders = await Order.find({ userId: user._id });
+
+    res.render("account", { account, orders });
   } catch (error: unknown) {
     next(error);
   }
