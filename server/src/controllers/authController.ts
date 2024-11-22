@@ -23,6 +23,19 @@ export const renderAuthView = async (viewName: string,req:Request, res:Response,
 }
 
 
+export const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    req.session.destroy((err:unknown) => {
+      if (err) next(err);
+      res.redirect("/");
+    })
+  } catch (err: unknown) {
+    next(err);
+  }
+}
+
+
+
 // add new user to database
 export const registerNewUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const {returnTo,...userInfo} = req.body as IRegisterRequestBody;
