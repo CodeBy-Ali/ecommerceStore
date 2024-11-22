@@ -11,6 +11,7 @@ export interface IOrder {
   orderId: string;
   shippingCost: number;
   subTotal: number;
+  userId: mongoose.Types.ObjectId
   products: IOrderProduct[];
   paymentMethod: string;
   shippingAddress: mongoose.Types.ObjectId;
@@ -33,6 +34,10 @@ const orderSchema = new Schema<IOrderDocument>(
     subTotal: {
       type: Number,
       required: true,
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
     },
     products: {
       type: [

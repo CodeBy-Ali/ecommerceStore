@@ -7,7 +7,7 @@ import ShippingAddress, {
 } from "../model/shippingAddressModel.ts";
 import logger from "../config/logger.ts";
 import mongoose from "mongoose";
-import { createError } from "./errorHandler.ts";
+import { createApiError } from "./errorHandler.ts";
 
 export const registerUserIfNotAlready = async (
   req: Request,
@@ -17,15 +17,14 @@ export const registerUserIfNotAlready = async (
   const checkoutReqBody = req.body as ICheckoutRequestBody;
   if (!checkoutReqBody.password) return next();
   try {
-
     const { firstName, lastName, password, email } = checkoutReqBody;
-    const {user} = await createUniqueUser({
+    const { user } = await createUniqueUser({
       firstName,
       lastName,
       password,
       email,
     });
-    
+
     await createUserSession(user, req);
     next();
   } catch (error: unknown) {
@@ -72,7 +71,7 @@ export const saveShippingAddressIfChecked = async (
       req.body.shippingAddressId = defaultAddress._id;
       return next();
     }
-    throw createError(400, "User shipping address is missing", "fail");
+    throw createApiError(400, "User shipping address is missing", "fail");
   } catch (error: unknown) {
     next(error);
   }
