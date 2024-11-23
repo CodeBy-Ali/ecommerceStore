@@ -15,7 +15,6 @@ const errorHandler = (
   if (res.headersSent) {
     return next(err);
   }
-
   if (isApiError(err)) {
     res.status(err.code).json({
       status: err.status,

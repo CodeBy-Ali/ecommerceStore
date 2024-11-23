@@ -1,9 +1,12 @@
 import { Request,Response,NextFunction,} from "express"
+import { getUserConfig } from "../utils/userUtils.ts";
 
-const unassignedRoutesHandler = (req:Request, res:Response, next:NextFunction) => {
+const unassignedRoutesHandler = async (req:Request, res:Response, next:NextFunction) => {
+  const userSession = req.session.user;
+  const userConfig = await getUserConfig(userSession);
   res.status(404);
   if  (req.accepts('html')) {
-    res.render('error', { error: '404 not Found' });
+    res.render('notFound', userConfig);
   }else if (req.accepts(['application/json' ,'json'])) {
     res.json({
       status: 'fail',
