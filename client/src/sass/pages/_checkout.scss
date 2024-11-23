@@ -2,7 +2,6 @@
 @use "../abstracts/mixins" as *;
 
 // header
-// TODO show order summary button is not working 
 
 body[data-page="checkout"] {
   font-family: $font-checkout-page;
@@ -71,6 +70,11 @@ body[data-page="checkout"] {
 
 .order_summary_container {
   & .order_summary_button {
+    border: 1px solid $clr-border;
+    font-size: $font-size-sm;
+    width: 100%;
+    background-color: transparent;
+
     & .order_summary_button_text_wrapper {
       display: inline-block;
       @include container($container-checkout-inner-section);
@@ -78,16 +82,15 @@ body[data-page="checkout"] {
       padding-inline: 2.1rem;
       padding-block: 1.7rem;
     }
-    border: 1px solid $clr-border;
-    font-size: $font-size-sm;
-    width: 100%;
-    background-color: transparent;
 
     & .summary_text {
       color: $clr-text-blue;
       display: flex;
       align-items: center;
 
+      & .hide_order_summary_text{
+        display: none;
+      }
       & .arrow_down_svg_wrapper {
         display: inline-block;
         margin-left: 1rem;
@@ -104,8 +107,18 @@ body[data-page="checkout"] {
       font-size: 1.8rem;
     }
 
-    &.open .arrow_down_svg_wrapper {
-      transform: rotate(180deg);
+    &.open {
+      & .arrow_down_svg_wrapper {
+        transform: rotate(180deg);
+      }
+
+      & .show_order_summary_text{
+        display: none;
+      }
+
+      & .hide_order_summary_text{
+        display: inline;
+      }
     }
   }
 

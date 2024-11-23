@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script type="module" crossorigin src="/assets/main.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <link rel="stylesheet" crossorigin href="/assets/main.css" />
     <title>Phil's Refills</title>
   </head>
@@ -42,9 +45,12 @@
               <div class="checkout_form_field_wrapper">
                 <div class="form_field">
                   <div class="checkout_form_field_container">
-                    <label for="new-address-country" aria-hidden="false" data-select-label
+                    <label
+                      for="new-address-country"
+                      aria-hidden="false"
+                      data-select-label
                       >Country/Region</label
-                    > 
+                    >
                     <select name="country" id="new-address-country">
                       <option value="Pakistan">Pakistan</option>
                     </select>
@@ -206,7 +212,9 @@
                         placeholder="ZIP code"
                         id="new-address-zipcode"
                       />
-                      <label for="new-address-zipcode">ZIP code (optional)</label>
+                      <label for="new-address-zipcode"
+                        >ZIP code (optional)</label
+                      >
                     </div>
                     <div class="error_message">
                       <span
@@ -264,7 +272,11 @@
     <main class="checkout_page_main">
       <div class="checkout_section_wrapper">
         <section class="order_summary_section">
-          <div class="order_summary_container" data-order-summary-accordion>
+          <div
+            class="order_summary_container"
+            data-order-summary-accordion
+            data-accordion
+          >
             <input
               type="hidden"
               name="cartId"
@@ -281,9 +293,10 @@
               >
                 <span class="order_summary_button_text_wrapper">
                   <span class="summary_text">
-                    <span data-checkout-summary-button-text
+                    <span class="show_order_summary_text"
                       >Show order Summary</span
                     >
+                    <span class="hide_order_summary_text">Hide order Summary</span>
                     <span class="arrow_down_svg_wrapper">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -377,7 +390,7 @@
                       <span>Account</span>
                     </button>
                     <div class="accordion_body" data-accordion-body="">
-                      <p data-user-email><%= user.email  %></p>
+                      <p data-user-email><%= user.email %></p>
                     </div>
                   </div>
                 </div>
@@ -410,38 +423,41 @@
                     </button>
                     <div class="checkout_selected_shipping_address_container">
                       <p data-selected-address-container>
-                       <%= shippingAddresses.reduce((accumulator,address) => { 
-                          if(address.isDefault){
-                            accumulator += `${address.firstName}, ${address.lastName}, ${address.address}, ${address.city}, ${address.country == "Pakistan" ? "PK" : address.country}, ${address.phone}`
-                          }
-                          return accumulator;
-                       },"")  %>
+                        <%= shippingAddresses.reduce((accumulator,address) => {
+                        if(address.isDefault){ accumulator +=
+                        `${address.firstName}, ${address.lastName},
+                        ${address.address}, ${address.city}, ${address.country
+                        == "Pakistan" ? "PK" : address.country},
+                        ${address.phone}` } return accumulator; },"") %>
                       </p>
                     </div>
                     <div class="accordion_body" data-accordion-body>
                       <div class="checkout_shippingAddresses_list_container">
-                        <ul class="checkout_shippingAddresses_list" data-shipping-addresses-list>
+                        <ul
+                          class="checkout_shippingAddresses_list"
+                          data-shipping-addresses-list
+                        >
                           <% shippingAddresses.forEach((address,index) => { %>
-                            <li>
-                              <label for="address<%= index  %>">
-                                <input
-                                  type="radio"
-                                  name="shippingAddressId"
-                                  id="address<%= index  %>"
-                                  value="<%= address._id  %>"
-                                  <%= address.isDefault ? "checked" : ""   %>
-                                />
+                          <li>
+                            <label for="address<%= index  %>">
+                              <input type="radio" name="shippingAddressId"
+                              id="address<%= index %>" value="<%= address._id
+                              %>" <%= address.isDefault ? "checked" : "" %> />
+                              <span>
                                 <span>
-                                  <span>
-                                    <%=  `${address.firstName}, ${address.lastName}, ${address.address}`  %>
-                                  </span>
-                                  <span class="shipping_address_country_city">
-                                    <%= `${address.city}, ${address.country == "Pakistan" ? "PK" : address.country}`  %>
-                                  </span>
-                                  <span class="visually-hidden"><%= address.phone %></span>
+                                  <%= `${address.firstName},
+                                  ${address.lastName}, ${address.address}` %>
                                 </span>
-                              </label>
-                            </li>
+                                <span class="shipping_address_country_city">
+                                  <%= `${address.city}, ${address.country ==
+                                  "Pakistan" ? "PK" : address.country}` %>
+                                </span>
+                                <span class="visually-hidden"
+                                  ><%= address.phone %></span
+                                >
+                              </span>
+                            </label>
+                          </li>
                           <% }) %>
                         </ul>
                         <button
@@ -462,7 +478,9 @@
                 <button class="registered_account_accordion_button">
                   Shipping Method
                 </button>
-                <p>Shipping Charges · <strong>Rs <%= shippingCost  %></strong></p>
+                <p>
+                  Shipping Charges · <strong>Rs <%= shippingCost %></strong>
+                </p>
               </section>
 
               <% } else { %>
@@ -498,46 +516,58 @@
                     <span>Enter a valid email</span>
                   </div>
                 </div>
-              <% if(!user.isRegistered){ %>
-                  <div class="form_field">
-                    <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
-                        <i class="fas fa-eye-slash eye_icon" ></i>
-                      </button>
-                    <div class="checkout_form_field_container">
-                      <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="password"
-                        required
-                        autocomplete="new-password"
-                        data-password
-                      />
-                      <label
-                        for="email"
-                        class="form_field_label"
-                        aria-hidden="false"
-                        >Password</label
-                      >
-                    </div>
-                    <div class="error_message">
-                      <span
-                        ><img
-                          src="/assets/errorIcon.svg"
-                          width="12"
-                          height="12"
-                          alt=""
-                      /></span>
-                      <span
-                        >Password is weak. Try combination of letters(A-z),numbers
-                        and special characters</span
-                      >
-                    </div>
+                <% if(!user.isRegistered){ %>
+                <div class="form_field">
+                  <button
+                    class="togglePassword_visibility_button"
+                    type="button"
+                    aria-label="show password"
+                    title="show password"
+                    data-eyeIconButton
+                  >
+                    <i class="fas fa-eye-slash eye_icon"></i>
+                  </button>
+                  <div class="checkout_form_field_container">
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="password"
+                      required
+                      autocomplete="new-password"
+                      data-password
+                    />
+                    <label
+                      for="email"
+                      class="form_field_label"
+                      aria-hidden="false"
+                      >Password</label
+                    >
                   </div>
-                  <div class="checkout_account_login_button_container">
-                    <button type="button" class="checkout_login_button" data-checkout-account-login>Login</button>
+                  <div class="error_message">
+                    <span
+                      ><img
+                        src="/assets/errorIcon.svg"
+                        width="12"
+                        height="12"
+                        alt=""
+                    /></span>
+                    <span
+                      >Password is weak. Try combination of letters(A-z),numbers
+                      and special characters</span
+                    >
                   </div>
-                <% }  %>
+                </div>
+                <div class="checkout_account_login_button_container">
+                  <button
+                    type="button"
+                    class="checkout_login_button"
+                    data-checkout-account-login
+                  >
+                    Login
+                  </button>
+                </div>
+                <% } %>
                 <div class="form_subscribe_news_container">
                   <input
                     type="checkbox"
@@ -559,7 +589,7 @@
                     <div class="checkout_form_field_container">
                       <label for="country" aria-hidden="false" data-select-label
                         >Country/Region</label
-                      > 
+                      >
                       <select name="country" id="country">
                         <option value="Pakistan">Pakistan</option>
                       </select>
