@@ -36,7 +36,6 @@ const app: Express = express();
 const mongoClientPromise: Promise<MongoClient> = new Promise(
   (resolve, reject) => {
     mongoose.connection.on("connected", () => {
-      logger.info("Connected to database ✔");
       const client: MongoClient | unknown = mongoose.connection.getClient();
       if (client) resolve(client as MongoClient);
     });

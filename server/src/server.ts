@@ -6,7 +6,7 @@ import { url } from "inspector";
 
 const { host, port } = configManager.getServerConfig();
 const { URI, name } = configManager.getDatabaseConfig();
-
+const { env } = configManager.getEnvConfig();
 // using async local storage for transactions
 mongoose.set("transactionAsyncLocalStorage", true);
 
@@ -16,6 +16,8 @@ mongoose
     dbName: name,
   })
   .then(() => {
+    logger.info(`[---------------- ENV: ${env} -------------------]`);
+    logger.info("Connected to database ✔");
     app.listen(port, host, () => {
       logger.info(`Server listening at http://127.0.0.1:${port}`);
     });

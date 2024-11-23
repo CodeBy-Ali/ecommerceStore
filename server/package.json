@@ -6,9 +6,10 @@
   "scripts": {
     "start": "nodemon dist/index.js",
     "dev": "tsx watch ./src/server.ts",
-    "build": "tsc",
+    "build": "babel src --out-dir build --extensions .ts,.tsx",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
+   "browserslist": "> 0.25%, not dead",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -30,6 +31,8 @@
     "winston": "^3.13.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.25.9",
+    "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-typescript": "^7.24.7",
     "@types/bcrypt": "^5.0.2",
