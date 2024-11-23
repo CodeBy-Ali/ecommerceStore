@@ -298,7 +298,8 @@ header:has(.dropDown_mobile_container.open){
   height: 0%;
   visibility: hidden;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
+  top: $height-header-sm;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -441,4 +442,7 @@ header:has(.dropDown_mobile_container.open){
   grid-template-columns: 1fr 1fr;
   gap: .8rem;
   margin-top: auto;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
