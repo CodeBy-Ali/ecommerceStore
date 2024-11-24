@@ -10,6 +10,8 @@ import {
 import { IPopulatedCartItem } from "../utils/userUtils.ts";
 import { createApiError } from "../middlewares/errorHandler.ts";
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid";
+import { getRandomString } from "../utils/utils.ts";
 
 export const createOrder = async (
   req: Request,
@@ -28,7 +30,7 @@ export const createOrder = async (
       );
     const connection = mongoose.connection;
     await connection.transaction(async () => {
-      const orderInfo = await getOrderInfo(req.body,user._id);
+      const orderInfo = await getOrderInfo(req.body, user._id);
       const order = new Order(orderInfo);
       await order.save();
       await removeOrderedItemsFromCart(body.cartId);
@@ -50,7 +52,10 @@ async function removeOrderedItemsFromCart(
   }
 }
 
-async function getOrderInfo(reqBody: ICheckoutRequestBody,userId: mongoose.Types.ObjectId): Promise<IOrder> {
+async function getOrderInfo(
+  reqBody: ICheckoutRequestBody,
+  userId: mongoose.Types.ObjectId
+): Promise<IOrder> {
   const { shippingAddressId } = reqBody;
   if (!shippingAddressId || !mongoose.isValidObjectId(shippingAddressId)) {
     throw createApiError(404, "User Order shipping address not found", "fail");
@@ -82,6 +87,8 @@ async function getOrderInfo(reqBody: ICheckoutRequestBody,userId: mongoose.Types
 }
 
 async function createOrderId() {
+  const baseString = "#PHL";
   const orderNumber = (await Order.find({})).length + 1;
-  return "#PHL" + orderNumber.toString();
+  const randomString = getRandomString(3);
+  return baseString + randomString + orderNumber.toString();
 }
