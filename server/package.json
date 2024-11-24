@@ -4,7 +4,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon dist/index.js",
+    "start": "node build/server.js",
     "dev": "tsx watch ./src/server.ts",
     "build": "babel src --out-dir build --extensions .ts,.tsx",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
