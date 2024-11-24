@@ -3,6 +3,7 @@ import app from "./app/app.ts";
 import mongoose from "mongoose";
 import logger from "./config/logger.ts";
 import { url } from "inspector";
+import setApiTestRequestInterval from "./config/testRequest.ts";
 
 const { host, port } = configManager.getServerConfig();
 const { URI, name } = configManager.getDatabaseConfig();
@@ -21,6 +22,7 @@ mongoose
     app.listen(port, host, () => {
       logger.info(`Server listening at http://127.0.0.1:${port}`);
     });
+    setApiTestRequestInterval();
   })
   .catch((error: any) => {
     console.log(error);

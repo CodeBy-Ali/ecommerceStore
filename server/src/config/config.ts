@@ -12,6 +12,8 @@ const __dirname = path.dirname(__filename);
 const envPath = path.join(__dirname,'..','..','.env');
 dotenv.config({ path: envPath });
 
+type Env = "DEV" | "PROD" | "TEST";
+
 class ConfigManager{
   private serverConfig: { host: string, port: number };
   private databaseConfig: {URI: string,name:string};
@@ -21,8 +23,8 @@ class ConfigManager{
   private nanoIdConfig: { alphabet: string,size: number };
   private corsConfig: { origin: string };
   private cacheConfig: {cacheAssets:boolean,maxAge: number}
-  private envConfig: {env:string,isProduction:boolean,isTesting:boolean,isDevelopment:boolean}
-  private env: string = process.argv[2] || process.env.NODE_ENV?.toUpperCase() || 'DEV';
+  private envConfig: {env:Env,isProduction:boolean,isTesting:boolean,isDevelopment:boolean}
+  private env: Env = process.argv[2] as Env || process.env.NODE_ENV?.toUpperCase() || 'DEV';
   private static instance: ConfigManager;
 
 
