@@ -9,9 +9,11 @@
     "preserveConstEnums": true,
     "strict": true,
     "esModuleInterop": true,
-    "outDir": "./dist",
+    "outDir": "./build",
     "moduleDetection": "force",
     "forceConsistentCasingInFileNames": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
     // "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
