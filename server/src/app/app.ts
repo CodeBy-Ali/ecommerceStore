@@ -7,6 +7,7 @@ import orderRoutes from "../routes/orderRoutes.ts";
 import productRoutes from "../routes/productRoutes.ts";
 import collectionRoutes from "../routes/collectionRoutes.ts";
 import accountRoutes from "../routes/accountRoutes.ts";
+import apiTestRoutes from "../routes/testRoutes.ts";
 import session, { Cookie } from "express-session";
 import MongoStore from "connect-mongo";
 import { v4 as uuidv4 } from "uuid";
@@ -96,6 +97,7 @@ app.use("/cart", cartRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/account",accountRoutes);
+app.use("/test", apiTestRoutes);
 // response to unhandled routes
 app.all("*", unassignedRoutesHandler);
 

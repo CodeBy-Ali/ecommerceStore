@@ -23,6 +23,7 @@ class ConfigManager{
   private nanoIdConfig: { alphabet: string,size: number };
   private corsConfig: { origin: string };
   private cacheConfig: {cacheAssets:boolean,maxAge: number}
+  private apiTestConfig: {secret:string}
   private envConfig: {env:Env,isProduction:boolean,isTesting:boolean,isDevelopment:boolean}
   private env: Env = process.argv[2] as Env || process.env.NODE_ENV?.toUpperCase() || 'DEV';
   private static instance: ConfigManager;
@@ -67,6 +68,9 @@ class ConfigManager{
       isDevelopment: this.env === 'DEV',
       isTesting: this.env === 'TEST',
     }  
+    this.apiTestConfig = {
+      secret: process.env.API_TEST_SECRET || "alkjbladSecretsdlfj"
+    }
   }
 
 
@@ -111,6 +115,10 @@ class ConfigManager{
 
   public getEnvConfig() {
     return this.envConfig;
+  }
+
+  public getApiTestConfig() {
+    return this.apiTestConfig;
   }
 }
 
