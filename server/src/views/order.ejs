@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Muhammad Ali Hassan" />
-    <script type="module" crossorigin src="/assets/main.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/main.css" />
+    <%- include("./partials/_documentHead.ejs")  %>
     <title>Thank you! <%= order.shippingAddress.firstName %> - Phil's Refills</title>
   </head>
   <body data-page="order">
