@@ -19,7 +19,7 @@ import { renderUserAccountView } from "../controllers/pagesController.ts";
 const router: Router = Router();
 
 
-router.get("/", renderUserAccountView);
+router.get("/",protectRoute, renderUserAccountView);
 
 router.get("/register", (req, res, next) =>
   renderAuthView("register", req, res, next)

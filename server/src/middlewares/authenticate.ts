@@ -4,7 +4,7 @@ import logger from "../config/logger.ts";
 // checks if matching userId is present in the session store
 export const protectRoute = (req: Request, res: Response, next: NextFunction) => {
   if (req.session.user) next();
-  else res.redirect("/login");
+  else res.redirect("/account/login");
 };
 
 export const isAuthorized = (req: Request, res: Response, next: NextFunction) => {
