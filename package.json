@@ -5,6 +5,7 @@
     "build:server": "cd server && npm run build",
     "build": "npm run build:client && npm run build:server",
     "start": "cd server && npm run start PROD",
+    "dev": "npm run dev --prefix server && npm run watch:build --prefix client",
     "preview": "npm run install && npm run build && npm run start"
   }
 }

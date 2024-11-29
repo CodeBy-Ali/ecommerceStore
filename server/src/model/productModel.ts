@@ -8,10 +8,10 @@ export type ProductCategory =
   | "moisturizer"
   | "shave"
   | "shampoo"
-  | "rephils"
+  | "rephil"
   | "bodyWash"
   | "conditioner"
-  | "cleansers";
+  | "cleanser";
 
 export interface IProduct {
   title: string;
@@ -81,10 +81,10 @@ const productSchema = new Schema<IProduct>(
           "moisturizer",
           "shave",
           "shampoo",
-          "rephils",
+          "rephil",
           "bodyWash",
           "conditioner",
-          "cleansers",
+          "cleanser",
         ],
       },
     ],

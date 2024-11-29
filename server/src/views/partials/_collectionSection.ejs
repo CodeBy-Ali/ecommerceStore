@@ -1,0 +1,29 @@
+<section class="category_section" id="<%= id %>">
+  <div class="category_section_wrapper">
+    <div class="category_section_header">
+      <h2>
+        <a href="/collections/<%= id %>"><%= name %></a>
+      </h2>
+      <p>
+        <span><%= products.length %></span>
+        <span>PRODUCT<%= products.length > 1 ? "S" : "" %></span>
+      </p>
+    </div>
+    <div class="products_container">
+      <ul>
+        <% products.forEach(product =>{ %>
+        <li class="product_list_item">
+          <%- include("./_productCard.ejs",{product})  %>
+        </li>
+        <% }) %> 
+        
+        <% if(banner){ %>
+        <li class="banner_card_wrapper">
+          <%- include("./_productBanner.ejs")  %>                
+        </li>
+
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</section>
