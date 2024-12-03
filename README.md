@@ -115,8 +115,8 @@ The backend serves as the API server and handles business logic, data management
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/full-stack-ecommerce.git
-   cd full-stack-ecommerce
+   git clone https://github.com/MAliHassanDev/ecommerceStore.git
+   cd ecommerceStore
 2. Install dependencies:
    ```bash 
    npm install
