@@ -1,11 +1,14 @@
-import { SessionOptions } from "express-session";
-import config from "../config/config.ts";
-import mongoose from "mongoose";
-import { MongoClient } from "mongodb";
 import MongoStore from "connect-mongo";
+import session, { SessionOptions } from "express-session";
+import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
+import config from "../config/config.ts";
 
-
+export interface UserSession {
+  _id: mongoose.Types.ObjectId;
+  isRegistered: boolean;
+}
 // crate client promise to reuse the mongo db connection;
 const mongoClientPromise: Promise<MongoClient> = new Promise(
   (resolve, reject) => {
@@ -15,6 +18,7 @@ const mongoClientPromise: Promise<MongoClient> = new Promise(
     });
   }
 );
+
 
 function getSessionConfig(): SessionOptions {
   const sessionName = config.getSessionConfig().name;
@@ -40,4 +44,6 @@ function getSessionConfig(): SessionOptions {
   };
 }
 
-export default getSessionConfig;
+
+const sessionMiddleware = session(getSessionConfig());
+export default sessionMiddleware;

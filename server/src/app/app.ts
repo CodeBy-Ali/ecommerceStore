@@ -9,20 +9,11 @@ import collectionRoutes from "../routes/collectionRoutes.ts";
 import accountRoutes from "../routes/accountRoutes.ts";
 import apiTestRoutes from "../routes/testRoutes.ts";
 import session, { Cookie } from "express-session";
-import mongoose from "mongoose";
 import errorHandler from "../middlewares/errorHandler.ts";
 import unassignedRoutesHandler from "../middlewares/unassignedRoutes.ts";
 import cors from "cors";
 import logRequest from "../middlewares/logRequest.ts";
-import getSessionConfig from './session.ts';
-
-
-
-
-export interface UserSession {
-  _id: mongoose.Types.ObjectId;
-  isRegistered: boolean;
-}
+import sessionMiddleware from "../middlewares/expresssSession.ts";
 
 //  config constants
 const staticDir = config.getDirConfig().static;
@@ -39,10 +30,7 @@ app.use(
 );
 
 // initialize session
-app.use(
-  session(getSessionConfig())
-);
-
+app.use(sessionMiddleware);
 
 // set view engine
 app.set("view engine", "ejs");
@@ -72,7 +60,7 @@ app.use("/collections", collectionRoutes);
 app.use("/cart", cartRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
-app.use("/account",accountRoutes);
+app.use("/account", accountRoutes);
 app.use("/test", apiTestRoutes);
 // response to unhandled routes
 app.all("*", unassignedRoutesHandler);
