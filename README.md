@@ -119,7 +119,7 @@ The backend serves as the API server and handles business logic, data management
    cd ecommerceStore
 2. Install dependencies:
    ```bash 
-   npm install
+   npm install:dev
 3. Set up environment variables: Create a `.env` file in the root directory with the 
    following keys:
  - `DATABASE_NAME`=your-mongodb-database-name
