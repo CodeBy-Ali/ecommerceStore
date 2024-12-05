@@ -1,11 +1,12 @@
 {
   "scripts": {
     "install": "npm install --prefix client --production=false && npm install --prefix server --production=false",
+    "install:dev": "cd client && npm install && cd .. && cd server && npm install",
     "build:client": "cd client && npm run build",
     "build:server": "cd server && npm run build",
     "build": "npm run build:client && npm run build:server",
     "start": "cd server && npm run start PROD",
-    "dev": "npm run dev --prefix server && npm run watch:build --prefix client",
+    "dev": "npm run build:client && npm run dev --prefix server",
     "preview": "npm run install && npm run build && npm run start"
   }
 }
