@@ -153,7 +153,6 @@ export function handleAddToCart(e: Event): void {
   const productId = actionButton
     .closest("form")
     ?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
-  console.log("Product Id",productId);
   const productQuantity = 1;
   if (!productId) {
     showNotification(
