@@ -19,7 +19,6 @@ const mongoClientPromise: Promise<MongoClient> = new Promise(
   }
 );
 
-
 function getSessionConfig(): SessionOptions {
   const sessionName = config.getSessionConfig().name;
   const sessionSecret = config.getSessionConfig().secret;
@@ -43,7 +42,6 @@ function getSessionConfig(): SessionOptions {
     },
   };
 }
-
 
 const sessionMiddleware = session(getSessionConfig());
 export default sessionMiddleware;

@@ -15,9 +15,10 @@ import cors from "cors";
 import logRequest from "../middlewares/logRequest.ts";
 import sessionMiddleware from "../middlewares/expresssSession.ts";
 
+
 //  config constants
 const staticDir = config.getDirConfig().static;
-
+const { isProduction} = config.getEnvConfig();
 // create app instance
 const app: Express = express();
 
@@ -28,6 +29,11 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
+
+if (isProduction) {
+  app.set('trust proxy', 1);
+}
 
 // initialize session
 app.use(sessionMiddleware);
