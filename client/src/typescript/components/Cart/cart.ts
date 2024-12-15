@@ -7,9 +7,8 @@ import {
   limitQuantityToStock,
   updateItemQuantity,
   getTotalCartItemsQuantity,
-  withProcessingState,
 } from "../utils/cartUtils";
-import { handleApiResponse } from "../utils/pagesUtils";
+import { handleApiResponse, showNotification } from "../utils/pagesUtils";
 
 interface IProduct {
   title: string;
@@ -78,12 +77,12 @@ function innitCartEventListeners(): void {
   overLay?.addEventListener("click", toggleCartDrawer);
   ["click", "input"].forEach((event) => {
     itemQuantityContainers.forEach((itemContainer) => {
-      itemContainer.addEventListener(event, handleAddToCartClick);
+      itemContainer.addEventListener(event, handleCartItemQuantityUpdate);
     });
   });
 }
 
-function handleAddToCartClick(e: Event): void {
+function handleCartItemQuantityUpdate(e: Event): void {
   const quantityContainer = e.currentTarget as HTMLDivElement;
   const clickedElement = e.target as HTMLElement;
   if (e.type === "click" && clickedElement.tagName !== "BUTTON") return;
@@ -100,27 +99,6 @@ function handleAddToCartClick(e: Event): void {
   const itemId = getCartItemId(quantityContainer);
   if (!itemId) return;
   storeUpdatedQuantityInDB(itemId, updatedQuantity);
-}
-
-async function removeProductFromCart(e: Event): Promise<void> {
-  const removeButton = e.target as HTMLElement;
-  const itemId = removeButton.getAttribute("data-item-id");
-  try {
-    if (!itemId) throw new Error("Failed to get item ID");
-    const response = await fetch(`/cart/items/${itemId}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-      },
-    });
-    const responseBody = await response.json();
-    handleApiResponse<ICartData>(responseBody, updateCartState, [
-      "cart",
-      "shippingConfig",
-    ]);
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 async function storeUpdatedQuantityInDB(
@@ -150,8 +128,31 @@ async function storeUpdatedQuantityInDB(
   }
 }
 
-export const addProductToCart = withProcessingState(
-  async (productId: string, quantity: number) => {
+async function removeProductFromCart(e: Event): Promise<void> {
+  const removeButton = e.target as HTMLElement;
+  const itemId = removeButton.getAttribute("data-item-id");
+  try {
+    if (!itemId) throw new Error("Failed to get item ID");
+    const response = await fetch(`/cart/items/${itemId}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    const responseBody = await response.json();
+    handleApiResponse<ICartData>(responseBody, updateCartState, [
+      "cart",
+      "shippingConfig",
+    ]);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const addProductToCart = async (productId: string, quantity: number) => {
+  if (!quantity) quantity = 1;
+  try {
+    if (!productId) throw new Error("Missing required argument: ProductId");
     const response = await fetch("/cart/items", {
       method: "POST",
       headers: {
@@ -169,8 +170,14 @@ export const addProductToCart = withProcessingState(
       "shippingConfig",
     ]);
     toggleCartDrawer();
+  } catch (err: unknown) {
+    console.log(err);
+    showNotification(
+      "Failed to add product to cart. Please try again later..",
+      false
+    );
   }
-);
+};
 
 function updateCartState(data: ICartData) {
   const totalCartItems = getTotalCartItemsQuantity(data.cart.items);

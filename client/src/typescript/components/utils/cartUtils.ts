@@ -1,10 +1,9 @@
 import DOMUtils from "./domUtils";
 import {
-  enterProcessingState,
-  exitProcessingState,
   showNotification,
 } from "./pagesUtils";
 import { addProductToCart, ICartItem } from "../Cart/cart";
+import AsyncButton from "../asyncButton/asyncButton";
 
 // closes and opens the cart menu
 export const toggleCartDrawer = (): void => {
@@ -123,44 +122,17 @@ export const limitQuantityToStock = (
   if (decreaseButton) decreaseButton.disabled = itemQuantity <= minQuantity;
 };
 
-export function withProcessingState(
-  fn: (productId: string, quantity: number) => Promise<void>
-) {
-  return async (
-    actionButton: HTMLButtonElement,
-    productId: string,
-    quantity: number
-  ): Promise<void> => {
-    actionButton && enterProcessingState(actionButton);
-    if (!quantity) quantity = 1;
-    try {
-      if (!productId) throw new Error("Missing required argument: ProductId");
-      await fn(productId, quantity);
-    } catch (error) {
-      console.log(error);
-      showNotification(
-        "Failed to add product to cart. Please try again later..",
-        false
-      );
-    } finally {
-      actionButton && exitProcessingState(actionButton);
-    }
-  };
-};
 
-export function handleAddToCart(e: Event): void {
+export function handleAddToCartClick(e:Event) {
   const actionButton = e.target as HTMLButtonElement;
-  const productId = actionButton
-    .closest("form")
-    ?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
-  console.log("Product Id",productId);
-  const productQuantity = 1;
+  const productId = actionButton.closest('form')?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
+  const quantityInputFiled = document.querySelector<HTMLInputElement>("input[data-product-quantity-input]");
+  if (!quantityInputFiled) return;
   if (!productId) {
-    showNotification(
-      "Failed to add product to cart. Please try again later..",
-      false
-    );
+    showNotification("Failed to add product to cart. Please try again later..", false);
     throw new Error("Missing required argument: ProductId");
   }
-  addProductToCart(actionButton, productId, productQuantity);
+  const quantity = Number(quantityInputFiled.value);
+  const asyncButton = new AsyncButton(actionButton);
+  asyncButton.withProcessingState(addProductToCart, [productId, quantity]);
 }

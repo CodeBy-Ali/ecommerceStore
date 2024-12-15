@@ -77,6 +77,10 @@
     display: block;
     margin-top: 6.4rem;
     margin-bottom: 2.4rem;
+    transition: opacity .3s ease;
+    &:active{
+      opacity: .8;
+    }
   }
 
   &--orderConfirmationPage{

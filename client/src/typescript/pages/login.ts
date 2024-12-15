@@ -1,3 +1,4 @@
+import AsyncButton from "../components/asyncButton/asyncButton";
 import DOMUtils from "../components/utils/domUtils";
 import {
   initPasswordVisibilityToggle,
@@ -8,12 +9,12 @@ import areFormElementsValid from "../components/validator/validator";
 export interface ISignInReqBody {
   email: string;
   password: string;
-  returnTo?:string,
+  returnTo?: string;
 }
 
 export const submitLoginForm = async (
   formElements: HTMLInputElement[],
-  returnTo?:string,
+  returnTo?: string
 ): Promise<void> => {
   if (!areFormElementsValid(formElements)) return;
 
@@ -28,7 +29,7 @@ export const submitLoginForm = async (
     email: emailField?.value,
     password: passwordField?.value,
   };
-  
+
   if (returnTo) signInReqBody.returnTo = returnTo;
 
   try {
@@ -54,34 +55,33 @@ export const submitLoginForm = async (
 
 //  initialize Register page
 const initLoginPage = (): void => {
-  const eyeIconButton= document.querySelector<HTMLButtonElement>(
+  const eyeIconButton = document.querySelector<HTMLButtonElement>(
     "[data-eyeIconButton]"
   );
   const passwordField = document.querySelector(
     "[data-password]"
   ) as HTMLInputElement;
-  const signInButton: HTMLElement | null = DOMUtils.getElement<HTMLButtonElement>('[data-signIn-button]')
+  const signInButton: HTMLButtonElement | null =
+    DOMUtils.getElement<HTMLButtonElement>("[data-signIn-button]");
   const signInForm = document.querySelector(
     "[data-signInForm]"
   ) as HTMLFormElement;
 
   if (!passwordField || !eyeIconButton) return;
 
-  initPasswordVisibilityToggle(eyeIconButton,passwordField)
-  
+  initPasswordVisibilityToggle(eyeIconButton, passwordField);
 
-  if (signInButton) {
-    signInButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (!signInForm || signInForm.elements.length < 2) {
-        throw new Error("SingIn form elements are missing or form is invalid");
-      }
-      const formElements = Array.from(
-        signInForm.elements
-      ) as HTMLInputElement[];
-      submitLoginForm(formElements);
-    });
-  }
+  if (!signInButton) return;
+
+  signInButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!signInForm || signInForm.elements.length < 2) {
+      throw new Error("SingIn form elements are missing or form is invalid");
+    }
+    const formElements = Array.from(signInForm.elements) as HTMLInputElement[];
+    const asyncButton = new AsyncButton(signInButton);
+    asyncButton.withProcessingState(submitLoginForm, [formElements]);
+  });
 };
 
 export default initLoginPage;

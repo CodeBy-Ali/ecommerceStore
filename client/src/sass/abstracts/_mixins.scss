@@ -52,7 +52,8 @@
   text-align: center;
   white-space: nowrap;
   width: fit-content;
-  transition: background-color $trans-dur linear, outline-offset $trans-dur linear;
+  transition: background-color $trans-dur linear,
+    outline-offset $trans-dur linear;
   @include flex-row-jc(center);
   @include respond-to(medium) {
     font-size: $font-size-base;
@@ -62,6 +63,14 @@
   &:hover {
     background-color: $clr-primary;
     color: white;
+  }
+  &.processing .async_button_text {
+    opacity: 0;
+  }
+
+  &.processing {
+    pointer-events: none;
+    opacity: 1;
   }
 }
 
@@ -230,7 +239,7 @@
     color: white;
   }
 
-  &:not(:placeholder-shown,[type="checkbox"]) + label,
+  &:not(:placeholder-shown, [type="checkbox"]) + label,
   &:focus + label {
     top: 0.5rem;
     font-size: 0.9rem;
@@ -303,7 +312,7 @@
       gap: 2rem;
       align-items: center;
       grid-template-columns: 13rem 1fr;
-      & .empty_cart_collection_image_container{
+      & .empty_cart_collection_image_container {
         max-width: 13rem;
         max-height: 8.6rem;
         border-radius: 1rem;
@@ -316,7 +325,6 @@
           border-radius: 1rem;
         }
       }
-  
 
       & > div:last-child h4 {
         font-size: $font-size-md;
@@ -356,15 +364,14 @@
     }
     -moz-appearance: textfield;
   }
-  
-  
+
   & > button {
     font-weight: $font-semibold;
     background-color: transparent;
     border: none;
     padding-block: 1rem;
-    
-    &:not(:disabled){
+
+    &:not(:disabled) {
       color: $clr-primary;
     }
 
@@ -404,11 +411,11 @@
 
 @mixin accordion {
   font-size: $font-size-xsm;
-  
+
   &:last-child {
     border-bottom: 0.5px solid rgba(255, 255, 255, 0.507);
   }
-  
+
   & .accordion_button {
     background-color: transparent;
     border: none;
@@ -423,7 +430,7 @@
       width: 2rem;
     }
   }
-  
+
   & .accordion_heading {
     display: none;
     font-size: $font-size-sm;
@@ -431,7 +438,7 @@
     margin-bottom: 1.6rem;
     font-weight: $font-semibold;
   }
-  
+
   & .accordion_itemList li:last-child {
     margin-bottom: 1.5rem;
   }
@@ -441,7 +448,7 @@
     overflow: hidden;
     transition: max-height $transition-time-accordion ease;
     visibility: none;
-    &.open{
+    &.open {
       visibility: visible;
     }
   }
@@ -454,8 +461,7 @@
     color: $clr-primary;
   }
 
-
-  & .accordion_itemList{
+  & .accordion_itemList {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -463,12 +469,12 @@
       color: white;
     }
   }
-  
-  & .accordion_button_arrowIcon  img{
+
+  & .accordion_button_arrowIcon img {
     transition: transform $transition-time-accordion ease;
   }
 
-  & .accordion_button.open .accordion_button_arrowIcon img{
+  & .accordion_button.open .accordion_button_arrowIcon img {
     transform: rotate(180deg);
   }
   @include respond-to(small) {
@@ -476,10 +482,7 @@
   }
 }
 
-
-
-
-@mixin overLay($transitionTime: .5s){
+@mixin overLay($transitionTime: 0.5s) {
   position: fixed;
   top: -$height-header-sm;
   height: calc(100% + $height-header-sm);
@@ -489,12 +492,12 @@
   visibility: hidden;
   z-index: $z-index-overlay;
   transition: all $transitionTime ease-in;
-  @include respond-to(medium){
+  @include respond-to(medium) {
     top: -$height-header-lg;
     height: calc(100% + $height-header-lg);
   }
-  &.active{
-    opacity: .4;
+  &.active {
+    opacity: 0.4;
     visibility: visible;
   }
 }

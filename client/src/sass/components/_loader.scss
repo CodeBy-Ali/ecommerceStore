@@ -1,7 +1,22 @@
 @use "../abstracts/animations" as *;
 
+.loading_animation_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: none;
+  height: 80%;
+}
+
+
+button.async_button.processing .loading_animation_wrapper{
+ display: block;
+}
+
 .loader {
-  width: 40px;
+  height:  100%;
   --b: 7px;
   aspect-ratio: 1;
   border-radius: 50%;

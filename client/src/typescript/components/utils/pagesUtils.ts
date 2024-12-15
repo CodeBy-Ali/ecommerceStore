@@ -1,8 +1,9 @@
 import DOMUtils from "./domUtils";
 import { apiStatus } from "../../../config/config";
 import { addProductToCart } from "../Cart/cart";
+import AsyncButton from "../asyncButton/asyncButton";
 
-export interface IFormData{
+export interface IFormData {
   [field: string]: string | boolean | undefined;
 }
 
@@ -32,8 +33,6 @@ export function handleApiResponse<T>(
   implementation(data);
 }
 
-
-
 export const showNotification = (message: string, success: boolean): void => {
   const notificationCenter = document.querySelector(
     "[data-notification-center]"
@@ -57,22 +56,7 @@ export const showNotification = (message: string, success: boolean): void => {
   setTimeout(() => notificationCenter?.removeChild(notification), 4000);
 };
 
-export const enterProcessingState = (element: HTMLElement) => {
-  if (!element)
-    return console.log("Valid HTMLElement required to add loading animation.");
-  DOMUtils.addClass(element, "processing");
-};
-
-export const exitProcessingState = (element: HTMLElement) => {
-  if (!element)
-    return console.log(
-      "Valid HTMLElement required to remove loading animation."
-    );
-  DOMUtils.removeClass(element, "processing");
-};
-
-
-export function handleAddToCartClick(e: Event) {
+export function handleCartProductQuantityUpdate(e: Event) {
   const actionButton = e.target as HTMLButtonElement;
   const productId = actionButton.getAttribute("data-productId");
   const quantityInputFiled = document.querySelector<HTMLInputElement>(
@@ -87,7 +71,11 @@ export function handleAddToCartClick(e: Event) {
     throw new Error("Missing required argument: ProductId");
   }
   const quantity = Number(quantityInputFiled.value);
-  addProductToCart(actionButton, productId, quantity);
+  const asyncButton = new AsyncButton(actionButton);
+  asyncButton.withProcessingState<[string, number]>(addProductToCart, [
+    productId,
+    quantity,
+  ]);
 }
 // TODO replace the formData interface with more strict an type safe one
 // TODO remove for loop and nested if conditions
@@ -110,8 +98,8 @@ export function extractFormData(form: HTMLFormElement) {
       case "checkbox":
         value = element.checked;
         break;
-      default: 
-        value = element.value.length > 0 ? element.value : null
+      default:
+        value = element.value.length > 0 ? element.value : null;
     }
     return value;
   }
@@ -153,7 +141,6 @@ export async function submitForm<T>(url: string, body: T) {
     console.error(error);
   }
 }
-
 
 export function initPasswordVisibilityToggle(
   togglePasswordBtn: HTMLButtonElement,

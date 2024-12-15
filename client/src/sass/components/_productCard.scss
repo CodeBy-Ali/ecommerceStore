@@ -179,16 +179,3 @@
     opacity: 1;
   }
 }
-
-.addToCart_loading_animation_wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  display: none;
-}
-
-.addTOCart_action_btn.processing .addToCart_loading_animation_wrapper {
-  display: block;
-}
