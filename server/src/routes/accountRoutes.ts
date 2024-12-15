@@ -7,7 +7,7 @@ import {
   validateCheckoutReqBody,
   validateShippingAddressReqBody,
 } from "../middlewares/validator.ts";
-import { redirectIfRegistered } from "../middlewares/authenticate.ts";
+import { redirectToHomeIfRegistered } from "../middlewares/authenticate.ts";
 import {
   registerNewUser,
   renderAuthView,
@@ -18,20 +18,24 @@ import { renderUserAccountView } from "../controllers/pagesController.ts";
 
 const router: Router = Router();
 
+router.get("/", protectRoute, renderUserAccountView);
 
-router.get("/",protectRoute, renderUserAccountView);
-
-router.get("/register", (req, res, next) =>
+router.get("/register", redirectToHomeIfRegistered, (req, res, next) =>
   renderAuthView("register", req, res, next)
 );
 
-router.get("/login", (req, res, next) =>
+router.get("/login", redirectToHomeIfRegistered, (req, res, next) =>
   renderAuthView("login", req, res, next)
 );
 
 router.post("/register", validateRegisterBody, registerNewUser);
 
-router.post("/login", validateAuthBody, redirectIfRegistered, authenticateUser);
+router.post(
+  "/login",
+  validateAuthBody,
+  redirectToHomeIfRegistered,
+  authenticateUser
+);
 
 router.post("/logout", logoutUser);
 
