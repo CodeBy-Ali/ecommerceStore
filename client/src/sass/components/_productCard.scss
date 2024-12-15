@@ -155,6 +155,10 @@
   &.processing {
     pointer-events: none;
     opacity: 1;
+
+    & .plus_icon_btn{
+      opacity: 0;
+    }
   }
   @include respond-to(small) {
     opacity: 0;
