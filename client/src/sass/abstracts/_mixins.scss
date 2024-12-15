@@ -64,14 +64,7 @@
     background-color: $clr-primary;
     color: white;
   }
-  &.processing .async_button_text {
-    opacity: 0;
-  }
-
-  &.processing {
-    pointer-events: none;
-    opacity: 1;
-  }
+  
 }
 
 // centers the element with in its parent using position absolute;
