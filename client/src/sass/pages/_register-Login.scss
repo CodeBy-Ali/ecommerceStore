@@ -44,7 +44,7 @@
     margin-top: 0;
   }
 }
-
+ 
 .togglePassword_visibility_button{
   position: absolute;
   right: 2rem;
@@ -61,3 +61,6 @@
   }
 }
 
+.form_field:has(.validationFailed) .togglePassword_visibility_button{
+  bottom: 64%;
+}
