@@ -232,7 +232,7 @@
     </div>
   </nav>
   <div class="mobile_signUp_link_container">
-    <% if(user) { %>
+    <% if(user && user.isRegistered) { %>
       <a href="/account" class="button--authButton">My Account</a>
       <a href="/account/logout" class="button--authButton">Log Out</a>
     <% }else { %>
