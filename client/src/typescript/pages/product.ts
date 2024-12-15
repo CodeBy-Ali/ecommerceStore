@@ -1,8 +1,6 @@
 import { productImageSlider, additionalProductSlider } from "../components/imageSlider/imageSlider";
 import DOMUtils from "../components/utils/domUtils";
-import { addProductToCart } from "../components/Cart/cart";
-import { updateItemQuantity } from "../components/utils/cartUtils";
-import { showNotification } from "../components/utils/pagesUtils";
+import { handleAddToCartClick, updateItemQuantity } from "../components/utils/cartUtils";
 import initAccordion from "../components/accordion/accordion";
 
 const initProductPage = () => {
@@ -17,18 +15,6 @@ const initProductPage = () => {
   additionalProductSlider(); 
 };
 
-export function handleAddToCartClick(e:Event) {
-  const actionButton = e.target as HTMLButtonElement;
-  const productId = actionButton.closest('form')?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
-  const quantityInputFiled = document.querySelector<HTMLInputElement>("input[data-product-quantity-input]");
-  if (!quantityInputFiled) return;
-  if (!productId) {
-    showNotification("Failed to add product to cart. Please try again later..", false);
-    throw new Error("Missing required argument: ProductId");
-  }
-  const quantity = Number(quantityInputFiled.value);
-  addProductToCart(actionButton, productId, quantity);
-}
 
 function productQuantitySpinner() {
   const productQuantityContainer = DOMUtils.getElement<HTMLDivElement>("[data-product-quantity-wrapper]");

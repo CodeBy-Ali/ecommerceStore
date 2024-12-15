@@ -25,6 +25,7 @@ export const renderAuthView = async (viewName: string,req:Request, res:Response,
 
 export const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    console.log("logout request")
     req.session.destroy((err:unknown) => {
       if (err) next(err);
       res.redirect("/");

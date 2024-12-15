@@ -1,4 +1,4 @@
-import { handleAddToCart } from "../components/utils/cartUtils";
+import { handleAddToCartClick } from "../components/utils/cartUtils";
 import DOMUtils from "../components/utils/domUtils";
 
 // returns true of the given element is visible with in viewport else returns false
@@ -31,7 +31,7 @@ const moveInnerScroller = (innerScroller: HTMLElement): void => {
   }
 };
 
-function moveProductImage(distanceInRem:string,...elements: HTMLElement[]) {
+function moveProductImage(distanceInRem: string, ...elements: HTMLElement[]) {
   elements.forEach((element) => {
     const isInView = isElementInView(element, "half");
     if (isInView) {
@@ -46,7 +46,9 @@ const initScrollAnimations = () => {
   const squalaneProductImage = DOMUtils.getElement<HTMLDivElement>(
     "[data-squalane-image-container]"
   );
-  const clinicalProductImage = DOMUtils.getElement<HTMLElement>("[data-clinical-product-image-container]");
+  const clinicalProductImage = DOMUtils.getElement<HTMLElement>(
+    "[data-clinical-product-image-container]"
+  );
   const innerScroller: HTMLElement | null = document.querySelector(
     "[data-imageInnerScroller]"
   ) as HTMLElement;
@@ -61,7 +63,7 @@ const initScrollAnimations = () => {
     if (windowWidth > laptopScreen) {
       moveProductImage("-7rem", squalaneProductImage);
       moveProductImage("7rem", clinicalProductImage);
-    };
+    }
   });
 };
 
@@ -70,7 +72,7 @@ const initAddToCart = () => {
     "[data-add-to-cart-btn]"
   );
   addToCartButtons?.forEach((button) =>
-    button.addEventListener("click", handleAddToCart)
+    button.addEventListener("click", handleAddToCartClick)
   );
 };
 
