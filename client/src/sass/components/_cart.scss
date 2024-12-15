@@ -1,6 +1,8 @@
 @use "../abstracts/variables" as *;
 @use "../abstracts/mixins" as *;
 
+// TODO add scroll bar
+
 .cart_drawer-section {
   position: fixed;
   right: 0;
