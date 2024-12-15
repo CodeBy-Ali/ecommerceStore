@@ -1,7 +1,5 @@
 import DOMUtils from "./domUtils";
-import {
-  showNotification,
-} from "./pagesUtils";
+import { showNotification } from "./pagesUtils";
 import { addProductToCart, ICartItem } from "../Cart/cart";
 import AsyncButton from "../asyncButton/asyncButton";
 
@@ -122,15 +120,18 @@ export const limitQuantityToStock = (
   if (decreaseButton) decreaseButton.disabled = itemQuantity <= minQuantity;
 };
 
-
-export function handleAddToCartClick(e:Event) {
+export function handleAddToCartClick(e: Event, quantity = 1) {
   const actionButton = e.currentTarget as HTMLButtonElement;
-  const productId = actionButton.closest('form')?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
+  const productId = actionButton
+    .closest("form")
+    ?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
   if (!productId) {
-    showNotification("Failed to add product to cart. Please try again later..", false);
+    showNotification(
+      "Failed to add product to cart. Please try again later..",
+      false
+    );
     throw new Error("Missing required argument: ProductId");
   }
-  const quantity = 1;
   const asyncButton = new AsyncButton(actionButton);
   asyncButton.withProcessingState(addProductToCart, [productId, quantity]);
 }
