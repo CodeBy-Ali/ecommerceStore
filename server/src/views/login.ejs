@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include("./partials/_documentHead.ejs")  %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <%- include("./partials/_documentHead.ejs") %>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
   </head>
   <body data-page="login">
     <a class="button--skipToMain" href="#main">Skip to content</a>
@@ -26,33 +29,81 @@
           <form action="" data-signInForm class="signIn_form">
             <ul class="form_fields_list">
               <li class="form_field">
-                <input type="email" id="email" name="email" placeholder="Email" required autocomplete="email" data-email/>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  required
+                  autocomplete="email"
+                  data-email
+                />
                 <label for="email" class="" aria-hidden="false">Email</label>
                 <div class="error_message">
-                  <span><img src="/assets/errorIcon.svg" width="12" height="12" alt=""></span>
-                   <span>Email is invalid</span>
-                 </div>
+                  <span
+                    ><img
+                      src="/assets/errorIcon.svg"
+                      width="12"
+                      height="12"
+                      alt=""
+                  /></span>
+                  <span>Email is invalid</span>
+                </div>
               </li>
               <li class="form_field">
-                <button class="togglePassword_visibility_button" type="button" aria-label="show password" title="show password" data-eyeIconButton>
-                  <i class="fas fa-eye-slash eye_icon" ></i>
+                <button
+                  class="togglePassword_visibility_button"
+                  type="button"
+                  aria-label="show password"
+                  title="show password"
+                  data-eyeIconButton
+                >
+                  <i class="fas fa-eye-slash eye_icon"></i>
                 </button>
-                <input type="password" id="password" name="password" placeholder="password" data-password required />
-                <label for="password" class="" aria-hidden="false">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="password"
+                  data-password
+                  required
+                />
+                <label for="password" class="" aria-hidden="false"
+                  >Password</label
+                >
                 <div class="error_message">
-                  <span><img src="/assets/errorIcon.svg" width="12" height="12" alt=""></span>
-                   <span>Enter a strong password</span>
-                 </div>
+                  <span
+                    ><img
+                      src="/assets/errorIcon.svg"
+                      width="12"
+                      height="12"
+                      alt=""
+                  /></span>
+                  <span>Enter a strong password</span>
+                </div>
               </li>
             </ul>
 
-            <a href="" class="login_form_forgetPassword">Forgot your Password?</a>
+            <a href="" class="login_form_forgetPassword"
+              >Forgot your Password?</a
+            >
 
             <p>
-              <button type="button" class="button--formSubmit" data-signIn-button>Sign in</button>
+              <button
+                type="button"
+                class="button--formSubmit async_button"
+                data-signIn-button
+              >
+                <div class="loading_animation_wrapper">
+                  <div class="loader"></div>
+                </div>
+                <span class="async_button_text"> Sign in </span>
+              </button>
             </p>
 
-            <a href="/account/register" class="login_form_createAccount">Create account</a>
+            <a href="/account/register" class="login_form_createAccount"
+              >Create account</a
+            >
           </form>
         </section>
       </section>
