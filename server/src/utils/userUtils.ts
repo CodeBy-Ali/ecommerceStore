@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { UserSession } from "../app/app.ts";
+import { UserSession } from "../middlewares/expresssSession.ts";
 import ShippingConfig, { IShippingConfig } from "../model/settingsModel.ts";
 import User, { IUser, IUserDocument } from "../model/userModel.ts";
-import { calculateProductSubtotal, getUserCart} from "./cartUtils.ts";
+import { calculateProductSubtotal, getUserCart } from "./cartUtils.ts";
 import configManager from "../config/config.ts";
 import bcrypt from "bcrypt";
 import { IRegisterRequestBody } from "../middlewares/validator.ts";
@@ -16,15 +16,14 @@ interface IUserInfo extends UserSession {
   avatar?: string;
 }
 
-
 export interface IPopulatedCartItem {
-  product: IProductDocument,
-  quantity: number,
+  product: IProductDocument;
+  quantity: number;
 }
 
 export interface IPopulatedCart {
-  _id: string|unknown;
-  items: IPopulatedCartItem[]
+  _id: string | unknown;
+  items: IPopulatedCartItem[];
   subTotal: number;
 }
 
@@ -34,9 +33,7 @@ interface IUserConfig {
   shippingConfig: IShippingConfig | null;
 }
 
-export const getUserConfig = async (
-  userSession: UserSession | undefined
-) => {
+export const getUserConfig = async (userSession: UserSession | undefined) => {
   const emptyConfig: IUserConfig = {
     user: null,
     cart: null,
@@ -66,7 +63,7 @@ export const getUserConfig = async (
       },
     };
 
-  const cartItems = cart.items  as IPopulatedCartItem[];
+  const cartItems = cart.items as IPopulatedCartItem[];
   const subTotal = calculateProductSubtotal(cartItems);
   return {
     user: {
@@ -82,19 +79,19 @@ export const getUserConfig = async (
   };
 };
 
-
 export async function createUniqueUser(
   userInfo: IRegisterRequestBody
-): Promise<{user:IUserDocument,unique:boolean}> {
+): Promise<{ user: IUserDocument; unique: boolean }> {
   const { saltRounds } = configManager.getBcryptConfig();
   const passwordHash = await bcrypt.hash(userInfo.password, saltRounds);
 
   const duplicateUser = await User.findOne({ email: userInfo.email });
 
-  if (duplicateUser) return {
-    unique: false,
-    user: duplicateUser,
-  };
+  if (duplicateUser)
+    return {
+      unique: false,
+      user: duplicateUser,
+    };
 
   const user = new User({
     firstName: userInfo.firstName,

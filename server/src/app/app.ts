@@ -9,39 +9,18 @@ import collectionRoutes from "../routes/collectionRoutes.ts";
 import accountRoutes from "../routes/accountRoutes.ts";
 import apiTestRoutes from "../routes/testRoutes.ts";
 import session, { Cookie } from "express-session";
-import MongoStore from "connect-mongo";
-import { v4 as uuidv4 } from "uuid";
-import mongoose from "mongoose";
 import errorHandler from "../middlewares/errorHandler.ts";
-import { MongoClient } from "mongodb";
 import unassignedRoutesHandler from "../middlewares/unassignedRoutes.ts";
-import logger from "../config/logger.ts";
 import cors from "cors";
 import logRequest from "../middlewares/logRequest.ts";
+import sessionMiddleware from "../middlewares/expresssSession.ts";
 
-export interface UserSession {
-  _id: mongoose.Types.ObjectId;
-  isRegistered: boolean;
-}
 
 //  config constants
-const sessionName = config.getSessionConfig().name;
-const sessionSecret = config.getSessionConfig().secret;
 const staticDir = config.getDirConfig().static;
-const { cookieMaxAge } = config.getSessionConfig();
-
+const { isProduction} = config.getEnvConfig();
 // create app instance
 const app: Express = express();
-
-// crate client promise to reuse the mongo db connection;
-const mongoClientPromise: Promise<MongoClient> = new Promise(
-  (resolve, reject) => {
-    mongoose.connection.on("connected", () => {
-      const client: MongoClient | unknown = mongoose.connection.getClient();
-      if (client) resolve(client as MongoClient);
-    });
-  }
-);
 
 // add cors
 app.use(
@@ -51,23 +30,14 @@ app.use(
   })
 );
 
+
+if (isProduction) {
+  app.set('trust proxy', 1);
+}
+
 // initialize session
-app.use(
-  session({
-    name: sessionName,
-    secret: sessionSecret,
-    store: MongoStore.create({
-      clientPromise: mongoClientPromise,
-    }),
-    saveUninitialized: false,
-    resave: false,
-    genid: () => uuidv4(),
-    cookie: {
-      maxAge: cookieMaxAge,
-      httpOnly: false,
-    },
-  })
-);
+app.use(sessionMiddleware);
+
 // set view engine
 app.set("view engine", "ejs");
 app.set("views", config.getDirConfig().view);
@@ -96,7 +66,7 @@ app.use("/collections", collectionRoutes);
 app.use("/cart", cartRoutes);
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
-app.use("/account",accountRoutes);
+app.use("/account", accountRoutes);
 app.use("/test", apiTestRoutes);
 // response to unhandled routes
 app.all("*", unassignedRoutesHandler);
