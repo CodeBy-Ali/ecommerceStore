@@ -7,10 +7,9 @@
   padding-top: 1px;
   @include productCard_layout;
   overflow: hidden;
-  
 }
 
-.product_card a{
+.product_card a {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -18,7 +17,6 @@
   border-radius: 6rem;
   z-index: 1;
 }
-
 
 .product_card .product_card_info {
   margin-top: 3.4rem;
@@ -40,7 +38,7 @@
     -webkit-line-clamp: 1;
     max-width: 85%;
     margin-inline: auto;
-    overflow:  hidden;
+    overflow: hidden;
   }
 
   & > p:last-child {
@@ -58,7 +56,7 @@
   // max-height: 36.3rem;
   border-bottom-right-radius: $radius-product-card;
   border-bottom-left-radius: $radius-product-card;
-  @include respond-to(medium){
+  @include respond-to(medium) {
     border-bottom-right-radius: $radius-product-card-md;
     border-bottom-left-radius: $radius-product-card-md;
   }
@@ -71,68 +69,66 @@
   }
 }
 
-// add to cart button 
-.product_addToCart_container{
+// add to cart button
+.product_addToCart_container {
   position: absolute;
-  padding-inline: 1.6rem ;
+  padding-inline: 1.6rem;
   bottom: 2rem;
   width: fit-content;
   right: 0;
   z-index: 2;
-  @include respond-to(small){
+  @include respond-to(small) {
     bottom: 3rem;
-    padding-inline: 3rem ;
+    padding-inline: 3rem;
     width: 100%;
   }
 }
 
-
-
-.addTOCart_action .plus_icon ,
-.plus_icon_btn{
+.addTOCart_action .plus_icon,
+.plus_icon_btn {
   width: 4.2rem;
   height: 4.2rem;
   border-radius: 50%;
   background-color: white;
   @include flex-row-jc(center);
-  
-  @include respond-to(small){
+
+  @include respond-to(small) {
     width: 4.6rem;
     height: 4.6rem;
   }
 
-  &.plus_icon{
+  &.plus_icon {
     position: absolute;
     right: 0;
     pointer-events: none;
     display: none;
-    @include respond-to(small){
+    @include respond-to(small) {
       display: flex;
     }
   }
-  & img{
+  & img {
     width: 2rem;
     height: 2rem;
   }
 }
 
-.addTOCart_action{
+.addTOCart_action {
   // pointer-events: none;
   position: relative;
   border-radius: 4.4rem;
-  transition: all .7s ease;
+  transition: all 0.7s ease;
   background-color: transparent;
   @include flex-row-jc(flex-end);
   width: fit-content;
   margin-left: auto;
-  @include respond-to(small){
+  @include respond-to(small) {
     justify-content: center;
     width: 100%;
   }
 }
 
-.addTOCart_action button{
-  background-color: transparent;  
+.addTOCart_action button {
+  background-color: transparent;
   background-color: white;
   font-family: $font-primary;
   color: $clr-primary;
@@ -141,58 +137,58 @@
   flex: 0;
   border: none;
   opacity: 1;
-  transition: opacity .7s ease;
+  transition: opacity 0.7s ease;
   font-size: $font-size-base;
   font-weight: $font-semibold;
 
   @include flex-row-jc(center);
-  
-  & .action_btn_text{
-    display:none;
+
+  & .action_btn_text {
+    display: none;
     pointer-events: none;
   }
 
-  &.processing .action_btn_text{
+  &.processing .action_btn_text {
     opacity: 0;
   }
 
-  &.processing{
+  &.processing {
     pointer-events: none;
     opacity: 1;
   }
-  @include respond-to(small){
+  @include respond-to(small) {
     opacity: 0;
     flex: 1;
     padding-block: 1.6rem;
     width: 100%;
-    & .action_btn_text{
-      display:block;
+    & .action_btn_text {
+      display: block;
     }
 
-    & .plus_icon_btn{
+    & .plus_icon_btn {
       display: none;
     }
   }
 }
 
-.product_card:hover .addTOCart_action, 
+.product_card:hover .addTOCart_action,
 .addTOCart_action:has(button:focus-visible) {
   background-color: white;
-  & button{
-    transition: opacity .7s ease;
+  & button {
+    transition: opacity 0.7s ease;
     opacity: 1;
   }
 }
 
-.addToCart_loading_animation_wrapper{
+.addToCart_loading_animation_wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   pointer-events: none;
   display: none;
 }
 
-.addTOCart_action_btn.processing .addToCart_loading_animation_wrapper{
+.addTOCart_action_btn.processing .addToCart_loading_animation_wrapper {
   display: block;
 }
