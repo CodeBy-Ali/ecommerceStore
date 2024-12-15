@@ -234,7 +234,9 @@
   <div class="mobile_signUp_link_container">
     <% if(user && user.isRegistered) { %>
       <a href="/account" class="button--authButton">My Account</a>
-      <a href="/account/logout" class="button--authButton">Log Out</a>
+      <form class="account_logout_form"  action="/account/logout" method="post">
+        <button class="button--authButton" type="submit">Log Out</button>
+      </form>
     <% }else { %>
       <a href="/account/register" class="button--authButton">Sign Up</a>
       <a href="/account/login" class="button--authButton">Log In</a>
