@@ -126,13 +126,11 @@ export const limitQuantityToStock = (
 export function handleAddToCartClick(e:Event) {
   const actionButton = e.target as HTMLButtonElement;
   const productId = actionButton.closest('form')?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
-  const quantityInputFiled = document.querySelector<HTMLInputElement>("input[data-product-quantity-input]");
-  if (!quantityInputFiled) return;
   if (!productId) {
     showNotification("Failed to add product to cart. Please try again later..", false);
     throw new Error("Missing required argument: ProductId");
   }
-  const quantity = Number(quantityInputFiled.value);
+  const quantity = 1;
   const asyncButton = new AsyncButton(actionButton);
   asyncButton.withProcessingState(addProductToCart, [productId, quantity]);
 }
