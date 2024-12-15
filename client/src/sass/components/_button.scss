@@ -128,6 +128,9 @@
 
 button.async_button {
   position: relative;
+  & > * {
+    pointer-events: none;
+  }
   &.processing .async_button_text {
     opacity: 0;
   }

@@ -1,4 +1,5 @@
 import initAccordion from "../components/accordion/accordion";
+import AsyncButton from "../components/asyncButton/asyncButton";
 import DOMUtils from "../components/utils/domUtils";
 import {
   extractFormData,
@@ -169,15 +170,16 @@ function handleCheckoutFormSubmit(e: Event) {
     cartId,
     ...formData,
   };
-  submitForm<ICheckoutReqBody>("/orders", checkoutReqBody);
+  const asyncButton = new AsyncButton(completeOrderBtn);
+  asyncButton.withProcessingState(submitForm, ["/orders", checkoutReqBody]);
 }
 
-async function handleLoginRequest() {
+function handleLoginRequest() {
   const emailField = DOMUtils.getElement<HTMLInputElement>(`input[data-email]`);
   const passwordField =
     DOMUtils.getElement<HTMLInputElement>(`input[data-password]`);
   if (!emailField || !passwordField) return;
-  await submitLoginForm([emailField,passwordField],"/checkout")
+  submitLoginForm([emailField,passwordField],"/checkout")
 }
 
 export default initCheckoutPage;

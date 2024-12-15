@@ -124,7 +124,7 @@ export const limitQuantityToStock = (
 
 
 export function handleAddToCartClick(e:Event) {
-  const actionButton = e.target as HTMLButtonElement;
+  const actionButton = e.currentTarget as HTMLButtonElement;
   const productId = actionButton.closest('form')?.querySelector<HTMLInputElement>('input[name="productId"]')?.value;
   if (!productId) {
     showNotification("Failed to add product to cart. Please try again later..", false);

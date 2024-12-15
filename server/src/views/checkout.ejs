@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include("./partials/_documentHead.ejs")  %>
+    <%- include("./partials/_documentHead.ejs") %>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -292,7 +292,9 @@
                     <span class="show_order_summary_text"
                       >Show order Summary</span
                     >
-                    <span class="hide_order_summary_text">Hide order Summary</span>
+                    <span class="hide_order_summary_text"
+                      >Hide order Summary</span
+                    >
                     <span class="arrow_down_svg_wrapper">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -955,10 +957,13 @@
               <section class="checkout_complete_order_section">
                 <button
                   type="button"
-                  class="button--complete-order"
+                  class="button--complete-order async_button"
                   data-complete-order-button
                 >
-                  Complete order
+                  <div class="loading_animation_wrapper">
+                    <div class="loader--white"></div>
+                  </div>
+                  <span class="async_button_text">Complete order</span>
                 </button>
               </section>
             </form>
