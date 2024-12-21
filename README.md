@@ -101,7 +101,6 @@ The backend serves as the API server and handles business logic, data management
 - **Users**: Stores user information (email, hashed password, shipping address, etc.).
 - **Products**: Product data including name, price, description, and stock count.
 - **Orders**: Stores orders, including user details, items purchased, and payment status.
-- **Reviews**: Customer reviews for products.
 - **Shopping Cart**: Stores the current cart data for logged-in users.
 
 ## Setup & Installation
@@ -109,7 +108,7 @@ The backend serves as the API server and handles business logic, data management
 ### Prerequisites
 - Node.js (>= 14.x)
 - MongoDB (Local or Cloud Instance)
-- A payment gateway account (Stripe or PayPal)
+
 
 ### Steps to Set Up
 
