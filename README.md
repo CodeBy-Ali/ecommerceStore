@@ -2,7 +2,7 @@
 
 This is a full-stack e-commerce application built using **TypeScript**, **Sass**, **Express**, **MongoDB**, and **EJS**. The app is designed to provide a smooth and scalable platform for online shopping with features like user authentication, product management, order processing, and more. 
 
-## [Live Preview](https://ecommercestore-hi4n.onrender.com/)
+## [Live Preview](https://ecommercestore-production-48f6.up.railway.app/)
 
 ![Nexus Store Demo Image](client/public/assets/nexusDemoImage.png)
 
