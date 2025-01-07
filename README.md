@@ -2,7 +2,7 @@
 
 This is a full-stack e-commerce application built using **TypeScript**, **Sass**, **Express**, **MongoDB**, and **EJS**. The app is designed to provide a smooth and scalable platform for online shopping with features like user authentication, product management, order processing, and more. 
 
-## [Live Preview](https://ecommercestore-hi4n.onrender.com/)
+## [Live Preview](https://ecommercestore-production-48f6.up.railway.app/)
 
 ![Nexus Store Demo Image](client/public/assets/nexusDemoImage.png)
 
@@ -101,7 +101,6 @@ The backend serves as the API server and handles business logic, data management
 - **Users**: Stores user information (email, hashed password, shipping address, etc.).
 - **Products**: Product data including name, price, description, and stock count.
 - **Orders**: Stores orders, including user details, items purchased, and payment status.
-- **Reviews**: Customer reviews for products.
 - **Shopping Cart**: Stores the current cart data for logged-in users.
 
 ## Setup & Installation
@@ -109,7 +108,7 @@ The backend serves as the API server and handles business logic, data management
 ### Prerequisites
 - Node.js (>= 14.x)
 - MongoDB (Local or Cloud Instance)
-- A payment gateway account (Stripe or PayPal)
+
 
 ### Steps to Set Up
 
