@@ -10,8 +10,11 @@ import {
 import { IPopulatedCartItem } from "../utils/userUtils.ts";
 import { createApiError } from "../middlewares/errorHandler.ts";
 import mongoose from "mongoose";
-import { v4 as uuidv4 } from "uuid";
 import { getRandomString } from "../utils/utils.ts";
+import sendMail from "../features/sendEmail/sendEmail.ts";
+import User, { IUserDocument } from "../model/userModel.ts";
+import config from "../config/config.ts";
+import ShippingAddress from "../model/shippingAddressModel.ts";
 
 export const createOrder = async (
   req: Request,
@@ -28,12 +31,26 @@ export const createOrder = async (
         "Unauthorized access. Please log in to continue",
         "fail"
       );
+    const userDocument = (await User.findOne({
+      _id: user._id,
+    })) as IUserDocument;
     const connection = mongoose.connection;
     await connection.transaction(async () => {
       const orderInfo = await getOrderInfo(req.body, user._id);
       const order = new Order(orderInfo);
       await order.save();
       await removeOrderedItemsFromCart(body.cartId);
+
+      sendMail({
+        subject: `Order Confirmed: ${order.orderId}`,
+        html: getOrderConfirmationEmailTemplate(
+          order,
+          `${userDocument.firstName} ${userDocument.lastName}`
+        ),
+        from: config.getOAuthConfig().email,
+        to: userDocument.email,
+      });
+
       res.redirect(`/orders/${order._id}`);
     });
   } catch (error: unknown) {
@@ -91,4 +108,23 @@ async function createOrderId() {
   const orderNumber = (await Order.find({})).length + 1;
   const randomString = getRandomString(3);
   return baseString + randomString + orderNumber.toString();
+}
+
+function getOrderConfirmationEmailTemplate(order: IOrder, userName: string) {
+  return /*html*/ `
+    <h1>Hi ${userName}</h1>
+
+    <p>
+      Thank you for your recent purchase with Nexus. Your order<strong>${
+        order.orderId
+      }</strong> is confirmed. Here are the details: 
+    </p>
+
+    <p><strong>Total Item(s)</strong>: ${order.products.length}</p>  
+    <p><strong>Order Subtotal</strong>: ${order.subTotal}</p>
+    <p><strong>Sipping Cost</strong>: ${order.shippingCost || "Free"}</p>
+    <p><strong>Total</strong>: ${order.subTotal + order.shippingCost}</p>
+
+    <p>Thank you for shopping with us!</p>
+  `;
 }
